@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_232454) do
     t.text "introduction"
     t.string "target", default: "", null: false
     t.string "sexuality"
-    t.date "date_of_birth"
+    t.integer "age"
     t.string "live"
     t.string "job"
     t.string "university"
