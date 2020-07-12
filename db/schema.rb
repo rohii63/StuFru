@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_232454) do
     t.text "target_comment"
     t.text "introduction"
     t.string "target", default: "", null: false
-    t.string "sexuality"
+    t.string "gender"
     t.integer "age"
     t.string "live"
     t.string "job"
