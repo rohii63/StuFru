@@ -9,7 +9,7 @@
 <p><%= current_user.name %></p>
 
 <p>
-<%= link_to (text_area_tag '', current_user.target_comment, disabled: true, placeholder: "具体的な目標を記入しよう！"), "#", data: {toggle: "modal", target: "#userTargetCommentModal"} %>
+<%= link_to (text_area_tag '', current_user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！"), "#", data: {toggle: "modal", target: "#userTargetCommentModal"} %>
 <%= render partial: 'users/modal_form/target_comment' %>
 </p>
 
