@@ -1,0 +1,194 @@
+<%= form_with model: @user = current_user, local: true do |f| %>
+  <div class="modal fade" id="userTargetModal" tabindex="-1" role="dialog" aria-labelledby="userTargetModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">目標ジャンル設定</h5>
+        </div>
+        <div class="modal-body">
+            <%# Create navar with reference to this site : https://getbootstrap.com/docs/4.4/components/navbar/ %>
+          <% navbars = { 
+            A: "資格取得",
+            B: "スキルアップ",
+            C: "TOEIC・TOEFL・英検・英会話",
+            D: "外国語習得",
+            E: "読書・趣味・教養",
+            F: "学問",
+            G: "専門学校進学",
+            H: "大学受験合格"
+            } %>
+          <% for pointer,nav_name in navbars do %>
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <% if nav_name == "大学受験合格" %>
+              <%= link_to "#{nav_name}", root_path %>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <% else %>
+              <a class="navbar-brand" href="#"><%= nav_name %></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent<%= pointer %>">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <% case nav_name %>
+                    <% when "資格取得" then %>
+                      <% for target_categories in [
+                        "公務員試験",
+                        "教員採用試験",
+                        "法律・ビジネス系",
+                        "建築・不動産系",
+                        "土木・設備系",
+                        "料理・栄養・健康系",
+                        "医療・福祉・保育系",
+                        "デザイン・センス・ライフスタイル系",
+                        "大学院",
+                        "社会人大学院",
+                        "MBA",
+                        "世界遺産検定",
+                        "気象予報士",
+                        "旅行業務取扱管理者",
+                        "漢検",
+                        "数学検定 算数検定",
+                        "その他資格取得"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+                    <% when "スキルアップ" then %>
+                      <% for target_categories in [
+                        "プログラミング",
+                        "PCスキル",
+                        "ビジネス、経営",
+                        "自己啓発",
+                        "コミュニケーション",
+                        "就職試験（SPIなど）",
+                        "ニュース、時事",
+                        "その他スキルアップ"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+                    <% when "TOEIC・TOEFL・英検・英会話" then %>
+                      <% for target_categories in [
+                        "TOEIC",
+                        "TOEFL",
+                        "英検",
+                        "英会話",
+                        "IELTS",
+                        "GTEC",
+                        "その他英語学習"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+                    <% when "外国語習得" then %>
+                      <% for target_categories in [
+                        "中国語",
+                        "中国語検定",
+                        "HSK",
+                        "フランス語",
+                        "仏検",
+                        "スペイン語",
+                        "ドイツ語",
+                        "独検",
+                        "ロシア語",
+                        "イタリア語",
+                        "韓国語",
+                        "ハングル能力検定",
+                        "TOPIK",
+                        "その他外国語習得"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+                    <% when "読書・趣味・教養" then %>
+                      <% for target_categories in [
+                        "文学",
+                        "書道",
+                        "思想・哲学",
+                        "将棋・囲碁・チェス・麻雀",
+                        "その他趣味・教養"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+                    <% when "学問" then %>
+                      <% for target_categories in [
+                        "法律・政治系",
+                        "経済・商学・会計系",
+                        "文学・社会学系",
+                        "教育・教養系",
+                        "芸術・美学系",
+                        "理学系",
+                        "工学系",
+                        "医学系",
+                        "薬学系",
+                        "看護系",
+                        "外国語系",
+                        "その他学問"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+                    <% when "専門学校進学" then %>
+                      <% for target_categories in [
+                        "公務員・政治系",
+                        "法律系",
+                        "ビジネス・経営系",
+                        "経済・金融系",
+                        "国際・語学系",
+                        "旅行・観光・ホテル・ブライダル系",
+                        "マスコミ・芸能系",
+                        "音楽・イベント系",
+                        "デザイン・写真・芸術系",
+                        "ファッション・和裁系",
+                        "ゲーム・コンピュータ・Web系",
+                        "自動車・航空・宇宙系",
+                        "機械・電気・電子・化学系",
+                        "建築・土木・インテリア系",
+                        "動物・植物系",
+                        "自然・環境・バイオ系",
+                        "美容・理容・ヘアメイク系",
+                        "メイク・ネイル・エステ系",
+                        "保育・教育系",
+                        "福祉系",
+                        "医療系",
+                        "健康・スポーツ系",
+                        "栄養・調理・製菓系"
+                        ] do %>
+                        <div class="form-check">
+                          <%= f.radio_button :target, :"#{target_categories}", class: "form-check-input" %>
+                          <%= f.label :target, "#{target_categories}", class: "form-check-label" %>
+                        </div>
+                      <% end %>
+
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            <% end %>  
+          </nav>
+          <% end %>          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.submit :保存, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

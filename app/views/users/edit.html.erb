@@ -1,7 +1,27 @@
 <h1>Users#edit</h1>
 <p>Find me in app/views/users/edit.html.erb</p>
 
-<%= image_tag url_for(current_user.avatar.variant(resize_to_limit: [100, 100])) %>
+<p>プロフィール</p>
+<p>
+<%= link_to (image_tag url_for(current_user.avatar.variant(resize: "100x100>"))), "#", data: {toggle: "modal", target: "#userAvatarModal"} %>
+<%= render partial: 'users/modal_form/avatar' %>
+</p>
+<p><%= current_user.name %></p>
 
-<%= link_to current_user.name, "#", data: {toggle: "modal", target: "#userModal"} %>
-<%= render partial: 'users/modal_form' %>
+<p>
+<%= link_to current_user.target_comment, "#", data: {toggle: "modal", target: "#userTargetCommentModal"} %>
+<%= render partial: 'users/modal_form/target_comment' %>
+</p>
+
+<%# add following link %>
+<%# add follower link %>
+<%# add book link %>
+
+<p>自己紹介 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userIntroductionModal"}%></p>
+<%= render partial: 'users/modal_form/introduction' %>
+<p><%= current_user.introduction %></p>
+
+
+<p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userTargetModal"}%></p>
+<%= render partial: 'users/modal_form/target' %>
+<p><%= current_user.target %></p>
