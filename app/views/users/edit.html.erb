@@ -1,6 +1,7 @@
 <h1>Users#edit</h1>
 <p>Find me in app/views/users/edit.html.erb</p>
 
+<%= image_tag url_for(current_user.avatar.variant(resize_to_limit: [100, 100])) %>
 
 <%= link_to current_user.name, "#", data: {toggle: "modal", target: "#userModal"} %>
 <%= render partial: 'users/modal_form' %>
