@@ -1,2 +1,6 @@
 <h1>Users#edit</h1>
 <p>Find me in app/views/users/edit.html.erb</p>
+
+<%= link_to current_user.name, edit_user_path(current_user), data: {toggle: "modal", target: "#userModal"} %>
+
+<%= render partial: 'users/edit_form' %>
