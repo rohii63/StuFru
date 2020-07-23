@@ -52,8 +52,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_112749) do
     t.integer "age"
     t.string "live"
     t.string "job"
-    t.string "university"
-    t.string "high_school"
+    t.string "my_choice_university"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

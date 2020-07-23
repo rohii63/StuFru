@@ -1,5 +1,4 @@
-
-<%= form_with model: @user = current_user, local: true do |f| %>
+<%= form_with model: @user, local: true do |f| %>
   <div class="modal fade" id="userTargetModal" tabindex="-1" role="dialog" aria-labelledby="userTargetModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
       <div class="modal-content">
@@ -171,11 +170,12 @@
                       </div>
                     <% end %>
                   <% when "大学受験合格" then %>
-                    <% university_list = File.open("app/assets/csv/university_list.csv", mode = "r") %>
-                    <%= f.select :target, options_for_select(university_list.readlines), class: 'form-control', include_blank: true %>
-                    <% university_list.close %>
+                    <div class="form-check">
+                      <%= f.radio_button :target, :大学受験合格, class: "form-check-input" %>
+                      <%= f.label :target, "大学受験合格", class: "form-check-label" %>
+                    </div>
                   <% end %>
-                </li>
+                </li>                
               </ul>
             </div>
           </nav>

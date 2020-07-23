@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
@@ -34,8 +35,7 @@ class UsersController < ApplicationController
         :age,
         :live,
         :job,
-        :university,
-        :high_school
+        :my_choice_university
         )
     end
   end

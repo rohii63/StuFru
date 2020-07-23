@@ -41,8 +41,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.integer :age
       t.string  :live
       t.string  :job
-      t.string  :university
-      t.string  :high_school
+      t.string  :my_choice_university
 
       t.timestamps null: false
     end
