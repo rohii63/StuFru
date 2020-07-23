@@ -23,12 +23,18 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
+  gem 'hirb'                # モデルの出力結果を表形式で表示するGem
+  gem 'hirb-unicode'        # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
+  gem 'pry-rails'           # rails console(もしくは、rails c)でirbの代わりにpryを使われる
+  gem 'pry-doc'             # methodを表示
+  gem 'pry-byebug'          # デバッグを実施(Ruby 2.0以降で動作する)
+  gem 'pry-stack_explorer'  # スタックをたどれる
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -52,7 +58,10 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 gem 'dotenv-rails'
 # Devise
 gem 'devise'
 gem 'omniauth-twitter'
+# To create a save destination for active storage
+gem "aws-sdk-s3", require: false

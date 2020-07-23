@@ -1,0 +1,7 @@
+<%= form_with model: @user, local: true do |f| %>
+  <% university_list = File.open("app/assets/csv/university_list.csv", mode = "r") %>
+  <%= select_tag "university", options_for_select(university_list.readlines), class: 'form-control', include_blank: "大学を選択しよう！", onchange: "sendValue()" %>
+  <% university_list.close %>
+  <%= f.hidden_field :my_choice_university %>
+  <%= f.submit %>
+<% end %>

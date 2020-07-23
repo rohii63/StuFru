@@ -1,0 +1,46 @@
+<%= javascript_pack_tag 'edit' %>
+<h1>Users#edit</h1>
+<p>Find me in app/views/users/edit.html.erb</p>
+
+<p>プロフィール</p>
+<p>
+<%= link_to (image_tag url_for(@user.avatar.variant(resize: "100x100>"))), "#", data: {toggle: "modal", target: "#userAvatarModal"} %>
+<%= render partial: 'users/edit_form/avatar' %>
+</p>
+<p><%= @user.name %></p>
+
+
+<p>
+<%= link_to (text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！"), "#", data: {toggle: "modal", target: "#userTargetCommentModal"} %>
+<%= render partial: 'users/edit_form/target_comment' %>
+</p>
+
+<%# add following link %>
+<%# add follower link %>
+<%# add book link %>
+
+<p>自己紹介 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userIntroductionModal"}%></p>
+<%= render partial: 'users/edit_form/introduction' %>
+<p><%= @user.introduction %></p>
+
+<p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userTargetModal"}%></p>
+<%= render partial: 'users/edit_form/target' %>
+<p><%= @user.target %></p>
+
+<p>
+<% if @user.target == "大学受験合格" %>
+<%= render partial: 'users/edit_form/my_choice_university' %>
+<% end %>
+</p>
+<p>
+<%= @user.my_choice_university %>
+</p>
+
+
+<p>基本情報 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userBasicInformationModal"}%></p>
+<%= render partial: 'users/edit_form/basic_information' %>
+<p>ユーザ名 <%= @user.name %></p>
+<p>性別 <%= @user.gender %></p>
+<p>年齢 <%= @user.age %></p>
+<p>住まい <%= @user.live %></p>
+<p>職業 <%= @user.job %></p>
