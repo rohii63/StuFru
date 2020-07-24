@@ -8,9 +8,10 @@ Bundler.require(*Rails.groups)
 
 module StuFru
   class Application < Rails::Application
-    #fix cannot render error
-    config.web_console.whitelisted_ips = '10.0.2.2'
-
+    #fix rails server error
+    unless Rails.env.production?
+      config.web_console.whitelisted_ips = '10.0.2.2'
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
