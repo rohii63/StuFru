@@ -1,12 +1,11 @@
 <%= form_with model: @user, local: true do |f| %>
   <div class="modal fade" id="userTargetModal" tabindex="-1" role="dialog" aria-labelledby="userTargetModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">目標ジャンル設定</h5>
         </div>
         <div class="modal-body">
-            <%# Create navar with reference to this site : https://getbootstrap.com/docs/4.4/components/navbar/ %>
           <% navbars = { 
             A: "資格取得",
             B: "スキルアップ",
@@ -18,7 +17,7 @@
             H: "大学受験合格"
             } %>
           <% for pointer,nav_name in navbars do %>
-          <nav class="navbar navbar-expand-lg navbar-light">
+          <nav class="navbar navbar-light">
             <a class="navbar-brand" href="#"><%= nav_name %></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
