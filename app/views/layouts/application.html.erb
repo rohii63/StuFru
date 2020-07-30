@@ -14,6 +14,7 @@
         <nav>
             <% if user_signed_in? %>
               <strong><%= link_to current_user.name, root_url %></strong>
+              <%= link_to 'show', user_path(current_user) %>
               <%= link_to 'プロフィール', edit_user_path(current_user) %>
               <%= link_to 'アカウント管理', edit_user_registration_path %>
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
