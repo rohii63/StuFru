@@ -1,2 +1,25 @@
-<h1>Users#show</h1>
+<h1>Users#show@<%= @user.name %></h1>
 <p>Find me in app/views/users/show.html.erb</p>
+
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">プロフィール</a>
+      <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-book" aria-selected="false">教材</a>
+      <a class="nav-link active" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="true">レポート</a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+        <% unless current_user == @user %>
+          <%= render partial: 'users/not_current_user_edit' %>
+        <% else %>
+          <%= render template: "users/edit" %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">...</div>
+      <div class="tab-pane fade show active" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">...</div>
+    </div>
+  </div>
+</div>
