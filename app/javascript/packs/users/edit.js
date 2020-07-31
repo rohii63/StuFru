@@ -6,11 +6,13 @@ $(function () {
   $('#university').select2();
 });
 
-window.sendValue = function() {
+window.sendValue = function(){
   var selectedValue = $("#university").val();
   console.log(selectedValue)
   $("#user_my_choice_university").attr("value", selectedValue)
 }
+
+
 
 // $(function() {
 //   $("#btn-a").click(
