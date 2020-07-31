@@ -19,11 +19,6 @@
 <p><%= @user.target %></p>
 
 <p>
-<% if @user.target == "大学受験合格" %>
-<%= render partial: 'users/edit_form/my_choice_university' %>
-<% end %>
-</p>
-<p>
 <%= @user.my_choice_university %>
 </p>
 

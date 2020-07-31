@@ -1,7 +1,21 @@
 <%= form_with model: @user, local: true do |f| %>
-  <% university_list = File.open("app/assets/csv/university_list.csv", mode = "r") %>
-  <%= select_tag "university", options_for_select(university_list.readlines), class: 'form-control', include_blank: "大学を選択しよう！", onchange: "sendValue()" %>
-  <% university_list.close %>
-  <%= f.hidden_field :my_choice_university %>
-  <%= f.submit %>
+  <div class="modal fade" id="userChoiceUniversityModal" data-backdrop="static" role="dialog" aria-labelledby="userChoiceUniversityLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">編集</h5>
+        </div>
+        <div class="modal-body">
+          <% university_list = File.open("app/assets/csv/university_list.csv", mode = "r") %>
+          <%= select_tag "university", options_for_select(university_list.readlines), include_blank: "大学を選択しよう！", onchange: "sendValue()" %>
+          <% university_list.close %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.hidden_field :my_choice_university %>
+          <%= f.submit "保存", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
