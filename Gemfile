@@ -67,3 +67,5 @@ gem 'omniauth-twitter'
 gem "aws-sdk-s3", require: false
 
 gem 'nokogiri', '~> 1.10', '>= 1.10.10'
+
+gem 'faker', '~> 2.13'
