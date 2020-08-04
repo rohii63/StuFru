@@ -5,27 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-# require 'faker'
-
-# 50.times do |n|
-#   name = Faker::Name.name
-#   email = Faker::Internet.unique.email
-#   password = "password"
-#   User.create!(
-#     name: name,
-#     email: email,
-#     password: password
-#               )
-# end
-
-User.create!(
+User.create(
   email: 'trial@mail',
   name: 'trial',
   password: 'password',
   confirmed_at: '2020-07-25 00:10:00',
   confirmation_sent_at: '2020-07-25 00:00:00'
 )
+
 
 target_category1_contents = [
   "公務員試験",
@@ -127,7 +114,7 @@ target_category7_contents = [
   "健康・スポーツ系",
   "栄養・調理・製菓系"
 ]
-  target_category8_contents = [
+target_category8_contents = [
     "大学受験合格"
   ]
 
@@ -154,4 +141,33 @@ for @content in target_category7_contents do
 end
 for @content in target_category8_contents do
   Target.create(target_category_id: 8, content: "#{@content}")
+end
+
+
+require 'faker'
+
+50.times do |n|
+  name = Faker::Name.name
+  email = Faker::Internet.unique.email
+  User.create!(
+    name: name,
+    email: email,
+    password: "password",
+    target: "yeild"
+  )
+end
+
+@faker = User.where(target: "yeild")
+@target2 = Target.where(target_category_id: 2)
+
+target = []
+
+@target2.each do |t2|
+  10.times do |n|
+    target.push(t2.content)
+  end
+end
+
+@faker.zip(target) do |f, t|
+  f.update(target: "#{t}")
 end

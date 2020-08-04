@@ -1,0 +1,13 @@
+<%# @users.each do |user| %>
+<li id="profile-card-<%= @user.id %>">
+  <%= image_tag url_for(@user.avatar.variant(resize: "50x50>")) %>
+  <%= @user.name %>
+  <%= @user.job %>
+  <%= @user.live %>
+  <%= @user.target_comment %>
+  <%= @user.target %>
+  <%= @user.my_choice_university %>
+  <%# user.study_time %>
+  <%# follower button %>
+</li>
+<%# end %>
