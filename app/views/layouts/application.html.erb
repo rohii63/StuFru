@@ -17,6 +17,7 @@
               <%= link_to 'index', users_path %>
               <%= link_to 'プロフィール', edit_user_path(current_user) %>
               <%= link_to 'ユーザ検索', search_path(current_user) %>
+              <%= link_to '教材全般', search_path(current_user) %>
               <%= link_to 'アカウント管理', edit_user_registration_path %>
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
             <% else %>
