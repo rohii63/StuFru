@@ -1,16 +1,17 @@
 class User < ApplicationRecord
   has_one_attached :avatar
   before_create :default_image
-
+  default_scope -> { order(created_at: :desc) }
+  has_many :books
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,
           :confirmable
 
     def default_image
-      self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
+      self.avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
     end
 
-    def self.user_search(search)
+    def self.name_search(search)
       User.where(['name LIKE ?', "%#{search}%"])
     end
 
