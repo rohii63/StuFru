@@ -1,7 +1,4 @@
 class BooksController < ApplicationController
-  require 'pry'
-  # binding.pry
-
   def new
     @user = current_user
     @book = @user.books.build
@@ -14,7 +11,7 @@ class BooksController < ApplicationController
     attach_default_image unless params[:book][:icon]
     if @book.save
       flash[:success] = "登録完了"
-      redirect_to new_user_book_path(current_user)
+      redirect_to new_book_path
     else
       flash[:erorr] = "教材名を入力してください。"
       redirect_to request.referrer

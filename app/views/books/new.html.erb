@@ -4,20 +4,22 @@
 
 <%= "〜#{@keyword}〜で検索" if @keyword %>
 <p>
-  <%= form_tag new_user_book_path(current_user), method: 'get' do %>
+  <%= form_tag new_book_path, method: 'get' do %>
     <%= text_field_tag :search, nil, placeholder: "教材名で検索" %>
     <%= submit_tag "検索" %>
   <% end %>
 </p>
 
 <p>
-  <%= link_to "登録した教材", new_user_book_path(current_user) if @keyword %>
+  <%= link_to "登録した教材", new_book_path if @keyword %>
 </p>
 
 <%= link_to "教材登録", "#", data: {toggle: "modal", target: "#BooksNewModal"} %>
 <%= render partial: 'books/new_modal' %>
 
 <% @books.each do |book| %>
-  <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
-  <%= book.name %>
+  <%= link_to edit_book_path(book) do %>
+    <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
+    <%= book.name %>
+  <% end %>
 <% end %>
