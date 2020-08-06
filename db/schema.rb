@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_08_05_025252) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", limit: 191, null: false
-    t.string "record_type", limit: 191, null: false
+    t.string "name", null: false
+    t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -23,58 +23,57 @@ ActiveRecord::Schema.define(version: 2020_08_05_025252) do
   end
 
   create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "key", limit: 191, null: false
-    t.string "filename", limit: 191, null: false
-    t.string "content_type", limit: 191
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", limit: 191, null: false
+    t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "name"
+    t.text "name", null: false
     t.string "icon"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "created_at"], name: "index_books_on_user_id_and_created_at"
+    t.index ["user_id", "created_at"], name: "index_books_on_user_id_and_created_at", unique: true
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "target_category_id"
-    t.string "content", limit: 191
+    t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", limit: 191, default: "", null: false
-    t.string "encrypted_password", limit: 191, default: "", null: false
-    t.string "reset_password_token", limit: 191
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "confirmation_token", limit: 191
+    t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email", limit: 191
-    t.string "name", limit: 191, default: "", null: false
-    t.string "avatar", limit: 191
+    t.string "unconfirmed_email"
+    t.string "name", default: "", null: false
+    t.string "avatar"
     t.text "target_comment"
     t.text "introduction"
-    t.string "target", limit: 191, default: "", null: false
-    t.string "gender", limit: 191
+    t.string "target", default: "", null: false
+    t.string "gender"
     t.integer "age"
-    t.string "live", limit: 191
-    t.string "job", limit: 191
-    t.string "my_choice_university", limit: 191
+    t.string "live"
+    t.string "job"
+    t.string "my_choice_university"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

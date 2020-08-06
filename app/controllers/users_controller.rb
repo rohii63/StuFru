@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
     @temporaryTargets = []
     8.times do |n|
       n += 1
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
+    @user = User.find(params[:id])
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
