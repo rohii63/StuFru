@@ -11,7 +11,7 @@ class User < ApplicationRecord
       self.avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
     end
 
-    def self.user_search(search)
+    def self.name_search(search)
       User.where(['name LIKE ?', "%#{search}%"])
     end
 

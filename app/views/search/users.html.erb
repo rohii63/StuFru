@@ -3,7 +3,6 @@
 
 <% if @keyword != "－おすすめユーザ－" %>
   <%= "〜#{@keyword}〜で検索" %>
- 
 <% end %>
 <p>
 <%= form_tag search_path, method: 'get' do %>

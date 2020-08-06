@@ -5,8 +5,8 @@ class BooksController < ApplicationController
   def new
     @user = current_user
     @book = @user.books.build
-    @userBooks = @user.books.all
-    @books = Book.all
+    @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
+    @keyword = params[:search]
   end
 
   def create
