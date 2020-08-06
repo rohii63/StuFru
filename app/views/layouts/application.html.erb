@@ -27,8 +27,7 @@
         </nav>
       </header>
     <%# flash message %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render partial: 'layouts/notifications'%>
     <%= yield %>
   </body>
 </html>
