@@ -146,28 +146,28 @@ User.create(
 
 # require 'faker'
 
-50.times do |n|
-  name = Faker::Name.name
-  email = Faker::Internet.unique.email
-  User.create!(
-    name: name,
-    email: email,
-    password: "password",
-    target: "yeild"
-  )
-end
+# 50.times do |n|
+#   name = Faker::Name.name
+#   email = Faker::Internet.unique.email
+#   User.create!(
+#     name: name,
+#     email: email,
+#     password: "password",
+#     target: "yeild"
+#   )
+# end
 
-@faker = User.where(target: "yeild")
-@target2 = Target.where(target_category_id: 2)
+# @faker = User.where(target: "yeild")
+# @target2 = Target.where(target_category_id: 2)
 
-target = []
+# target = []
 
-@target2.each do |t2|
-  10.times do |n|
-    target.push(t2.content)
-  end
-end
+# @target2.each do |t2|
+#   10.times do |n|
+#     target.push(t2.content)
+#   end
+# end
 
-@faker.zip(target) do |f, t|
-  f.update(target: "#{t}")
-end
+# @faker.zip(target) do |f, t|
+#   f.update(target: "#{t}")
+# end

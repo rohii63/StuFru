@@ -3,10 +3,9 @@ class CreateBooks < ActiveRecord::Migration[6.0]
     create_table :books do |t|
       t.text :name, null: false
       t.string :icon
-      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
-    add_index :books, [:user_id, :created_at], unique: true
+    add_index :books, :name, unique: true, length: 100
   end
 end

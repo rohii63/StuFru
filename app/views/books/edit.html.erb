@@ -1,2 +1,14 @@
 <h1>Books#edit</h1>
 <p>Find me in app/views/books/edit.html.erb</p>
+
+<p>勉強中：<%= @book.users.count %></p>
+
+<%= image_tag url_for(@book.icon.variant(resize: "100x100>")) %>
+<%= @book.name %>
+
+<% if @book.users.count == 1 && current_user.register?(@book) %>
+  <%= link_to "教材編集", "#", data: {toggle: "modal", target: "#BooksEditModal"} %>
+  <%= render partial: 'books/edit_modal' %>
+<% end %>
+
+<%= render partial: 'books/register_form' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_025252) do
+ActiveRecord::Schema.define(version: 2020_08_07_011751) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -33,14 +33,22 @@ ActiveRecord::Schema.define(version: 2020_08_05_025252) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "book_registers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_registers_on_book_id"
+    t.index ["user_id", "book_id"], name: "index_book_registers_on_user_id_and_book_id", unique: true
+    t.index ["user_id"], name: "index_book_registers_on_user_id"
+  end
+
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
     t.string "icon"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "created_at"], name: "index_books_on_user_id_and_created_at", unique: true
-    t.index ["user_id"], name: "index_books_on_user_id"
+    t.index ["name"], name: "index_books_on_name", unique: true, length: 100
   end
 
   create_table "targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -78,5 +86,4 @@ ActiveRecord::Schema.define(version: 2020_08_05_025252) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "books", "users"
 end
