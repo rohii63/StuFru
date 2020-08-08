@@ -7,11 +7,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
+    @books = @user.books.all
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
+    @books = @user.books.all
     @temporaryTargets = []
     8.times do |n|
       n += 1
