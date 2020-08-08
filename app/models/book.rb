@@ -5,9 +5,13 @@ class Book < ApplicationRecord
                               foreign_key: "book_id",
                               dependent:  :destroy
   has_many :users, through: :owners
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   def self.name_search(search)
     Book.where(['name LIKE ?', "%#{search}%"])
+  end
+
+  def exist_same_name?
+    Book.find_by(name: self.name)
   end
 end
