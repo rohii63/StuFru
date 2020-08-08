@@ -14,7 +14,7 @@ class BooksController < ApplicationController
       flash[:success] = "登録完了"
       redirect_to new_book_path
     else
-      flash[:erorr] = "教材名を入力してください"
+      flash[:erorr] = "エラー文未作成"
       redirect_to request.referrer
     end
   end
@@ -24,6 +24,14 @@ class BooksController < ApplicationController
   end
 
   def update
+    book = Book.find(params[:id])
+    if book.update(book_params)
+      flash[:success] = "編集完了"
+      redirect_to edit_book_path(book)
+    else
+      flash[:erorr] = "エラー文未作成"
+      redirect_to request.referrer
+    end
   end
 
   private
