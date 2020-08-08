@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get 'home/home'
   resources :users
   resources :books, only: [:new, :create, :edit, :update]
+  resources :book_registers, only: [:create, :destroy]
 end

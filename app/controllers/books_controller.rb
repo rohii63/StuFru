@@ -10,15 +10,17 @@ class BooksController < ApplicationController
     @book = current_user.books.build(book_params) 
     attach_default_image unless params[:book][:icon]
     if @book.save
+      current_user.study_books.create(book_id: @book.id)
       flash[:success] = "登録完了"
       redirect_to new_book_path
     else
-      flash[:erorr] = "教材名を入力してください。"
+      flash[:erorr] = "教材名を入力してください"
       redirect_to request.referrer
     end
   end
 
   def edit
+    @book = Book.find(params[:id])
   end
 
   def update

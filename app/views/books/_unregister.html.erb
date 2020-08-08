@@ -1,0 +1,3 @@
+<%= form_with url: book_register_path(@book), html: { method: :delete }, local: true do |f| %>
+  <%= f.submit "登録解除", class: "btn btn-primary" %>
+<% end %>

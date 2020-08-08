@@ -2,7 +2,10 @@ class User < ApplicationRecord
   has_one_attached :avatar
   before_create :default_image
   default_scope -> { order(created_at: :desc) }
-  has_many :books
+  has_many :study_books, class_name: "BookRegister",
+                              foreign_key: "user_id",
+                              dependent:  :destroy
+  has_many :books,  through: :study_books
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,
           :confirmable
@@ -21,5 +24,18 @@ class User < ApplicationRecord
       else
         User.where.not(id: id).where(my_choice_university: my_choice_university)
       end
+    end
+
+    
+    def register(book)
+      books << book
+    end
+    
+    def unregister(book)
+      study_books.find_by(book_id: book.id).destroy
+    end
+
+    def register?(book)
+      books.include?(book)
     end
 end

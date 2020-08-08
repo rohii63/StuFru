@@ -1,7 +1,10 @@
 class Book < ApplicationRecord
-  belongs_to :user
   has_one_attached :icon
   default_scope -> { order(created_at: :desc) }
+  has_many :owners, class_name: "BookRegister",
+                              foreign_key: "book_id",
+                              dependent:  :destroy
+  has_many :users, through: :owners
   validates :name, presence: true
 
   def self.name_search(search)
