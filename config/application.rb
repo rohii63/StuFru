@@ -22,5 +22,8 @@ module StuFru
 
     #Change flash message to japanese
     config.i18n.default_locale = :ja
+    #Change timezone to JST
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
   end
 end
