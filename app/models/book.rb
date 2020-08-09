@@ -5,6 +5,7 @@ class Book < ApplicationRecord
                               foreign_key: "book_id",
                               dependent:  :destroy
   has_many :users, through: :owners
+  has_one :micropost
   validates :name, presence: true, uniqueness: true
 
   def self.name_search(search)
