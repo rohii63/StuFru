@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_011751) do
+ActiveRecord::Schema.define(version: 2020_08_08_081027) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +51,20 @@ ActiveRecord::Schema.define(version: 2020_08_07_011751) do
     t.index ["name"], name: "index_books_on_name", unique: true, length: 100
   end
 
+  create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "studied_at", null: false
+    t.integer "studied_time", null: false
+    t.integer "studied_page"
+    t.text "content"
+    t.string "picture"
+    t.bigint "user_id", null: false
+    t.bigint "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_microposts_on_book_id"
+    t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
   create_table "targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "target_category_id"
     t.string "content"
@@ -86,4 +100,6 @@ ActiveRecord::Schema.define(version: 2020_08_07_011751) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "microposts", "books"
+  add_foreign_key "microposts", "users"
 end
