@@ -1,0 +1,7 @@
+<%= form_with model: @micropost, local: true do |f| %>
+  <%= f.collection_select :book_id, @books, :id, :name %>
+  <%= f.datetime_select :studied_at, class: "form-control" %>
+  <%= f.select :studied_time, (1..90).to_a, class: "form-control" %>
+  <%# f.file_field :picture, class: "form-control-file" %>
+  <%= f.submit :記録する, class: "btn btn-primary" %>
+<% end %>

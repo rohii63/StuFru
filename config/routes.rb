@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :users
   resources :books, only: [:new, :create, :edit, :update]
   resources :book_registers, only: [:create, :destroy]
+  resources :microposts, except: [:index]
 end
