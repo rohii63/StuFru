@@ -6,13 +6,18 @@ $(function () {
   $('#university').select2();
 });
 
-window.sendValue = function(){
-  var selectedValue = $("#university").val();
-  console.log(selectedValue)
-  $("#user_my_choice_university").attr("value", selectedValue)
-}
-
-
+$(function() {
+  $('#university').change(function() {
+    var val = $(this).val();
+    console.log(val);
+    $("#user_my_choice_university").attr("value", val)
+  });
+});
+// window.sendValue = function(){
+//   var selectedValue = $("#university").val();
+//   console.log(selectedValue)
+//   $("#user_my_choice_university").attr("value", selectedValue)
+// }
 
 // $(function() {
 //   $("#btn-a").click(

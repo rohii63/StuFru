@@ -25,5 +25,7 @@ module StuFru
     #Change timezone to JST
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
+    #Change error messages to japanese
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
   end
 end

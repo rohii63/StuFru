@@ -1,7 +1,31 @@
 <%= form_with model: @micropost, local: true do |f| %>
-  <%= f.collection_select :book_id, @books, :id, :name %>
-  <%= f.datetime_select :studied_at, class: "form-control" %>
-  <%= f.select :studied_time, (1..90).to_a, class: "form-control" %>
-  <%# f.file_field :picture, class: "form-control-file" %>
-  <%= f.submit :記録する, class: "btn btn-primary" %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= label_tag 'micropost[book_id]', "教材名" %>
+    <%= f.collection_select :book_id, @books, :id, :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :studied_at, "勉強日時" %>
+    <%= f.datetime_select :studied_at, class: "form-control", end_year: Time.now.year  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :how_many_studied_hours, "勉強時間" %>
+    <%= f.select :how_many_studied_hours, (0..23).to_a, class: "form-control" %>
+    <%= f.label :how_many_studied_hours, "時間" %>
+    <%= f.select :how_many_studied_minutes, (0..59).to_a, class: "form-control" %>
+    <%= f.label :how_many_studied_minutes, "分" %>
+    <%= f.hidden_field :studied_time_in_minutes, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, "一言コメント" %>
+    <%= f.text_area :content, class: "form-control w-50 p-3", rows: "4" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture, "写真" %>
+    <%= f.file_field :picture, class: "form-control-file" %>
+  </div>
+    <%= f.submit :記録する, class: "btn btn-primary" %>
 <% end %>
+
+<%= javascript_pack_tag 'microposts/new' %>

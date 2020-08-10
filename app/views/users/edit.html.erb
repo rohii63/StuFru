@@ -27,15 +27,10 @@
 <p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userTargetModal"}%></p>
 <%= render 'users/modal_form/target' %>
 <p><%= @user.target %></p>
-<% if @user.target == "大学受験合格" %>
-  <p>
-    志望校：<%= @user.my_choice_university %><%= link_to "編集", "#", data: {toggle: "modal", target: "#userChoiceUniversityModal"} %>
-  </p>
-  <%= render 'users/modal_form/my_choice_university' %>
-<% end %>
 
 <p>
-  <% if @user.target == "大学受験合格" && !@user.my_choice_university %>
+  <% if @user.target == "大学受験合格" %>
+    志望校：<%= @user.my_choice_university %><%= link_to "編集", "#", data: {toggle: "modal", target: "#userChoiceUniversityModal"} %>
     <%= render 'users/modal_form/my_choice_university' %>
   <% end %>
 </p>

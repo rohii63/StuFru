@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'search/users', to: 'search#users', as: 'search'
+  get '/microposts', to: 'microposts#new'
   devise_for :users
   root 'home#top'
   get 'home/home'

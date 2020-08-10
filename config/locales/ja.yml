@@ -7,6 +7,14 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      micropost: 勉強記録
+    attributes:
+      micropost:
+        studied_at: 勉強日時
+        how_many_studied_hours: 何時間勉強したか
+        how_many_studied_minutes: 何分勉強したか
+        studied_time_in_minutes: 勉強時間
   date:
     abbr_day_names:
     - 日

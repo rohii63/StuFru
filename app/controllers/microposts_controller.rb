@@ -7,13 +7,15 @@ class MicropostsController < ApplicationController
   end
 
   def create
-    user = current_user
-    micropost = user.microposts.build(micropost_params)
-    if micropost.save
+    @user = current_user
+    @micropost = @user.microposts.build(micropost_params)
+    if @micropost.save
       flash[:success] = "登録完了"
       redirect_to root_path
     else
-      redirect_to request.referrer
+      @books = @user.books.all
+      @book_names = @books.pluck(:name)
+      render 'new'
     end
   end
 
@@ -35,7 +37,9 @@ class MicropostsController < ApplicationController
       params.require(:micropost).permit(
         :book_id,
         :studied_at,
-        :studied_time,
+        :how_many_studied_hours,
+        :how_many_studied_minutes,
+        :studied_time_in_minutes,
         :studied_page,
         :content,
         :picture,
