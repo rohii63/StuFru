@@ -2,7 +2,8 @@
 <p>トップページです。</p>
 
 <% if user_signed_in? %>
-  <%= render 'user_timeline' %>
+  <p><%= link_to "投稿する", new_micropost_path %></p>
+  <%= render 'shared/timeline' %>
 <% else %>
   <%= render 'not_login_top' %>
 <% end %>

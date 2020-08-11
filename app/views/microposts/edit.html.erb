@@ -2,7 +2,7 @@
 <p>Find me in app/views/microposts/edit.html.erb</p>
 
 <%= form_with model: @micropost, local: true do |f| %>
-  <%= render 'layouts/error_messages', object: f.object %>
+  <%= render 'shared/error_messages', object: f.object %>
 
   <div class="form-group">
     <%= label_tag 'micropost[book_id]', "教材名" %>
