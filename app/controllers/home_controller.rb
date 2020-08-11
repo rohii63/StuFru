@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   def top
-    @user = current_user
-    @microposts = @user.microposts.all
+    if user_signed_in?
+      @user = current_user
+      @microposts = @user.microposts.all
+    end
   end
 
   def home
