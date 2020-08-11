@@ -7,5 +7,7 @@ class HomeController < ApplicationController
   end
 
   def home
+    @user = current_user
+    @micropost = @user.microposts.all
   end
 end
