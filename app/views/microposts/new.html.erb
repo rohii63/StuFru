@@ -3,7 +3,7 @@
 
   <div class="form-group">
     <%= label_tag 'micropost[book_id]', "教材名" %>
-    <%= f.collection_select :book_id, @books, :id, :name, class: "form-control" %>
+    <%= f.collection_select :book_id, @books, :id, :name, class: "form-control", include_blank: true %>
   </div>
   <div class="form-group">
     <%= f.label :studied_at, "勉強日時" %>

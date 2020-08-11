@@ -20,15 +20,33 @@ class MicropostsController < ApplicationController
   end
 
   def show
+    @micropost = Micropost.find(params[:id])
   end
 
   def edit
+    @micropost = Micropost.find(params[:id])
+    @user = current_user
+    @books = @user.books.all
+    @book_names = @books.pluck(:name)
   end
 
   def update
+    @user = current_user
+    @micropost = Micropost.find(params[:id])
+    if @micropost.update(micropost_params)
+      flash[:success] = "編集完了"
+      redirect_to root_path
+    else
+      @books = @user.books.all
+      @book_names = @books.pluck(:name)
+      render 'edit'
+    end
   end
 
   def destroy
+    Micropost.find(params[:id]).destroy
+    flash[:success] = "削除完了"
+    redirect_to root_path
   end
 
   private
