@@ -5,5 +5,16 @@ class Micropost < ApplicationRecord
   default_scope -> { order(studied_at: :desc) }
   validates :user_id, presence: true
   validates :studied_at, presence: true
-  validates :studied_time, presence: true
+  validates :how_many_studied_hours, presence: true
+  validates :how_many_studied_minutes, presence: true
+  validates :studied_time_in_minutes, presence: true
+  validate  :datetime_not_future_time
+  validate  :studied_time_non_zero
+
+  def datetime_not_future_time
+    errors.add(:base, "勉強日時は現在までの日時を選択してください。") if studied_at > Time.now
+  end
+  def studied_time_non_zero
+    errors.add(:base, "勉強時間は1分以上で入力してください。") if studied_time_in_minutes == 0
+  end
 end

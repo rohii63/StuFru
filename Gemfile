@@ -71,3 +71,5 @@ gem 'nokogiri', '~> 1.10', '>= 1.10.10'
 gem 'faker', '~> 2.13'
 #Create hash widh association function of activeRecord
 gem 'active_hash'
+#Change error messages to japanese
+gem 'rails-i18n', '~> 6.0'
