@@ -8,6 +8,6 @@ class HomeController < ApplicationController
 
   def home
     @user = current_user
-    @micropost = @user.microposts.all
+    @microposts = @user.microposts.all
   end
 end

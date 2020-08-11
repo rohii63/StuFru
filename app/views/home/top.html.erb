@@ -2,7 +2,7 @@
 <p>トップページです。</p>
 
 <% if user_signed_in? %>
-  <%= render 'login_top' %>
+  <%= render 'user_timeline' %>
 <% else %>
   <%= render 'not_login_top' %>
 <% end %>
