@@ -31,15 +31,26 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
-        format.json { render :index, status: :ok, location: users_path }
+        flash[:success] = "編集完了"
+        redirect_to edit_user_path(@user)
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        @books = @user.books.all
+        @temporaryTargets = []
+        8.times do |n|
+          n += 1
+          @temporaryTargets.push(Target.new(target_category_id: "#{n}"))
+        end
+        @targetContent1 = Target.where(target_category_id:1)
+        @targetContent2 = Target.where(target_category_id:2)
+        @targetContent3 = Target.where(target_category_id:3)
+        @targetContent4 = Target.where(target_category_id:4)
+        @targetContent5 = Target.where(target_category_id:5)
+        @targetContent6 = Target.where(target_category_id:6)
+        @targetContent7 = Target.where(target_category_id:7)
+        @targetContent8 = Target.where(target_category_id:8)
+        render :edit
       end
-    end
   end
 
   private

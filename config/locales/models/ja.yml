@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      book: 教材
+    attributes:
+      user:
+        name: 名前
+        target_comment: 目標コメント
+        introduction: 自己紹介
+      book:
+        name: 教材名
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              format: '%{message}'
+              blank: '%{attribute}を入力して下さい。'
+              too_long: '%{attribute}は32文字以内で入力してください。'
+            target_comment:
+              format: '%{message}'
+              too_long: '%{attribute}は400文字以内で入力してください。'
+            introduction:
+              format: '%{message}'
+              too_long: '%{attribute}は1000文字以内で入力してください。'
+        book:
+          attributes:
+            name:
+              format: '%{message}'
+              blank: '%{attribute}を入力して下さい。'
+              taken: '%{value}は既に存在する教材名です。'

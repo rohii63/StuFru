@@ -27,5 +27,6 @@ module StuFru
     config.active_record.default_timezone = :local
     #Change error messages to japanese
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    config.active_model.i18n_customize_full_message = true
   end
 end

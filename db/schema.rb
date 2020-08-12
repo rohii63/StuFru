@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_081027) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name", default: "", null: false
+    t.string "name", null: false
     t.string "avatar"
     t.text "target_comment"
     t.text "introduction"

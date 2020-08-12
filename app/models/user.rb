@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_one_attached :avatar
-  before_create :default_image
+  before_validation :default_image
   default_scope -> { order(created_at: :desc) }
   has_many :study_books, class_name: "BookRegister",
                               foreign_key: "user_id",
@@ -10,9 +10,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,
           :confirmable
+  validate :avatar_content_type
+  validates :name, presence: true, length: {maximum: 32}
+  # validates :target, presence: true
+  validates :target_comment, length: {maximum: 400}
+  validates :introduction, length: {maximum: 1000}
 
     def default_image
       self.avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
+    end
+
+    def avatar_content_type
+      if !avatar.content_type.in?(%('image/jpeg image/png'))
+        errors.add(:avatar, 'にはjpegまたはpngファイルを添付してください')
+      end
     end
 
     def self.name_search(search)

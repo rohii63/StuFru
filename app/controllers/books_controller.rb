@@ -13,12 +13,11 @@ class BooksController < ApplicationController
       current_user.study_books.create(book_id: @book.id)
       flash[:success] = "登録完了"
       redirect_to new_book_path
-    elsif @book.exist_same_name?
-      flash[:error] = "同じ教材名が既に存在します"
-      redirect_to request.referrer
     else
-      flash[:error] = "教材名を入力してください"
-      redirect_to request.referrer
+      @user = current_user
+      @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
+      @keyword = params[:search]
+      render 'new'
     end
   end
 
@@ -28,16 +27,13 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
-    if book.update(book_params)
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
       flash[:success] = "編集完了"
-      redirect_to edit_book_path(book)
-    elsif @book.exist_same_name?
-      flash[:error] = "同じ教材名が既に存在します"
-      redirect_to request.referrer
+      redirect_to edit_book_path(@book)
     else
-      flash[:error] = "教材名を入力してください"
-      redirect_to request.referrer
+      @microposts = @book.microposts.all
+      render 'edit'
     end
   end
 
