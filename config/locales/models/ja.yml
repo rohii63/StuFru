@@ -6,6 +6,7 @@ ja:
     attributes:
       user:
         name: 名前
+        avatar: プロフィール画像
         target_comment: 目標コメント
         introduction: 自己紹介
       book:

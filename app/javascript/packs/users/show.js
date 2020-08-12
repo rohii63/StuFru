@@ -18,12 +18,3 @@ $(function() {
 //   console.log(selectedValue)
 //   $("#user_my_choice_university").attr("value", selectedValue)
 // }
-
-// $(function() {
-//   $("#btn-a").click(
-//     function () {
-//       var btn = $('#btn-a').val();
-//       console.log( btn );
-//     }
-//   )
-// })

@@ -6,7 +6,7 @@
           <h5 class="modal-title">基本情報編集</h5>
         </div>
         <div class="modal-body">
-          <%= f.label :ユーザ名 %>
+          <%= f.label :name, "ユーザー名" %>
           <%= f.text_field :name %>
           <%= f.select :gender, ['男', '女', 'その他'], include_blank: '性別' %>
           <%= f.select :age, (1..100).to_a, include_blank: '年齢' %>
