@@ -1,23 +1,50 @@
-<h1>Users#show@<%= @user.name %></h1>
+<%= form_with model: @user, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+<% end %>
+<h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 
-<div class="row">
-  <div class="col-3">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">プロフィール</a>
-      <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-book" aria-selected="false">教材</a>
-      <a class="nav-link active" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="true">レポート</a>
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <%= render 'users/profile_tab' %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
-        <%= render 'users/book_tab' %>
-      </div>
-      <div class="tab-pane fade show active" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">...</div>
-    </div>
-  </div>
-</div>
+<p>プロフィール</p>
+<p>
+  <%= link_to (image_tag url_for(@user.avatar.variant(resize: "100x100>"))), "#", data: {toggle: "modal", target: "#userAvatarModal"} %>
+  <%= render 'users/modal_form/avatar' %>
+</p>
+<p><%= @user.name %></p>
+
+
+<p>
+  <%= link_to (text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！"), "#", data: {toggle: "modal", target: "#userTargetCommentModal"} %>
+  <%= render 'users/modal_form/target_comment' %>
+</p>
+
+<%# add following link %>
+<%# add follower link %>
+
+<p><%= link_to "本棚（#{@user.books.count}）", books_path %></p>
+
+
+<p>自己紹介 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userIntroductionModal"}%></p>
+<%= render 'users/modal_form/introduction' %>
+<p><%= @user.introduction %></p>
+
+<p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userTargetModal"}%></p>
+<%= render 'users/modal_form/target' %>
+<p><%= @user.target %></p>
+
+<p>
+  <% if @user.target == "大学受験合格" %>
+    志望校：<%= @user.my_choice_university %><%= link_to "編集", "#", data: {toggle: "modal", target: "#userChoiceUniversityModal"} %>
+    <%= render 'users/modal_form/my_choice_university' %>
+  <% end %>
+</p>
+
+
+<p>基本情報 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userBasicInformationModal"}%></p>
+<%= render 'users/modal_form/basic_information' %>
+<p>ユーザ名 <%= @user.name %></p>
+<p>性別 <%= @user.gender %></p>
+<p>年齢 <%= @user.age %></p>
+<p>住まい <%= @user.live %></p>
+<p>職業 <%= @user.job %></p>
+
+<%= javascript_pack_tag 'users/show' %>

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  def new
+
+  def my_page
+    @user = current_user
+    @books = @user.books.all
   end
 
   def index
@@ -7,11 +10,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @books = @user.books.all
-  end
-
-  def edit
     @user = current_user
     @books = @user.books.all
     @temporaryTargets = []
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
       if @user.update(user_params)
         flash[:success] = "編集完了"
-        redirect_to edit_user_path(@user)
+        redirect_to user_path(@user)
       else
         @books = @user.books.all
         @temporaryTargets = []
@@ -49,7 +47,7 @@ class UsersController < ApplicationController
         @targetContent6 = Target.where(target_category_id:6)
         @targetContent7 = Target.where(target_category_id:7)
         @targetContent8 = Target.where(target_category_id:8)
-        render :edit
+        render 'show'
       end
   end
 

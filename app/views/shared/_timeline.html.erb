@@ -1,6 +1,6 @@
 <% @microposts.each do |micropost| %>
   <ul>
-    <%= link_to user_path(micropost.user) do %>
+    <%= link_to my_page_path(micropost.user) do %>
       <li><%= image_tag url_for(micropost.user.avatar.variant(resize: "100x100>")) %></li>
     <% end %>
     <%= link_to micropost_path(micropost) do %>

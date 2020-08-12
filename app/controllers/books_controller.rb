@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  def new
+  def index
     @user = current_user
     @book = @user.books.build
     @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
@@ -12,16 +12,16 @@ class BooksController < ApplicationController
     if @book.save
       current_user.study_books.create(book_id: @book.id)
       flash[:success] = "登録完了"
-      redirect_to new_book_path
+      redirect_to books_path
     else
       @user = current_user
       @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
       @keyword = params[:search]
-      render 'new'
+      render 'index'
     end
   end
 
-  def edit
+  def show
     @book = Book.find(params[:id])
     @microposts = @book.microposts.all
   end
@@ -30,10 +30,10 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.update(book_params)
       flash[:success] = "編集完了"
-      redirect_to edit_book_path(@book)
+      redirect_to book_path(@book)
     else
       @microposts = @book.microposts.all
-      render 'edit'
+      render 'show'
     end
   end
 

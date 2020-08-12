@@ -1,7 +1,7 @@
 <p><%= @user.name %>さんの本棚</p>
 
 <% @books.each do |book| %>
-  <%= link_to edit_book_path(book) do %>
+  <%= link_to book_path(book) do %>
     <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
     <%= book.name %>
   <% end %>
