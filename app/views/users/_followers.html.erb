@@ -1,4 +1,4 @@
-<% @users.each do |user| %>
+<% @followers.each do |user| %>
   <li id="profile-card-<%= user.id %>">
     <%= link_to my_page_path(user) do %>
       <%= image_tag url_for(user.avatar.variant(resize: "50x50>")) %>

@@ -17,8 +17,7 @@
   <%= render 'users/modal_form/target_comment' %>
 </p>
 
-<%# add following link %>
-<%# add follower link %>
+<p><%= link_to "フォロワー（#{@user.followers.count}）フォロー（#{@user.following.count}）", follow_user_path(@user) %></p>
 
 <p><%= link_to "本棚（#{@user.books.count}）", books_path %></p>
 
