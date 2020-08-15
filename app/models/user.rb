@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_one_attached :avatar
   after_create :default_image
-  default_scope -> { order(created_at: :desc) }
   has_many :study_books, class_name: "BookRegister",
                               foreign_key: "user_id",
                               dependent:  :destroy
@@ -25,6 +24,7 @@ class User < ApplicationRecord
   validates :target_comment, length: {maximum: 400}
   validates :introduction, length: {maximum: 1000}
 
+
     def default_image
       self.avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
     end
@@ -37,16 +37,35 @@ class User < ApplicationRecord
       end
     end
 
-    def self.name_search(search)
-      User.where(['name LIKE ?', "%#{search}%"])
+    def self.name_search(id, search)
+      searched_users_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(['name LIKE ?', "%#{search}%"]).group("microposts.user_id").maximum("microposts.studied_at")
+      ordered_users = searched_users_in_hash.sort_by{ |k, v| v }.reverse.to_h
+      user_ids = ordered_users.keys
+      self.find(user_ids)
     end
 
     def self.recommended_user(id, target, my_choice_university)
       if my_choice_university
-        User.where.not(id: id).where(my_choice_university: my_choice_university)
+        recommended_user_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(my_choice_university: my_choice_university).group("microposts.user_id").maximum("microposts.studied_at")
       else
-        User.where.not(id: id).where(target: target)
+        recommended_user_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(target: target).group("microposts.user_id").maximum("microposts.studied_at")
       end
+      ordered_users = recommended_user_in_hash.sort_by{ |k, v| v }.reverse.to_h
+      user_ids = ordered_users.keys
+      self.find(user_ids)
+    end
+
+    def a_week_study_time
+      hours = 0
+      minutes = 0
+      from = Time.current.at_beginning_of_day - 6.day
+      to = Time.current
+      a_week_microposts = microposts.all.where(studied_at: from...to)
+      a_week_microposts.each do |micropost|
+        hours += micropost.how_many_studied_hours
+        minutes += micropost.how_many_studied_minutes
+      end
+      "#{hours}時間#{minutes}分"
     end
 
     def register(book)

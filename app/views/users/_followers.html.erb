@@ -8,12 +8,7 @@
       <%= user.target_comment %>
       <%= user.target %>
       <%= user.my_choice_university %>
-      <%# user.study_time %>
-    <% end %>
-    <% if current_user.following?(user) %>
-      <%= render 'users/unfollow_form' %>
-    <% else %>
-      <%= render 'users/follow_form' %>
+      <%= user.a_week_study_time %>
     <% end %>
   </li>
 <% end %>

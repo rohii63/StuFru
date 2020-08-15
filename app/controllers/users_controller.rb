@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def my_page
     @user = User.find(params[:id])
     @books = @user.books.all
+    @microposts = @user.microposts.all
   end
 
   def index
