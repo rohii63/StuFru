@@ -9,8 +9,8 @@ User.create(
   email: 'trial@mail',
   name: 'trial',
   password: 'password',
-  confirmed_at: '2020-07-25 00:10:00',
-  confirmation_sent_at: '2020-07-25 00:00:00'
+  confirmed_at: DateTime.now,
+  confirmation_sent_at: DateTime.now - 1
 )
 
 
@@ -144,30 +144,32 @@ for @content in target_category8_contents do
 end
 
 
-# require 'faker'
+require 'faker'
 
-# 50.times do |n|
-#   name = Faker::Name.name
-#   email = Faker::Internet.unique.email
-#   User.create!(
-#     name: name,
-#     email: email,
-#     password: "password",
-#     target: "yeild"
-#   )
-# end
+50.times do |n|
+  name = Faker::Name.name
+  email = Faker::Internet.unique.email
+  user = User.create!(
+    name: name,
+    email: email,
+    password: "password",
+    target: "yeild",
+    confirmed_at: DateTime.now,
+    confirmation_sent_at: DateTime.now - 1
+  )
+  user.active_relationships.create(followed_id: 1)
+end
 
-# @faker = User.where(target: "yeild")
-# @target2 = Target.where(target_category_id: 2)
+@fakers = User.where(target: "yeild")
+@targets2 = Target.where(target_category_id: 2)
+target = []
 
-# target = []
+@targets2.each do |t2|
+  10.times do |n|
+    target.push(t2.content)
+  end
+end
 
-# @target2.each do |t2|
-#   10.times do |n|
-#     target.push(t2.content)
-#   end
-# end
-
-# @faker.zip(target) do |f, t|
-#   f.update(target: "#{t}")
-# end
+@fakers.zip(target) do |f, t|
+  f.update(target: "#{t}")
+end

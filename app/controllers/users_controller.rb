@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
   def my_page
-    @user = current_user
+    @user = User.find(params[:id])
     @books = @user.books.all
+    @microposts = @user.microposts.all
   end
 
   def index
@@ -49,6 +50,13 @@ class UsersController < ApplicationController
         @targetContent8 = Target.where(target_category_id:8)
         render 'show'
       end
+  end
+
+  def follow
+    @user = User.find(params[:id])
+    @followers = @user.followers.all
+    @following = @user.following.all
+    render 'show_follow'
   end
 
   private
