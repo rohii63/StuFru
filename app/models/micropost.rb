@@ -2,12 +2,15 @@ class Micropost < ApplicationRecord
   belongs_to :user
   belongs_to :book, optional: true
   has_one_attached :picture
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   default_scope -> { order(studied_at: :desc) }
   validates :user_id, presence: true
   validates :studied_at, presence: true
   validates :how_many_studied_hours, presence: true
   validates :how_many_studied_minutes, presence: true
   validates :studied_time_in_minutes, presence: true
+  validates :content, length: {maximum: 280}
   validate  :datetime_not_future_time
   validate  :studied_time_non_zero
 

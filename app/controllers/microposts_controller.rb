@@ -21,6 +21,9 @@ class MicropostsController < ApplicationController
 
   def show
     @micropost = Micropost.find(params[:id])
+    @comment = @micropost.comments.build()
+    @comments = @micropost.comments.all
+    @likes = @micropost.likes.all
   end
 
   def edit

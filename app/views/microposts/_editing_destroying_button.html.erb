@@ -1,0 +1,4 @@
+<% if @micropost.user == current_user %>
+  <p><%= link_to "編集", edit_micropost_path(@micropost) %></p>
+  <p><%= link_to "削除", "/microposts/#{@micropost.id}", method: :delete %></p>
+<% end %>

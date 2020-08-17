@@ -1,0 +1,20 @@
+  <li>
+  <%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(@micropost.user) %>
+  </li>
+  <li><%= @micropost.user.name %></li>
+  <li><%= @micropost.studied_at %></li>
+  <li><%= @micropost.content %></li>
+    <ul>
+      <li>
+        <%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "100x100>"))), book_path(@micropost.book)  if @micropost.book %>
+      </li>
+      <li><%= @micropost.book.name if @micropost.book %></li>
+      <li>
+        <% if @micropost.how_many_studied_hours != 0 %>
+          <%= @micropost.how_many_studied_hours %>時間
+        <% end %>
+        <% if @micropost.how_many_studied_minutes != 0 %>
+          <%= @micropost.how_many_studied_minutes %>分
+        <% end %>
+      </li>
+    </ul>

@@ -1,0 +1,23 @@
+<p>コメント（<%= @comments.count %>件）</p>
+<% @comments.each do |comment| %>
+  <ul>
+    <li><%= image_tag url_for(comment.user.avatar.variant(resize: "30x30>")) %></li>
+    <li><%= comment.user.name %></li>
+    <li><%= comment.created_at %></li>
+    <li><%= comment.content %></li>
+    <li><%= link_to "×", "#", data: {toggle: "modal", target: "#deleteConfirmModal"} if current_user == comment.user %></li>
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">コメントを削除しますか？</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+            <%= link_to "削除する" ,micropost_comment_path(@micropost, comment), method: :delete, class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ul>
+<% end %>
