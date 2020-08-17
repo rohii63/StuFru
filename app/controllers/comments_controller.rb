@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
   
   def create
-    @micropost = Micropost.find(params[:micropost_id])
     @comment = current_user.comments.build(comment_params)
+    @micropost = @comment.micropost
     if @comment.save
+      @micropost.create_notification_comment!(current_user, @comment.id)
       redirect_to micropost_path(@micropost)
     else
       render 'microposts/show'

@@ -1,6 +1,8 @@
 class LikesController < ApplicationController
   def create
-    current_user.likes.create(micropost_id: params[:micropost_id])
+    micropost = Micropost.find(params[:micropost_id])
+    current_user.likes.create(micropost_id: micropost)
+    micropost.create_notification_like!(current_user)
     redirect_to request.referrer
   end
 
