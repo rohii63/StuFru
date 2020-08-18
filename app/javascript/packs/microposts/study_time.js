@@ -19,3 +19,5 @@ $(function() {
     $("#micropost_studied_time_in_minutes").attr("value", total)
   })
 });
+
+// $("#user_my_choice_university").attr("value", selectedValue)

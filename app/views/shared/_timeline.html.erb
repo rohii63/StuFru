@@ -1,8 +1,6 @@
 <% @microposts.each do |micropost| %>
   <ul>
-    <%= link_to my_page_path(micropost.user) do %>
-      <li><%= image_tag url_for(micropost.user.avatar.variant(resize: "100x100>")) %></li>
-    <% end %>
+    <li><%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(micropost.user) %></li>
     <%= link_to micropost_path(micropost) do %>
       <li><%= micropost.user.name %></li>
       <li><%= micropost.studied_at %></li>
@@ -20,10 +18,12 @@
             <% end %>
           </li>
         </ul>
-    <% end %>
   </ul>
   <ul>
-    <li><%# コメントリンク %></li>
-    <li><%# いいねぼたん %></li>
+    <li>コメントする</li>
+    <% end %>
+    <li>
+      <%= render 'shared/like_button', micropost: micropost %>
+    </li>
   </ul>
 <% end %>

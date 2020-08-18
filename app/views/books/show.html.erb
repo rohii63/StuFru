@@ -1,6 +1,4 @@
-<%= form_with model: @book, local: true do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-<% end %>
+<%= render 'shared/error_messages', object: @book %>
 
 <h1>Books#show</h1>
 <p>Find me in app/views/books/show.html.erb</p>

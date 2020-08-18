@@ -3,6 +3,8 @@ ja:
     models:
       user: ユーザー
       book: 教材
+      micropost: 投稿
+      comment: コメント
     attributes:
       user:
         name: 名前
@@ -11,6 +13,10 @@ ja:
         introduction: 自己紹介
       book:
         name: 教材名
+      micropost:
+        content: コメント
+      comment:
+        content: コメント
     errors:
       models:
         user:
@@ -31,3 +37,14 @@ ja:
               format: '%{message}'
               blank: '%{attribute}を入力して下さい。'
               taken: '%{value}は既に存在する教材名です。'
+        micropost:
+          attributes:
+            content:
+              format: '%{message}'
+              too_long: '%{attribute}は280文字以内で入力してください。'
+        comment:
+          attributes:
+            content:
+              format: '%{message}'
+              blank: '%{attribute}を入力して下さい。'
+              too_long: '%{attribute}は140文字以内で入力してください。'

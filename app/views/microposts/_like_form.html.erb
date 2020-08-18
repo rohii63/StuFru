@@ -1,0 +1,9 @@
+<%= render 'shared/like_button', micropost: @micropost %>
+
+<% @likes.each do |like| %>
+  <%= link_to my_page_path(like.user) do %>  
+    <ul>
+      <li><%= image_tag url_for(like.user.avatar.variant(resize: "30x30>")) %></li>
+    </ul>
+  <% end %>
+<% end %>
