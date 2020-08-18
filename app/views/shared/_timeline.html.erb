@@ -1,8 +1,6 @@
 <% @microposts.each do |micropost| %>
   <ul>
-    <%= link_to my_page_path(micropost.user) do %>
-      <li><%= image_tag url_for(micropost.user.avatar.variant(resize: "100x100>")) %></li>
-    <% end %>
+    <li><%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(micropost.user) %></li>
     <%= link_to micropost_path(micropost) do %>
       <li><%= micropost.user.name %></li>
       <li><%= micropost.studied_at %></li>
@@ -25,15 +23,7 @@
     <li>コメントする</li>
     <% end %>
     <li>
-      <% if current_user.like?(micropost) %>
-        <%= form_with model: @like = current_user.likes.find_by(micropost_id: micropost), url: micropost_like_path(micropost, @like), method: :delete,  local: true do |f| %>
-          <%= f.submit "いいね！（#{micropost.likes.count}）", class: "btn btn-primary" %>
-        <% end %>
-      <% else %>
-        <%= form_with model: micropost.likes.build(), url: micropost_likes_path(micropost), local: true do |like| %>
-          <%= like.submit "いいね！（#{micropost.likes.count}）", class: "btn btn-primary" %>
-        <% end %>
-      <% end %>
+      <%= render 'shared/like_button', micropost: micropost %>
     </li>
   </ul>
 <% end %>

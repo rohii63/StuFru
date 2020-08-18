@@ -1,13 +1,10 @@
-  <li>
-  <%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(@micropost.user) %>
-  </li>
+  <li><%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(@micropost.user) %></li>
   <li><%= @micropost.user.name %></li>
   <li><%= @micropost.studied_at %></li>
   <li><%= @micropost.content %></li>
+  <li><%= image_tag url_for(@micropost.picture.variant(resize: "100x100>")) if @micropost.picture.attached? %></li>
     <ul>
-      <li>
-        <%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "100x100>"))), book_path(@micropost.book)  if @micropost.book %>
-      </li>
+      <li><%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "100x100>"))), book_path(@micropost.book)  if @micropost.book %></li>
       <li><%= @micropost.book.name if @micropost.book %></li>
       <li>
         <% if @micropost.how_many_studied_hours != 0 %>
