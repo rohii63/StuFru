@@ -5,7 +5,7 @@ class Micropost < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  default_scope -> { order(studied_at: :desc) }
+  default_scope -> { order(updated_at: :desc) }
   validates :user_id, presence: true
   validates :studied_at, presence: true
   validates :how_many_studied_hours, presence: true
@@ -71,6 +71,45 @@ class Micropost < ApplicationRecord
     hours = total / 60
     minutes = total % 60
     return hours, minutes
+  end
+
+  def self.today_study_times
+    from = Time.current.at_beginning_of_day
+    to = Time.current.at_end_of_day
+    from_in_yesterday = Time.current.at_beginning_of_day - 1.day
+    to_in_yesterday = Time.current.at_end_of_day - 1.day
+
+    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    total_in_yesterday = self.where(studied_at: from_in_yesterday...to_in_yesterday).sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes, total, total_in_yesterday
+  end
+
+  def self.this_week_study_times
+    from = Time.current.at_beginning_of_week
+    to = Time.current.at_end_of_week
+    from_in_last_week = Time.current.at_beginning_of_week - 1.week
+    to_in_last_week = Time.current.at_end_of_week - 1.week
+
+    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    total_in_last_week = self.where(studied_at: from_in_last_week...to_in_last_week).sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes, total, total_in_last_week
+  end
+
+  def self.this_month_study_times
+    from = Time.current.at_beginning_of_month
+    to = Time.current.at_end_of_month
+    from_in_last_month = Time.current.at_beginning_of_month - 1.month
+    to_in_last_month = Time.current.at_end_of_month - 1.month
+
+    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    total_in_last_month = self.where(studied_at: from_in_last_month...to_in_last_month).sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes, total, total_in_last_month
   end
 
 end

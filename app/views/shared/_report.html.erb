@@ -1,1 +1,22 @@
-<%= @total_study_times[0] %>時間<%= @total_study_times[1] %>分
+<p>
+  <div><strong>総勉強時間</strong><div>
+  <%= @total_study_times[0] %>時間<%= @total_study_times[1] %>分
+</p>
+
+<p>
+  <div><strong>今日の勉強時間</strong><div>
+  <%= @today_study_times[0] %>時間<%= @today_study_times[1] %>分
+  <div><%= day_before_ratio_in_study_time %></div>
+</p>
+
+<p>
+  <div><strong>今週の勉強時間</strong><div>
+  <%= @this_week_study_times[0] %>時間<%= @this_week_study_times[1] %>分
+  <div><%= week_before_ratio_in_study_time %></div>
+</p>
+
+<p>
+  <div><strong>今月の勉強時間</strong><div>
+  <%= @this_month_study_times[0] %>時間<%= @this_month_study_times[1] %>分
+  <div><%= month_before_ratio_in_study_time %></div>
+</p>
