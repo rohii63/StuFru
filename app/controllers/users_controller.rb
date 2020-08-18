@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books.all
     @microposts = @user.microposts.all
+    @total_study_times = @microposts.total_study_times
   end
 
   def index

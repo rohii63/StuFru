@@ -9,5 +9,7 @@ class HomeController < ApplicationController
   def home
     @user = current_user
     @microposts = @user.microposts.all
+    @total_study_times = @microposts.total_study_times
   end
+
 end

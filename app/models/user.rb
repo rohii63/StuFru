@@ -63,16 +63,13 @@ class User < ApplicationRecord
       self.find(user_ids)
     end
 
-    def a_week_study_time
-      hours = 0
-      minutes = 0
+    def a_week_study_times
       from = Time.current.at_beginning_of_day - 6.day
       to = Time.current
-      a_week_microposts = microposts.all.where(studied_at: from...to)
-      a_week_microposts.each do |micropost|
-        hours += micropost.how_many_studied_hours
-        minutes += micropost.how_many_studied_minutes
-      end
+
+      total_times = microposts.all.where(studied_at: from...to).sum(:studied_time_in_minutes)
+      hours = total_times / 60
+      minutes = total_times % 60
       "#{hours}時間#{minutes}分"
     end
 

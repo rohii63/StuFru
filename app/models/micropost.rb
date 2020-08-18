@@ -65,4 +65,12 @@ class Micropost < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+
+  def self.total_study_times
+    total = self.sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes
+  end
+
 end
