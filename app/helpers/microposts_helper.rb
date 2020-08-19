@@ -1,7 +1,7 @@
 module MicropostsHelper
 
   def day_before_ratio_in_study_time
-    tmp = @today_study_times[2] - @today_study_times[3]
+    tmp = @today_study_time[2] - @today_study_time[3]
     sign = "+"
 
     if tmp < 0
@@ -16,7 +16,7 @@ module MicropostsHelper
   end
 
   def week_before_ratio_in_study_time
-    tmp = @this_week_study_times[2] - @this_week_study_times[3]
+    tmp = @this_week_study_time[2] - @this_week_study_time[3]
     sign = "+"
 
     if tmp < 0
@@ -31,7 +31,7 @@ module MicropostsHelper
   end
 
   def month_before_ratio_in_study_time
-    tmp = @this_month_study_times[2] - @this_month_study_times[3]
+    tmp = @this_month_study_time[2] - @this_month_study_time[3]
     sign = "+"
 
     if tmp < 0

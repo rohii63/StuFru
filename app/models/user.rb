@@ -63,7 +63,7 @@ class User < ApplicationRecord
       self.find(user_ids)
     end
 
-    def a_week_study_times
+    def a_week_study_time
       from = Time.current.at_beginning_of_day - 6.day
       to = Time.current
 

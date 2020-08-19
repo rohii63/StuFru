@@ -14,13 +14,20 @@ class Micropost < ApplicationRecord
   validates :content, length: {maximum: 280}
   validate  :datetime_not_future_time
   validate  :studied_time_non_zero
+  validate  :study_time_limit_per_day
 
   def datetime_not_future_time
-    errors.add(:base, "勉強日時は現在までの日時を選択してください。") if studied_at > Time.now
+    errors.add(:studied_at, "は現在までの日時を選択してください。") if studied_at > Time.now
   end
 
   def studied_time_non_zero
-    errors.add(:base, "勉強時間は1分以上で入力してください。") if studied_time_in_minutes == 0
+    errors.add(:studied_time_in_minutes, "は1分以上で入力してください。") if studied_time_in_minutes == 0
+  end
+
+  def study_time_limit_per_day
+    from = studied_at.at_beginning_of_day
+    to = studied_at.at_end_of_day
+    errors.add(:studied_time_in_minutes, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:studied_time_in_minutes) > 24
   end
 
   def create_notification_like!(current_user)
@@ -66,14 +73,14 @@ class Micropost < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  def self.total_study_times
+  def self.total_study_time
     total = self.sum(:studied_time_in_minutes)
     hours = total / 60
     minutes = total % 60
     return hours, minutes
   end
 
-  def self.today_study_times
+  def self.today_study_time
     from = Time.current.at_beginning_of_day
     to = Time.current.at_end_of_day
     from_in_yesterday = Time.current.at_beginning_of_day - 1.day
@@ -86,7 +93,7 @@ class Micropost < ApplicationRecord
     return hours, minutes, total, total_in_yesterday
   end
 
-  def self.this_week_study_times
+  def self.this_week_study_time
     from = Time.current.at_beginning_of_week
     to = Time.current.at_end_of_week
     from_in_last_week = Time.current.at_beginning_of_week - 1.week
@@ -99,7 +106,7 @@ class Micropost < ApplicationRecord
     return hours, minutes, total, total_in_last_week
   end
 
-  def self.this_month_study_times
+  def self.this_month_study_time
     from = Time.current.at_beginning_of_month
     to = Time.current.at_end_of_month
     from_in_last_month = Time.current.at_beginning_of_month - 1.month
@@ -110,6 +117,10 @@ class Micropost < ApplicationRecord
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total, total_in_last_month
+  end
+
+  def daily_study_time
+    
   end
 
 end
