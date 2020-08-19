@@ -119,8 +119,34 @@ class Micropost < ApplicationRecord
     return hours, minutes, total, total_in_last_month
   end
 
-  def daily_study_time
-    
+  def self.daily_study_time(n)
+    from = Time.current.at_beginning_of_day - n.day
+    to = Time.current.at_end_of_day - n.day
+
+    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes, total
+  end
+
+  def self.weekly_study_time(n)
+    from = Time.current.at_beginning_of_week - n.week
+    to = Time.current.at_end_of_week - n.week
+
+    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes, total
+  end
+
+  def self.monthly_study_time(n)
+    from = Time.current.at_beginning_of_month - n.month
+    to = Time.current.at_end_of_month - n.month
+
+    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    hours = total / 60
+    minutes = total % 60
+    return hours, minutes, total
   end
 
 end

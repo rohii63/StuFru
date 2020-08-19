@@ -20,3 +20,30 @@
   <%= @this_month_study_time[0] %>時間<%= @this_month_study_time[1] %>分
   <div><%= month_before_ratio_in_study_time %></div>
 </p>
+
+<strong><%= "#{Date.today - 6.day}〜#{Date.today}" %></strong>
+<% for n in 0..6 do %>
+  <% a_day_study_time = @microposts.daily_study_time(n) %>
+  <p>
+    <div><strong><%= Date.today - n.day %></strong><div>
+    <%= a_day_study_time[0] %>時間<%= a_day_study_time[1] %>分
+  </p>
+<% end %>
+
+<strong><%= "#{Date.today.at_beginning_of_week - 6.week}〜#{Date.today.at_end_of_week}" %></strong>
+<% for n in 0..6 do %>
+  <% a_week_study_time = @microposts.weekly_study_time(n) %>
+  <p>
+    <div><strong><%= Date.today.at_beginning_of_week - n.week %></strong><div>
+    <%= a_week_study_time[0] %>時間<%= a_week_study_time[1] %>分
+  </p>
+<% end %>
+
+<strong><%= "#{(Date.today.at_beginning_of_month - 6.month).to_s(:year)}〜#{Date.today.at_end_of_month.to_s(:year)}" %></strong>
+<% for n in 0..6 do %>
+  <% a_month_study_time = @microposts.monthly_study_time(n) %>
+  <p>
+    <div><strong><%= (Date.today.at_beginning_of_month - n.month).to_s(:year) %></strong><div>
+    <%= a_month_study_time[0] %>時間<%= a_month_study_time[1] %>分
+  </p>
+<% end %>
