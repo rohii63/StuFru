@@ -1,0 +1,63 @@
+<p>
+  <div><strong>総勉強時間</strong><div>
+  <%= @total_study_time[0] %>時間<%= @total_study_time[1] %>分
+</p>
+
+<p>
+  <div><strong>今日の勉強時間</strong><div>
+  <%= @today_study_time[0] %>時間<%= @today_study_time[1] %>分
+  <div><%= day_before_ratio_in_study_time %></div>
+</p>
+
+<p>
+  <div><strong>今週の勉強時間</strong><div>
+  <%= @this_week_study_time[0] %>時間<%= @this_week_study_time[1] %>分
+  <div><%= week_before_ratio_in_study_time %></div>
+</p>
+
+<p>
+  <div><strong>今月の勉強時間</strong><div>
+  <%= @this_month_study_time[0] %>時間<%= @this_month_study_time[1] %>分
+  <div><%= month_before_ratio_in_study_time %></div>
+</p>
+
+<% f = 6 %>
+<% t = 0 %>
+<strong><%= "#{Date.today - f.day}〜#{Date.today - t.day}" %></strong>
+<% chart_data_d = {} %>
+<% f.downto(t) do |n| %>
+  <% a_day_study_time = @microposts.daily_study_time(n) %>
+  <% date = (Date.today - n.day).to_s(:default) %>
+  <% chart_data_d[date] = a_day_study_time[2] %>
+<% end %>
+<%= column_chart(chart_data_d.sort.to_h) %>
+
+<strong><%= "#{Date.today - 7.day}〜#{Date.today - 1.day}" %></strong>
+<% chart_data_dd = {} %>
+<% 7.downto(1) do |n| %>
+  <% a_day_study_time = @microposts.daily_study_time(n) %>
+  <% date = (Date.today - n.day).to_s(:default) %>
+  <% chart_data_dd[date] = a_day_study_time[2] %>
+<% end %>
+<%= column_chart(chart_data_dd.sort.to_h) %>
+
+
+
+<strong><%= "#{Date.today.at_beginning_of_week - f.week}〜#{Date.today.at_end_of_week - t.week}" %></strong>
+<% chart_data_w = {} %>
+<% f.downto(t) do |n| %>
+  <% a_week_study_time = @microposts.weekly_study_time(n) %>
+  <% date = (Date.today.at_beginning_of_week - n.week).to_s(:default) %>
+  <% chart_data_w[date] = a_week_study_time[2] %>
+<% end %>
+<%= column_chart(chart_data_w) %>
+
+<strong><%= "#{(Date.today.at_beginning_of_month - f.month).to_s(:year)}〜#{(Date.today.at_end_of_month - t.month).to_s(:year)}" %></strong>
+<% chart_data_m = {} %>
+<% f.downto(t) do |n| %>
+  <% a_month_study_time = @microposts.monthly_study_time(n) %>
+  <% date = (Date.today.at_beginning_of_month - n.month).to_s(:year) %>
+  <% chart_data_m[date] = a_month_study_time[2] %>
+<% end %>
+<%= column_chart(chart_data_m.sort.to_h) %>
+
