@@ -21,31 +21,43 @@
   <div><%= month_before_ratio_in_study_time %></div>
 </p>
 
-<strong><%= "#{Date.today - 6.day}〜#{Date.today}" %></strong>
-<% for n in 0..6 do %>
+<% f = 6 %>
+<% t = 0 %>
+<strong><%= "#{Date.today - f.day}〜#{Date.today - t.day}" %></strong>
+<% chart_data_d = {} %>
+<% f.downto(t) do |n| %>
   <% a_day_study_time = @microposts.daily_study_time(n) %>
-  <p>
-    <div><strong><%= Date.today - n.day %></strong><div>
-    <%= a_day_study_time[0] %>時間<%= a_day_study_time[1] %>分
-  </p>
+  <% date = (Date.today - n.day).to_s(:default) %>
+  <% chart_data_d[date] = a_day_study_time[2] %>
 <% end %>
+<%= column_chart(chart_data_d.sort.to_h) %>
 
-<strong><%= "#{Date.today.at_beginning_of_week - 6.week}〜#{Date.today.at_end_of_week}" %></strong>
-<% for n in 0..6 do %>
+<strong><%= "#{Date.today - 7.day}〜#{Date.today - 1.day}" %></strong>
+<% chart_data_dd = {} %>
+<% 7.downto(1) do |n| %>
+  <% a_day_study_time = @microposts.daily_study_time(n) %>
+  <% date = (Date.today - n.day).to_s(:default) %>
+  <% chart_data_dd[date] = a_day_study_time[2] %>
+<% end %>
+<%= column_chart(chart_data_dd.sort.to_h) %>
+
+
+
+<strong><%= "#{Date.today.at_beginning_of_week - f.week}〜#{Date.today.at_end_of_week - t.week}" %></strong>
+<% chart_data_w = {} %>
+<% f.downto(t) do |n| %>
   <% a_week_study_time = @microposts.weekly_study_time(n) %>
-  <p>
-    <div><strong><%= Date.today.at_beginning_of_week - n.week %></strong><div>
-    <%= a_week_study_time[0] %>時間<%= a_week_study_time[1] %>分
-  </p>
+  <% date = (Date.today.at_beginning_of_week - n.week).to_s(:default) %>
+  <% chart_data_w[date] = a_week_study_time[2] %>
 <% end %>
+<%= column_chart(chart_data_w) %>
 
-<strong><%= "#{(Date.today.at_beginning_of_month - 6.month).to_s(:year)}〜#{Date.today.at_end_of_month.to_s(:year)}" %></strong>
-<% for n in 0..6 do %>
+<strong><%= "#{(Date.today.at_beginning_of_month - f.month).to_s(:year)}〜#{(Date.today.at_end_of_month - t.month).to_s(:year)}" %></strong>
+<% chart_data_m = {} %>
+<% f.downto(t) do |n| %>
   <% a_month_study_time = @microposts.monthly_study_time(n) %>
-  <p>
-    <div><strong><%= (Date.today.at_beginning_of_month - n.month).to_s(:year) %></strong><div>
-    <%= a_month_study_time[0] %>時間<%= a_month_study_time[1] %>分
-  </p>
+  <% date = (Date.today.at_beginning_of_month - n.month).to_s(:year) %>
+  <% chart_data_m[date] = a_month_study_time[2] %>
 <% end %>
+<%= column_chart(chart_data_m.sort.to_h) %>
 
-<%= pie_chart [["Football", 10], ["Basketball", 5]] %>
