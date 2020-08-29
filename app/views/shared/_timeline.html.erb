@@ -22,8 +22,8 @@
   <ul>
     <li>コメントする</li>
     <% end %>
-    <li>
-      <%= render 'shared/like_button', micropost: micropost %>
+    <li id="like_button_<%= micropost.id %>">
+      <%= render 'likes/like_btn', micropost: micropost %>
     </li>
   </ul>
 <% end %>

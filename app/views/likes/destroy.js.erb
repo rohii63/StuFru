@@ -1,0 +1,1 @@
+document.getElementById("like_button_<%= @micropost.id %>").innerHTML = '<%= j(render 'likes/like_btn', micropost: @micropost) %>'
