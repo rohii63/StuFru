@@ -1,0 +1,33 @@
+<p>コメント（<%= @comments.count %>件）</p>
+
+<% @comments.each do |comment| %>
+  <ul id="comment_card_<%= comment.id %>">
+    <li><%= image_tag url_for(comment.user.avatar.variant(resize: "30x30>")) %></li>
+    <li><%= comment.user.name %></li>
+    <li><%= comment.created_at %></li>
+    <li><%= comment.content %></li>
+    <% if current_user == comment.user %>
+      <li>
+        <%= form_with model: @micropost, method: :get do |f| %>
+          <%= f.hidden_field :id %>
+          <%= hidden_field_tag 'comment[id]', comment.id %>
+          <%= f.submit "×" %> 
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">コメントを削除しますか？</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+        <%= link_to "削除する", "#", id: "set_url", method: :delete, remote: true, class: "btn btn-primary", data: {dismiss: "modal"} %>
+      </div>
+    </div>
+  </div>
+</div>

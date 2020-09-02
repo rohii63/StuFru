@@ -24,6 +24,7 @@ class MicropostsController < ApplicationController
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
+    @comment_to_delete = Comment.find(params[:comment][:id]) if request.xml_http_request?
   end
 
   def edit
