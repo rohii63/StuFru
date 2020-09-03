@@ -5,9 +5,8 @@ class CommentsController < ApplicationController
     @micropost = @comment.micropost
     if @comment.save
       @micropost.create_notification_comment!(current_user, @comment.id)
+    end
       @comments = @micropost.comments.all
-    else
-      render 'microposts/show'
     end
   end
 

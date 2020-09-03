@@ -1,5 +1,5 @@
-<%= form_with model: @book, url: books_path, local: true do |f| %>
-  <div class="modal fade" id="BooksNewModal" tabindex="-1" role="dialog" aria-labelledby="BooksNewModalLabel" aria-hidden="true">
+<%= form_with model: @book, url: books_path do |f| %>
+  <div class="modal" id="BooksNewModal" tabindex="-1" role="dialog" aria-labelledby="BooksNewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -11,7 +11,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :登録, class: "btn btn-primary" %>
+          <%= f.submit :登録, class: "btn btn-primary", id: "book_register_btn" %>
         </div>
       </div>
     </div>

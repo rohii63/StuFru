@@ -1,0 +1,4 @@
+$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
+$("#search_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
+$("#search").val("");
+$("#study_books").html("<%= escape_javascript(render 'books/study_books') %>");

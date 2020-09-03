@@ -1,1 +1,3 @@
+$("#registered_user_count").html("勉強中：<%= @book.users.count %>");
+$("#book_edit_link").html("<%= escape_javascript(render 'books/edit_link') %>");
 $("#register_btn").html("<%= escape_javascript(render 'books/register_btn') %>");
