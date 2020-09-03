@@ -9,13 +9,9 @@
   <%= render 'books/search_field' %>
 </p>
 
-<p>
-  <%= link_to "登録した教材", books_path if @keyword %>
-</p>
-
-<%= link_to "教材登録", "#", remote: true %>
+<%= link_to "教材登録", "#", data: {toggle: "modal", target: "#BooksNewModal"} %>
 <%= render 'books/new_modal' %>
 
-<div id="study_books">
-  <%= render 'books/study_books' %>
+<div id="book_field">
+  <%= render 'books/book_field' %>
 </div>

@@ -45,8 +45,8 @@ class User < ApplicationRecord
       end
     end
 
-    def self.name_search(id, search)
-      searched_users_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(['name LIKE ?', "%#{search}%"]).group("microposts.user_id").maximum("microposts.studied_at")
+    def self.keyword_search(id, search)
+      searched_users_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(['name LIKE ? OR target_comment LIKE ? OR introduction LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]).group("microposts.user_id").maximum("microposts.studied_at")
       ordered_users = searched_users_in_hash.sort_by{ |k, v| v }.reverse.to_h
       user_ids = ordered_users.keys
       self.find(user_ids)

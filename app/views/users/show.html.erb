@@ -24,7 +24,7 @@
 <%= render 'users/modal_form/introduction' %>
 <p><%= @user.introduction %></p>
 
-<p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userTargetModal"}%></p>
+<p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userTargetModal"} %></p>
 <%= render 'users/modal_form/target' %>
 <p><%= @user.target %></p>
 
@@ -36,7 +36,7 @@
 </p>
 
 
-<p>基本情報 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userBasicInformationModal"}%></p>
+<p>基本情報 <%= link_to "編集", "#", data: {toggle: "modal", target: "#userBasicInformationModal"} %></p>
 <%= render 'users/modal_form/basic_information' %>
 <p>ユーザ名 <%= @user.name %></p>
 <p>性別 <%= @user.gender %></p>

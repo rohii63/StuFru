@@ -2,15 +2,15 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @book = @user.books.build
-    @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
+    if params[:search] || params[:search] == ""
+      @books = Book.name_search(params[:search])
+    else
+      @books = @user.books.all
+    end
     @keyword = params[:search]
     respond_to do |format|
-      format.html { render 'books/index'}
-      if params[:search].present?
-        format.js { render 'books/create' }
-      else
-        format.js { render 'books/index' }
-      end
+      format.html
+      format.js { render 'books/create' }
     end
   end
 
@@ -20,8 +20,7 @@ class BooksController < ApplicationController
     if @book.save
       current_user.study_books.create(book_id: @book.id)
     end
-    @books = !params[:search].present? ? current_user.books.all : Book.name_search(params[:search])
-    @keyword = params[:search]
+    @books = current_user.books.all
   end
 
   def show
