@@ -1,5 +1,5 @@
-<%= form_with model: @user, local: true do |f| %>
-  <div class="modal fade" id="userBasicInformationModal" tabindex="-1" role="dialog" aria-labelledby="userBasicInformationModalLabel" aria-hidden="true">
+<%= form_with model: @user do |f| %>
+  <div class="modal" id="basicInformationEditModal" tabindex="-1" role="dialog" aria-labelledby="basicInformationEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -15,6 +15,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= hidden_field_tag "modal[name]", "basicInformationEditModal" %>
           <%= f.submit :保存, class: "btn btn-primary" %>
         </div>
       </div>

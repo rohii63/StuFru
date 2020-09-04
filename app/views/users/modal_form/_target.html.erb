@@ -1,5 +1,5 @@
-<%= form_with model: @user, local: true do |f| %>
-  <div class="modal fade" id="userTargetModal" tabindex="-1" role="dialog" aria-labelledby="userTargetModalLabel" aria-hidden="true">
+<%= form_with model: @user do |f| %>
+  <div class="modal" id="targetEditModal" tabindex="-1" role="dialog" aria-labelledby="targetEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
           <% navbars = {} %>
-          <% @temporaryTargets.each do |t| %>
+          <% @tmpTargets.each do |t| %>
           <% navbars.store(t.target_category_id, t.targetCategory.name) %>
           <% end %>
           <% for pointer,nav_name in navbars do %>
@@ -85,7 +85,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.hidden_field :name %>
+          <%= hidden_field_tag "modal[name]", "targetEditModal" %>
           <%= f.submit :保存, class: "btn btn-primary" %>
         </div>
       </div>

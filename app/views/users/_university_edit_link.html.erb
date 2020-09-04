@@ -1,0 +1,3 @@
+<% if @user.target == "大学受験合格" %>
+  志望校：<%= @user.my_choice_university %><%= link_to "編集", "#", data: {toggle: "modal", target: "#universityEditModal"} %>
+<% end %>
