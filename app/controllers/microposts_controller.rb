@@ -1,11 +1,4 @@
 class MicropostsController < ApplicationController
-  def new
-    @user = current_user
-    @micropost = @user.microposts.build()
-    @books = @user.books.all
-    @book_names = @books.pluck(:name)
-  end
-
   def create
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
@@ -15,7 +8,8 @@ class MicropostsController < ApplicationController
     else
       @books = @user.books.all
       @book_names = @books.pluck(:name)
-      render 'new'
+      @microposts = @user.feed
+      render 'home/top'
     end
   end
 
@@ -24,26 +18,31 @@ class MicropostsController < ApplicationController
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
-    @comment_to_delete = Comment.find(params[:comment][:id]) if request.xml_http_request?
+    if @micropost.user == current_user
+      @books = current_user.books.all
+      @book_names = @books.pluck(:name)
+      @comment_id = Comment.find(params[:comment][:id]) if request.xml_http_request?
+    end
   end
 
   def edit
     @micropost = Micropost.find(params[:id])
-    @user = current_user
-    @books = @user.books.all
+    @books = current_user.books.all
     @book_names = @books.pluck(:name)
   end
 
   def update
-    @user = current_user
     @micropost = Micropost.find(params[:id])
     if @micropost.update(micropost_params)
       flash[:success] = "編集完了"
-      redirect_to root_path
+      redirect_to micropost_path(@micropost)
     else
-      @books = @user.books.all
+      @books = current_user.books.all
       @book_names = @books.pluck(:name)
-      render 'edit'
+      @comment = @micropost.comments.build()
+      @comments = @micropost.comments.all
+      @likes = @micropost.likes.all
+      render 'show'
     end
   end
 

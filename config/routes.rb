@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   resources :books, only: [:index, :create, :show, :update]
   resources :book_registers, only: [:create, :destroy]
-  resources :microposts, except: [:index] do
+  resources :microposts, except: [:index, :new] do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end

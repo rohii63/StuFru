@@ -6,11 +6,6 @@ class Micropost < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
   default_scope -> { order(updated_at: :desc) }
-  validates :user_id, presence: true
-  validates :studied_at, presence: true
-  validates :how_many_studied_hours, presence: true
-  validates :how_many_studied_minutes, presence: true
-  validates :studied_time_in_minutes, presence: true
   validates :content, length: {maximum: 280}
   validate  :datetime_not_future_time
   validate  :studied_time_non_zero
@@ -27,7 +22,7 @@ class Micropost < ApplicationRecord
   def study_time_limit_per_day
     from = studied_at.at_beginning_of_day
     to = studied_at.at_end_of_day
-    errors.add(:studied_time_in_minutes, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:studied_time_in_minutes) > 24
+    errors.add(:studied_time_in_minutes, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:studied_time_in_minutes) + studied_time_in_minutes >= 1440
   end
 
   def create_notification_like!(current_user)

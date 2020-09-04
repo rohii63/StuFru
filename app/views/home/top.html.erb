@@ -1,9 +1,19 @@
+<% if user_signed_in? %>
+  <div id="error_messages">
+    <%= render 'shared/error_messages', object: @micropost %>
+  </div>
+<% end %>
+
 <h1>ようこそ</h1>
 <p>トップページです。</p>
 
 <% if user_signed_in? %>
-  <p><%= link_to "投稿する", new_micropost_path %></p>
+  <p><%= link_to "投稿する", "#", data: {toggle: "modal", target: "#micropostNewModal"} %></p>
+  <%= render 'home/micropost_new_modal' %>
+  
   <%= render 'shared/timeline' %>
 <% else %>
   <%= render 'not_login_top' %>
 <% end %>
+
+<%= javascript_pack_tag 'microposts/study_time' %>

@@ -18,16 +18,4 @@
   </ul>
 <% end %>
 
-<div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">コメントを削除しますか？</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-        <%= link_to "削除する", "#", id: "set_url", method: :delete, remote: true, class: "btn btn-primary", data: {dismiss: "modal"} %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'microposts/comment_delete_modal' %>

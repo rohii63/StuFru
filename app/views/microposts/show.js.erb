@@ -1,9 +1,9 @@
 $(function() {
-  $('#deleteConfirmModal').modal('show')
+  $('#commentDeleteModal').modal('show')
 })
 
 $(function() {
   $("#set_url").click(function() {
-    $(this).attr("href", "/microposts/<%= @micropost.id %>/comments/<%= @comment_to_delete.id %>")
+    $(this).attr("href", "/microposts/<%= @micropost.id %>/comments/<%= @comment_id.id %>")
   })
 })
