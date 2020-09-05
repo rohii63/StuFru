@@ -2,15 +2,10 @@ class MicropostsController < ApplicationController
   def create
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
-    if @micropost.save
-      flash[:success] = "登録完了"
-      redirect_to root_path
-    else
-      @books = @user.books.all
-      @book_names = @books.pluck(:name)
-      @microposts = @user.feed
-      render 'home/top'
-    end
+    @micropost.save
+    @books = @user.books.all
+    @book_names = @books.pluck(:name)
+    @microposts = @user.feed
   end
 
   def show
@@ -23,12 +18,6 @@ class MicropostsController < ApplicationController
       @book_names = @books.pluck(:name)
       @comment_id = Comment.find(params[:comment][:id]) if request.xml_http_request?
     end
-  end
-
-  def edit
-    @micropost = Micropost.find(params[:id])
-    @books = current_user.books.all
-    @book_names = @books.pluck(:name)
   end
 
   def update

@@ -8,12 +8,14 @@
 <p>トップページです。</p>
 
 <% if user_signed_in? %>
-  <p><%= link_to "投稿する", "#", data: {toggle: "modal", target: "#micropostNewModal"} %></p>
-  <%= render 'home/micropost_new_modal' %>
-  
-  <%= render 'shared/timeline' %>
+  <p><%= link_to "投稿する", "#", remote: true %></p>
+  <div id="micropost_new_modal">
+    <%= render 'home/micropost_new_modal' %>
+  </div>
+
+  <div id="timeline">
+    <%= render 'shared/timeline' %>
+  </div>
 <% else %>
   <%= render 'not_login_top' %>
 <% end %>
-
-<%= javascript_pack_tag 'microposts/study_time' %>

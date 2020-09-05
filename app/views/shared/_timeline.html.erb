@@ -1,29 +1,3 @@
 <% @microposts.each do |micropost| %>
-  <ul>
-    <li><%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(micropost.user) %></li>
-    <%= link_to micropost_path(micropost) do %>
-      <li><%= micropost.user.name %></li>
-      <li><%= micropost.studied_at %></li>
-      <li><%= micropost.content %></li>
-      <li><%= image_tag url_for(micropost.picture.variant(resize: "100x100>")) if micropost.picture.attached? %></li>
-        <ul>
-          <li><%= image_tag url_for(micropost.book.icon.variant(resize: "100x100>")) if micropost.book %></li>
-          <li><%= micropost.book.name if micropost.book %></li>
-          <li>
-            <% if micropost.how_many_studied_hours != 0 %>
-              <%= micropost.how_many_studied_hours %>時間
-            <% end %>
-            <% if micropost.how_many_studied_minutes != 0 %>
-              <%= micropost.how_many_studied_minutes %>分
-            <% end %>
-          </li>
-        </ul>
-  </ul>
-  <ul>
-    <li>コメントする</li>
-    <% end %>
-    <li id="like_button_<%= micropost.id %>">
-      <%= render 'likes/like_btn', micropost: micropost %>
-    </li>
-  </ul>
+  <%= render 'home/post_card', micropost: micropost %>
 <% end %>

@@ -1,0 +1,9 @@
+$('#micropostNewModal').modal('hide');
+
+$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @micropost) %>");
+
+<% if @micropost.id %>
+  $("<%= escape_javascript(render 'home/post_card', micropost: @micropost) %>").prependTo("#timeline");
+<% end %>
+
+$("#micropost_new_modal").html("<%= escape_javascript(render 'home/micropost_new_modal') %>");
