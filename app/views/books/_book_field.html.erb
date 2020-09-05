@@ -1,6 +1,3 @@
 <% @books.each do |book| %>
-  <%= link_to book_path(book) do %>
-    <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
-    <%= book.name %>
-  <% end %>
+  <%= render 'books/book_card', book: book %>
 <% end %>

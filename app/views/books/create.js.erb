@@ -1,5 +1,14 @@
 $('#BooksNewModal').modal('hide');
+
 $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
+
 $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
+
 $("#search").val("");
-$("#book_field").html("<%= escape_javascript(render 'books/book_field') %>");
+
+$("#book_name").val("");
+
+<% if @book.id %>
+  $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#book_field");
+<% end %>
+
