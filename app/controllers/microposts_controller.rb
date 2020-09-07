@@ -24,7 +24,7 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
     if @micropost.update(micropost_params)
       flash[:success] = "編集完了"
-      redirect_to micropost_path(@micropost)
+      redirect_to root_path
     else
       @books = current_user.books.all
       @book_names = @books.pluck(:name)

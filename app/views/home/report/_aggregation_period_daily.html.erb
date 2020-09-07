@@ -1,0 +1,5 @@
+<%= link_to "＜", home_path(term: "day", left: "before", from: @from, to: @to), remote: true %>
+
+<%= "#{Date.today - @from.day}〜#{Date.today - @to.day}" %>
+
+<%= link_to "＞", home_path(term: "day", right: "after", from: @from, to: @to), remote: true %>

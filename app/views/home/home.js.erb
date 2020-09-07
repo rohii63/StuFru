@@ -1,0 +1,11 @@
+<% case @term %>
+  <% when "day" %>
+    $("#aggregation_period_daily").html("<%= escape_javascript(render 'home/report/aggregation_period_daily') %>");
+    $("#daily_graph").html("<%= escape_javascript(render 'home/report/daily_graph') %>");
+  <% when "week" %>
+    $("#aggregation_period_weekly").html("<%= escape_javascript(render 'home/report/aggregation_period_weekly') %>");
+    $("#weekly_graph").html("<%= escape_javascript(render 'home/report/weekly_graph') %>");
+  <% when "month" %>
+    $("#aggregation_period_monthly").html("<%= escape_javascript(render 'home/report/aggregation_period_monthly') %>");
+    $("#monthly_graph").html("<%= escape_javascript(render 'home/report/monthly_graph') %>");
+<% end %>
