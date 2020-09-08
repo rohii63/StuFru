@@ -29,6 +29,12 @@ class BooksController < ApplicationController
     @book.update(book_params)
   end
 
+  def destroy
+    Book.find(params[:id]).destroy
+    flash[:success] = "削除完了"
+    redirect_to books_path
+  end
+
   private
 
     def book_params

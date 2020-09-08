@@ -3,24 +3,6 @@
   <%= @total_study_time[0] %>時間<%= @total_study_time[1] %>分
 </p>
 
-<p>
-  <div><strong>今日の勉強時間</strong></div>
-  <%= @today_study_time[0] %>時間<%= @today_study_time[1] %>分
-  <div><%= day_before_ratio_in_study_time %></div>
-</p>
-
-<p>
-  <div><strong>今週の勉強時間</strong></div>
-  <%= @this_week_study_time[0] %>時間<%= @this_week_study_time[1] %>分
-  <div><%= week_before_ratio_in_study_time %></div>
-</p>
-
-<p>
-  <div><strong>今月の勉強時間</strong></div>
-  <%= @this_month_study_time[0] %>時間<%= @this_month_study_time[1] %>分
-  <div><%= month_before_ratio_in_study_time %></div>
-</p>
-
 <div class="row">
   <div class="col-4">
     <div class="list-group" id="list-tab" role="tablist">
@@ -32,6 +14,11 @@
   <div class="col-8">
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane  show active" id="list-daily" role="tabpanel" aria-labelledby="list-daily-list">
+        <p>
+          <div><strong>今日の勉強時間</strong></div>
+          <%= @today_study_time[0] %>時間<%= @today_study_time[1] %>分
+          <div><%= day_before_ratio_in_study_time %></div>
+        </p>
         <strong id="aggregation_period_daily">
           <%= render 'users/report/aggregation_period_daily' %>
         </strong>
@@ -40,6 +27,11 @@
         </div>
       </div>
       <div class="tab-pane " id="list-weekly" role="tabpanel" aria-labelledby="list-weekly-list">
+        <p>
+          <div><strong>今週の勉強時間</strong></div>
+          <%= @this_week_study_time[0] %>時間<%= @this_week_study_time[1] %>分
+          <div><%= week_before_ratio_in_study_time %></div>
+        </p>
         <strong id="aggregation_period_weekly">
           <%= render 'users/report/aggregation_period_weekly' %>
         </strong>
@@ -48,6 +40,11 @@
         </div>
       </div>
       <div class="tab-pane " id="list-monthly" role="tabpanel" aria-labelledby="list-monthly-list">
+        <p>
+          <div><strong>今月の勉強時間</strong></div>
+          <%= @this_month_study_time[0] %>時間<%= @this_month_study_time[1] %>分
+          <div><%= month_before_ratio_in_study_time %></div>
+        </p>
         <strong id="aggregation_period_monthly">
           <%= render 'users/report/aggregation_period_monthly' %>
         </strong>

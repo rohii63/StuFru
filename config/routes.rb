@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get :follow
     end
   end
-  resources :books, only: [:index, :create, :show, :update]
+  resources :books, only: [:index, :create, :show, :update, :destroy]
   resources :book_registers, only: [:create, :destroy]
   resources :microposts, except: [:index, :new, :edit] do
     resources :likes, only: [:create, :destroy]
