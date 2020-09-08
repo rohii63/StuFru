@@ -1,27 +1,23 @@
-<%= render 'shared/error_messages', object: @book %>
+<div id="error_messages">
+  <%= render 'shared/error_messages', object: @book %>
+</div>
 
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 
-
-<%= "〜#{@keyword}〜で検索" if @keyword %>
-<p>
-  <%= form_tag books_path, method: 'get' do %>
-    <%= text_field_tag :search, nil, placeholder: "教材名で検索" %>
-    <%= submit_tag "検索" %>
-  <% end %>
+<p id="search_field">
+  <%= render 'books/search_field' %>
 </p>
 
-<p>
-  <%= link_to "登録した教材", books_path if @keyword %>
-</p>
 
-<%= link_to "教材登録", "#", data: {toggle: "modal", target: "#BooksNewModal"} %>
-<%= render partial: 'books/new_modal' %>
+<div id="book_new_link">
+  <%= link_to "教材登録", "#", data: {toggle: "modal", target: "#BooksNewModal"} %>
+</div>
 
-<% @books.each do |book| %>
-  <%= link_to book_path(book) do %>
-    <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
-    <%= book.name %>
-  <% end %>
-<% end %>
+<div id="book_new_modal">
+  <%= render 'books/new_modal' %>
+</div>
+
+<div id="book_field">
+  <%= render 'books/book_field' %>
+</div>

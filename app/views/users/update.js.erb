@@ -1,0 +1,16 @@
+$("#<%= @modal_name %>").modal('hide');
+
+$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @user) %>");
+
+$("#avatar_edit_link").html("<%= escape_javascript(link_to (image_tag url_for(@user.avatar.variant(resize: "100x100>"))), "#", data: {toggle: "modal", target: "#avatarEditModal"}) %>");
+
+$("#target_comment_edit_link").html("<%= escape_javascript(link_to (text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！"), "#", data: {toggle: "modal", target: "#targetCommentEditModal"}) %>");
+
+$("#introduction_edit_link").html("<%= escape_javascript(link_to (text_area_tag '', @user.introduction, readonly: true, placeholder: "自己紹介をしよう！"), "#", data: {toggle: "modal", target: "#introductionEditModal"}) %>");
+
+$("#user_target").html("<%= @user.target %>");
+
+$("#university_edit_link").html("<%= escape_javascript(render 'users/university_edit_link') %>");
+
+$("#user_basic_information").html("<%= escape_javascript(render 'users/user_basic_information') %>");
+

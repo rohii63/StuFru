@@ -1,22 +1,11 @@
 class MicropostsController < ApplicationController
-  def new
-    @user = current_user
-    @micropost = @user.microposts.build()
-    @books = @user.books.all
-    @book_names = @books.pluck(:name)
-  end
-
   def create
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
-    if @micropost.save
-      flash[:success] = "登録完了"
-      redirect_to root_path
-    else
-      @books = @user.books.all
-      @book_names = @books.pluck(:name)
-      render 'new'
-    end
+    @micropost.save
+    @books = @user.books.all
+    @book_names = @books.pluck(:name)
+    @microposts = @user.feed
   end
 
   def show
@@ -24,25 +13,25 @@ class MicropostsController < ApplicationController
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
-  end
-
-  def edit
-    @micropost = Micropost.find(params[:id])
-    @user = current_user
-    @books = @user.books.all
-    @book_names = @books.pluck(:name)
+    if @micropost.user == current_user
+      @books = current_user.books.all
+      @book_names = @books.pluck(:name)
+      @comment_id = Comment.find(params[:comment][:id]) if request.xml_http_request?
+    end
   end
 
   def update
-    @user = current_user
     @micropost = Micropost.find(params[:id])
     if @micropost.update(micropost_params)
       flash[:success] = "編集完了"
       redirect_to root_path
     else
-      @books = @user.books.all
+      @books = current_user.books.all
       @book_names = @books.pluck(:name)
-      render 'edit'
+      @comment = @micropost.comments.build()
+      @comments = @micropost.comments.all
+      @likes = @micropost.likes.all
+      render 'show'
     end
   end
 

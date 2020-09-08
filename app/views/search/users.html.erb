@@ -1,20 +1,10 @@
 <h1>Search#users</h1>
 <p>Find me in app/views/search/users.html.erb</p>
 
-<% if @keyword != "－おすすめユーザ－" %>
-  <%= "〜#{@keyword}〜で検索" %>
-<% end %>
-<p>
-<%= form_tag search_path, method: 'get' do %>
-  <%= text_field_tag :search, nil, placeholder: "ユーザ名で検索" %>
-  <%= submit_tag "検索" %>
-<% end %>
-</p>
-<p>
-<%= link_to "おすすめユーザを表示", search_path if @keyword != "－おすすめユーザ－" %>
-<strong><%= @keyword if @keyword == "－おすすめユーザ－" %></strong>
-</p>
+<%= render 'search/search_field' %>
 
-<ol class="profile-cards">
-  <%= render 'search/profile_card' %>
+<p><%= link_to "おすすめユーザー", search_path, remote: true, method: :get %></p>
+
+<ol id="searched_user">
+  <%= render 'search/searched_user' %>
 </ol>

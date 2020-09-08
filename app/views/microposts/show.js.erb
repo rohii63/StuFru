@@ -1,0 +1,9 @@
+$(function() {
+  $('#commentDeleteModal').modal('show')
+})
+
+$(function() {
+  $("#set_url").click(function() {
+    $(this).attr("href", "/microposts/<%= @micropost.id %>/comments/<%= @comment_id.id %>")
+  })
+})

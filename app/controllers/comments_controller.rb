@@ -5,16 +5,14 @@ class CommentsController < ApplicationController
     @micropost = @comment.micropost
     if @comment.save
       @micropost.create_notification_comment!(current_user, @comment.id)
-      redirect_to micropost_path(@micropost)
-    else
-      render 'microposts/show'
     end
+      @comments = @micropost.comments.all
   end
 
   def destroy
-    micropost = Micropost.find(params[:micropost_id])
+    @micropost = Micropost.find(params[:micropost_id])
     Comment.find(params[:id]).destroy
-    redirect_to micropost_path(micropost)
+    @comments = @micropost.comments.all
   end
 
   private

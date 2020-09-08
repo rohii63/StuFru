@@ -2,8 +2,12 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @book = @user.books.build
-    @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
-    @keyword = params[:search]
+    if params[:search] || params[:search] == ""
+      @books = Book.name_search(params[:search])
+      @keyword = params[:search]
+    else
+      @books = @user.books.all
+    end
   end
 
   def create
@@ -11,14 +15,8 @@ class BooksController < ApplicationController
     attach_default_image unless params[:book][:icon]
     if @book.save
       current_user.study_books.create(book_id: @book.id)
-      flash[:success] = "登録完了"
-      redirect_to books_path
-    else
-      @user = current_user
-      @books = !params[:search].present? ? @user.books.all : Book.name_search(params[:search])
-      @keyword = params[:search]
-      render 'index'
     end
+    @books = current_user.books.all
   end
 
   def show
@@ -28,13 +26,7 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(book_params)
-      flash[:success] = "編集完了"
-      redirect_to book_path(@book)
-    else
-      @microposts = @book.microposts.all
-      render 'show'
-    end
+    @book.update(book_params)
   end
 
   private

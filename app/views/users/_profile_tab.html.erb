@@ -3,13 +3,7 @@
 </p>
 <p>
   <%= @user.name %>
-  <% unless current_user == @user %>
-    <% if current_user.following?(@user) %>
-      <%= render 'users/unfollow_form' %>
-    <% else %>
-      <%= render 'users/follow_form' %>
-    <% end %>
-  <% end %>
+  <div id="follow_btn"><%= render 'users/follow_btn' %></div>
 </p>
 
 

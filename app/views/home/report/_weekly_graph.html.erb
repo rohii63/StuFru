@@ -1,0 +1,9 @@
+<% weekly_data = {} %>
+
+<% @from.downto(@to) do |n| %>
+  <% a_week_study_time = @microposts.weekly_study_time(n) %>
+  <% date = (Date.today.at_beginning_of_week - n.week).to_s(:month) %>
+  <% weekly_data[date] = a_week_study_time[2] %>
+<% end %>
+
+<%= column_chart weekly_data, id: "weekly_chart" %>

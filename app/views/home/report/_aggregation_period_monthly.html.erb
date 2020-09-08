@@ -1,0 +1,5 @@
+<%= link_to "＜", home_path(term: "month", left: "before", from: @from, to: @to), remote: true %>
+
+<%= "#{(Date.today.at_beginning_of_month - @from.month).to_s(:year)}〜#{(Date.today.at_end_of_month - @to.month).to_s(:year)}" %>
+
+<%= link_to "＞", home_path(term: "month",right: "after", from: @from, to: @to), remote: true %>

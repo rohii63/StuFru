@@ -1,0 +1,21 @@
+$('#micropostNewModal').modal('show');
+
+var hours
+var minutes
+
+hours = $('#micropost_how_many_studied_hours').val() * 60
+minutes = $('#micropost_how_many_studied_minutes').val()
+
+$('#micropost_how_many_studied_hours').change(function() {
+  hours = $(this).val() * 60
+});
+
+$('#micropost_how_many_studied_minutes').change(function() {
+  minutes = $(this).val();
+});
+
+$('#study_time_caliculate_trigger').click(function() {
+  var total = parseInt(hours) + parseInt(minutes)
+  $("#micropost_studied_time_in_minutes").attr("value", total)
+  console.log(total)
+})

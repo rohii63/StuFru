@@ -1,9 +1,14 @@
-<%= render 'shared/error_messages', object: @comment %>
+<div id="comment_error_messages">
+  <%= render 'shared/error_messages', object: @comment %>
+</div>
+<div id="micropost_error_messages">
+  <%= render 'shared/error_messages', object: @micropost %>
+</div>
 
 <h1>Microposts#show</h1>
 <p>Find me in app/views/microposts/show.html.erb</p>
 
-<%= render 'microposts/editing_destroying_button' %>
+<%= render 'microposts/edit_and_destroy_button' %>
 
 <ul>
 <%= render 'microposts/card' %>
@@ -11,8 +16,10 @@
 
 <%= render 'microposts/like_form' %>
 
-<%= render 'microposts/comment_card' %>
-
-<div class="form-group">
-  <%= render 'microposts/comment_form' %>
+<div id="comment_field">
+  <%= render 'microposts/comment_field' %>
 </div>
+
+  <%= render 'microposts/comment_form' %>
+
+<%= javascript_pack_tag 'microposts/study_time' %>

@@ -72,13 +72,13 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
   end
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "studied_at", null: false
-    t.integer "how_many_studied_hours", null: false
-    t.integer "how_many_studied_minutes", null: false
-    t.integer "studied_time_in_minutes", null: false
+    t.datetime "studied_at"
+    t.integer "how_many_studied_hours"
+    t.integer "how_many_studied_minutes"
+    t.integer "studied_time_in_minutes"
     t.text "content"
     t.string "picture"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

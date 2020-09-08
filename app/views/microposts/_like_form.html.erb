@@ -1,4 +1,6 @@
-<%= render 'shared/like_button', micropost: @micropost %>
+<li id="like_button_<%= @micropost.id %>">
+  <%= render 'likes/like_btn', micropost: @micropost %>
+</li>
 
 <% @likes.each do |like| %>
   <%= link_to my_page_path(like.user) do %>  

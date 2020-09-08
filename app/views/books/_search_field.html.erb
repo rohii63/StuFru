@@ -1,0 +1,8 @@
+<p id="searched_word"><%= "〜#{@keyword}〜で検索" if @keyword %></p>
+  
+<%= form_tag books_path, method: 'get', remote: true do %>
+  <%= text_field_tag :search, nil, placeholder: "教材名で検索" %>
+  <%= submit_tag "検索" %>
+<% end %>
+
+<p><%= link_to "本棚", books_path, method: :get, remote: true %></p>
