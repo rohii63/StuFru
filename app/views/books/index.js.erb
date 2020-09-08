@@ -1,0 +1,11 @@
+$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
+
+$("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
+
+<% if @keyword %>
+  $("#book_new_link").html("");
+<% else %>
+  $("#book_new_link").html("<%= escape_javascript(link_to "教材登録", "#", data: {toggle: "modal", target: "#BooksNewModal"}) %>");
+<% end %>
+
+$("#book_field").html("<%= escape_javascript(render 'books/book_field') %>");

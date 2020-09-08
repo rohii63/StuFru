@@ -4,13 +4,9 @@ class BooksController < ApplicationController
     @book = @user.books.build
     if params[:search] || params[:search] == ""
       @books = Book.name_search(params[:search])
+      @keyword = params[:search]
     else
       @books = @user.books.all
-    end
-    @keyword = params[:search]
-    respond_to do |format|
-      format.html
-      format.js { render 'books/create' }
     end
   end
 

@@ -1,13 +1,34 @@
 class UsersController < ApplicationController
 
   def my_page
-    @user = User.find(params[:id])
-    @books = @user.books.all
-    @microposts = @user.microposts.all
-    @total_study_time = @microposts.total_study_time
-    @today_study_time = @microposts.today_study_time
-    @this_week_study_time = @microposts.this_week_study_time
-    @this_month_study_time = @microposts.this_month_study_time
+    unless params[:term]
+      @user = User.find(params[:id])
+      @books = @user.books.all
+      @microposts = @user.microposts.all
+      @total_study_time = @microposts.total_study_time
+      @today_study_time = @microposts.today_study_time
+      @this_week_study_time = @microposts.this_week_study_time
+      @this_month_study_time = @microposts.this_month_study_time
+      @from = 6
+      @to = 0
+    else
+      @term = params[:term]
+      @from = params[:from].to_i
+      @to = params[:to].to_i
+      @user = User.find(params[:id])
+      @microposts = @user.microposts.all
+      if params[:left]
+        @from += 1
+        @to += 1
+      end
+      if params[:right]
+        @from -= 1
+        @to -= 1
+      end
+      respond_to do |format|
+        format.js { render 'home/home' }
+      end
+    end
   end
 
   def index

@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
       @micropost.create_notification_comment!(current_user, @comment.id)
     end
       @comments = @micropost.comments.all
-    end
   end
 
   def destroy
