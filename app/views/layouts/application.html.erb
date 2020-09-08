@@ -14,7 +14,6 @@
         <nav>
             <% if user_signed_in? %>
               <strong><%= link_to "マイページ", my_page_path(current_user) %></strong>
-              <strong><%= link_to "HOME", home_path %></strong>
               <strong><%= link_to "TOP", root_url %></strong>
               <%= link_to 'index', users_path %>
               <p>

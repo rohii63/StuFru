@@ -33,28 +33,33 @@
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane  show active" id="list-daily" role="tabpanel" aria-labelledby="list-daily-list">
         <strong id="aggregation_period_daily">
-          <%= render 'home/report/aggregation_period_daily' %>
+          <%= render 'users/report/aggregation_period_daily' %>
         </strong>
         <div id="daily_graph">
-          <%= render 'home/report/daily_graph' %>
+          <%= render 'users/report/daily_graph' %>
         </div>
       </div>
       <div class="tab-pane " id="list-weekly" role="tabpanel" aria-labelledby="list-weekly-list">
         <strong id="aggregation_period_weekly">
-          <%= render 'home/report/aggregation_period_weekly' %>
+          <%= render 'users/report/aggregation_period_weekly' %>
         </strong>
         <div id="weekly_graph">
-          <%= render 'home/report/weekly_graph' %>
+          <%= render 'users/report/weekly_graph' %>
         </div>
       </div>
       <div class="tab-pane " id="list-monthly" role="tabpanel" aria-labelledby="list-monthly-list">
         <strong id="aggregation_period_monthly">
-          <%= render 'home/report/aggregation_period_monthly' %>
+          <%= render 'users/report/aggregation_period_monthly' %>
         </strong>
         <div id="monthly_graph">
-          <%= render 'home/report/monthly_graph' %>
+          <%= render 'users/report/monthly_graph' %>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div><strong>今週のやる事リスト</strong></div>
+<%= link_to "編集", my_page_path(@user, todo: "todo"), remote: true %>
+
+<%= render 'users/report/to_do_list' %>

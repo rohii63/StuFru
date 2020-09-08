@@ -1,5 +1,0 @@
-<%= link_to "＜", home_path(term: "week", left: "before", from: @from, to: @to), remote: true %>
-
-<%= "#{Date.today.at_beginning_of_week - @from.week}〜#{Date.today.at_end_of_week - @to.week}" %>
-
-<%= link_to "＞", home_path(term: "week",right: "after", from: @from, to: @to), remote: true %>

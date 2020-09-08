@@ -1,7 +1,25 @@
 class UsersController < ApplicationController
 
   def my_page
-    unless params[:term]
+    if params[:term]
+      @term = params[:term]
+      @from = params[:from].to_i
+      @to = params[:to].to_i
+      @user = User.find(params[:id])
+      @microposts = @user.microposts.all
+      case params[:button]
+      when "before"
+        @from += 1
+        @to += 1
+      when "after"
+        @from -= 1
+        @to -= 1
+      end
+    elsif params[:todo]
+      respond_to do |format|
+        format.js { render 'users/to_do' }
+      end
+    else
       @user = User.find(params[:id])
       @books = @user.books.all
       @microposts = @user.microposts.all
@@ -11,23 +29,6 @@ class UsersController < ApplicationController
       @this_month_study_time = @microposts.this_month_study_time
       @from = 6
       @to = 0
-    else
-      @term = params[:term]
-      @from = params[:from].to_i
-      @to = params[:to].to_i
-      @user = User.find(params[:id])
-      @microposts = @user.microposts.all
-      if params[:left]
-        @from += 1
-        @to += 1
-      end
-      if params[:right]
-        @from -= 1
-        @to -= 1
-      end
-      respond_to do |format|
-        format.js { render 'home/home' }
-      end
     end
   end
 

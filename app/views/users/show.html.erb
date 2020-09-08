@@ -8,30 +8,30 @@
 <p>プロフィール</p>
 
 <p id="avatar_edit_link"><%= link_to (image_tag url_for(@user.avatar.variant(resize: "100x100>"))), "#", data: {toggle: "modal", target: "#avatarEditModal"} %></p>
-<%= render 'users/modal_form/avatar' %>
+<%= render 'users/modal/avatar' %>
 
 <p><%= @user.name %></p>
 
 <p id="target_comment_edit_link"><%= link_to (text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！"), "#", data: {toggle: "modal", target: "#targetCommentEditModal"} %></p>
-<%= render 'users/modal_form/target_comment' %>
+<%= render 'users/modal/target_comment' %>
 
 <p><%= link_to "フォロワー（#{@user.followers.count}）フォロー（#{@user.following.count}）", follow_user_path(@user) %></p>
 
 <p><%= link_to "本棚（#{@user.books.count}）", books_path %></p>
 
 <p id="introduction_edit_link"><%= link_to (text_area_tag '', @user.introduction, readonly: true, placeholder: "自己紹介をしよう！"), "#", data: {toggle: "modal", target: "#introductionEditModal"} %></p>
-<%= render 'users/modal_form/introduction' %>
+<%= render 'users/modal/introduction' %>
 
 <p>達成目標 <%= link_to "編集", "#", data: {toggle: "modal", target: "#targetEditModal"} %></p>
-<%= render 'users/modal_form/target' %>
+<%= render 'users/modal/target' %>
 <p id="user_target"><%= @user.target %></p>
 
 <p id="university_edit_link"><%= render 'users/university_edit_link' %></p>
-<%= render 'users/modal_form/my_choice_university' %>
+<%= render 'users/modal/my_choice_university' %>
 
 
 <p>基本情報 <%= link_to "編集", "#", data: {toggle: "modal", target: "#basicInformationEditModal"} %></p>
-<%= render 'users/modal_form/basic_information' %>
+<%= render 'users/modal/basic_information' %>
 <div id="user_basic_information"><%= render 'users/user_basic_information' %></div>
 
 <%= javascript_pack_tag 'users/show' %>
