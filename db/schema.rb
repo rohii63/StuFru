@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_083534) do
+ActiveRecord::Schema.define(version: 2020_09_09_025923) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -72,17 +72,18 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
   end
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "studied_at"
-    t.integer "how_many_studied_hours"
-    t.integer "how_many_studied_minutes"
-    t.integer "studied_time_in_minutes"
+    t.datetime "studied_at", null: false
+    t.integer "how_many_studied_hours", null: false
+    t.integer "how_many_studied_minutes", null: false
+    t.integer "studied_time_in_minutes", null: false
     t.text "content"
     t.string "picture"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_microposts_on_book_id"
+    t.index ["studied_at"], name: "index_microposts_on_studied_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
@@ -145,6 +146,16 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "week_targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "content"
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_week_targets_on_book_id"
+    t.index ["user_id"], name: "index_week_targets_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
@@ -152,4 +163,6 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "books"
   add_foreign_key "microposts", "users"
+  add_foreign_key "week_targets", "books"
+  add_foreign_key "week_targets", "users"
 end

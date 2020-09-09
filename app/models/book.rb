@@ -6,6 +6,7 @@ class Book < ApplicationRecord
                               dependent:  :destroy
   has_many :users, through: :owners
   has_many :microposts
+  has_many :week_targets
   validates :name, presence: true, uniqueness: true
 
   def self.name_search(search)
