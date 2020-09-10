@@ -10,12 +10,16 @@
 </p>
 
 
-<div id="book_new_link">
-  <%= link_to "教材登録", "#", data: {toggle: "modal", target: "#BooksNewModal"} %>
+<div id="new_book_link">
+  <%= link_to "教材登録", "#", data: {toggle: "modal", target: "#newBookModal"} %>
 </div>
 
-<div id="book_new_modal">
-  <%= render 'books/new_modal' %>
+<div id="new_book_modal">
+  <%= render 'books/modal/new_book' %>
+</div>
+
+<div id="book_category_modal">
+  <%= render 'books/modal/book_category' %>
 </div>
 
 <div id="book_field">

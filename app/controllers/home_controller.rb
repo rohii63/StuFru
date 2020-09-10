@@ -4,7 +4,6 @@ class HomeController < ApplicationController
       @user = current_user
       @micropost = @user.microposts.build()
       @books = @user.books.all
-      @book_names = @books.pluck(:name)
       @microposts = @user.feed
     end
   end

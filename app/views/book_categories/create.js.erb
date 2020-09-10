@@ -1,0 +1,9 @@
+<% if @book_category.errors.any? %>
+  <% @book_category.errors.full_messages.each do |msg| %>
+    alert("<%= msg %>")
+  <% end %>
+<% else %>
+  $("#bookCategoryModal").modal('hide')
+  $("#book_category_name").html("<%= escape_javascript(collection_select(:book_category, :name, @book_categories, :name, selected: "カテゴリーなし")) %>")
+  $("#newBookModal").modal('show')
+<% end %>

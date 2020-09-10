@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one_attached :avatar
   after_create :default_image
+  after_create :default_book_category
   has_many :study_books, class_name: "BookRegister",
                               foreign_key: "user_id",
                               dependent:  :destroy
@@ -23,6 +24,7 @@ class User < ApplicationRecord
                                   foreign_key: 'visited_id', 
                                   dependent: :destroy
   has_many :week_targets, dependent: :destroy
+  has_many :book_categories, dependent: :destroy
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,
           :confirmable
@@ -36,6 +38,10 @@ class User < ApplicationRecord
 
     def default_image
       self.avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
+    end
+
+    def default_book_category
+      book_categories.create(name: "カテゴリーなし")
     end
 
     def avatar_presence

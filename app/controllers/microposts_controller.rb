@@ -4,7 +4,6 @@ class MicropostsController < ApplicationController
     @micropost = @user.microposts.build(micropost_params)
     @micropost.save
     @books = @user.books.all
-    @book_names = @books.pluck(:name)
     @microposts = @user.feed
   end
 
@@ -15,7 +14,6 @@ class MicropostsController < ApplicationController
     @likes = @micropost.likes.all
     if @micropost.user == current_user
       @books = current_user.books.all
-      @book_names = @books.pluck(:name)
       @comment_id = Comment.find(params[:comment][:id]) if request.xml_http_request?
     end
   end
@@ -27,7 +25,6 @@ class MicropostsController < ApplicationController
       redirect_to root_path
     else
       @books = current_user.books.all
-      @book_names = @books.pluck(:name)
       @comment = @micropost.comments.build()
       @comments = @micropost.comments.all
       @likes = @micropost.likes.all

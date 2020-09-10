@@ -1,13 +1,11 @@
-$('#BooksNewModal').modal('hide');
-
+$('#newBookModal').modal('hide');
 $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
-
 $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
-
 $("#search").val("");
 
-<% if @book.id %>
-  $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#book_field");
-<% end %>
-
-$("#book_new_modal").html("<%= escape_javascript(render 'books/new_modal') %>");
+$('#newBookModal').on('hidden.bs.modal', function () {
+  <% unless @book.errors.any? %>
+    $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#book_field");
+    $("#new_book_modal").html("<%= escape_javascript(render 'books/modal/new_book') %>");
+  <% end %>
+})

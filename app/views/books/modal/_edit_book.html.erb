@@ -1,9 +1,9 @@
-<%= form_with model: @book = current_user.books.build do |f| %>
-  <div class="modal" id="BooksNewModal" tabindex="-1" role="dialog" aria-labelledby="BooksNewModalLabel" aria-hidden="true">
+<%= form_with model: @book do |f| %>
+  <div class="modal" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">教材登録</h5>
+          <h5 class="modal-title">教材編集</h5>
         </div>
         <div class="modal-body">
           <%= f.file_field :icon, class: "form-control-file" %>
@@ -11,7 +11,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :登録, class: "btn btn-primary", id: "book_register_btn" %>
+          <%= link_to "削除", "/books/#{@book.id}", class: "btn btn-secondary", method: :delete if @book.microposts.empty? %>
+          <%= f.submit :保存, class: "btn btn-primary", id: "edit_book_btn" %>
         </div>
       </div>
     </div>

@@ -12,7 +12,12 @@ ja:
         target_comment: 目標コメント
         introduction: 自己紹介
       book:
+        icon: イメージ
         name: 教材名
+        status: ステータス
+        study_unit: 勉強単位
+      book_category:
+        name: カテゴリー名
       micropost:
         content: コメント
         studied_at: 勉強日時
@@ -39,6 +44,13 @@ ja:
               format: '%{message}'
               blank: '%{attribute}を入力して下さい。'
               taken: '%{value}は既に存在する教材名です。'
+              too_long: '%{attribute}は60文字以内で入力してください。'
+        book_category:
+          attributes:
+            name:
+              format: '%{message}'
+              blank: '%{attribute}を入力して下さい。'
+              too_long: '%{attribute}は30文字以内で入力してください。'
         micropost:
           attributes:
             content:
