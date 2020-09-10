@@ -8,7 +8,9 @@ class BooksController < ApplicationController
       @books = Book.name_search(params[:search])
       @keyword = params[:search]
     else
-      @books = @user.books.all
+      @book_in_progress = @user.books.where(status: "勉強中")
+      @book_standby = @user.books.where(status: "勉強予定")
+      @book_finished = @user.books.where(status: "勉強済み")
     end
   end
 
@@ -18,9 +20,11 @@ class BooksController < ApplicationController
     attach_default_image unless params[:book][:icon]
     if @book.save
       @user.study_books.create(book_id: @book.id)
+      @book_in_progress = @user.books.where(status: "勉強中")
+      @book_standby = @user.books.where(status: "勉強予定")
+      @book_finished = @user.books.where(status: "勉強済み")
+      @book_categories = @user.book_categories.all
     end
-    @books = @user.books.all
-    @book_categories = @user.book_categories.all
   end
 
   def show

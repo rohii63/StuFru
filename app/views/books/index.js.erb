@@ -1,9 +1,10 @@
-$("#book_field").html("<%= escape_javascript(render 'books/book_field') %>");
 $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
 $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
 <% if @keyword %>
+  $("#book_field").html("<%= escape_javascript(render 'books/search_result_field') %>");
   $("#search").val("");
   $("#new_book_link").html("");
 <% else %>
+  $("#book_field").html("<%= escape_javascript(render 'books/book_field') %>");
   $("#new_book_link").html("<%= escape_javascript(link_to "教材登録", "#", data: {toggle: "modal", target: "#newBookModal"}) %>");
 <% end %>

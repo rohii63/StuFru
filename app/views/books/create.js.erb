@@ -5,7 +5,17 @@ $("#search").val("");
 
 $('#newBookModal').on('hidden.bs.modal', function () {
   <% unless @book.errors.any? %>
-    $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#book_field");
+    <% case @book.status %>
+      <% when "勉強中" %>
+        $("#pills-in-progress-tab").tab('show')
+        $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#pills-in-progress");
+      <% when "勉強予定" %>
+        $("#pills-standby-tab").tab('show')
+        $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#pills-standby");
+      <% when "勉強済み" %>
+        $("#pills-finished-tab").tab('show')
+        $("<%= escape_javascript(render 'books/book_card', book: @book) %>").prependTo("#pills-finished");
+    <% end %>
     $("#new_book_modal").html("<%= escape_javascript(render 'books/modal/new_book') %>");
   <% end %>
 })

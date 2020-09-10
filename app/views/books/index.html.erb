@@ -9,10 +9,9 @@
   <%= render 'books/search_field' %>
 </p>
 
-
-<div id="new_book_link">
+<p id="new_book_link">
   <%= link_to "教材登録", "#", data: {toggle: "modal", target: "#newBookModal"} %>
-</div>
+</p>
 
 <div id="new_book_modal">
   <%= render 'books/modal/new_book' %>
@@ -21,6 +20,8 @@
 <div id="book_category_modal">
   <%= render 'books/modal/book_category' %>
 </div>
+
+<p><%= link_to "本棚", books_path(), method: :get, remote: true %></p>
 
 <div id="book_field">
   <%= render 'books/book_field' %>
