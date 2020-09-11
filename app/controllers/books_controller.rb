@@ -7,10 +7,6 @@ class BooksController < ApplicationController
     if params[:search] || params[:search] == ""
       @books = Book.name_search(params[:search])
       @keyword = params[:search]
-    else
-      @book_in_progress = @user.books.where(status: "勉強中")
-      @book_standby = @user.books.where(status: "勉強予定")
-      @book_finished = @user.books.where(status: "勉強済み")
     end
   end
 
@@ -20,9 +16,6 @@ class BooksController < ApplicationController
     attach_default_image unless params[:book][:icon]
     if @book.save
       @user.study_books.create(book_id: @book.id)
-      @book_in_progress = @user.books.where(status: "勉強中")
-      @book_standby = @user.books.where(status: "勉強予定")
-      @book_finished = @user.books.where(status: "勉強済み")
       @book_categories = @user.book_categories.all
     end
   end
@@ -30,11 +23,18 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @microposts = @book.microposts.all
+    @user = current_user
+    @book_categories = @user.book_categories.all
   end
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
+    if @book.update(book_params)
+      flash[:success] = "編集完了"
+      redirect_to books_path()
+    end
+    @user = current_user
+    @book_categories = @user.book_categories.all
   end
 
   def destroy

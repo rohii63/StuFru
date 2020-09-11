@@ -11,18 +11,12 @@
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-in-progress" role="tabpanel" aria-labelledby="pills-in-progress-tab">
-    <% @book_in_progress.each do |book| %>
-      <%= render 'books/book_card', book: book %>
-    <% end %>
+    <%= render 'books/book_in_progress' %>
   </div>
   <div class="tab-pane fade" id="pills-standby" role="tabpanel" aria-labelledby="pills-standby-tab">
-    <% @book_standby.each do |book| %>
-      <%= render 'books/book_card', book: book %>
-    <% end %>
+    <%= render 'books/book_standby' %>
   </div>
   <div class="tab-pane fade" id="pills-finished" role="tabpanel" aria-labelledby="pills-finished-tab">
-    <% @book_finished.each do |book| %>
-      <%= render 'books/book_card', book: book %>
-    <% end %>
+    <%= render 'books/book_finished' %>
   </div>
 </div>

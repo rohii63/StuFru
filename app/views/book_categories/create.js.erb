@@ -4,6 +4,11 @@
   <% end %>
 <% else %>
   $("#bookCategoryModal").modal('hide')
-  $("#book_category_name").html("<%= escape_javascript(collection_select(:book_category, :name, @book_categories, :name, selected: "カテゴリーなし")) %>")
+  $("#book_book_category_id").html("<%= escape_javascript(collection_select(:@book, :book_category_id, @book_categories, :id, :name)) %>")
+
+  <%# when comming from a book index page %>
   $("#newBookModal").modal('show')
+  <%# when comming from a book show page %>
+  $("#editBookModal").modal('show')
+  
 <% end %>

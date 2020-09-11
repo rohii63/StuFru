@@ -16,9 +16,7 @@ class UsersController < ApplicationController
         @to -= 1
       end
     elsif params[:todo]
-      respond_to do |format|
-        format.js { render 'users/to_do' }
-      end
+      render 'users/to_do'
     else
       @user = User.find(params[:id])
       @books = @user.books.all
@@ -27,6 +25,7 @@ class UsersController < ApplicationController
       @today_study_time = @microposts.today_study_time
       @this_week_study_time = @microposts.this_week_study_time
       @this_month_study_time = @microposts.this_month_study_time
+      @book_categories = @user.book_categories.all
       @from = 6
       @to = 0
     end
