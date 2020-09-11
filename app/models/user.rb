@@ -6,6 +6,7 @@ class User < ApplicationRecord
                               foreign_key: "user_id",
                               dependent:  :destroy
   has_many :books,  through: :study_books
+  has_many :book_categories, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -24,7 +25,6 @@ class User < ApplicationRecord
                                   foreign_key: 'visited_id', 
                                   dependent: :destroy
   has_many :week_targets, dependent: :destroy
-  has_many :book_categories, dependent: :destroy
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable,
           :confirmable

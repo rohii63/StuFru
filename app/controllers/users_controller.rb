@@ -20,12 +20,12 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
       @books = @user.books.all
+      @book_categories = @user.book_categories.all
       @microposts = @user.microposts.all
       @total_study_time = @microposts.total_study_time
       @today_study_time = @microposts.today_study_time
       @this_week_study_time = @microposts.this_week_study_time
       @this_month_study_time = @microposts.this_month_study_time
-      @book_categories = @user.book_categories.all
       @from = 6
       @to = 0
     end

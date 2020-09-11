@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   def index
     @user = current_user
+    @books = @user.books.all
     @book_categories = @user.book_categories.all
     @book_category = @user.book_categories.build()
     @book = @user.books.build()
@@ -16,6 +17,7 @@ class BooksController < ApplicationController
     attach_default_image unless params[:book][:icon]
     if @book.save
       @user.study_books.create(book_id: @book.id)
+      @books = @user.books.all
       @book_categories = @user.book_categories.all
     end
   end
