@@ -1,7 +1,7 @@
 $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
 $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
 <% if @keyword %>
-  $("#book_field").html("<%= escape_javascript(render 'books/search_result_field') %>");
+  $("#book_field").html("<%= escape_javascript(render 'books/index/search_result_field') %>");
   $("#search").val("");
   $("#new_book_link").html("");
 <% else %>

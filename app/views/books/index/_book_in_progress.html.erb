@@ -1,6 +1,6 @@
 <% @book_categories.each do |category| %>
   <p><%= category.name unless category.books.where(status: "勉強中").empty? %></p>
   <% category.books.where(status: "勉強中").each do |book| %>
-    <%= render 'books/book_card', book: book %>
+    <%= render 'books/index/book_card', book: book %>
   <% end %>
 <% end %>

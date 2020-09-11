@@ -6,7 +6,7 @@
 <p>Find me in app/views/books/index.html.erb</p>
 
 <p id="search_field">
-  <%= render 'books/search_field' %>
+  <%= render 'books/index/search_field' %>
 </p>
 
 <p id="new_book_link">
@@ -24,5 +24,5 @@
 <p><%= link_to "#{@user.name}さんの本棚", books_path(), method: :get, remote: true %></p>
 
 <div id="book_field">
-  <%= render 'books/book_field' %>
+  <%= render 'books/index/book_field' %>
 </div>
