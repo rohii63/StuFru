@@ -8,11 +8,10 @@
 <p>トップページです。</p>
 
 <% if user_signed_in? %>
-  <p><%= link_to "投稿する", "#", remote: true %></p>
-  <div id="micropost_new_modal">
-    <%= render 'home/micropost_new_modal' %>
+  <p><%= link_to "投稿する", root_path(modal: "open"), remote: true %></p>
+  <div id="new_micropost_modal">
+    <%= render 'home/new_micropost_modal' %>
   </div>
-
   <div id="timeline">
     <%= render 'shared/timeline' %>
   </div>

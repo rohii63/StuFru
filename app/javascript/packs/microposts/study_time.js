@@ -7,12 +7,10 @@ $(function() {
   $('#micropost_how_many_studied_hours').change(function() {
     hours = $(this).val() * 60
   });
-
   $('#micropost_how_many_studied_minutes').change(function() {
     minutes = $(this).val();
   });
-  
-  $('#study_time_caliculate_trigger').click(function() {
+  $('#caliculate_trigger').click(function() {
     var total = parseInt(hours) + parseInt(minutes)
     $("#micropost_studied_time_in_minutes").attr("value", total)
   })

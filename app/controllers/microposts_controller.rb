@@ -1,9 +1,12 @@
 class MicropostsController < ApplicationController
   def create
+    if params[:page]
+      params[:micropost][:study_amount] = params[:page][:end].to_i - params[:page][:start].to_i + 1
+    end
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
     @micropost.save
-    @books = @user.books.all
+    @books_select = @user.books.where(status: "勉強中")
     @microposts = @user.feed
   end
 
@@ -50,7 +53,8 @@ class MicropostsController < ApplicationController
         :studied_page,
         :content,
         :picture,
-        :user_id
+        :user_id,
+        :study_amount
       )
     end
 end

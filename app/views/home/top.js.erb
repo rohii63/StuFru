@@ -1,21 +1,37 @@
-$('#micropostNewModal').modal('show');
+$(function() {
+  <% if @selected_book %>  
+    <% case @selected_book.study_unit %>
+      <% when "ページ" %>
+        viewStudyAmountTemplate();
+        $("#studyAmount label").after("<input>合計</input><input>範囲</input>")
 
-var hours
-var minutes
+        attrTotalBtn = new Object();
+        attrTotalBtn.name = "studyAmount";
+        attrTotalBtn.type = "radio";
+        attrTotalBtn.checked = "checked";
+        $("#studyAmount input:eq(0)").attr(attrTotalBtn);
+        attrRangeBtn = new Object();
+        attrRangeBtn.name = "studyAmount";
+        attrRangeBtn.type = "radio";
+        $("#studyAmount input:eq(1)").attr(attrRangeBtn);
 
-hours = $('#micropost_how_many_studied_hours').val() * 60
-minutes = $('#micropost_how_many_studied_minutes').val()
+        $("#studyAmount").on("change", "input:eq(1)", function() {
+          $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#micropost_study_amount");
+        })
+        $('#studyAmount').on("change", "input:eq(0)", function() {
+          $("<%= escape_javascript(number_field :micropost, :study_amount, in: 0...9999) %>").replaceAll("#studyAmountRangeInput");
+        })
+      <% when "問", "単語" %>
+        viewStudyAmountTemplate();
+      <% when "時間", "" %>
+        $("#studyAmount").html("");
+    <% end %>
 
-$('#micropost_how_many_studied_hours').change(function() {
-  hours = $(this).val() * 60
-});
-
-$('#micropost_how_many_studied_minutes').change(function() {
-  minutes = $(this).val();
-});
-
-$('#study_time_caliculate_trigger').click(function() {
-  var total = parseInt(hours) + parseInt(minutes)
-  $("#micropost_studied_time_in_minutes").attr("value", total)
-  console.log(total)
+    function viewStudyAmountTemplate() {
+      $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, in: 0...9999) %><span></span>");
+      $("#studyAmount span").html("単位：<%= @selected_book.study_unit %>");
+    }
+  <% else %>
+    $("#studyAmount").html("");
+  <% end %>
 })
