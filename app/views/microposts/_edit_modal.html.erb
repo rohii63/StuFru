@@ -1,5 +1,5 @@
-<%= form_with model: @micropost, local: true do |f| %>
-  <div class="modal" id="micropostEditModal" tabindex="-1" role="dialog" aria-labelledby="micropostEditModalLabel" aria-hidden="true">
+<%= form_with model: @micropost do |f| %>
+  <div class="modal fade" id="editMicropostModal" tabindex="-1" role="dialog" aria-labelledby="editMicropostModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,7 +8,7 @@
         <div class="modal-body">
           <div class="form-group">
             <%= label_tag 'micropost[book_id]', "教材名" %>
-            <%= f.collection_select :book_id, @books.where(status: "勉強中"), :id, :name, class: "form-control", include_blank: true %>
+            <%= f.collection_select :book_id, @books_in_progress, :id, :name, class: "form-control", include_blank: true %>
           </div>
           <div class="form-group">
             <%= f.label :studied_at, "勉強日時" %>
@@ -22,6 +22,9 @@
             <%= f.label :how_many_studied_minutes, "分" %>
             <%= f.hidden_field :studied_time_in_minutes, class: "form-control" %>
           </div>
+          <div id="studyAmount" class="form-group">
+          
+          </div>
           <div class="form-group">
             <%= f.label :content, "一言コメント" %>
             <%= f.text_area :content, class: "form-control w-50 p-3", rows: "4" %>
@@ -33,7 +36,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :記録する, id: "caliculate_trigger",class: "btn btn-primary" %>
+          <%= f.submit :保存する, id: "calculate_trigger",class: "btn btn-primary" %>
         </div>
       </div>
     </div>

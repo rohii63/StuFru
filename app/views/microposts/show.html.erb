@@ -8,18 +8,51 @@
 <h1>Microposts#show</h1>
 <p>Find me in app/views/microposts/show.html.erb</p>
 
-<%= render 'microposts/edit_and_destroy_button' %>
+<% if @micropost.user == current_user %>
+  <p><%= link_to "編集", root_path(modal: "edit"), remote: true %></p>
+  <%= render 'microposts/edit_modal' %>
+
+  <p><%= link_to "削除", "#", data: {toggle: "modal", target: "#deleteConfirmModal"} %></p>
+  <%= render 'microposts/delete_confirm_modal' %>
+<% end %>
 
 <ul>
-<%= render 'microposts/card' %>
+  <li><%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(@micropost.user) %></li>
+  <li><%= @micropost.user.name %></li>
+  <li><%= @micropost.studied_at %></li>
+  <li><%= @micropost.content %></li>
+  <li><%= image_tag url_for(@micropost.picture.variant(resize: "100x100>")) if @micropost.picture.attached? %></li>
+  <ul>
+    <li><%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "100x100>"))), book_path(@micropost.book)  if @micropost.book %></li>
+    <li><%= @micropost.book.name if @micropost.book %></li>
+    <li>
+      <% if @micropost.how_many_studied_hours != 0 %>
+        <%= @micropost.how_many_studied_hours %>時間
+      <% end %>
+      <% if @micropost.how_many_studied_minutes != 0 %>
+        <%= @micropost.how_many_studied_minutes %>分
+      <% end %>
+    </li>
+    <li>
+      <% if @micropost.study_amount  %>
+        <%= @micropost.study_amount %><%= @micropost.book.study_unit %>
+      <% end %>
+    </li>
+  </ul>
 </ul>
 
-<%= render 'microposts/like_form' %>
+<div id="like_form">
+  <%= render 'microposts/like_form' %>
+</div>
 
 <div id="comment_field">
   <%= render 'microposts/comment_field' %>
 </div>
 
-  <%= render 'microposts/comment_form' %>
+<%= form_with model: @comment, url: micropost_comments_path(@micropost) do |comment| %>
+  <%= comment.text_field :content, class: "from-control" %>
+  <%= comment.hidden_field :micropost_id, class: "from-control" %>
+  <%= comment.submit "送信", class: "btn btn-primary" %>
+<% end %>
 
 <%= javascript_pack_tag 'microposts/study_time' %>

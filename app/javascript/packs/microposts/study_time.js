@@ -10,7 +10,7 @@ $(function() {
   $('#micropost_how_many_studied_minutes').change(function() {
     minutes = $(this).val();
   });
-  $('#caliculate_trigger').click(function() {
+  $('#calculate_trigger').click(function() {
     var total = parseInt(hours) + parseInt(minutes)
     $("#micropost_studied_time_in_minutes").attr("value", total)
   })

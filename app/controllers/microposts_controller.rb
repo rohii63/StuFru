@@ -9,19 +9,23 @@ class MicropostsController < ApplicationController
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
     @micropost.save
-    @books_select = @user.books.where(status: "勉強中")
+    @books_in_progress = @user.books.where(status: "勉強中")
     @microposts = @user.feed
   end
 
   def show
     @micropost = Micropost.find(params[:id])
+    if @micropost.user == current_user
+      @books_in_progress = current_user.books.where(status: "勉強中")
+      if params[:comment_id]
+        @comments = @micropost.comments.all
+        @comment = Comment.find(params[:comment_id])
+        render 'comment_delete_modal'
+      end
+    end
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
-    if @micropost.user == current_user
-      @books = current_user.books.all
-      @comment_id = Comment.find(params[:comment][:id]) if request.xml_http_request?
-    end
   end
 
   def update
@@ -29,12 +33,6 @@ class MicropostsController < ApplicationController
     if @micropost.update(micropost_params)
       flash[:success] = "編集完了"
       redirect_to root_path
-    else
-      @books = current_user.books.all
-      @comment = @micropost.comments.build()
-      @comments = @micropost.comments.all
-      @likes = @micropost.likes.all
-      render 'show'
     end
   end
 

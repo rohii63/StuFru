@@ -8,7 +8,7 @@
         <div class="modal-body">
           <div class="form-group">
             <%= label_tag 'micropost[book_id]', "教材名" %>
-            <%= f.collection_select :book_id, @books_select, :id, :name, class: "form-control", include_blank: true %>
+            <%= f.collection_select :book_id, @books_in_progress, :id, :name, class: "form-control", include_blank: true %>
           </div>
           <div class="form-group">
             <%= f.label :studied_at, "勉強日時" %>
@@ -36,7 +36,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :記録する, id: "caliculate_trigger", class: "btn btn-primary" %>
+          <%= f.submit :記録する, id: "calculate_trigger", class: "btn btn-primary" %>
         </div>
       </div>
     </div>

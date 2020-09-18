@@ -1,7 +1,0 @@
-<% if @micropost.user == current_user %>
-  <p><%= link_to "編集", "#", data: {toggle: "modal", target: "#micropostEditModal"} %></p>
-  <%= render 'microposts/edit_modal' %>
-
-  <p><%= link_to "削除", "#", data: {toggle: "modal", target: "#deleteConfirmModal"} %></p>
-  <%= render 'microposts/delete_confirm_modal' %>
-<% end %>
