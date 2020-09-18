@@ -19,7 +19,7 @@ $(function() {
           $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#micropost_study_amount");
         })
         $('#studyAmount').on("change", "input:eq(0)", function() {
-          $("<%= escape_javascript(number_field :micropost, :study_amount, in: 0...9999) %>").replaceAll("#studyAmountRangeInput");
+          $("<%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %>").replaceAll("#studyAmountRangeInput");
         })
       <% when "問", "単語" %>
         viewStudyAmountTemplate();
@@ -28,7 +28,7 @@ $(function() {
     <% end %>
 
     function viewStudyAmountTemplate() {
-      $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, in: 0...9999) %><span></span>");
+      $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %><span></span>");
       $("#studyAmount span").html("単位：<%= @selected_book.study_unit %>");
     }
   <% else %>
