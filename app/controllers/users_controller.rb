@@ -8,20 +8,20 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @microposts = @user.microposts.all
       case params[:button]
-      when "before"
-        @from += 1
-        @to += 1
-      when "after"
-        @from -= 1
-        @to -= 1
+        when "before"
+          @from += 1
+          @to += 1
+        when "after"
+          @from -= 1
+          @to -= 1
       end
-    elsif params[:todo]
-      render 'users/to_do'
     else
       @user = User.find(params[:id])
       @books = @user.books.all
+      @books_in_progress = @user.books.where(status: "勉強中")
       @book_categories = @user.book_categories.all
       @microposts = @user.microposts.all
+      @week_target = @user.week_targets.build()
       @total_study_time = @microposts.total_study_time
       @today_study_time = @microposts.today_study_time
       @this_week_study_time = @microposts.this_week_study_time

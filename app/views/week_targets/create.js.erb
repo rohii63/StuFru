@@ -1,0 +1,13 @@
+$(function() {
+  $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>")
+  
+  <% if @week_target.id %>
+    $("#weekTargetForm").html("");
+    $("#selectBook").before("<button>作成</button>");
+
+    atrWeekTargetNewBtn = new Object();
+    atrWeekTargetNewBtn.id = "weekTargetNewBtn"
+    atrWeekTargetNewBtn.class = "btn btn-primary"
+    $("button:first").attr(atrWeekTargetNewBtn);
+  <% end %>
+})

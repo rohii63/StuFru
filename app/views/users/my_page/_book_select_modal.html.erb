@@ -1,0 +1,27 @@
+<%= form_with model: @week_target, url: new_user_week_target_path(@user), method: :get do |f| %>
+  <div class="modal fade" id="bookSelectModal" tabindex="-1" role="dialog" aria-labelledby="bookSelectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">教材選択</h5>
+        </div>
+        <div class="modal-body">
+          <% @book_categories.each do |category| %>
+            <p><%= category.name unless @books.where(book_category_id: category.id).where(status: "勉強中").empty? %></p>
+            <% @books.where(book_category_id: category.id).where(status: "勉強中").each do |book| %>
+              <label>
+                <%= f.radio_button :book_id, "#{book.id}" %>
+                <%= image_tag url_for(book.icon.variant(resize: "75x75>")) %>
+                <%= book.name %>  
+              </label>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.submit "選択", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

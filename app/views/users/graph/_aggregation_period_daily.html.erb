@@ -1,5 +1,3 @@
 <%= link_to "＜", my_page_path(@user, term: "day", button: "before", from: @from, to: @to), remote: true %>
-
 <%= "#{Date.today - @from.day}〜#{Date.today - @to.day}" %>
-
 <%= link_to "＞", my_page_path(@user, term: "day", button: "after", from: @from, to: @to), remote: true %>

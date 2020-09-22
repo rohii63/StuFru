@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2020_09_09_235708) do
   end
 
   create_table "week_targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "content"
+    t.integer "content", null: false
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
     t.datetime "created_at", precision: 6, null: false

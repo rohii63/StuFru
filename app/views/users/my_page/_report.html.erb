@@ -20,10 +20,10 @@
           <div><%= day_before_ratio_in_study_time %></div>
         </p>
         <strong id="aggregation_period_daily">
-          <%= render 'users/report/aggregation_period_daily' %>
+          <%= render 'users/graph/aggregation_period_daily' %>
         </strong>
         <div id="daily_graph">
-          <%= render 'users/report/daily_graph' %>
+          <%= render 'users/graph/daily_graph' %>
         </div>
       </div>
       <div class="tab-pane " id="list-weekly" role="tabpanel" aria-labelledby="list-weekly-list">
@@ -33,10 +33,10 @@
           <div><%= week_before_ratio_in_study_time %></div>
         </p>
         <strong id="aggregation_period_weekly">
-          <%= render 'users/report/aggregation_period_weekly' %>
+          <%= render 'users/graph/aggregation_period_weekly' %>
         </strong>
         <div id="weekly_graph">
-          <%= render 'users/report/weekly_graph' %>
+          <%= render 'users/graph/weekly_graph' %>
         </div>
       </div>
       <div class="tab-pane " id="list-monthly" role="tabpanel" aria-labelledby="list-monthly-list">
@@ -46,17 +46,23 @@
           <div><%= month_before_ratio_in_study_time %></div>
         </p>
         <strong id="aggregation_period_monthly">
-          <%= render 'users/report/aggregation_period_monthly' %>
+          <%= render 'users/graph/aggregation_period_monthly' %>
         </strong>
         <div id="monthly_graph">
-          <%= render 'users/report/monthly_graph' %>
+          <%= render 'users/graph/monthly_graph' %>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div><strong>今週のやる事リスト</strong></div>
-<%= link_to "編集", my_page_path(@user, todo: "todo"), remote: true %>
+<span><strong>今週の目標</strong></span>
+<button id="weekTargetNewBtn" class="btn btn-primary">作成</button>
 
-<%= render 'users/report/to_do_list' %>
+<div id="selectBook"></div>
+<%= render 'users/my_page/book_select_modal' %>
+
+<div id="weekTargetForm"></div>
+
+
+<%= javascript_pack_tag 'users/my_page' %>
