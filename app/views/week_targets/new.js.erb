@@ -3,11 +3,13 @@ $(function() {
   $("#selectBook").html("");
   $("#weekTargetForm").html("<%= escape_javascript(render 'users/my_page/week_target_form') %>");
 
-  $("#weekTargetForm").on("change", "#totalBtn", function() {
+  $("#weekTargetForm").on("change", "#totalBtn1", function() {
     $("<%= escape_javascript(number_field :week_target, :content, in: 1...9999) %>").replaceAll("#studyAmountRangeInput");
+    $("#studyUnit1").html("<%= @selected_book.study_unit %>");
   })
-  $('#weekTargetForm').on("change", "#rangeBtn", function() {
+  $('#weekTargetForm').on("change", "#rangeBtn1", function() {
     $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#week_target_content");
+    $("#studyUnit1").html("");
   })
   
 });

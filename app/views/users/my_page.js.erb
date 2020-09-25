@@ -1,11 +1,11 @@
 <% case @term %>
   <% when "day" %>
-    $("#aggregation_period_daily").html("<%= escape_javascript(render 'users/graph/aggregation_period_daily') %>");
-    $("#daily_graph").html("<%= escape_javascript(render 'users/graph/daily_graph') %>");
+    $("#aggregation_period_daily").html("<%= escape_javascript(render 'users/my_page/graph/aggregation_period_daily') %>");
+    $("#daily_graph").html("<%= escape_javascript(render 'users/my_page/graph/daily_graph') %>");
   <% when "week" %>
-    $("#aggregation_period_weekly").html("<%= escape_javascript(render 'users/graph/aggregation_period_weekly') %>");
-    $("#weekly_graph").html("<%= escape_javascript(render 'users/graph/weekly_graph') %>");
+    $("#aggregation_period_weekly").html("<%= escape_javascript(render 'users/my_page/graph/aggregation_period_weekly') %>");
+    $("#weekly_graph").html("<%= escape_javascript(render 'users/my_page/graph/weekly_graph') %>");
   <% when "month" %>
-    $("#aggregation_period_monthly").html("<%= escape_javascript(render 'users/graph/aggregation_period_monthly') %>");
-    $("#monthly_graph").html("<%= escape_javascript(render 'users/graph/monthly_graph') %>");
+    $("#aggregation_period_monthly").html("<%= escape_javascript(render 'users/my_page/graph/aggregation_period_monthly') %>");
+    $("#monthly_graph").html("<%= escape_javascript(render 'users/my_page/graph/monthly_graph') %>");
 <% end %>

@@ -1,10 +1,16 @@
 class MicropostsController < ApplicationController
   def create
     if params[:page]
-      params[:micropost][:study_amount] = params[:page][:end].to_i - params[:page][:start].to_i + 1
-      if !params[:page][:start].present?
-        params[:micropost][:study_amount] = 10000
+      start_page = params[:page][:start].to_i
+      end_page = params[:page][:end].to_i
+      if start_page == 0 || end_page == 0
+        tmp = nil
+      elsif start_page >= end_page
+        tmp = 10000
+      else
+        tmp = end_page - start_page
       end
+      params[:micropost][:study_amount] = tmp
     end
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)

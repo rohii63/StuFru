@@ -1,7 +1,9 @@
 class WeekTarget < ApplicationRecord
   belongs_to :user
   belongs_to :book
+  default_scope -> { order(created_at: :desc) }
   validates :content, numericality: { greater_than_or_equal_to: 1, allow_nil: true }, presence: true
+  validates :book_id, uniqueness: { message: "の目標はすでに設定されています。" }
   validate :start_page_and_end_page_not_blank
   validate :start_page_not_blank
   validate :end_page_not_blank

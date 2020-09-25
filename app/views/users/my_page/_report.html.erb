@@ -20,10 +20,10 @@
           <div><%= day_before_ratio_in_study_time %></div>
         </p>
         <strong id="aggregation_period_daily">
-          <%= render 'users/graph/aggregation_period_daily' %>
+          <%= render 'users/my_page/graph/aggregation_period_daily' %>
         </strong>
         <div id="daily_graph">
-          <%= render 'users/graph/daily_graph' %>
+          <%= render 'users/my_page/graph/daily_graph' %>
         </div>
       </div>
       <div class="tab-pane " id="list-weekly" role="tabpanel" aria-labelledby="list-weekly-list">
@@ -33,10 +33,10 @@
           <div><%= week_before_ratio_in_study_time %></div>
         </p>
         <strong id="aggregation_period_weekly">
-          <%= render 'users/graph/aggregation_period_weekly' %>
+          <%= render 'users/my_page/graph/aggregation_period_weekly' %>
         </strong>
         <div id="weekly_graph">
-          <%= render 'users/graph/weekly_graph' %>
+          <%= render 'users/my_page/graph/weekly_graph' %>
         </div>
       </div>
       <div class="tab-pane " id="list-monthly" role="tabpanel" aria-labelledby="list-monthly-list">
@@ -46,10 +46,10 @@
           <div><%= month_before_ratio_in_study_time %></div>
         </p>
         <strong id="aggregation_period_monthly">
-          <%= render 'users/graph/aggregation_period_monthly' %>
+          <%= render 'users/my_page/graph/aggregation_period_monthly' %>
         </strong>
         <div id="monthly_graph">
-          <%= render 'users/graph/monthly_graph' %>
+          <%= render 'users/my_page/graph/monthly_graph' %>
         </div>
       </div>
     </div>
@@ -60,9 +60,15 @@
 <button id="weekTargetNewBtn" class="btn btn-primary">作成</button>
 
 <div id="selectBook"></div>
-<%= render 'users/my_page/book_select_modal' %>
-
+<div id="book_select_modal">
+  <%= render 'users/my_page/book_select_modal' %>
+</div>
 <div id="weekTargetForm"></div>
+<div id="weekTargetArea">
+  <% @week_targets.each do |week_target| %>
+    <%= render 'users/my_page/week_target_card', week_target: week_target %>
+  <% end %>
+</div>
 
 
 <%= javascript_pack_tag 'users/my_page' %>

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
       @book_categories = @user.book_categories.all
       @microposts = @user.microposts.all
       @week_target = @user.week_targets.build()
+      @week_targets = @user.week_targets.all
       @total_study_time = @microposts.total_study_time
       @today_study_time = @microposts.today_study_time
       @this_week_study_time = @microposts.this_week_study_time

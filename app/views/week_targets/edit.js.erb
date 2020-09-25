@@ -1,0 +1,12 @@
+$(function() {
+  $("<%= escape_javascript(render 'users/my_page/week_target_edit_form') %>").replaceAll("#weekTarget<%= @week_target.id %>");
+
+  $("#weekTargetCard<%= @week_target.id %>").on("change", "#totalBtn2", function() {
+    $("<%= escape_javascript(number_field :week_target, :content, in: 1...9999) %>").replaceAll("#studyAmountRangeInput");
+    $("#studyUnit2").html("<%= @week_target.book.study_unit %>");
+  })
+  $('#weekTargetCard<%= @week_target.id %>').on("change", "#rangeBtn2", function() {
+    $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#week_target_content");
+    $("#studyUnit2").html("");
+  })
+})
