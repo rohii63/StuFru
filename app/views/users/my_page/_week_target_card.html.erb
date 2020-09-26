@@ -1,9 +1,7 @@
 <div id="weekTargetCard<%= week_target.id %>">
   <% current_study_amount = @microposts.this_week_study_amount(week_target.book.id) %>
 
-  <div><%= week_target.book.name %></div>
-
-  <div></div>
+  <canvas id="achievementRateOfStudyAmount<%= week_target.id %>" width="200" height="200"></canvas>
 
   <% if week_target.book.study_unit == "時間" %>
     <span id="weekTarget<%= week_target.id %>">目標: <%= sprintf("%02d", week_target.content / 60) %> 時間 <%= sprintf("%02d", week_target.content % 60) %> 分</span>
