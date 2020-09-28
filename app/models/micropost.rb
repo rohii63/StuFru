@@ -150,10 +150,11 @@ class Micropost < ApplicationRecord
     return hours, minutes, total
   end
 
-  def self.this_week_study_amount(book_id)
-    from = Time.current.at_beginning_of_week
-    to = Time.current.at_end_of_week
+  def self.weekly_study_amount(book_id, week_target_created_at)
+    from = week_target_created_at.at_beginning_of_week
+    to = week_target_created_at.at_end_of_week
+    post = self.where(studied_at: from...to).where(book_id: book_id)
     
-    Book.find(book_id).study_unit == "時間" ? self.where(studied_at: from...to).where(book_id: book_id).sum(:studied_time_in_minutes) : self.where(studied_at: from...to).where(book_id: book_id).sum(:study_amount)
+    Book.find(book_id).study_unit == "時間" ? post.sum(:studied_time_in_minutes) : post.sum(:study_amount)
   end
 end

@@ -18,9 +18,9 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
       @microposts = @user.microposts.all
-      @week_targets = @user.week_targets.all
+      @week_targets = @user.week_targets.all.at_this_week()
       if params[:chart]
-        render 'users/my_page/chart'
+        render 'week_targets/chart'
       end
       @books = @user.books.all
       @books_in_progress = @user.books.where(status: "勉強中")

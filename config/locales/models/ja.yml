@@ -28,7 +28,6 @@ ja:
         content: コメント
       week_target:
         content: 今週の目標
-        book_id: この教材
     errors:
       models:
         user:

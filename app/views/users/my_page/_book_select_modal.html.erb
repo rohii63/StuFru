@@ -12,8 +12,8 @@
           <% else %>
             <% @book_categories.each do |category| %>
               <% tmp_books = books_in_progress.where(book_category_id: category.id) %>
-              <p><%= category.name if !tmp_books.empty? && @week_targets.where(book_id: tmp_books.pluck(:id)).empty? %></p>
-              <% @books.where(book_category_id: category.id).each do |book| %>
+              <p><%= category.name if !tmp_books.empty? && !(@week_targets.where(book_id: tmp_books.pluck(:id)).count == tmp_books.count) %></p>
+              <% tmp_books.each do |book| %>
                 <% unless @week_targets.find_by(book_id: book.id) %>
                   <label>
                     <%= f.radio_button :book_id, "#{book.id}" %>

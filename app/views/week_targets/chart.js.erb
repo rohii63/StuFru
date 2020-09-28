@@ -1,0 +1,24 @@
+$(function() {
+  configureDoughnutGraph(displayStudyAmountGraph);
+});
+
+var displayStudyAmountGraph = function(blue, gray, options) {
+  <% @week_targets.each do |week_target| %>
+    $('<%= escape_javascript(render "users/my_page/canvas_tag", week_target: week_target) %>').replaceAll("#studyAmountGraph<%= week_target.id %>");
+    <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.created_at) %>
+    <% progress_rate = result * 100 / week_target.content %>
+
+    var ctx = $('#studyAmountGraph<%= week_target.id %>');
+    var chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: { 
+        datasets: [{
+          data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
+          backgroundColor: [blue, gray]
+        }]
+      },
+      options: options,
+      plugins: [chartJsPluginCenterLabel]
+    });
+  <% end %>
+};

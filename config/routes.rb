@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get :follow
     end
     resources :book_categories, only: [:new, :create, :destroy]
-    resources :week_targets, only: [:new, :create, :edit, :update, :destroy]
+    resources :week_targets, except: :show
   end
   resources :books, only: [:index, :create, :show, :update, :destroy]
   resources :book_registers, only: [:create, :destroy]

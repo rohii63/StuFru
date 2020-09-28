@@ -1,9 +1,21 @@
 class WeekTargetsController < ApplicationController
+
+  def index
+    @user = User.find(params[:user_id])
+    @week_targets = @user.week_targets.all
+    @microposts = @user.microposts.all
+    @number_of_weeks_passed = (Time.current.at_beginning_of_week - @week_targets.last.created_at.at_beginning_of_week).to_i / 604800
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def new
     @user = User.find(params[:user_id])
     @selected_book = Book.find(params[:week_target][:book_id])
     @week_target = @user.week_targets.build()
-    @week_targets = @user.week_targets.all
+    @week_targets = @user.week_targets.all.at_this_week()
     @week_target.book_id = @selected_book.id
   end
 
@@ -12,7 +24,7 @@ class WeekTargetsController < ApplicationController
     @user = User.find(params[:user_id])
     @week_target = @user.week_targets.build(week_target_params)
     if @week_target.save
-      @week_targets = @user.week_targets.all
+      @week_targets = @user.week_targets.all.at_this_week()
       @microposts = @user.microposts.all
       @book_categories = @user.book_categories.all
       @books = @user.books.all

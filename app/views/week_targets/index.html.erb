@@ -1,0 +1,33 @@
+<% 0.upto(@number_of_weeks_passed) do |n| %>
+  <% past_week_targets = @week_targets.past_records(n) %>
+  <% if past_week_targets.present? %>
+    <% week_target_created_at = past_week_targets.take.created_at %>
+    <% from = week_target_created_at.at_beginning_of_week %>
+    <% to = week_target_created_at.at_end_of_week %>
+
+    <div><strong><%= "#{from.to_s(:month)} - #{to.to_s(:month)}" %></strong></div>
+    
+    <% past_week_targets.each do |week_target| %>
+      <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.created_at) %>
+
+      <div><strong><%= week_target.book.name %></div></strong>
+      <% if week_target.book.study_unit == "時間" %>
+        <span>目標: 
+          <%= sprintf("%02d", week_target.content / 60) %> 時間 
+          <%= sprintf("%02d", week_target.content % 60) %> 分</span>
+        <div>実績: 
+          <%= sprintf("%02d", achievement / 60) %> 時間 
+          <%= sprintf("%02d", achievement % 60) %> 分</div>
+      <% else %>
+        <span>目標: 
+          <%= sprintf("%04d", week_target.content) %> <%= week_target.book.study_unit %></span>
+        <div>実績: 
+          <%= sprintf("%04d", achievement) %> <%= week_target.book.study_unit %></div>
+      <% end %>
+
+      <%= render 'users/my_page/canvas_tag', week_target: week_target %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= javascript_pack_tag 'users/index'%>
