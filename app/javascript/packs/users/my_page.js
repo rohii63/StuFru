@@ -2,7 +2,7 @@ $(function() {
   $.ajax({
     url: location.href,
     type: "GET", 
-    data: {chart: "view"},
+    data: {chart: ""},
     dataType: "script"
   })
 

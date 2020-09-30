@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
   def my_page
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.all
     if params[:term]
       @term = params[:term]
       @from = params[:from].to_i
       @to = params[:to].to_i
-      @user = User.find(params[:id])
-      @microposts = @user.microposts.all
       case params[:button]
         when "before"
           @from += 1
@@ -15,13 +15,14 @@ class UsersController < ApplicationController
           @from -= 1
           @to -= 1
       end
-    else
-      @user = User.find(params[:id])
-      @microposts = @user.microposts.all
+      render 'switch_graph'
+    elsif params[:chart]
       @week_targets = @user.week_targets.all.at_this_week()
-      if params[:chart]
-        render 'week_targets/chart'
-      end
+      @from = 6
+      @to = 0
+      render 'chart'
+    else
+      @week_targets = @user.week_targets.all.at_this_week()
       @books = @user.books.all
       @books_in_progress = @user.books.where(status: "勉強中")
       @book_categories = @user.book_categories.all
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
       @this_month_study_time = @microposts.this_month_study_time
       @from = 6
       @to = 0
+      
     end
   end
 

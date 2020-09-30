@@ -1,0 +1,77 @@
+$(function() {
+  <% daily_data = [] %>
+  <% weekly_data = [] %>
+  <% monthly_data = [] %>
+  var daily_labels = []
+  var weekly_labels = []
+  var monthly_labels = []
+
+  <% @from.downto(@to) do |n| %>
+    <% a_day_study_time = @microposts.daily_study_time(n) %>
+    <% a_week_study_time = @microposts.weekly_study_time(n) %>
+    <% a_month_study_time = @microposts.monthly_study_time(n) %>
+    <% daily_data << a_day_study_time[2] %>
+    <% weekly_data << a_week_study_time[2] %>
+    <% monthly_data << a_month_study_time[2] %>
+    var date = new Date('<%= Date.today - n.day %>');
+    createLabels(daily_labels, date);
+    var date = new Date('<%= Date.today.at_beginning_of_week - n.week %>');
+    createLabels(weekly_labels, date);
+    var date = new Date('<%= Date.today.at_beginning_of_month - n.month %>');
+    createLabelsOnMonthly(monthly_labels, date);
+  <% end %>
+
+  displayBarGraph("dailyGraph", daily_labels, <%= daily_data %>);
+  displayBarGraph("weeklyGraph", weekly_labels, <%= weekly_data %>);
+  displayBarGraph("monthlyGraph", monthly_labels, <%= monthly_data %>);
+
+  configureDoughnutGraph(displayStudyAmountGraph);
+});
+
+function displayBarGraph(canvasId, labels, data) {
+  var aryMax = function (a, b) {return Math.max(a, b);}
+  var ctx = $(`#${canvasId}`);
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{ data: data }]
+    },
+    options: {
+      scales: { 
+        yAxes: [{
+          display: false,
+          ticks: { 
+            beginAtZero: true, 
+            max: data.reduce(aryMax) + 150 
+          }
+        }]
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+};
+
+var displayStudyAmountGraph = function(blue, gray, options) {
+  <% @week_targets.each do |week_target| %>
+    $('<%= escape_javascript(render "users/my_page/canvas_tag", week_target: week_target) %>').replaceAll("#studyAmountGraph<%= week_target.id %>");
+    
+    <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.created_at) %>
+    <% progress_rate = result * 100 / week_target.content %>
+
+    var ctx = $('#studyAmountGraph<%= week_target.id %>');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: { 
+        datasets: [{
+          data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
+          backgroundColor: [blue, gray],
+          datalabels: { display: false }
+        }]
+      },
+      options: options,
+      plugins: [chartJsPluginCenterLabel]
+    });
+  <% end %>
+};

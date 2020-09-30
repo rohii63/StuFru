@@ -4,10 +4,7 @@ function configureDoughnutGraph(displayGraph) {
 
   var options = {
     cutoutPercentage: 65,
-    legend: { display: false },
-    responsive: false,
-    title: { display: true, fontSize: 16 },
-    tooltips: { enabled: false },
+    responsive: false
   };
 
   displayGraph(blue, gray, options);

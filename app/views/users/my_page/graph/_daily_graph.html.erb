@@ -1,9 +1,0 @@
-<% daily_data = {} %>
-
-<% @from.downto(@to) do |n| %>
-  <% a_day_study_time = @microposts.daily_study_time(n) %>
-  <% date = (Date.today - n.day).to_s(:month) %>
-  <% daily_data[date] = a_day_study_time[2] %>
-<% end %>
-
-<%= column_chart daily_data, id: "daily_chart" %>

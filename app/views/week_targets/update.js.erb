@@ -3,12 +3,12 @@ $(function() {
 
   <% unless @week_target.errors.any? %>
     $("<%= escape_javascript(render 'users/my_page/week_target_card', week_target: @week_target) %>").replaceAll("#weekTargetCard<%= @week_target.id %>")
-    configureDoughnutGraph(displayStudyAmountGraph);
+    configureDoughnutGraph(updateStudyAmountGraph);
   <% end %>
 })
 
-var displayStudyAmountGraph = function(blue, gray, options) {
-  <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.created_at) %>
+var updateStudyAmountGraph = function(blue, gray, options) {
+  <% result = @microposts.weekly_study_amount(@week_target.book.id, @week_target.created_at) %>
   <% progress_rate = result * 100 / @week_target.content %>
 
   var ctx = $('#studyAmountGraph<%= @week_target.id %>');
@@ -17,7 +17,8 @@ var displayStudyAmountGraph = function(blue, gray, options) {
     data: { 
       datasets: [{
         data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
-        backgroundColor: [blue, gray]
+        backgroundColor: [blue, gray],
+        datalabels: { display: false }
       }]
     },
     options: options,
