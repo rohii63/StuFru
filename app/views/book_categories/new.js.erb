@@ -1,0 +1,16 @@
+$(function() {
+  <%# when comming from a book index page %>
+  $("#newBookModal").modal('hide')
+  <%# when comming from a book show page %>
+  $("#editBookModal").modal('hide')
+
+  $("#book_category_modal").html("<%= escape_javascript(render 'books/modal/book_category') %>")
+  $("#bookCategoryModal").modal('show')
+
+  $('#bookCategoryModal').on('hidden.bs.modal', function () {
+    <%# when comming from a book index page %>
+    $("#newBookModal").modal('show')
+  <%# when comming from a book show page %>
+    $("#editBookModal").modal('show')
+  })
+});

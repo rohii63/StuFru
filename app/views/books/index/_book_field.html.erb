@@ -1,0 +1,22 @@
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-in-progress-tab" data-toggle="pill" href="#pills-in-progress" role="tab" aria-controls="pills-in-progress" aria-selected="true">勉強中</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-standby-tab" data-toggle="pill" href="#pills-standby" role="tab" aria-controls="pills-standby" aria-selected="false">勉強予定</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-finished-tab" data-toggle="pill" href="#pills-finished" role="tab" aria-controls="pills-finished" aria-selected="false">勉強済み</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-in-progress" role="tabpanel" aria-labelledby="pills-in-progress-tab">
+    <%= render 'books/index/book_in_progress' %>
+  </div>
+  <div class="tab-pane fade" id="pills-standby" role="tabpanel" aria-labelledby="pills-standby-tab">
+    <%= render 'books/index/book_standby' %>
+  </div>
+  <div class="tab-pane fade" id="pills-finished" role="tabpanel" aria-labelledby="pills-finished-tab">
+    <%= render 'books/index/book_finished' %>
+  </div>
+</div>

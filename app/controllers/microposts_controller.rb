@@ -1,23 +1,37 @@
 class MicropostsController < ApplicationController
   def create
+    if params[:page]
+      start_page = params[:page][:start].to_i
+      end_page = params[:page][:end].to_i
+      if start_page == 0 || end_page == 0
+        tmp = nil
+      elsif start_page >= end_page
+        tmp = 10000
+      else
+        tmp = end_page - start_page
+      end
+      params[:micropost][:study_amount] = tmp
+    end
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
     @micropost.save
-    @books = @user.books.all
-    @book_names = @books.pluck(:name)
+    @books_in_progress = @user.books.where(status: "勉強中")
     @microposts = @user.feed
   end
 
   def show
     @micropost = Micropost.find(params[:id])
+    if @micropost.user == current_user
+      @books_in_progress = current_user.books.where(status: "勉強中")
+      if params[:comment_id]
+        @comments = @micropost.comments.all
+        @comment = Comment.find(params[:comment_id])
+        render 'comment_delete_modal'
+      end
+    end
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
-    if @micropost.user == current_user
-      @books = current_user.books.all
-      @book_names = @books.pluck(:name)
-      @comment_id = Comment.find(params[:comment][:id]) if request.xml_http_request?
-    end
   end
 
   def update
@@ -25,13 +39,6 @@ class MicropostsController < ApplicationController
     if @micropost.update(micropost_params)
       flash[:success] = "編集完了"
       redirect_to root_path
-    else
-      @books = current_user.books.all
-      @book_names = @books.pluck(:name)
-      @comment = @micropost.comments.build()
-      @comments = @micropost.comments.all
-      @likes = @micropost.likes.all
-      render 'show'
     end
   end
 
@@ -53,7 +60,8 @@ class MicropostsController < ApplicationController
         :studied_page,
         :content,
         :picture,
-        :user_id
+        :user_id,
+        :study_amount
       )
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_083534) do
+ActiveRecord::Schema.define(version: 2020_09_09_235708) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "book_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_book_categories_on_user_id"
+  end
+
   create_table "book_registers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "book_id"
@@ -45,9 +53,13 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
+    t.string "status", null: false
+    t.string "study_unit", null: false
     t.string "icon"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "book_category_id"
+    t.index ["book_category_id"], name: "index_books_on_book_category_id"
     t.index ["name"], name: "index_books_on_name", unique: true, length: 100
   end
 
@@ -72,17 +84,19 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
   end
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "studied_at"
-    t.integer "how_many_studied_hours"
-    t.integer "how_many_studied_minutes"
-    t.integer "studied_time_in_minutes"
+    t.datetime "studied_at", null: false
+    t.integer "how_many_studied_hours", null: false
+    t.integer "how_many_studied_minutes", null: false
+    t.integer "studied_time_in_minutes", null: false
+    t.integer "study_amount"
     t.text "content"
     t.string "picture"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_microposts_on_book_id"
+    t.index ["studied_at"], name: "index_microposts_on_studied_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
@@ -145,11 +159,25 @@ ActiveRecord::Schema.define(version: 2020_08_17_083534) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "week_targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "content", null: false
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_week_targets_on_book_id"
+    t.index ["user_id"], name: "index_week_targets_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_categories", "users"
+  add_foreign_key "books", "book_categories"
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "microposts"
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "books"
   add_foreign_key "microposts", "users"
+  add_foreign_key "week_targets", "books"
+  add_foreign_key "week_targets", "users"
 end

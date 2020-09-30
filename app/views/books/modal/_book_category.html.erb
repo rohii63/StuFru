@@ -1,0 +1,20 @@
+<%= form_with model: @book_category, url: user_book_categories_path(@user) do |f| %>
+  <div class="modal fade" id="bookCategoryModal" tabindex="-1" role="dialog" aria-labelledby="bookCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">カテゴリー登録</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.text_field :name, placeholder: "カテゴリー名を入力" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.submit :登録, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<p>
+<%= image_tag url_for(@user.avatar.variant(resize: "100x100>")) %>
+</p>
+<p>
+  <%= @user.name %>
+  <div id="follow_btn"><%= render 'relationships/follow_btn' %></div>
+</p>
+
+
+<p>
+<%= text_area_tag '', @user.target_comment, disabled: true, placeholder: "具体的な目標を記入しよう！" %>
+</p>
+
+<p><%= link_to "フォロワー（#{@user.followers.count}）フォロー（#{@user.following.count}）", follow_user_path(@user) %></p>
+
+<p>自己紹介</p>
+<p><%= @user.introduction %></p>
+
+<p>達成目標</p>
+<p><%= @user.target %></p>
+
+<p>
+<%= @user.my_choice_university %>
+</p>
+
+
+<p>基本情報</p>
+<p>ユーザ名 <%= @user.name %></p>
+<p>性別 <%= @user.gender %></p>
+<p>年齢 <%= @user.age %></p>
+<p>住まい <%= @user.live %></p>
+<p>職業 <%= @user.job %></p>

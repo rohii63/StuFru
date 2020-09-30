@@ -8,11 +8,7 @@
     <li><%= comment.content %></li>
     <% if current_user == comment.user %>
       <li>
-        <%= form_with model: @micropost, method: :get do |f| %>
-          <%= f.hidden_field :id %>
-          <%= hidden_field_tag 'comment[id]', comment.id %>
-          <%= f.submit "×" %> 
-        <% end %>
+        <%= link_to "×", micropost_path(@micropost, comment_id: comment.id), remote: true %>
       </li>
     <% end %>
   </ul>

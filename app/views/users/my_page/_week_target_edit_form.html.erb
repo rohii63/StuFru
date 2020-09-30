@@ -1,0 +1,21 @@
+<%= form_with model: @week_target, url: user_week_target_path(@user, @week_target) do |f| %>
+  <span>目標: 
+    <% case @week_target.book.study_unit %>
+      <% when "時間" %>
+        <% hours = @week_target.content / 60 %>
+        <% minutes = @week_target.content % 60 %>
+        <%= number_field_tag 'time[hours]', hours, in: 0...168 %>
+        <%= label_tag 'time[hours]', "時間" %>
+        <%= number_field_tag 'time[minutes]', minutes, in: 0...60 %>
+        <%= label_tag 'time[minutes]', "分" %>
+      <% when "ページ" %>
+        <input id="totalBtn2" name="studyAmount" type="radio" checked="checked">合計</input>
+        <input id="rangeBtn2" name="studyAmount" type="radio">範囲</input>
+        <%= f.number_field :content, in: 1...9999 %> <span id="studyUnit2"><%= @week_target.book.study_unit %></span>
+      <% else %>
+        <%= f.number_field :content, in: 1...9999 %> <%= @week_target.book.study_unit %>
+    <% end %>
+  </span>
+  <%= f.hidden_field :book_id %>
+  <%= f.submit "保存", class: "btn btn-primary" %>
+<% end %>

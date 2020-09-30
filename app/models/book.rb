@@ -6,7 +6,9 @@ class Book < ApplicationRecord
                               dependent:  :destroy
   has_many :users, through: :owners
   has_many :microposts
-  validates :name, presence: true, uniqueness: true
+  has_many :week_targets
+  belongs_to :book_category
+  validates :name, presence: true, uniqueness: true, length: {maximum: 60}
 
   def self.name_search(search)
     Book.where(['name LIKE ?', "%#{search}%"])

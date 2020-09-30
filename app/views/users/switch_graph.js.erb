@@ -1,0 +1,69 @@
+$(function() {
+  <% data = [] %>
+  var labels = [];
+
+  <% case @term %>
+    <% when "day" %>
+      $("#aggregation_period_daily").html("<%= escape_javascript(render 'users/my_page/aggregation_period_daily') %>");
+
+      <% @from.downto(@to) do |n| %>
+        <% a_day_study_time = @microposts.daily_study_time(n) %>
+        <% data << a_day_study_time[2] %>
+        var date = new Date('<%= Date.today - n %>');
+        createLabels(labels, date);
+      <% end %>
+
+      switchBarGraph("dailyGraph", labels, <%= data %>)
+
+    <% when "week" %>
+      $("#aggregation_period_weekly").html("<%= escape_javascript(render 'users/my_page/aggregation_period_weekly') %>");
+
+      <% @from.downto(@to) do |n| %>
+        <% a_week_study_time = @microposts.weekly_study_time(n) %>
+        <% data << a_week_study_time[2] %>
+        var date = new Date('<%= Date.today.at_beginning_of_week - n.week %>');
+        createLabels(labels, date);
+      <% end %>
+
+      switchBarGraph("weeklyGraph", labels, <%= data %>)
+
+    <% when "month" %>
+      $("#aggregation_period_monthly").html("<%= escape_javascript(render 'users/my_page/aggregation_period_monthly') %>");
+
+      <% @from.downto(@to) do |n| %>
+        <% a_month_study_time = @microposts.monthly_study_time(n) %>
+        <% data << a_month_study_time[2] %>
+        var date = new Date('<%= Date.today.at_beginning_of_month - n.month %>');
+        createLabelsOnMonthly(labels, date);
+      <% end %>
+
+      switchBarGraph("monthlyGraph", labels, <%= data %>)
+
+  <% end %>
+});
+
+function switchBarGraph(canvasId, labels, data) {
+  var aryMax = function (a, b) {return Math.max(a, b);}
+  var ctx = $(`#${canvasId}`);
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{ data: data }]
+    },
+    options: {
+      animation: false,
+      scales: { 
+        yAxes: [{
+          display: false,
+          ticks: { 
+            beginAtZero: true, 
+            max: data.reduce(aryMax) + 150 
+          }
+        }]
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+};

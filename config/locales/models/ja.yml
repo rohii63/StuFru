@@ -5,6 +5,7 @@ ja:
       book: 教材
       micropost: 投稿
       comment: コメント
+      week_target: 今週の目標
     attributes:
       user:
         name: 名前
@@ -12,13 +13,21 @@ ja:
         target_comment: 目標コメント
         introduction: 自己紹介
       book:
+        icon: イメージ
         name: 教材名
+        status: ステータス
+        study_unit: 勉強単位
+      book_category:
+        name: カテゴリー名
       micropost:
         content: コメント
         studied_at: 勉強日時
         studied_time_in_minutes: 勉強時間
+        study_amount: 学習量
       comment:
         content: コメント
+      week_target:
+        content: 今週の目標
     errors:
       models:
         user:
@@ -26,27 +35,40 @@ ja:
             name:
               format: '%{message}'
               blank: '%{attribute}を入力して下さい。'
-              too_long: '%{attribute}は32文字以内で入力してください。'
+              too_long: '%{attribute}は32文字以内にしてください。'
             target_comment:
               format: '%{message}'
-              too_long: '%{attribute}は400文字以内で入力してください。'
+              too_long: '%{attribute}は400文字以内にしてください。'
             introduction:
               format: '%{message}'
-              too_long: '%{attribute}は1000文字以内で入力してください。'
+              too_long: '%{attribute}は1000文字以内にしてください。'
         book:
           attributes:
             name:
               format: '%{message}'
               blank: '%{attribute}を入力して下さい。'
               taken: '%{value}は既に存在する教材名です。'
+              too_long: '%{attribute}は60文字以内にしてください。'
+        book_category:
+          attributes:
+            name:
+              format: '%{message}'
+              blank: '%{attribute}を入力して下さい。'
+              too_long: '%{attribute}は30文字以内にしてください。'
         micropost:
           attributes:
             content:
               format: '%{message}'
-              too_long: '%{attribute}は280文字以内で入力してください。'
+              too_long: '%{attribute}は280文字以内にしてください。'
         comment:
           attributes:
             content:
               format: '%{message}'
               blank: '%{attribute}を入力して下さい。'
-              too_long: '%{attribute}は140文字以内で入力してください。'
+              too_long: '%{attribute}は140文字以内にしてください。'
+        week_target:
+          attributes:
+            content:
+              format: '%{message}'
+              blank: '%{attribute}を入力してください'
+              greater_than_or_equal_to: '%{attribute}は１以上の値にして下さい'

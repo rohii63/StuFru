@@ -1,0 +1,2 @@
+module WeekTargetsHelper
+end

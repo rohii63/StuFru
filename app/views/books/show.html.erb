@@ -1,22 +1,24 @@
-<div id="error_messages">
-  <%= render 'shared/error_messages', object: @book %>
-</div>
+<div id="error_messages"></div>
 
 <h1>Books#show</h1>
 <p>Find me in app/views/books/show.html.erb</p>
 
 
 <div id="book_info">
-  <%= render 'books/book_info' %>
+  <%= render 'books/show/book_info' %>
 </div>
 
-<div id="book_edit_link">
-  <%= render 'books/edit_link' %>
+<div id="edit_book_link">
+  <%= render 'books/show/edit_link' %>
 </div>
-<%= render 'books/edit_modal' %>
+<%= render 'books/modal/edit_book' %>
+
+<div id="book_category_modal">
+  <%= render 'books/modal/book_category' %>
+</div>
 
 
-<li id="register_btn"><%= render 'books/register_btn' %></li>
+<li id="register_btn"><%= render 'books/show/register_btn' %></li>
 
 <strong><p>タイムライン</p></strong>
 <p><%= render 'shared/timeline' %></p>

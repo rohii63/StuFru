@@ -1,33 +1,39 @@
 class UsersController < ApplicationController
 
   def my_page
-    unless params[:term]
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.all
+    if params[:term]
+      @term = params[:term]
+      @from = params[:from].to_i
+      @to = params[:to].to_i
+      case params[:button]
+        when "before"
+          @from += 1
+          @to += 1
+        when "after"
+          @from -= 1
+          @to -= 1
+      end
+      render 'switch_graph'
+    elsif params[:chart]
+      @week_targets = @user.week_targets.all.at_this_week()
+      @from = 6
+      @to = 0
+      render 'chart'
+    else
+      @week_targets = @user.week_targets.all.at_this_week()
       @books = @user.books.all
-      @microposts = @user.microposts.all
+      @books_in_progress = @user.books.where(status: "勉強中")
+      @book_categories = @user.book_categories.all
+      @week_target = @user.week_targets.build()
       @total_study_time = @microposts.total_study_time
       @today_study_time = @microposts.today_study_time
       @this_week_study_time = @microposts.this_week_study_time
       @this_month_study_time = @microposts.this_month_study_time
       @from = 6
       @to = 0
-    else
-      @term = params[:term]
-      @from = params[:from].to_i
-      @to = params[:to].to_i
-      @user = User.find(params[:id])
-      @microposts = @user.microposts.all
-      if params[:left]
-        @from += 1
-        @to += 1
-      end
-      if params[:right]
-        @from -= 1
-        @to -= 1
-      end
-      respond_to do |format|
-        format.js { render 'home/home' }
-      end
+      
     end
   end
 

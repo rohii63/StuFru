@@ -16,6 +16,11 @@
             <%= micropost.how_many_studied_minutes %>分
           <% end %>
         </li>
+        <li>
+          <% if micropost.study_amount  %>
+            <%= micropost.study_amount %><%= micropost.book.study_unit %>
+          <% end %>
+        </li>
       </ul>
 </ul>
 <ul>
