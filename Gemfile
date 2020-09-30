@@ -68,7 +68,7 @@ gem "aws-sdk-s3", require: false
 
 gem 'nokogiri', '~> 1.10', '>= 1.10.10'
 #Create fake user
-gem 'faker', '~> 2.13'
+gem 'faker', '~> 2.14'
 #Create hash widh association function of activeRecord
 gem 'active_hash'
 #Change error messages to japanese

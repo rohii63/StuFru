@@ -111,7 +111,7 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.9.0)
-    faker (2.13.0)
+    faker (2.14.0)
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
     globalid (0.4.2)
@@ -294,7 +294,7 @@ DEPENDENCIES
   chartkick
   devise
   dotenv-rails
-  faker (~> 2.13)
+  faker (~> 2.14)
   hirb
   hirb-unicode
   image_processing (~> 1.2)
