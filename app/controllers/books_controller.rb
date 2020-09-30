@@ -27,6 +27,10 @@ class BooksController < ApplicationController
     @microposts = @book.microposts.all
     @user = current_user
     @book_categories = @user.book_categories.all
+    respond_to do |format|
+      format.html
+      format.js { render 'edit' }
+    end
   end
 
   def update
