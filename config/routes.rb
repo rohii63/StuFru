@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get '/microposts', to: 'microposts#new'
   get '/microposts/:id/comments', to: 'microposts#show'
   get '/my_page/:id', to: 'users#my_page', as: 'my_page'
+
   devise_for :users
+
   resources :users, only: [:index, :show, :update] do
     member do
       get :follow
@@ -20,4 +22,8 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index
+
+  namespace :api, {format: 'json'} do
+    get 'universities', to: 'universities#index'
+  end
 end

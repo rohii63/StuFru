@@ -3,6 +3,7 @@ import 'select2/dist/css/select2.css'
 
 $(function () {
   $('#user_my_choice_university').select2();
+  $('#users_university').select2();
 });
 
 // window.sendValue = function(){

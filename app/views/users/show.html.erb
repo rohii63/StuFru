@@ -26,6 +26,9 @@
 
 <p id="university_edit_link"><%= render 'users/university_edit_link' %></p>
 <%= render 'users/modal/my_choice_university' %>
+<% university_list = File.open("app/assets/csv/university_list.csv", mode = "r") %>
+<%= select :users, :university, options_for_select(university_list.readlines), include_blank: "大学を選択しよう！" %>
+<% university_list.close %>
 
 
 <p>基本情報 <%= link_to "編集", "#", data: {toggle: "modal", target: "#basicInformationEditModal"} %></p>
@@ -33,3 +36,6 @@
 <div id="user_basic_information"><%= render 'users/user_basic_information' %></div>
 
 <%= javascript_pack_tag 'users/show' %>
+
+<%= javascript_pack_tag 'hello_vue' %>
+<%= stylesheet_pack_tag 'hello_vue' %>

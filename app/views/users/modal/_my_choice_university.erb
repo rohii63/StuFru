@@ -5,7 +5,7 @@
         <div class="modal-header">
           <h5 class="modal-title">編集</h5>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modalBody">
           <% university_list = File.open("app/assets/csv/university_list.csv", mode = "r") %>
           <%= f.select :my_choice_university, options_for_select(university_list.readlines), include_blank: "大学を選択しよう！" %>
           <% university_list.close %>
