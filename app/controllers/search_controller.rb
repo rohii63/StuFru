@@ -6,4 +6,8 @@ class SearchController < ApplicationController
     flash[:error] = ""
     flash[:error] = "キーワードを入力して下さい。" if params[:search] == ""
   end
+
+  def universities
+    
+  end
 end

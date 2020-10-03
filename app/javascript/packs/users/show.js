@@ -1,12 +1,24 @@
-import 'select2'
-import 'select2/dist/css/select2.css'
-
 $(function () {
-  $('#user_my_choice_university').select2();
-});
+  btnProp = new Object();
+  btnProp.type = "submit";
+  btnProp.name = "commit";
+  btnProp.value = "保存";
+  btnProp.class = "btn btn-primary";
 
-// window.sendValue = function(){
-//   var selectedValue = $("#university").val();
-//   console.log(selectedValue)
-//   $("#user_my_choice_university").attr("value", selectedValue)
-// }
+  $("#avatarEditModal").on(
+    "change", 
+    "#user_avatar", 
+    function() {
+      var val = $('#user_avatar').val();
+
+      if (val == "") {
+        $("#avatarUpdateBtn").html("");
+
+      } else {
+        $("#avatarUpdateBtn").html("<input></input>");
+        $("#avatarUpdateBtn>input").prop(btnProp);
+        
+      };
+    }
+  );
+});

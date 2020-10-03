@@ -3,7 +3,7 @@
 
 <%= render 'search/search_field' %>
 
-<p><%= link_to "おすすめユーザー", search_path, remote: true, method: :get %></p>
+<p><%= link_to "おすすめユーザー", user_search_path, remote: true, method: :get %></p>
 
 <ol id="searched_user">
   <%= render 'search/searched_user' %>

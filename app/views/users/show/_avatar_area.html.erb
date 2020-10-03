@@ -1,0 +1,24 @@
+<p><%= link_to (image_tag url_for(@user.avatar.variant(resize: "100x100>"))), 
+              user_path(@user, modal_name: "avatarEditModal"), remote: true %></p>
+
+<%= form_with model: @user, url: user_update_path(
+                                  @user, 
+                                  modal_name: "avatarEditModal",
+                                  area_name: "avatar_area") do |f| %>
+  <div class="modal fade" id="avatarEditModal" tabindex="-1" role="dialog" aria-labelledby="avatarEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">プロフィール画像設定</h5>
+        </div>
+        <div class="modal-body">
+          <%= f.file_field :avatar, class: "form-control-file" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <div id="avatarUpdateBtn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

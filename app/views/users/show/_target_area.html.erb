@@ -1,5 +1,13 @@
-<%= form_with model: @user do |f| %>
-  <div class="modal" id="targetEditModal" tabindex="-1" role="dialog" aria-labelledby="targetEditModalLabel" aria-hidden="true">
+<p>達成目標 
+  <%= link_to "編集", user_path(@user, modal_name: "targetEditModal"), remote: true %></p>
+    
+<p><%= @user.target %></p>
+
+<%= form_with model: @user, url: user_update_path(
+                                  @user, 
+                                  modal_name: "targetEditModal",
+                                  area_name: "target_area") do |f| %>
+  <div class="modal fade" id="targetEditModal" tabindex="-1" role="dialog" aria-labelledby="targetEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +20,7 @@
           <% end %>
           <% for pointer,nav_name in navbars do %>
           <nav class="navbar navbar-light">
-            <a class="navbar-brand" href="#"><%= nav_name %></a>
+            <a class="navbar-brand"><%= nav_name %></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -85,8 +93,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= hidden_field_tag "modal[name]", "targetEditModal" %>
-          <%= f.submit :保存, class: "btn btn-primary" %>
+          <%= hidden_field_tag "target[content]", "" %>
+          <%= f.submit :保存, class: "btn btn-primary", id: "targetUpdateBtn" %>
         </div>
       </div>
     </div>
