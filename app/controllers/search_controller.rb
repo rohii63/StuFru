@@ -8,6 +8,15 @@ class SearchController < ApplicationController
   end
 
   def universities
-    
+    @user = current_user
+    if params[:university_name]
+      @user.my_choice_university = params[:university_name]
+      render 'open_modal'
+    elsif params[:keyword]
+      @universities = University.name_search(params[:keyword])
+      render 'university_search'
+    else
+      @universities = University.all
+    end
   end
 end

@@ -61,24 +61,20 @@ class UsersController < ApplicationController
       @targetContent6 = Target.where(target_category_id:6)
       @targetContent7 = Target.where(target_category_id:7)
       @targetContent8 = Target.where(target_category_id:8)
+      
     end
   end
 
   def update
-    if params[:target]
-      if params[:target][:content].present?
-        redirect_to university_search_path()
-      end
-    end
     @user = current_user
     @user.update(user_params)
     @modal_name = params[:modal_name]
     @area_name = params[:area_name]
     @tmpTargets = []
-      8.times do |n|
-        n += 1
-        @tmpTargets.push(Target.new(target_category_id: "#{n}"))
-      end
+    8.times do |n|
+      n += 1
+      @tmpTargets.push(Target.new(target_category_id: "#{n}"))
+    end
     @targetContent1 = Target.where(target_category_id:1)
     @targetContent2 = Target.where(target_category_id:2)
     @targetContent3 = Target.where(target_category_id:3)
@@ -87,6 +83,15 @@ class UsersController < ApplicationController
     @targetContent6 = Target.where(target_category_id:6)
     @targetContent7 = Target.where(target_category_id:7)
     @targetContent8 = Target.where(target_category_id:8)
+    if params[:target]
+      if params[:target][:content].present?
+        redirect_to university_search_path()
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to user_update_path(@user) }
+      format.js
+    end
   end
 
   def follow

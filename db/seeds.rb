@@ -125,29 +125,29 @@ target_category8_contents = [
     "大学受験合格"
   ]
 
-for @content in target_category1_contents do
-  Target.create(target_category_id: 1, content: "#{@content}")
+for content in target_category1_contents do
+  Target.create(target_category_id: 1, content: content)
 end
-for @content in target_category2_contents do
-  Target.create(target_category_id: 2, content: "#{@content}")
+for content in target_category2_contents do
+  Target.create(target_category_id: 2, content: content)
 end
-for @content in target_category3_contents do
-  Target.create(target_category_id: 3, content: "#{@content}")
+for content in target_category3_contents do
+  Target.create(target_category_id: 3, content: content)
 end
-for @content in target_category4_contents do
-  Target.create(target_category_id: 4, content: "#{@content}")
+for content in target_category4_contents do
+  Target.create(target_category_id: 4, content: content)
 end
-for @content in target_category5_contents do
-  Target.create(target_category_id: 5, content: "#{@content}")
+for content in target_category5_contents do
+  Target.create(target_category_id: 5, content: content)
 end
-for @content in target_category6_contents do
-  Target.create(target_category_id: 6, content: "#{@content}")
+for content in target_category6_contents do
+  Target.create(target_category_id: 6, content: content)
 end
-for @content in target_category7_contents do
-  Target.create(target_category_id: 7, content: "#{@content}")
+for content in target_category7_contents do
+  Target.create(target_category_id: 7, content: content)
 end
-for @content in target_category8_contents do
-  Target.create(target_category_id: 8, content: "#{@content}")
+for content in target_category8_contents do
+  Target.create(target_category_id: 8, content: content)
 end
 
 
@@ -167,16 +167,23 @@ require 'faker'
   user.active_relationships.create(followed_id: 1)
 end
 
-@fakers = User.where(target: "yeild")
-@targets2 = Target.where(target_category_id: 2)
-target = []
+fakers = User.where(target: "yeild")
+targets2 = Target.where(target_category_id: 2)
+targets = []
 
-@targets2.each do |t2|
+targets2.each do |t2|
   10.times do |n|
-    target.push(t2.content)
+    targets.push(t2.content)
   end
 end
 
-@fakers.zip(target) do |f, t|
-  f.update(target: "#{t}")
+fakers.zip(targets) do |f, t|
+  f.update(target: t)
+end
+
+
+universities = File.open("app/javascript/csv/university_list.csv", mode = "r").readlines
+
+for university in universities do
+  University.create(name: university)
 end

@@ -2,6 +2,9 @@
   <%= link_to "編集", user_path(@user, modal_name: "targetEditModal"), remote: true %></p>
     
 <p><%= @user.target %></p>
+<p><% if @user.my_choice_university %>
+  <strong>志望校：<%= @user.my_choice_university %></strong><%= link_to "編集", university_search_path() %>
+<% end %></p>
 
 <%= form_with model: @user, url: user_update_path(
                                   @user, 
