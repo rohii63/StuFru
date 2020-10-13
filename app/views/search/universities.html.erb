@@ -1,0 +1,14 @@
+<% if @from_top %>
+  <div id="my_choice_university_create_confirm_modal"></div>
+<% else %>
+  <div id="my_choice_university_update_confirm_modal"></div>
+<% end %>
+
+<p><%= text_field_tag :university_search, nil, placeholder: "大学名", autocomplete: false %></p>
+
+<div id="universityIndex">
+  <p><strong>大学一覧</strong></p>
+  <%= render 'search/university_index' %>
+</div>
+
+<%= javascript_pack_tag "search/universities" %>

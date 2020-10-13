@@ -1,0 +1,3 @@
+  <% @universities.each do |university| %>
+    <div><%= link_to university.name, university_search_path(university_name: university.name), remote: true %></div>
+  <% end %>

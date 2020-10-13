@@ -1,5 +1,17 @@
-<%= form_with model: @user do |f| %>
-  <div class="modal" id="basicInformationEditModal" tabindex="-1" role="dialog" aria-labelledby="basicInformationEditModalLabel" aria-hidden="true">
+<p>基本情報 
+  <%= link_to "編集", user_path(@user, modal_name: "basicInformationEditModal"), remote: true %></p>
+
+<p>ユーザ名 <%= @user.name %></p>
+<p>性別 <%= @user.sex %></p>
+<p>年齢 <%= @user.age %></p>
+<p>住まい <%= @user.live %></p>
+<p>職業 <%= @user.job %></p>
+
+<%= form_with model: @user, url: user_update_path(
+                                  @user, 
+                                  modal_name: "basicInformationEditModal", 
+                                  area_name: "basic_information_area") do |f| %>
+  <div class="modal fade" id="basicInformationEditModal" tabindex="-1" role="dialog" aria-labelledby="basicInformationEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,14 +20,13 @@
         <div class="modal-body">
           <%= f.label :name, "ユーザー名" %>
           <%= f.text_field :name %>
-          <%= f.select :gender, ['男', '女', 'その他'], include_blank: '性別' %>
+          <%= f.select :sex, ['男', '女', 'その他'], include_blank: '性別' %>
           <%= f.select :age, (1..100).to_a, include_blank: '年齢' %>
           <%= f.select :live, ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'], include_blank: '住まい' %>
           <%= f.select :job, ['中学１年生', '中学２年生', '中学３年生', '高校１年生', '高校２年生', '高校３年生', '浪人生', '大学１年生', '大学２年生', '大学３年生', '大学４年生', '大学院生', '専門学校生', '社会人'], include_blank: '職業' %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= hidden_field_tag "modal[name]", "basicInformationEditModal" %>
           <%= f.submit :保存, class: "btn btn-primary" %>
         </div>
       </div>

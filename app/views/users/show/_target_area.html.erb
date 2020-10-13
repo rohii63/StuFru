@@ -1,0 +1,49 @@
+<p>達成目標 
+  <%= link_to "編集", user_path(@user, modal_name: "targetEditModal"), remote: true %></p>
+    
+<p><%= @user.target %></p>
+<p><% if @user.target == "大学受験合格" %>
+  <strong>志望校：<%= @user.my_choice_university %></strong><%= link_to "編集", university_search_path() %>
+<% end %></p>
+
+<%= form_with model: @user, url: user_update_path(
+                                  @user, 
+                                  modal_name: "targetEditModal",
+                                  area_name: "target_area") do |f| %>
+  <div class="modal fade" id="targetEditModal" tabindex="-1" role="dialog" aria-labelledby="targetEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">目標ジャンル設定</h5>
+        </div>
+        <div class="modal-body">
+
+          <% for pointer,nav_name in @navbars do %>
+          <nav class="navbar navbar-light">
+            <a class="navbar-brand"><%= nav_name %></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent<%= pointer %>">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <% Target.where(target_category_id: pointer).each do |target| %>
+                    <div class="form-check">
+                      <%= f.radio_button :target, :"#{target.content}", class: "form-check-input" %>
+                      <%= f.label :target, "#{target.content}", class: "form-check-label" %>
+                    </div>
+                  <% end %>
+                </li>                
+              </ul>
+            </div>
+          </nav>
+          <% end %>          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.submit :保存, class: "btn btn-primary", id: "targetUpdateBtn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

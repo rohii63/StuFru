@@ -1,0 +1,23 @@
+<%= form_with model: @user, url: user_update_path(@user, top_page: ""), local: true do |f| %>
+  <% for pointer, nav_name in @navbars do %>
+    <div class="pos-f-t">
+      <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar<%= pointer %>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span><%= nav_name %></span>
+        </button>
+      </nav>
+      <div class="collapse" id="navbar<%= pointer %>">
+        <div class="bg-dark p-4">
+          <% Target.where(target_category_id: pointer).each do |target| %>
+            <div class="form-check">
+              <%= f.radio_button :target, :"#{target.content}", class: "form-check-input" %>
+              <%= f.label :target, "#{target.content}", class: "form-check-label" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= f.submit "登録", id: "targetCreateBtn", class: "btn btn-primary", disabled: "true" %>
+<% end %>
+

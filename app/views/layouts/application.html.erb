@@ -18,7 +18,7 @@
               <strong><%= link_to "TOP", root_url %></strong>
               <%= link_to 'index', users_path %>
               <p>
-                <%= link_to 'ユーザ検索', search_path(current_user) %>
+                <%= link_to 'ユーザ検索', user_search_path(current_user) %>
                 <%= unchecked_notifications.any? ? link_to('*通知*', notifications_path) : link_to('通知', notifications_path) %>
                 <%= link_to '教材全般', books_path %>
                 <%= link_to 'プロフィール', user_path(current_user) %>
@@ -28,7 +28,7 @@
             <% else %>
               <%= link_to 'サインアップ', new_user_registration_path %>
               <%= link_to 'ログイン', new_user_session_path %>
-            <% end %>
+            <% end %> 
         </nav>
     </header>
     <div id="notifications">

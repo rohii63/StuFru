@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_235708) do
+ActiveRecord::Schema.define(version: 2020_10_03_075816) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -132,6 +132,12 @@ ActiveRecord::Schema.define(version: 2020_09_09_235708) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "universities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -146,8 +152,8 @@ ActiveRecord::Schema.define(version: 2020_09_09_235708) do
     t.string "avatar"
     t.text "target_comment"
     t.text "introduction"
-    t.string "target", default: "", null: false
-    t.string "gender"
+    t.string "target"
+    t.string "sex"
     t.integer "age"
     t.string "live"
     t.string "job"

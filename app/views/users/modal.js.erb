@@ -1,0 +1,24 @@
+$(function() {
+  $("#<%= @modal_name %>").modal('show');
+
+  var target = $('input:radio[name="user[target]"]:checked').val();
+
+  $("#targetEditModal").on(
+    "change",
+    'input:radio[name="user[target]"]',
+    function() {
+      target = $('input:radio[name="user[target]"]:checked').val();
+  });
+
+  $("#targetEditModal").on(
+    "click",
+    '#targetUpdateBtn',
+    function() {
+      if (target == "大学受験合格") {
+        var hiddenObj = $("<input type='hidden' name='target[university]' id='target_university' value=''>");
+        
+        $(this).before(hiddenObj);
+        $("#targetEditModal").modal('hide');
+      };
+  });
+});
