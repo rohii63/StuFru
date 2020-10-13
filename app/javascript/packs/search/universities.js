@@ -1,4 +1,11 @@
 $(function() {
+  var elem =  $("#my_choice_university_create_confirm_modal");
+
+  if (elem[0]) {
+    $("header").html("");
+    $("#university_search").before("<p><h4>志望校を選択しよう！</h4></p>");
+  };
+
   $("#university_search").on("keyup", function() {
     var keyword = $(this).val()
     

@@ -33,7 +33,6 @@ class UsersController < ApplicationController
       @this_month_study_time = @microposts.this_month_study_time
       @from = 6
       @to = 0
-      
     end
   end
 
@@ -48,49 +47,35 @@ class UsersController < ApplicationController
     else
       @user = current_user
       @books = @user.books.all
-      @tmpTargets = []
-      8.times do |n|
-        n += 1
-        @tmpTargets.push(Target.new(target_category_id: "#{n}"))
-      end
-      @targetContent1 = Target.where(target_category_id:1)
-      @targetContent2 = Target.where(target_category_id:2)
-      @targetContent3 = Target.where(target_category_id:3)
-      @targetContent4 = Target.where(target_category_id:4)
-      @targetContent5 = Target.where(target_category_id:5)
-      @targetContent6 = Target.where(target_category_id:6)
-      @targetContent7 = Target.where(target_category_id:7)
-      @targetContent8 = Target.where(target_category_id:8)
-      
+      create_target_list
     end
   end
 
   def update
     @user = current_user
     @user.update(user_params)
-    @modal_name = params[:modal_name]
-    @area_name = params[:area_name]
-    @tmpTargets = []
-    8.times do |n|
-      n += 1
-      @tmpTargets.push(Target.new(target_category_id: "#{n}"))
-    end
-    @targetContent1 = Target.where(target_category_id:1)
-    @targetContent2 = Target.where(target_category_id:2)
-    @targetContent3 = Target.where(target_category_id:3)
-    @targetContent4 = Target.where(target_category_id:4)
-    @targetContent5 = Target.where(target_category_id:5)
-    @targetContent6 = Target.where(target_category_id:6)
-    @targetContent7 = Target.where(target_category_id:7)
-    @targetContent8 = Target.where(target_category_id:8)
-    if params[:target]
-      if params[:target][:content].present?
-        redirect_to university_search_path()
+    if params[:top_page]
+      if @user.target == "大学受験合格"
+        redirect_to university_search_path(from_top: "")
+      else
+        redirect_to root_path()
       end
-    end
-    respond_to do |format|
-      format.html { redirect_to user_update_path(@user) }
-      format.js
+    elsif params[:target] && @user.my_choice_university.nil?
+      redirect_to university_search_path()
+    else
+      @modal_name = params[:modal_name]
+      @area_name = params[:area_name]
+      create_target_list
+
+      respond_to do |format|
+        if params[:from_top]
+          format.html { redirect_to root_path() }
+        else
+          format.html { redirect_to user_path(@user) }
+          format.js
+        end
+      end
+      
     end
   end
 
@@ -110,11 +95,27 @@ class UsersController < ApplicationController
         :target_comment,
         :introduction,
         :target,
-        :gender,
+        :sex,
         :age,
         :live,
         :job,
         :my_choice_university
         )
+    end
+
+    def create_target_list
+      tmpTargets = []
+
+      8.times do |n|
+        n += 1
+        tmpTargets.push(Target.new(target_category_id: "#{n}"))
+      end
+
+      @navbars = {}
+
+      tmpTargets.each do |t| 
+        @navbars.store(t.target_category_id, t.targetCategory.name) 
+      end 
+
     end
   end

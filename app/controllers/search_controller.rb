@@ -15,6 +15,9 @@ class SearchController < ApplicationController
     elsif params[:keyword]
       @universities = University.name_search(params[:keyword])
       render 'university_search'
+    elsif params[:from_top]
+      @from_top = ""
+      @universities = University.all
     else
       @universities = University.all
     end

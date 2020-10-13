@@ -1,4 +1,17 @@
 $(function() {
-  $("#my_choice_university_update_confirm_modal").html("<%= escape_javascript(render "search/my_choice_university_update_confirm_modal") %>");
+  var elem =  $("#my_choice_university_create_confirm_modal");
+
+  if (elem[0]) { 
+    elem.html("<%= escape_javascript(render "search/my_choice_university_create_confirm_modal") %>");
+
+    var hiddenObj = $("<input type='hidden' name='from_top' id='from_top'>");
+
+    $("#user_my_choice_university").before(hiddenObj);
+
+  } else { 
+    $("#my_choice_university_update_confirm_modal").html("<%= escape_javascript(render "search/my_choice_university_update_confirm_modal") %>");
+
+  };
+  
   $("#confirmModal").modal("show");
 })

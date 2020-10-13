@@ -36,8 +36,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string  :avatar
       t.text    :target_comment
       t.text    :introduction
-      t.string  :target,         null: false, default: ""
-      t.string  :gender
+      t.string  :target
+      t.string  :sex
       t.integer :age
       t.string  :live
       t.string  :job

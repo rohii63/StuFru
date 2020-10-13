@@ -29,9 +29,7 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable,
           :confirmable
   validate :avatar_presence
-  # validate :avatar_content_type
   validates :name, presence: true, length: {maximum: 32}
-  # validates :target, presence: true
   validates :target_comment, length: {maximum: 400}
   validates :introduction, length: {maximum: 1000}
 
@@ -109,6 +107,22 @@ class User < ApplicationRecord
                       WHERE follower_id = :user_id"
       Micropost.where("user_id IN (#{following_ids})
                       OR user_id = :user_id", user_id: id)
+    end
+
+    def self.feeds_of_users_with_same_target(id, target, my_choice_university)
+      if target == "大学受験合格" && my_choice_university.present?
+        microposts = self.joins(:microposts).select("microposts.id").where.not(id: id).where(my_choice_university: my_choice_university)
+      else
+        microposts = self.joins(:microposts).select("microposts.id").where.not(id: id).where(target: target)
+      end
+
+      micropost_ids = []
+
+      microposts.each do |micropost|
+        micropost_ids << micropost.id
+      end
+
+      Micropost.where(id: micropost_ids)
     end
 
     def like?(micropost)

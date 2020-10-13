@@ -1,4 +1,8 @@
-<div id="my_choice_university_update_confirm_modal"></div>
+<% if @from_top %>
+  <div id="my_choice_university_create_confirm_modal"></div>
+<% else %>
+  <div id="my_choice_university_update_confirm_modal"></div>
+<% end %>
 
 <p><%= text_field_tag :university_search, nil, placeholder: "大学名", autocomplete: false %></p>
 

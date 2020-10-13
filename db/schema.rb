@@ -152,8 +152,8 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
     t.string "avatar"
     t.text "target_comment"
     t.text "introduction"
-    t.string "target", default: "", null: false
-    t.string "gender"
+    t.string "target"
+    t.string "sex"
     t.integer "age"
     t.string "live"
     t.string "job"

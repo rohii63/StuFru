@@ -15,7 +15,10 @@ $(function() {
     '#targetUpdateBtn',
     function() {
       if (target == "大学受験合格") {
-        $("#target_content").prop("value","university");
+        var hiddenObj = $("<input type='hidden' name='target[university]' id='target_university' value=''>");
+        
+        $(this).before(hiddenObj);
+        $("#targetEditModal").modal('hide');
       };
   });
 });

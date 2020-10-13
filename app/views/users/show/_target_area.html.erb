@@ -2,7 +2,7 @@
   <%= link_to "編集", user_path(@user, modal_name: "targetEditModal"), remote: true %></p>
     
 <p><%= @user.target %></p>
-<p><% if @user.my_choice_university %>
+<p><% if @user.target == "大学受験合格" %>
   <strong>志望校：<%= @user.my_choice_university %></strong><%= link_to "編集", university_search_path() %>
 <% end %></p>
 
@@ -17,11 +17,8 @@
           <h5 class="modal-title">目標ジャンル設定</h5>
         </div>
         <div class="modal-body">
-          <% navbars = {} %>
-          <% @tmpTargets.each do |t| %>
-          <% navbars.store(t.target_category_id, t.targetCategory.name) %>
-          <% end %>
-          <% for pointer,nav_name in navbars do %>
+
+          <% for pointer,nav_name in @navbars do %>
           <nav class="navbar navbar-light">
             <a class="navbar-brand"><%= nav_name %></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,63 +27,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent<%= pointer %>">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <% case nav_name %>
-                  <% when "資格取得" then %>
-                    <% @targetContent1.each do |t1| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t1.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t1.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "スキルアップ" then %>
-                    <% @targetContent2.each do |t2| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t2.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t2.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "TOEIC・TOEFL・英検・英会話" then %>
-                    <% @targetContent3.each do |t3| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t3.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t3.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "外国語習得" then %>
-                    <% @targetContent4.each do |t4| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t4.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t4.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "読書・趣味・教養" then %>
-                    <% @targetContent5.each do |t5| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t5.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t5.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "学問" then %>
-                    <% @targetContent6.each do |t6| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t6.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t6.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "専門学校進学" then %>
-                    <% @targetContent7.each do |t7| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t7.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t7.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
-                  <% when "大学受験合格" then %>
-                    <% @targetContent8.each do |t8| %> 
-                      <div class="form-check">
-                        <%= f.radio_button :target, :"#{t8.content}", class: "form-check-input" %>
-                        <%= f.label :target, "#{t8.content}", class: "form-check-label" %>
-                      </div>
-                    <% end %>
+                  <% Target.where(target_category_id: pointer).each do |target| %>
+                    <div class="form-check">
+                      <%= f.radio_button :target, :"#{target.content}", class: "form-check-input" %>
+                      <%= f.label :target, "#{target.content}", class: "form-check-label" %>
+                    </div>
                   <% end %>
                 </li>                
               </ul>
@@ -96,7 +41,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= hidden_field_tag "target[content]", "" %>
           <%= f.submit :保存, class: "btn btn-primary", id: "targetUpdateBtn" %>
         </div>
       </div>
