@@ -29,6 +29,13 @@ $(function() {
 });
 
 function displayBarGraph(canvasId, labels, data) {
+  var canvasElem = new Object();
+  canvasElem.id = canvasId;
+  canvasElem.width = 900;
+  canvasElem.height = 400;
+
+  $(canvasElem).replaceAll("#canvasId");
+  
   var aryMax = function (a, b) {return Math.max(a, b);}
   var ctx = $(`#${canvasId}`);
 
