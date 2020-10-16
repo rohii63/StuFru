@@ -51,14 +51,21 @@
 </div>
 
 <span id="weekTargetLabel"><strong>今週の目標</strong></span>
-<button id="weekTargetNewBtn" class="btn btn-primary">作成</button>
+
+<% if @user == current_user %>
+  <button id="weekTargetNewBtn" class="btn btn-primary">作成</button>
+<% end %>
+
 <%= link_to "履歴", user_week_targets_path(@user) %>
 
-<div id="selectBook"></div>
-<div id="book_select_modal">
-  <%= render 'users/my_page/book_select_modal' %>
-</div>
-<div id="weekTargetForm"></div>
+<% if @user == current_user %>
+  <div id="selectBook"></div>
+  <div id="book_select_modal">
+    <%= render 'users/my_page/book_select_modal' %>
+  </div>
+  <div id="weekTargetForm"></div>
+<% end %>
+
 <div id="weekTargetArea">
   <% if @week_targets.empty? %>
     <div id="whenWeekTargetAreaBlank">今週の目標を設定しよう！</div>

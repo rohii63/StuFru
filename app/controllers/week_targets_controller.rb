@@ -4,7 +4,7 @@ class WeekTargetsController < ApplicationController
     @user = User.find(params[:user_id])
     @week_targets = @user.week_targets.all
     @microposts = @user.microposts.all
-    @number_of_weeks_passed = (Time.current.at_beginning_of_week - @week_targets.last.created_at.at_beginning_of_week).to_i / 604800
+    @number_of_weeks_passed = (Time.current.at_beginning_of_week - @week_targets.last.created_at.at_beginning_of_week).to_i / 604800 if @week_targets.present?
     respond_to do |format|
       format.html
       format.js
