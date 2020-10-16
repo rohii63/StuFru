@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_075816) do
+ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -125,6 +125,19 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "status_with_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "status"
+    t.string "study_unit"
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.bigint "book_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_category_id"], name: "index_status_with_books_on_book_category_id"
+    t.index ["book_id"], name: "index_status_with_books_on_book_id"
+    t.index ["user_id"], name: "index_status_with_books_on_user_id"
+  end
+
   create_table "targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "target_category_id"
     t.string "content"
@@ -184,6 +197,9 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "books"
   add_foreign_key "microposts", "users"
+  add_foreign_key "status_with_books", "book_categories"
+  add_foreign_key "status_with_books", "books"
+  add_foreign_key "status_with_books", "users"
   add_foreign_key "week_targets", "books"
   add_foreign_key "week_targets", "users"
 end
