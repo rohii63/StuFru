@@ -3,6 +3,6 @@ class StatusWithBook < ApplicationRecord
   belongs_to :book
   belongs_to :book_category
 
-  enum status: { "勉強中": 0, "勉強予定": 1, "勉強済み": 2 }
-  enum study_unit: { "時間": 0, "ページ": 1, "単語": 2, "問": 3 }
+  enum status: { "勉強中": "in_progress", "勉強予定": "standby", "勉強済み": "finished" }
+  enum study_unit: { "時間": "hour", "ページ": "page", "単語": "word", "問": "question" }
 end

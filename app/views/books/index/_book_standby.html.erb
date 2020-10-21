@@ -1,6 +1,7 @@
 <% @book_categories.each do |category| %>
-  <p><%= category.name unless @books.where(book_category_id: category.id).where(status: "勉強予定").empty? %></p>
-  <% @books.where(book_category_id: category.id).where(status: "勉強予定").each do |book| %>
-    <%= render 'books/index/book_card', book: book %>
+  <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "standby") %>
+  <p><%= category.name unless tmp_status_with_books.empty? %></p>
+  <% tmp_status_with_books.each do |status_with_book| %>
+    <%= render 'books/index/book_card', status_with_book: status_with_book %>
   <% end %>
 <% end %>

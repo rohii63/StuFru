@@ -1,21 +1,24 @@
-$('#newBookModal').modal('hide');
-$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
-$("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
-$("#search").val("");
+$(function(){
+  $('#newBookModal').modal('hide');
+  $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
+  $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
+  $("#search").val("");
 
-$('#newBookModal').on('hidden.bs.modal', function () {
   <% unless @book.errors.any? %>
-    <% case @book.status %>
-      <% when "勉強中" %>
-        $("#pills-in-progress-tab").tab('show')
-        $("#pills-in-progress").html("<%= escape_javascript(render 'books/index/book_in_progress') %>");
-      <% when "勉強予定" %>
-        $("#pills-standby-tab").tab('show')
-        $("#pills-standby").html("<%= escape_javascript(render 'books/index/book_standby') %>");
-      <% when "勉強済み" %>
-        $("#pills-finished-tab").tab('show')
-        $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
-    <% end %>
-    $("#new_book_modal").html("<%= escape_javascript(render 'books/modal/new_book') %>");
+    $('#newBookModal').on('hidden.bs.modal', function () {
+      <% case @status_with_book.status %>
+        <% when "勉強中" %>
+          $("#pills-in-progress-tab").tab('show');
+          $("#pills-in-progress").html("<%= escape_javascript(render 'books/index/book_in_progress') %>");
+        <% when "勉強予定" %>
+          $("#pills-standby-tab").tab('show');
+          $("#pills-standby").html("<%= escape_javascript(render 'books/index/book_standby') %>");
+        <% when "勉強済み" %>
+          $("#pills-finished-tab").tab('show');
+          $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
+      <% end %>
+
+      $("#new_book_modal").html("<%= escape_javascript(render 'books/modal/new_book') %>");
+    });
   <% end %>
 })

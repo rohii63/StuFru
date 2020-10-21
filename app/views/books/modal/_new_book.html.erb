@@ -1,4 +1,4 @@
-<%= form_with model: @book = @user.books.build do |f| %>
+<%= form_with model: @book = @user.books.build do |book| %>
   <div class="modal fade" id="newBookModal" tabindex="-1" role="dialog" aria-labelledby="newBookModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -7,30 +7,32 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <%= f.label :icon %>
-            <%= f.file_field :icon, class: "form-control-file" %>
+            <%= book.label :icon %>
+            <%= book.file_field :icon, class: "form-control-file" %>
           </div>
           <div class="form-group">
-            <%= f.label :name %>
-            <%= f.text_field :name, placeholder: "教材名を入力" %>
+            <%= book.label :name %>
+            <%= book.text_field :name, placeholder: "教材名を入力" %>
           </div>
-          <div class="form-group">
-            <%= f.label :status %>
-            <%= f.select :status, ['勉強中', '勉強予定', '勉強済み'], include_blank: false %>
-          </div>
-          <div class="form-group">
-            <%= f.label :study_unit %>
-            <%= f.select :study_unit, ['時間', 'ページ', '単語', '問'], include_blank: false %>
-          </div>
-          <div class="form-group">
-            <%= label_tag "book[book_category_id]" ,"カテゴリー" %>
-            <%= link_to "新規作成", new_user_book_category_path(@user), remote: true %>
-            <%= f.collection_select :book_category_id, @book_categories, :id, :name, selected: 1 %>
-          </div>
+          <%= fields_for @status_with_book = @user.status_with_books.build() do |status| %>
+            <div class="form-group">
+              <%= status.label :status, "ステータス" %>
+              <%= status.select :status, StatusWithBook.statuses, include_blank: false %>
+            </div>
+            <div class="form-group">
+              <%= status.label :study_unit, "学習単位" %>
+              <%= status.select :study_unit, StatusWithBook.study_units, include_blank: false %>
+            </div>
+            <div class="form-group">
+              <%= label_tag "book[book_category_id]" ,"カテゴリー" %>
+              <%= link_to "新規作成", new_user_book_category_path(@user), remote: true %>
+              <%= status.collection_select :book_category_id, @book_categories, :id, :name, selected: 1 %>
+            </div>
+          <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :登録, class: "btn btn-primary", id: "book_register_btn" %>
+          <%= book.submit :登録, class: "btn btn-primary", id: "book_register_btn" %>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
   <% end %>
 <% else %>
   $("#bookCategoryModal").modal('hide')
-  $("#book_book_category_id").html("<%= escape_javascript(collection_select(:@book, :book_category_id, @book_categories, :id, :name)) %>")
+  $("#status_with_book_book_category_id").html("<%= escape_javascript(collection_select(:@status_with_book, :book_category_id, @book_categories, :id, :name)) %>")
 
   <%# when comming from a book index page %>
   $("#newBookModal").modal('show')

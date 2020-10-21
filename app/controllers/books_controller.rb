@@ -2,9 +2,11 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @books = @user.books.all
+    @book = @user.books.build()
+    @status_with_books = @user.status_with_books.all
+    @status_with_book = @user.status_with_books.build()
     @book_categories = @user.book_categories.all
     @book_category = @user.book_categories.build()
-    @book = @user.books.build()
     if params[:search] || params[:search] == ""
       @books = Book.name_search(params[:search])
       @keyword = params[:search]
@@ -14,11 +16,16 @@ class BooksController < ApplicationController
   def create
     @user = current_user
     @book = @user.books.build(book_params)
+    @status_with_book = @user.status_with_books.build(status_with_book_params)
     attach_default_image unless params[:book][:icon]
     if @book.save
-      @user.study_books.create(book_id: @book.id)
-      @books = @user.books.all
-      @book_categories = @user.book_categories.all
+      @status_with_book.book_id = @book.id
+      if @status_with_book.save
+        @user.study_books.create(book_id: @book.id)
+        @books = @user.books.all
+        @book_categories = @user.book_categories.all
+        @status_with_books = @user.status_with_books.all
+      end
     end
   end
 
@@ -52,7 +59,11 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:book).permit(:name, :icon, :status, :study_unit, :book_category_id)
+      params.require(:book).permit(:name, :icon, :status, :study_unit)
+    end
+
+    def status_with_book_params
+      params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
     end
 
     def attach_default_image

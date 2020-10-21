@@ -53,13 +53,11 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
-    t.string "status", null: false
-    t.string "study_unit", null: false
+    t.string "status"
+    t.string "study_unit"
     t.string "icon"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "book_category_id"
-    t.index ["book_category_id"], name: "index_books_on_book_category_id"
     t.index ["name"], name: "index_books_on_name", unique: true, length: 100
   end
 
@@ -190,7 +188,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "book_categories", "users"
-  add_foreign_key "books", "book_categories"
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "microposts"
