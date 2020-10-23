@@ -3,22 +3,22 @@
 <h1>Books#show</h1>
 <p>Find me in app/views/books/show.html.erb</p>
 
+<p id="registered_user_count">勉強中：<%= @book.users.count %></p>
 
 <div id="book_info">
   <%= render 'books/show/book_info' %>
 </div>
 
-<div id="edit_book_link">
-  <%= render 'books/show/edit_link' %>
-</div>
-<%= render 'books/modal/edit_book' %>
+<%= link_to "編集", "#", data: { toggle: "modal", target: "#bookEditModal" } %>
+<%= render 'books/show/book_edit_modal' %>
 
 <div id="book_category_modal">
-  <%= render 'books/modal/book_category' %>
+  <%= render 'books/book_category_modal' %>
 </div>
 
-
-<li id="register_btn"><%= render 'books/show/register_btn' %></li>
+<span id="register_btn">
+  <%= render 'books/show/register_btn' %>
+</span>
 
 <strong><p>タイムライン</p></strong>
 <p><%= render 'shared/timeline' %></p>

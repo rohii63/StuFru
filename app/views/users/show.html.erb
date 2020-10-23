@@ -17,7 +17,7 @@
 
 <p><%= link_to "フォロワー（#{@user.followers.count}）フォロー（#{@user.following.count}）", follow_user_path(@user) %></p>
 
-<p><%= link_to "本棚（#{@user.books.count}）", books_path %></p>
+<p><%= link_to "本棚（#{@user.books.count}）", user_books_path(@user) %></p>
 
 <div id="introduction_area">
   <%= render 'users/show/introduction_area' %>

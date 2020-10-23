@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
   def index
     @user = current_user
-    @books = @user.books.all
     @book = @user.books.build()
     @status_with_books = @user.status_with_books.all
     @status_with_book = @user.status_with_books.build()
@@ -33,27 +32,27 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @microposts = @book.microposts.all
     @user = current_user
+    @study_book = @user.study_books.build(book_id: @book.id)
+    @status_with_book = @user.status_with_books.build()
     @book_categories = @user.book_categories.all
+
     respond_to do |format|
       format.html
       format.js { render 'edit' }
     end
+
   end
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(book_params)
-      flash[:success] = "編集完了"
-      redirect_to books_path()
-    end
-    @user = current_user
-    @book_categories = @user.book_categories.all
+    @book.update(book_params)
   end
 
   def destroy
+    @user = current_user
     Book.find(params[:id]).destroy
     flash[:success] = "削除完了"
-    redirect_to books_path
+    redirect_to user_books_path(@user)
   end
 
   private

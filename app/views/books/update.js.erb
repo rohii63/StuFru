@@ -1,2 +1,9 @@
-$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
-$("#book_info").html("<%= escape_javascript(render 'books/show/book_info') %>");
+$(function(){
+  $("#bookEditModal").modal('hide');
+  $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
+  
+  <% unless @book.errors.any? %>
+    $("#book_info").html("<%= escape_javascript(render 'books/show/book_info') %>");
+  <% end %>
+
+})
