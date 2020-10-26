@@ -1,11 +1,14 @@
 $(function() {
   $('#newMicropostModal').modal('hide');
+
   $('#newMicropostModal').on('hidden.bs.modal', function () {
     $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @micropost) %>");
-    <% if @micropost.id %>
+
+    <% unless @micropost.errors.any? %>
       $("<%= escape_javascript(render 'home/post_card', micropost: @micropost) %>").prependTo("#timeline");
       $("#new_micropost_modal").html("<%= escape_javascript(render 'home/new_micropost_modal') %>");
     <% end %>
+
   })
 })
 

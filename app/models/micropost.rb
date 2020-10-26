@@ -1,6 +1,7 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   belongs_to :book, optional: true
+  belongs_to :status_with_book, optional: true
   has_one_attached :picture
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -150,11 +151,12 @@ class Micropost < ApplicationRecord
     return hours, minutes, total
   end
 
-  def self.weekly_study_amount(book_id, week_target_created_at)
+  def self.weekly_study_amount(book_id, status_with_book_id, week_target_created_at)
     from = week_target_created_at.at_beginning_of_week
     to = week_target_created_at.at_end_of_week
     post = self.where(studied_at: from...to).where(book_id: book_id)
     
-    Book.find(book_id).study_unit == "時間" ? post.sum(:studied_time_in_minutes) : post.sum(:study_amount)
+    StatusWithBook.find(status_with_book_id).study_unit == "時間" ? post.sum(:studied_time_in_minutes) : post.sum(:study_amount)
   end
+
 end

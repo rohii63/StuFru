@@ -5,14 +5,15 @@ class HomeController < ApplicationController
         render 'modal_open'
 
       elsif params[:micropost]
+        @user = current_user
         book_id = params[:micropost][:book_id]
-        @selected_book = Book.find(book_id) if book_id.present?
+        @selected_book = @user.status_with_books.find_by(book_id: book_id) if book_id.present?
         render 'modal'
       
       else
         @user = current_user
         @micropost = @user.microposts.build()
-        @books_in_progress = @user.books.where(status: "勉強中")
+        @books_in_progress = @user.books_in_progress
         @follower_microposts = @user.feed
         @target_genre_microposts = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university)
 

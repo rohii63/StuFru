@@ -1,6 +1,7 @@
 class WeekTarget < ApplicationRecord
   belongs_to :user
   belongs_to :book
+  belongs_to :status_with_book
   default_scope -> { order(created_at: :desc) }
   validates :content, numericality: { greater_than_or_equal_to: 1, allow_nil: true }, presence: true
   validate :start_page_and_end_page_not_blank
@@ -37,4 +38,5 @@ class WeekTarget < ApplicationRecord
 
     self.where(created_at: from...to) if self.where(created_at: from...to).any?
   end
+
 end

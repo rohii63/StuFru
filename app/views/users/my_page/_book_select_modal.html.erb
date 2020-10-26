@@ -6,13 +6,12 @@
           <h5 class="modal-title">教材選択</h5>
         </div>
         <div class="modal-body">
-          <% books_in_progress = @books.where(status: "勉強中") %>
-          <% if @week_targets.where(book_id: books_in_progress.pluck(:id)).count == books_in_progress.count %>
+          <% if @week_targets.where(book_id: @books_in_progress.pluck(:id)).count == @books_in_progress.count %>
             目標を設定できる教材がありません。
           <% else %>
             <% @book_categories.each do |category| %>
-              <% tmp_books = books_in_progress.where(book_category_id: category.id) %>
-              <p><%= category.name if !tmp_books.empty? && !(@week_targets.where(book_id: tmp_books.pluck(:id)).count == tmp_books.count) %></p>
+              <% tmp_books = @books_in_progress.joins(:status_with_books).select("books.id, books.name, books.icon").where(status_with_books: {book_category_id: category.id}) %>
+              <p><%= category.name if !tmp_books.empty? && !(@week_targets.where(book_id: tmp_books.pluck(:id)).count == tmp_books.count(:id)) %></p>
               <% tmp_books.each do |book| %>
                 <% unless @week_targets.find_by(book_id: book.id) %>
                   <label>

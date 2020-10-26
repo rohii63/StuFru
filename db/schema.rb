@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_064608) do
+ActiveRecord::Schema.define(version: 2020_10_26_012907) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "studied_at", null: false
-    t.integer "how_many_studied_hours", null: false
-    t.integer "how_many_studied_minutes", null: false
+    t.integer "how_many_studied_hours"
+    t.integer "how_many_studied_minutes"
     t.integer "studied_time_in_minutes", null: false
     t.integer "study_amount"
     t.text "content"
@@ -93,7 +93,9 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
     t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "status_with_book_id"
     t.index ["book_id"], name: "index_microposts_on_book_id"
+    t.index ["status_with_book_id"], name: "index_microposts_on_status_with_book_id"
     t.index ["studied_at"], name: "index_microposts_on_studied_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
@@ -182,7 +184,9 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
     t.bigint "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "status_with_book_id", null: false
     t.index ["book_id"], name: "index_week_targets_on_book_id"
+    t.index ["status_with_book_id"], name: "index_week_targets_on_status_with_book_id"
     t.index ["user_id"], name: "index_week_targets_on_user_id"
   end
 
@@ -193,10 +197,12 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
   add_foreign_key "likes", "microposts"
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "books"
+  add_foreign_key "microposts", "status_with_books"
   add_foreign_key "microposts", "users"
   add_foreign_key "status_with_books", "book_categories"
   add_foreign_key "status_with_books", "books"
   add_foreign_key "status_with_books", "users"
   add_foreign_key "week_targets", "books"
+  add_foreign_key "week_targets", "status_with_books"
   add_foreign_key "week_targets", "users"
 end

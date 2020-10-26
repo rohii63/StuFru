@@ -8,7 +8,7 @@ $(function() {
 })
 
 var updateStudyAmountGraph = function(blue, gray, options) {
-  <% result = @microposts.weekly_study_amount(@week_target.book.id, @week_target.created_at) %>
+  <% result = @microposts.weekly_study_amount(@week_target.book.id, @week_target.status_with_book.id, @week_target.created_at) %>
   <% progress_rate = result * 100 / @week_target.content %>
 
   var ctx = $('#studyAmountGraph<%= @week_target.id %>');

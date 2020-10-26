@@ -5,7 +5,7 @@
 <p>Find me in app/views/microposts/show.html.erb</p>
 
 <% if @micropost.user == current_user %>
-  <p><%= link_to "編集", root_path(modal: "edit"), remote: true %></p>
+  <p><%= link_to "編集", root_path(modal: ""), remote: true %></p>
   <%= render 'microposts/edit_modal' %>
 
   <p><%= link_to "削除", "#", data: {toggle: "modal", target: "#deleteConfirmModal"} %></p>
@@ -31,7 +31,7 @@
     </li>
     <li>
       <% if @micropost.study_amount  %>
-        <%= @micropost.study_amount %><%= @micropost.book.study_unit %>
+        <%= @micropost.study_amount %><%= @micropost.status_with_book.study_unit %>
       <% end %>
     </li>
   </ul>
@@ -51,4 +51,4 @@
   <%= comment.submit "送信", class: "btn btn-primary" %>
 <% end %>
 
-<%= javascript_pack_tag 'microposts/study_time' %>
+<%= javascript_pack_tag 'microposts/show' %>

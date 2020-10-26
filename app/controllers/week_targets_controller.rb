@@ -14,20 +14,20 @@ class WeekTargetsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @selected_book = Book.find(params[:week_target][:book_id])
-    @week_target = @user.week_targets.build()
+    @status_with_book = @user.status_with_books.find_by(book_id: @selected_book.id)
+    @week_target = @user.week_targets.build(book_id: @selected_book.id, status_with_book_id: @status_with_book.id)
     @week_targets = @user.week_targets.all.at_this_week()
-    @week_target.book_id = @selected_book.id
   end
 
   def create
-    substitute_params_for_week_target_content
+    caliculate_week_target_content
     @user = User.find(params[:user_id])
     @week_target = @user.week_targets.build(week_target_params)
     if @week_target.save
       @week_targets = @user.week_targets.all.at_this_week()
       @microposts = @user.microposts.all
       @book_categories = @user.book_categories.all
-      @books = @user.books.all
+      @books_in_progress = @user.books_in_progress
     end
   end
 
@@ -37,7 +37,7 @@ class WeekTargetsController < ApplicationController
   end
 
   def update
-    substitute_params_for_week_target_content
+    caliculate_week_target_content
     @user = User.find(params[:user_id])
     @week_target = WeekTarget.find(params[:id])
     @week_target.update(week_target_params)
@@ -52,12 +52,13 @@ class WeekTargetsController < ApplicationController
     def week_target_params
       params.require(:week_target).permit(
         :content,
+        :user_id,
         :book_id,
-        :user_id
+        :status_with_book_id
       )
     end
 
-    def substitute_params_for_week_target_content
+    def caliculate_week_target_content
       if params[:time]
         hours = params[:time][:hours]
         minutes = params[:time][:minutes]

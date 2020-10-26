@@ -140,5 +140,10 @@ class User < ApplicationRecord
         notification.save if notification.valid?
       end
     end
+
+    def books_in_progress
+      book_ids = status_with_books.where(status: "in_progress").pluck(:book_id)
+      books.where(id: book_ids)
+    end
     
 end

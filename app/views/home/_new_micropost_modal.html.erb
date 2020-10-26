@@ -36,7 +36,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :記録する, id: "calculate_trigger", class: "btn btn-primary" %>
+          <%= f.hidden_field :status_with_book_id %>
+          <%= f.submit :記録する, id: "btnPrimary", class: "btn btn-primary" %>
         </div>
       </div>
     </div>

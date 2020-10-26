@@ -1,6 +1,6 @@
 <%= form_with model: @week_target, url: user_week_target_path(@user, @week_target) do |f| %>
   <span>目標: 
-    <% case @week_target.book.study_unit %>
+    <% case @week_target.status_with_book.study_unit %>
       <% when "時間" %>
         <% hours = @week_target.content / 60 %>
         <% minutes = @week_target.content % 60 %>
@@ -11,9 +11,9 @@
       <% when "ページ" %>
         <input id="totalBtn2" name="studyAmount" type="radio" checked="checked">合計</input>
         <input id="rangeBtn2" name="studyAmount" type="radio">範囲</input>
-        <%= f.number_field :content, in: 1...9999 %> <span id="studyUnit2"><%= @week_target.book.study_unit %></span>
+        <%= f.number_field :content, in: 1...9999 %> <span id="studyUnit2"><%= @week_target.status_with_book.study_unit %></span>
       <% else %>
-        <%= f.number_field :content, in: 1...9999 %> <%= @week_target.book.study_unit %>
+        <%= f.number_field :content, in: 1...9999 %> <%= @week_target.status_with_book.study_unit %>
     <% end %>
   </span>
   <%= f.hidden_field :book_id %>
