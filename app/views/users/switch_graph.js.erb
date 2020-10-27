@@ -40,7 +40,8 @@ $(function() {
       switchBarGraph("monthlyGraph", labels, <%= data %>)
 
   <% end %>
-});
+})
+
 
 function switchBarGraph(canvasId, labels, data) {
   var aryMax = function (a, b) {return Math.max(a, b);}
@@ -66,4 +67,4 @@ function switchBarGraph(canvasId, labels, data) {
     },
     plugins: [ChartDataLabels]
   });
-};
+}

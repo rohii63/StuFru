@@ -1,7 +1,7 @@
 $(function() {
   $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>");
   
-  <% if @week_target.id %>
+  <% unless @week_target.errors.any? %>
     $("#weekTargetArea").prepend("<%= escape_javascript(render 'users/my_page/week_target_card', week_target: @week_target) %>");
     configureDoughnutGraph(createStudyAmountGraph);
 
@@ -13,24 +13,29 @@ $(function() {
     atrWeekTargetNewBtn.id = "weekTargetNewBtn";
     atrWeekTargetNewBtn.class = "btn btn-primary";
     $("button:first").attr(atrWeekTargetNewBtn);
+    
   <% end %>
 })
 
-var createStudyAmountGraph = function(blue, gray, options) {
-  <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.status_with_book.id, @week_target.created_at) %>
-  <% progress_rate = result * 100 / @week_target.content %>
 
-  var ctx = $('#studyAmountGraph<%= @week_target.id %>');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: { 
-      datasets: [{
-        data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
-        backgroundColor: [blue, gray],
-        datalabels: { display: false }
-      }]
-    },
-    options: options,
-    plugins: [chartJsPluginCenterLabel]
-  });
-};
+<% unless @week_target.errors.any? %>
+  var createStudyAmountGraph = function(blue, gray, options) {
+    <% result = @microposts.weekly_study_amount(@week_target.book.id, @week_target.status_with_book.id, @week_target.created_at) %>
+    <% progress_rate = result * 100 / @week_target.content %>
+
+    var ctx = $('#studyAmountGraph<%= @week_target.id %>');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: { 
+        datasets: [{
+          data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
+          backgroundColor: [blue, gray],
+          datalabels: { display: false }
+        }]
+      },
+      options: options,
+      plugins: [chartJsPluginCenterLabel]
+    });
+  };
+
+<% end %>

@@ -7,21 +7,25 @@ $(function() {
   <% end %>
 })
 
-var updateStudyAmountGraph = function(blue, gray, options) {
-  <% result = @microposts.weekly_study_amount(@week_target.book.id, @week_target.status_with_book.id, @week_target.created_at) %>
-  <% progress_rate = result * 100 / @week_target.content %>
 
-  var ctx = $('#studyAmountGraph<%= @week_target.id %>');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: { 
-      datasets: [{
-        data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
-        backgroundColor: [blue, gray],
-        datalabels: { display: false }
-      }]
-    },
-    options: options,
-    plugins: [chartJsPluginCenterLabel]
-  });
-};
+<% unless @week_target.errors.any? %>
+  var updateStudyAmountGraph = function(blue, gray, options) {
+    <% result = @microposts.weekly_study_amount(@week_target.book.id, @week_target.status_with_book.id, @week_target.created_at) %>
+    <% progress_rate = result * 100 / @week_target.content %>
+
+    var ctx = $('#studyAmountGraph<%= @week_target.id %>');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: { 
+        datasets: [{
+          data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
+          backgroundColor: [blue, gray],
+          datalabels: { display: false }
+        }]
+      },
+      options: options,
+      plugins: [chartJsPluginCenterLabel]
+    });
+  };
+
+<% end %>
