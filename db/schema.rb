@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 2020_10_26_012907) do
   add_foreign_key "likes", "microposts"
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "books"
-  add_foreign_key "microposts", "status_with_books"
+  add_foreign_key "microposts", "status_with_books", on_delete: :nullify
   add_foreign_key "microposts", "users"
   add_foreign_key "status_with_books", "book_categories"
   add_foreign_key "status_with_books", "books"

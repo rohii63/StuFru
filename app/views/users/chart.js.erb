@@ -26,7 +26,8 @@ $(function() {
   displayBarGraph("monthlyGraph", monthly_labels, <%= monthly_data %>);
 
   configureDoughnutGraph(displayStudyAmountGraph);
-});
+})
+
 
 function displayBarGraph(canvasId, labels, data) {
   var canvasElem = new Object();
@@ -58,7 +59,8 @@ function displayBarGraph(canvasId, labels, data) {
     },
     plugins: [ChartDataLabels]
   });
-};
+}
+
 
 var displayStudyAmountGraph = function(blue, gray, options) {
   <% @week_targets.each do |week_target| %>
@@ -81,4 +83,4 @@ var displayStudyAmountGraph = function(blue, gray, options) {
       plugins: [chartJsPluginCenterLabel]
     });
   <% end %>
-};
+}
