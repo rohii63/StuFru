@@ -5,17 +5,19 @@ class WeekTargetsController < ApplicationController
     @week_targets = @user.week_targets.all
     @microposts = @user.microposts.all
     @number_of_weeks_passed = (Time.current.at_beginning_of_week - @week_targets.last.created_at.at_beginning_of_week).to_i / 604800 if @week_targets.present?
+
     respond_to do |format|
       format.html
       format.js
     end
+
   end
 
   def new
     @user = User.find(params[:user_id])
     @selected_book = Book.find(params[:week_target][:book_id])
     @status_with_book = @user.status_with_books.find_by(book_id: @selected_book.id)
-    @week_target = @user.week_targets.build(book_id: @selected_book.id, status_with_book_id: @status_with_book.id)
+    @week_target = @user.week_targets.build(book_id: @selected_book.id, study_unit: @status_with_book.study_unit)
     @week_targets = @user.week_targets.all.at_this_week()
   end
 
@@ -27,7 +29,7 @@ class WeekTargetsController < ApplicationController
       @week_targets = @user.week_targets.all.at_this_week()
       @microposts = @user.microposts.all
       @book_categories = @user.book_categories.all
-      @books_in_progress = @user.books_in_progress
+      @status_with_books = @user.status_with_books.all
     end
   end
 
@@ -54,7 +56,7 @@ class WeekTargetsController < ApplicationController
         :content,
         :user_id,
         :book_id,
-        :status_with_book_id
+        :study_unit
       )
     end
 

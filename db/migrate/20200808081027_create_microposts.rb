@@ -6,6 +6,7 @@ class CreateMicroposts < ActiveRecord::Migration[6.0]
       t.integer :how_many_studied_minutes
       t.integer :studied_time_in_minutes, null: false
       t.integer :study_amount
+      t.string :study_unit
       t.text :content
       t.string :picture
       t.references :user, foreign_key: true, null: false

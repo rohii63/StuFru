@@ -1,8 +1,8 @@
 <div id="weekTargetCard<%= week_target.id %>">
-  <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.status_with_book.id, week_target.created_at) %>
+  <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
   
   <div><strong><%= week_target.book.name %></strong></div>
-  <% if week_target.status_with_book.study_unit == "時間" %>
+  <% if week_target.study_unit == "時間" %>
     <span id="weekTarget<%= week_target.id %>">目標: 
       <%= sprintf("%02d", week_target.content / 60) %> 時間 
       <%= sprintf("%02d", week_target.content % 60) %> 分</span>
@@ -12,10 +12,10 @@
       <%= sprintf("%02d", result % 60) %> 分</div>
   <% else %>
     <span id="weekTarget<%= week_target.id %>">目標: 
-      <%= sprintf("%04d", week_target.content) %> <%= week_target.status_with_book.study_unit %></span>
+      <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %></span>
     <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true %>
     <div>現在: 
-      <%= sprintf("%04d", result) %> <%= week_target.status_with_book.study_unit %></div>
+      <%= sprintf("%04d", result) %> <%= week_target.study_unit %></div>
   <% end %>
 
   <%= render 'users/my_page/canvas_tag', week_target: week_target %>

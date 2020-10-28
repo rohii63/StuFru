@@ -1,6 +1,6 @@
 $(function() {
   <% if @selected_book %>  
-    $("#micropost_status_with_book_id").prop("value", <%= @selected_book.id %>)
+    $("#micropost_study_unit").prop("value", "<%= @selected_book.study_unit %>")
     
     <% case @selected_book.study_unit %>
       <% when "ページ" %>

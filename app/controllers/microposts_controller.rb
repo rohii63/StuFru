@@ -63,7 +63,7 @@ class MicropostsController < ApplicationController
         :picture,
         :user_id,
         :study_amount,
-        :status_with_book_id
+        :study_unit
       )
     end
 end

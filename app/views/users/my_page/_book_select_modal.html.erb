@@ -6,20 +6,18 @@
           <h5 class="modal-title">教材選択</h5>
         </div>
         <div class="modal-body">
-          <% if @week_targets.where(book_id: @books_in_progress.pluck(:id)).count == @books_in_progress.count %>
-            目標を設定できる教材がありません。
+          <% if @user.books.all.empty? %>
+            勉強中の教材がありません。
           <% else %>
             <% @book_categories.each do |category| %>
-              <% tmp_books = @books_in_progress.joins(:status_with_books).select("books.id, books.name, books.icon").where(status_with_books: {book_category_id: category.id}) %>
-              <p><%= category.name if !tmp_books.empty? && !(@week_targets.where(book_id: tmp_books.pluck(:id)).count == tmp_books.count(:id)) %></p>
-              <% tmp_books.each do |book| %>
-                <% unless @week_targets.find_by(book_id: book.id) %>
-                  <label>
-                    <%= f.radio_button :book_id, "#{book.id}" %>
-                    <%= image_tag url_for(book.icon.variant(resize: "75x75>")) %>
-                    <%= book.name %>  
-                  </label>
-                <% end %>
+              <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "in_progress") %>
+              <p><%= category.name unless tmp_status_with_books.empty? %></p>
+              <% tmp_status_with_books.each do |status_with_book| %>
+                <label>
+                  <%= f.radio_button :book_id, "#{status_with_book.book.id}" %>
+                  <%= image_tag url_for(status_with_book.book.icon.variant(resize: "75x75>")) %>
+                  <%= status_with_book.book.name %>  
+                </label>
               <% end %>
             <% end %>
           <% end %>
