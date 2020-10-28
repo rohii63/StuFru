@@ -1,17 +1,6 @@
 class MicropostsController < ApplicationController
   def create
-    if params[:page]
-      start_page = params[:page][:start].to_i
-      end_page = params[:page][:end].to_i
-      if start_page == 0 || end_page == 0
-        tmp = nil
-      elsif start_page >= end_page
-        tmp = 10000
-      else
-        tmp = end_page - start_page
-      end
-      params[:micropost][:study_amount] = tmp
-    end
+    culculate_study_amount_of_page
     @user = current_user
     @micropost = @user.microposts.build(micropost_params)
     @micropost.save
@@ -21,6 +10,7 @@ class MicropostsController < ApplicationController
 
   def show
     @micropost = Micropost.find(params[:id])
+
     if @micropost.user == current_user
       @books_in_progress = current_user.books_in_progress
       if params[:comment_id]
@@ -29,14 +19,23 @@ class MicropostsController < ApplicationController
         render 'comment_delete_modal'
       end
     end
+
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
   end
 
-  def update
+  def edit
     @micropost = Micropost.find(params[:id])
-    @micropost.study_amount = nil unless params[:micropost][:study_amount].present?
+
+    if params[:modal]
+      render 'modal'
+    end
+  end
+
+  def update
+    culculate_study_amount_of_page
+    @micropost = Micropost.find(params[:id])
     if @micropost.update(micropost_params)
       flash[:success] = "編集完了"
       redirect_to root_path
@@ -66,4 +65,20 @@ class MicropostsController < ApplicationController
         :study_unit
       )
     end
+
+    def culculate_study_amount_of_page
+      if params[:page]
+        start_page = params[:page][:start].to_i
+        end_page = params[:page][:end].to_i
+        if start_page == 0 || end_page == 0
+          tmp = 10000
+        elsif start_page >= end_page
+          tmp = 10001
+        else
+          tmp = end_page - start_page
+        end
+        params[:micropost][:study_amount] = tmp
+      end
+    end
+
 end

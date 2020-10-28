@@ -12,6 +12,7 @@ class Micropost < ApplicationRecord
   validate  :studied_time_non_zero
   validate  :study_time_limit_per_day
   validate  :start_page_greater_than_end_page
+  validate  :item_of_page_blank
 
   def datetime_not_future_time
     errors.add(:studied_at, "は現在までの日時を選択してください。") if studied_at > Time.now
@@ -27,8 +28,12 @@ class Micropost < ApplicationRecord
     errors.add(:studied_time_in_minutes, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:studied_time_in_minutes) + studied_time_in_minutes >= 1440
   end
 
+  def item_of_page_blank
+    errors.add(:ページ, "を入力してください。") if study_amount == 10000
+  end
+
   def start_page_greater_than_end_page
-    errors.add(:終了ページ, "は開始ページより大きい値にして下さい。") if study_amount == 10000
+    errors.add(:終了ページ, "は開始ページより大きい値にして下さい。") if study_amount == 10001
   end
 
   def create_notification_like!(current_user)

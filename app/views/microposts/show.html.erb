@@ -5,8 +5,10 @@
 <p>Find me in app/views/microposts/show.html.erb</p>
 
 <% if @micropost.user == current_user %>
-  <p><%= link_to "編集", root_path(modal: ""), remote: true %></p>
-  <%= render 'microposts/edit_modal' %>
+  <p><%= link_to "編集", edit_micropost_path(@micropost, modal: ""), method: :get, remote: true %></p>
+  <div id="micropostModal">
+    <%= render 'microposts/edit_modal' %>
+  </div>
 
   <p><%= link_to "削除", "#", data: {toggle: "modal", target: "#deleteConfirmModal"} %></p>
   <%= render 'microposts/delete_confirm_modal' %>

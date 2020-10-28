@@ -1,30 +1,17 @@
 $(function() {
   $('#newMicropostModal').modal('show');
-  $('#editMicropostModal').modal('show');
 
-  var val = $("#micropost_book_id").val();
-
-  if (!val) { doAjaxWhenChange() } else {
-    var book_id = $("#micropost_book_id").val();
-    doAjax(book_id);
-    doAjaxWhenChange();
-  };
-
-})
-
-function doAjaxWhenChange() {
-  $("#micropost_book_id").change(function() {
+  $("#micropostModal").on("change", "#micropost_book_id",function() {
     book_id = $(this).val();
-    doAjax(book_id);
-  })
-}
 
-function doAjax(book_id) {
-  var params = { micropost: { book_id: book_id } };
-  $.ajax({
-        url: "<%= root_path %>",
-        type: "GET", 
-        data: params,
-        dataType: "script"
+    var params = { micropost: { book_id: book_id } };
+
+    $.ajax({
+          url: "<%= root_path() %>",
+          type: "GET", 
+          data: params,
+          dataType: "script"
+    });
+
   });
-}
+})

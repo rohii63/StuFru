@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   patch '/users/:id', to: 'users#update', as: 'user_update'
 
-  resources :microposts, except: [:index, :new, :edit] do
+  resources :microposts, except: [:index, :new] do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
