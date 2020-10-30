@@ -11,7 +11,9 @@
 <%= text_area_tag '', @user.target_comment, disabled: true, placeholder: "具体的な目標を記入しよう！" %>
 </p>
 
-<p><%= link_to "フォロワー（#{@user.followers.count}）フォロー（#{@user.following.count}）", follow_user_path(@user) %></p>
+<p id="followInformation">
+  <%= render 'users/my_page/follow_information' %>
+</p>
 
 <p>自己紹介</p>
 <p><%= @user.introduction %></p>

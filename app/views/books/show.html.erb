@@ -9,7 +9,7 @@
   <%= render 'books/show/book_info' %>
 </div>
 
-<%= link_to "編集", "#", data: { toggle: "modal", target: "#bookEditModal" } %>
+<%= link_to "編集", "#", data: { toggle: "modal", target: "#bookEditModal" } if @user.register?(@book) %>
 <%= render 'books/show/book_edit_modal' %>
 
 <div id="book_category_modal">

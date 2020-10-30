@@ -46,7 +46,11 @@ class WeekTargetsController < ApplicationController
     @microposts = @user.microposts.all
   end
 
-  def destory
+  def destroy
+    @user = User.find(params[:user_id])
+    @week_target = WeekTarget.find(params[:id])
+    @week_target.destroy
+    @week_targets = @user.week_targets.all
   end
 
   private
