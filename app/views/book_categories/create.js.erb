@@ -1,14 +1,26 @@
-<% if @book_category.errors.any? %>
-  <% @book_category.errors.full_messages.each do |msg| %>
-    alert("<%= msg %>")
-  <% end %>
-<% else %>
-  $("#bookCategoryModal").modal('hide')
-  $("#book_book_category_id").html("<%= escape_javascript(collection_select(:@book, :book_category_id, @book_categories, :id, :name)) %>")
+$(function() {
+  <% if @book_category.errors.any? %>
+    <% @book_category.errors.full_messages.each do |msg| %>
+      alert("<%= msg %>");
 
-  <%# when comming from a book index page %>
-  $("#newBookModal").modal('show')
-  <%# when comming from a book show page %>
-  $("#editBookModal").modal('show')
-  
-<% end %>
+    <% end %>
+
+  <% else %>
+    $("#bookCategoryModal").modal('hide');
+    $("[name='status_with_book[book_category_id]']").html("<%= escape_javascript(collection_select(:@status_with_book, :book_category_id, @book_categories, :id, :name)) %>");
+
+    <% case @modal %>
+      <% when "new" %>
+        $("#newBookModal").modal('show');
+
+      <% when "edit" %>
+        $("#bookStatusEditModal").modal('show');
+
+      <% when "register" %>
+        $("#bookRegisterModal").modal('show');
+
+    <% end %>
+    
+  <% end %>
+
+})

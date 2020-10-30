@@ -1,47 +1,17 @@
 $(function() {
   $('#newMicropostModal').modal('show');
-  $('#editMicropostModal').modal('show');
 
-  var val = $("#micropost_book_id").val()
+  $("#micropostModal").on("change", "#micropost_book_id",function() {
+    book_id = $(this).val();
 
-  if (!val) { doAjaxWhenChange() } else {
-    var book_id = $("#micropost_book_id").val();
-    doAjax(book_id)
-    doAjaxWhenChange()
-  }
+    var params = { micropost: { book_id: book_id } };
 
-  calculateStudyTime()
-
-  function doAjaxWhenChange() {
-    $("#micropost_book_id").change(function() {
-      book_id = $(this).val();
-      doAjax(book_id)
-    })
-  }
-
-  function doAjax(book_id) {
-    var params = { micropost: { book_id: book_id } }
     $.ajax({
-          url: "<%= root_path %>",
+          url: "<%= root_path() %>",
           type: "GET", 
           data: params,
           dataType: "script"
-    })
-  }
+    });
 
-  function calculateStudyTime() {
-    var hours = $('#micropost_how_many_studied_hours').val() * 60
-    var minutes = $('#micropost_how_many_studied_minutes').val()
-    
-    $('#micropost_how_many_studied_hours').change(function() {
-      hours = $(this).val() * 60
-    });
-    $('#micropost_how_many_studied_minutes').change(function() {
-      minutes = $(this).val();
-    });
-    $('#calculate_trigger').click(function() {
-      var total = parseInt(hours) + parseInt(minutes)
-      $("#micropost_studied_time_in_minutes").attr("value", total)
-    })
-  }
+  });
 })

@@ -1,39 +1,45 @@
 $(function() {
   <% if @selected_book %>  
+    $("#micropost_study_unit").prop("value", "<%= @selected_book.study_unit %>")
+    
     <% case @selected_book.study_unit %>
       <% when "ページ" %>
         viewStudyAmountTemplate();
-        $("#studyAmount label").after("<input>合計</input><input>範囲</input>")
+        
+        var btnElems = $("<input id='totalBtn' name='studyAmount' type='radio' checked='checked'>合計</input><input id='rangeBtn' name='studyAmount' type='radio'>範囲</input>");
 
-        attrTotalBtn = new Object();
-        attrTotalBtn.name = "studyAmount";
-        attrTotalBtn.type = "radio";
-        attrTotalBtn.checked = "checked";
-        $("#studyAmount input:eq(0)").attr(attrTotalBtn);
-        attrRangeBtn = new Object();
-        attrRangeBtn.name = "studyAmount";
-        attrRangeBtn.type = "radio";
-        $("#studyAmount input:eq(1)").attr(attrRangeBtn);
+        $("#studyAmount>label").after(btnElems);
 
-        $("#studyAmount").on("change", "input:eq(1)", function() {
+        $("#rangeBtn").on("change", function() {
           $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#micropost_study_amount");
-          $("span:last").html("");
-        })
-        $('#studyAmount').on("change", "input:eq(0)", function() {
-          $("<%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %>").replaceAll("#studyAmountRangeInput");
-          $("span:last").html("<%= @selected_book.study_unit %>");
-        })
+          $("#studyUnit").html("");
+        });
+
+          $('#totalBtn').on("change", function() {
+            $("<%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %>").replaceAll("#studyAmountRangeInput");
+            $("#studyUnit").html("<%= @selected_book.study_unit %>");
+          });
+
       <% when "問", "単語" %>
         viewStudyAmountTemplate();
+
       <% when "時間", "" %>
         $("#studyAmount").html("");
+        
     <% end %>
-
-    function viewStudyAmountTemplate() {
-      $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %><span></span>");
-      $("#studyAmount span").html("<%= @selected_book.study_unit %>");
-    }
+    
   <% else %>
     $("#studyAmount").html("");
+
   <% end %>
 })
+
+
+<% if @selected_book %>
+  function viewStudyAmountTemplate() {
+    $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %><span></span>");
+    $("#studyAmount span").prop("id", "studyUnit");
+    $("#studyAmount span").html("<%= @selected_book.study_unit %>");
+  }
+
+<% end %>

@@ -1,20 +1,26 @@
-<%= form_with model: @week_target, url: "/users/#{@user.id}/week_targets" do |f| %>
+<%= form_with model: @week_target, url: user_week_targets_path(@user), method: :post do |f| %>
   <div><a data-toggle='modal' data-target='#bookSelectModal'>教材名:<%= @selected_book.name %></a></div>
-  <%= f.hidden_field :book_id %>
   <%= f.label :content %>
-  <% case @selected_book.study_unit %>
+
+  <% case @status_with_book.study_unit %>
     <% when "時間" %>
       <%= number_field_tag 'time[hours]', nil, in: 0...168 %>
       <%= label_tag 'time[hours]', "時間" %>
       <%= number_field_tag 'time[minutes]', nil, in: 0...60 %>
       <%= label_tag 'time[minutes]', "分" %>
+
     <% when "ページ" %>
       <input id="totalBtn1" name="studyAmount" type="radio" checked="checked">合計</input>
       <input id="rangeBtn1" name="studyAmount" type="radio">範囲</input>
+
   <% end %>
-  <% unless @selected_book.study_unit == "時間" %>
+
+  <% unless @status_with_book.study_unit == "時間" %>
     <%= f.number_field :content, in: 1...9999 %>
-    <span id="studyUnit1"><%= @selected_book.study_unit %></span>
+    <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
   <% end %>
+
+  <%= f.hidden_field :book_id %>
+  <%= f.hidden_field :study_unit %>
   <div><%= f.submit "作成", class: "btn btn-primary" %></div>
 <% end %>

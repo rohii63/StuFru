@@ -12,6 +12,7 @@ class Micropost < ApplicationRecord
   validate  :studied_time_non_zero
   validate  :study_time_limit_per_day
   validate  :start_page_greater_than_end_page
+  validate  :item_of_page_blank
 
   def datetime_not_future_time
     errors.add(:studied_at, "は現在までの日時を選択してください。") if studied_at > Time.now
@@ -27,8 +28,12 @@ class Micropost < ApplicationRecord
     errors.add(:studied_time_in_minutes, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:studied_time_in_minutes) + studied_time_in_minutes >= 1440
   end
 
+  def item_of_page_blank
+    errors.add(:ページ, "を入力してください。") if study_amount == 10000
+  end
+
   def start_page_greater_than_end_page
-    errors.add(:終了ページ, "は開始ページより大きい値にして下さい。") if study_amount == 10000
+    errors.add(:終了ページ, "は開始ページより大きい値にして下さい。") if study_amount == 10001
   end
 
   def create_notification_like!(current_user)
@@ -150,11 +155,12 @@ class Micropost < ApplicationRecord
     return hours, minutes, total
   end
 
-  def self.weekly_study_amount(book_id, week_target_created_at)
+  def self.weekly_study_amount(book_id, study_unit, week_target_created_at)
     from = week_target_created_at.at_beginning_of_week
     to = week_target_created_at.at_end_of_week
-    post = self.where(studied_at: from...to).where(book_id: book_id)
+    post = self.where(studied_at: from...to).where(book_id: book_id).where(study_unit: study_unit)
     
-    Book.find(book_id).study_unit == "時間" ? post.sum(:studied_time_in_minutes) : post.sum(:study_amount)
+    study_unit == "時間" ? post.sum(:studied_time_in_minutes) : post.sum(:study_amount)
   end
+
 end

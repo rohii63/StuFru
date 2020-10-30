@@ -9,10 +9,10 @@
       <div><strong><%= "#{from.to_s(:month)} - #{to.to_s(:month)}" %></strong></div>
       
       <% past_week_targets.each do |week_target| %>
-        <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.created_at) %>
+        <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
 
         <div><strong><%= week_target.book.name %></div></strong>
-        <% if week_target.book.study_unit == "時間" %>
+        <% if week_target.study_unit == "時間" %>
           <span>目標: 
             <%= sprintf("%02d", week_target.content / 60) %> 時間 
             <%= sprintf("%02d", week_target.content % 60) %> 分</span>
@@ -21,9 +21,9 @@
             <%= sprintf("%02d", achievement % 60) %> 分</div>
         <% else %>
           <span>目標: 
-            <%= sprintf("%04d", week_target.content) %> <%= week_target.book.study_unit %></span>
+            <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %></span>
           <div>実績: 
-            <%= sprintf("%04d", achievement) %> <%= week_target.book.study_unit %></div>
+            <%= sprintf("%04d", achievement) %> <%= week_target.study_unit %></div>
         <% end %>
 
         <%= render 'users/my_page/canvas_tag', week_target: week_target %>

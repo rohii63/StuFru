@@ -23,8 +23,7 @@ class UsersController < ApplicationController
       render 'chart'
     else
       @week_targets = @user.week_targets.all.at_this_week()
-      @books = @user.books.all
-      @books_in_progress = @user.books.where(status: "勉強中")
+      @status_with_books = @user.status_with_books.all
       @book_categories = @user.book_categories.all
       @week_target = @user.week_targets.build()
       @total_study_time = @microposts.total_study_time

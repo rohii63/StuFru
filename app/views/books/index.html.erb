@@ -12,15 +12,17 @@
 </p>
 
 <div id="new_book_modal">
-  <%= render 'books/modal/new_book' %>
+  <%= render 'books/index/new_book' %>
 </div>
 
 <div id="book_category_modal">
-  <%= render 'books/modal/book_category' %>
+  <%= render 'books/book_category_modal' %>
 </div>
 
-<p><%= link_to "#{@user.name}さんの本棚", books_path(), method: :get, remote: true %></p>
+<p><%= link_to "#{@user.name}さんの本棚", user_books_path(@user), method: :get, remote: true %></p>
 
 <div id="book_field">
   <%= render 'books/index/book_field' %>
 </div>
+
+<div id="book_status_edit_modal"></div>

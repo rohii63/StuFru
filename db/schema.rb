@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_075816) do
+ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -53,13 +53,11 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
-    t.string "status", null: false
-    t.string "study_unit", null: false
+    t.string "status"
+    t.string "study_unit"
     t.string "icon"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "book_category_id"
-    t.index ["book_category_id"], name: "index_books_on_book_category_id"
     t.index ["name"], name: "index_books_on_name", unique: true, length: 100
   end
 
@@ -85,10 +83,11 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "studied_at", null: false
-    t.integer "how_many_studied_hours", null: false
-    t.integer "how_many_studied_minutes", null: false
+    t.integer "how_many_studied_hours"
+    t.integer "how_many_studied_minutes"
     t.integer "studied_time_in_minutes", null: false
     t.integer "study_amount"
+    t.string "study_unit"
     t.text "content"
     t.string "picture"
     t.bigint "user_id", null: false
@@ -123,6 +122,19 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "status_with_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "status"
+    t.string "study_unit"
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.bigint "book_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_category_id"], name: "index_status_with_books_on_book_category_id"
+    t.index ["book_id"], name: "index_status_with_books_on_book_id"
+    t.index ["user_id"], name: "index_status_with_books_on_user_id"
   end
 
   create_table "targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -167,6 +179,7 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
 
   create_table "week_targets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "content", null: false
+    t.string "study_unit", null: false
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -177,13 +190,15 @@ ActiveRecord::Schema.define(version: 2020_10_03_075816) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "book_categories", "users"
-  add_foreign_key "books", "book_categories"
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "microposts"
   add_foreign_key "likes", "users"
   add_foreign_key "microposts", "books"
   add_foreign_key "microposts", "users"
+  add_foreign_key "status_with_books", "book_categories"
+  add_foreign_key "status_with_books", "books"
+  add_foreign_key "status_with_books", "users"
   add_foreign_key "week_targets", "books"
   add_foreign_key "week_targets", "users"
 end

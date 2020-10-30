@@ -20,7 +20,7 @@
               <p>
                 <%= link_to 'ユーザ検索', user_search_path(current_user) %>
                 <%= unchecked_notifications.any? ? link_to('*通知*', notifications_path) : link_to('通知', notifications_path) %>
-                <%= link_to '教材全般', books_path %>
+                <%= link_to '教材全般', user_books_path(current_user) %>
                 <%= link_to 'プロフィール', user_path(current_user) %>
               </p>
               <%= link_to 'アカウント管理', edit_user_registration_path %>

@@ -7,6 +7,7 @@ class User < ApplicationRecord
                               dependent:  :destroy
   has_many :books,  through: :study_books
   has_many :book_categories, dependent: :destroy
+  has_many :status_with_books, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -138,6 +139,11 @@ class User < ApplicationRecord
         )
         notification.save if notification.valid?
       end
+    end
+
+    def books_in_progress
+      book_ids = status_with_books.where(status: "in_progress").pluck(:book_id)
+      books.where(id: book_ids)
     end
     
 end

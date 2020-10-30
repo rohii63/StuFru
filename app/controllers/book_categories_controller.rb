@@ -2,6 +2,7 @@ class BookCategoriesController < ApplicationController
   def new
     @user = current_user
     @book_category = @user.book_categories.build()
+    @modal = params[:modal]
   end
 
   def create
@@ -9,6 +10,7 @@ class BookCategoriesController < ApplicationController
     @book_category = @user.book_categories.build(book_category_params)
     @book_category.save
     @book_categories = @user.book_categories.all
+    @modal = params[:modal]
   end
 
   def destroy

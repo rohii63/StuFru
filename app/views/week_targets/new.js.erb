@@ -5,7 +5,7 @@ $(function() {
 
   $("#weekTargetForm").on("change", "#totalBtn1", function() {
     $("<%= escape_javascript(number_field :week_target, :content, in: 1...9999) %>").replaceAll("#studyAmountRangeInput");
-    $("#studyUnit1").html("<%= @selected_book.study_unit %>");
+    $("#studyUnit1").html("<%= @week_target.study_unit %>");
   })
   $('#weekTargetForm').on("change", "#rangeBtn1", function() {
     $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#week_target_content");

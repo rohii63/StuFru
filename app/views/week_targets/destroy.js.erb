@@ -1,0 +1,10 @@
+$(function(){
+  $("#weekTargetCard<%= @week_target.id %>").remove();
+
+  <% if @week_targets.empty? %>
+    var elem = $("<div id='whenWeekTargetAreaBlank'>今週の目標を設定しよう！</div>");
+
+    $("#weekTargetArea").prepend(elem);
+    
+  <% end %>
+})

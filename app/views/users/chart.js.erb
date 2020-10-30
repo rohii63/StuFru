@@ -26,7 +26,8 @@ $(function() {
   displayBarGraph("monthlyGraph", monthly_labels, <%= monthly_data %>);
 
   configureDoughnutGraph(displayStudyAmountGraph);
-});
+})
+
 
 function displayBarGraph(canvasId, labels, data) {
   var canvasElem = new Object();
@@ -58,13 +59,14 @@ function displayBarGraph(canvasId, labels, data) {
     },
     plugins: [ChartDataLabels]
   });
-};
+}
+
 
 var displayStudyAmountGraph = function(blue, gray, options) {
   <% @week_targets.each do |week_target| %>
     $('<%= escape_javascript(render "users/my_page/canvas_tag", week_target: week_target) %>').replaceAll("#studyAmountGraph<%= week_target.id %>");
     
-    <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.created_at) %>
+    <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
     <% progress_rate = result * 100 / week_target.content %>
 
     var ctx = $('#studyAmountGraph<%= week_target.id %>');
@@ -81,4 +83,4 @@ var displayStudyAmountGraph = function(blue, gray, options) {
       plugins: [chartJsPluginCenterLabel]
     });
   <% end %>
-};
+}

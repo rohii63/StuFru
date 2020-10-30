@@ -1,16 +1,20 @@
 $(function() {
-  <%# when comming from a book index page %>
-  $("#newBookModal").modal('hide')
-  <%# when comming from a book show page %>
-  $("#editBookModal").modal('hide')
+  $("#newBookModal").modal('hide');
+  $("#bookStatusEditModal").modal('hide');
+  $("#bookRegisterModal").modal('hide');
 
-  $("#book_category_modal").html("<%= escape_javascript(render 'books/modal/book_category') %>")
-  $("#bookCategoryModal").modal('show')
+  $("#book_category_modal").html("<%= escape_javascript(render 'books/book_category_modal') %>");
+  $("#bookCategoryModal").modal('show');
 
   $('#bookCategoryModal').on('hidden.bs.modal', function () {
-    <%# when comming from a book index page %>
-    $("#newBookModal").modal('show')
-  <%# when comming from a book show page %>
-    $("#editBookModal").modal('show')
-  })
+    <% case @modal %>
+      <% when "new" %>
+        $("#newBookModal").modal('show');
+      <% when "edit" %>
+        $("#bookStatusEditModal").modal('show');
+      <% when "register" %>
+        $("#bookRegisterModal").modal('show');
+    <% end %>
+    
+  });
 });

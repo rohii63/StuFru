@@ -1,6 +1,7 @@
-<div class="book_card_<%= book.id %>">
-  <%= link_to book_path(book) do %>
-    <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
-    <%= book.name %>
+<div class="book_card_<%= status_with_book.book.id %>">
+  <%= link_to book_path(status_with_book.book) do %>
+    <%= image_tag url_for(status_with_book.book.icon.variant(resize: "100x100>")) %>
+    <%= status_with_book.book.name %>
   <% end %>
+  <%= link_to "編集", edit_user_status_with_book_path(@user, status_with_book), remote: true if @user == current_user %>
 </div>

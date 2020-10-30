@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  study_unit: MyString
+  user: one
+  book: one
+  book_category: one
+
+two:
+  status: MyString
+  study_unit: MyString
+  user: two
+  book: two
+  book_category: two
