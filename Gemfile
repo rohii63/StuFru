@@ -76,3 +76,5 @@ gem 'rails-i18n', '~> 6.0'
 #Create graph
 gem "chartkick"
 gem 'chart-js-rails', '~> 0.1.7'
+#Paginate
+gem 'kaminari', '~> 1.2', '>= 1.2.1'

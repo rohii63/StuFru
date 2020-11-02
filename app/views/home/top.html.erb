@@ -27,12 +27,14 @@
           <%= render 'home/post_card', micropost: micropost %>
         <% end %>
       </div>
+      <%= paginate @follower_microposts %>
     </div>
     <div class="tab-pane fade" id="nav-target-genre" role="tabpanel" aria-labelledby="nav-target-genre-tab">
       <p><%= @user.target %></p>
       <% @target_genre_microposts.each do |micropost| %>
         <%= render 'home/post_card', micropost: micropost %>
       <% end %>
+      <%= paginate @target_genre_microposts %>
     </div>
   </div>
 
