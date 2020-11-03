@@ -32,12 +32,31 @@
           <% end %> 
         </div>
 
-      <nav class="col-md-9 py-3 border">
-        <h5 class="mb-0 font-weight-bold"><%= yield(:title) %></h5>
-        
-        <i class="fas fa-bars"></i>
+        <nav class="col-md-9 px-0 border">
+          <div class="pos-f-t">
+            <nav class="navbar d-flex justify-content-between align-items-center py-md-3">
+              <h5 class="font-weight-bold mb-0 "><%= yield(:title) %></h5>
+              <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars fa-lg d-md-none"></i>
+              </button>
+            </nav>
 
-      </nav>
+            <div class="collapse" id="navbarToggleExternalContent">
+              <div class="d-flex flex-column py-1 px-4">
+                <%= link_to new_user_session_path(), class: "my-1" do %>
+                  <i class="fas fa-sign-in-alt fa-lg"></i>
+                  ログイン
+                <% end %>
+                <%= link_to new_user_session_path(), class: "my-1" do %>
+                  <i class="fas fa-user-plus fa-lg"></i>
+                  ユーザ登録
+                <% end %>
+              </div>
+            </div>
+
+          </div>
+        </nav>
+
         <div id="notifications">
           <%= render 'shared/notifications' %>
         </div>

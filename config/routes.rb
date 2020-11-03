@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/my_page/:id', to: 'users#my_page', as: 'my_page'
 
   devise_for :users
-
+  
   resources :users, only: [:index, :show] do
     member do 
       get :follow end
