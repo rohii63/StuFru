@@ -13,7 +13,7 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3 d-none d-md-block">
+        <div class="col-3 d-none d-md-block border-right">
           <% if user_signed_in? %>
             <strong><%= link_to "マイページ", my_page_path(current_user) %></strong>
             <strong><%= link_to "TOP", root_url %></strong>
@@ -27,13 +27,24 @@
             <%= link_to 'アカウント管理', edit_user_registration_path %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
+            <div class="d-flex flex-column justify-content-center">
+              <%= image_tag 'logo.png', size: "100x100",class: "rounded mx-auto mt-5 mb-3" %>
+              <div class="d-flex flex-column mt-5">
+                <%= link_to new_user_session_path(), class: "my-3 text-center" do %>
+                  <i class="fas fa-sign-in-alt fa-lg"></i>
+                  ログイン
+                <% end %>
+                <%= link_to new_user_session_path(), class: "mt-4 text-center" do %>
+                  <i class="fas fa-user-plus fa-lg"></i>
+                  ユーザ登録
+                <% end %>
+              </div>
+            </div>
           <% end %> 
         </div>
 
-        <nav class="col-md-9 px-0 border">
-          <div class="pos-f-t">
+        <div class="col-md-9 px-0">
+          <div class="pos-f-t border-bottom">
             <nav class="navbar d-flex justify-content-between align-items-center py-md-3">
               <h5 class="font-weight-bold mb-0 "><%= yield(:title) %></h5>
               <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,12 +53,12 @@
             </nav>
 
             <div class="collapse" id="navbarToggleExternalContent">
-              <div class="d-flex flex-column py-1 px-4">
-                <%= link_to new_user_session_path(), class: "my-1" do %>
+              <div class="d-flex flex-column pt-1 pb-3 px-4">
+                <%= link_to new_user_session_path(), class: "my-2" do %>
                   <i class="fas fa-sign-in-alt fa-lg"></i>
                   ログイン
                 <% end %>
-                <%= link_to new_user_session_path(), class: "my-1" do %>
+                <%= link_to new_user_session_path(), class: "my-2" do %>
                   <i class="fas fa-user-plus fa-lg"></i>
                   ユーザ登録
                 <% end %>
@@ -55,7 +66,6 @@
             </div>
 
           </div>
-        </nav>
 
         <div id="notifications">
           <%= render 'shared/notifications' %>
@@ -63,6 +73,7 @@
 
         <%= yield %>
 
+        </div>
       </div>
     </div>
   </body>
