@@ -5,21 +5,22 @@
   <p>トップページです。</p>
 </div>
 
-<% if user_signed_in? %>
-  <% unless @user.target %>
-    <%= render 'home/target_register' %>
+<% unless @user.target %>
+  <%= render 'home/target_register' %>
 
-  <% else %>
-    <p><%= link_to "投稿する", root_path(modal: "new"), remote: true %></p>
-    <div id="micropostModal">
-      <%= render 'home/new_micropost_modal' %>
-    </div>
+<% else %>
+  <p><%= link_to "投稿する", root_path(modal: "new"), remote: true %></p>
+  <div id="micropostModal">
+    <%= render 'home/new_micropost_modal' %>
+  </div>
+
   <nav>
     <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" id="nav-follow-tab" data-toggle="tab" href="#nav-follow" role="tab" aria-controls="nav-follow" aria-selected="true">フォロー</a>
       <a class="nav-item nav-link" id="nav-target-genre-tab" data-toggle="tab" href="#nav-target-genre" role="tab" aria-controls="nav-target-genre" aria-selected="false">目標ジャンル</a>
     </div>
   </nav>
+
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-follow" role="tabpanel" aria-labelledby="nav-follow-tab">
       <div id="timeline">
@@ -37,10 +38,6 @@
       <%= paginate @target_genre_microposts %>
     </div>
   </div>
-
-  <% end %>
-<% else %>
-  <%= render 'not_login_top' %>
 
 <% end %>
 

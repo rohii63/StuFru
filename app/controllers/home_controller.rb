@@ -32,7 +32,13 @@ class HomeController < ApplicationController
           end
 
         end
+
       end
+
+    else
+      redirect_to new_user_session_path()
+
     end
+
   end
 end

@@ -1,34 +1,52 @@
-<h2>Log in</h2>
+<% content_for :title, "ログイン" %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="row justify-content-center pt-3 my-5">
 
-  <%= f.hidden_field :email, value: "trial@mail" %>
-  <%= f.hidden_field :password, value: "password" %>
-  <%= f.submit "Signin as a trial user", class:"btn btn-dark btn-block offset-2 col-8 my-5" %>
-  
-<% end %>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <div class="mx-3">
+    <h5 class="text-nowrap text-center font-weight-bold">
+      <p class="mb-2">繋がった仲間に勉強の成果を</p>
+      <p>発信できる勉強系SNSサービス</p>
+    </h5>
+    <div class="col-auto pt-1 pt-lg-0">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.hidden_field :email, value: "trial@mail" %>
+        <%= f.hidden_field :password, value: "password" %>
+        <%= f.submit "お試しログイン", class:"btn btn-dark btn-block my-4 py-2" %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+  
+  <div class="col-lg-auto text-center mx-3 mt-2 mt-lg-0">
+    <%= image_tag 'logo.png', size: "150x150", class: "mx-auto" %>
+  </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+</div>
+
+
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  <div class="d-flex flex-column border-top">
+    <div class="col-5 mx-auto mt-5">
+      <p class="border-bottom border-primary pb-2">Eメール</p>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="col-5 mx-auto mt-3">
+      <p class="border-bottom border-primary pb-2">パスワード</p>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="col-5 mx-auto mt-3">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="col-5 mx-auto text-center mt-4 mb-3">
+      <%= f.submit "Log in" %>
+    </div>
   </div>
 <% end %>
 
