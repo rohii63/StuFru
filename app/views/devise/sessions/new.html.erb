@@ -5,13 +5,13 @@
   <div class="mx-3">
     <h5 class="text-nowrap text-center font-weight-bold">
       <p class="mb-2">繋がった仲間に勉強の成果を</p>
-      <p>発信できる勉強系SNSサービス</p>
+      <p class="mb-2">発信できる勉強系SNSサービス</p>
     </h5>
-    <div class="col-auto pt-1 pt-xl-0">
+    <div class="col-auto pt-xl-0">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= f.hidden_field :email, value: "trial@mail" %>
         <%= f.hidden_field :password, value: "password" %>
-        <%= f.submit "お試しログイン", class:"btn btn-dark btn-block my-4 py-2" %>
+        <%= f.submit "お試しログイン", class:"btn btn-dark btn-block mt-4 py-2" %>
       <% end %>
     </div>
   </div>

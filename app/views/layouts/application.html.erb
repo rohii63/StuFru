@@ -11,76 +11,146 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="row">
+    <% if user_signed_in? %>
+      <div class="container-fluid">
+        <div class="row">
 
-        <div class="offset-2 col-2 d-none d-md-block border-right">
-          <% if user_signed_in? %>
-            <strong><%= link_to "マイページ", my_page_path(current_user) %></strong>
-            <strong><%= link_to "TOP", root_url %></strong>
-            <%= link_to 'index', users_path %>
-            <p>
-              <%= link_to 'ユーザ検索', user_search_path(current_user) %>
-              <%= unchecked_notifications.any? ? link_to('*通知*', notifications_path) : link_to('通知', notifications_path) %>
-              <%= link_to '教材全般', user_books_path(current_user) %>
-              <%= link_to 'プロフィール', user_path(current_user) %>
-            </p>
-            <%= link_to 'アカウント管理', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <div class="py-4"></div>
-            
-            <div class="d-flex flex-column justify-content-center">
-
-              <%= image_tag 'logo.png', size: "100x100", class: "rounded mx-auto mt-5 mb-3" %>
-
-              <div class="d-flex flex-column mt-5">
-                <%= link_to new_user_session_path(), class: "my-3 text-center" do %>
-                  <i class="fas fa-sign-in-alt fa-lg"></i>
-                  ログイン
-                <% end %>
-                <%= link_to new_user_registration_path(), class: "mt-4 text-center text-nowrap" do %>
-                  <i class="fas fa-user-plus fa-lg"></i>
-                  ユーザ登録
-                <% end %>
+          <div class="position-fixed offset-lg-1 col-2 d-none d-sm-block pl-xl-4 pl-sm-4">
+            <div class="mt-3 ml-xl-5 text-nowrap">
+              <div>
+                <%= link_to (image_tag 'logo.png', size: "70x70", class: "rounded"), my_page_path(current_user) %>
               </div>
-
-            </div>
-          <% end %> 
-        </div>
-
-        <div class="col-md-5 px-0">
-
-          <div class="pos-f-t border-bottom">
-            <nav class="navbar d-flex justify-content-between align-items-center py-md-3">
-              <h6 class="font-weight-bold mb-0 ">
-                <%= yield(:title) %>
-              </h6>
-              <div id="notifications">
-                  <%= render 'shared/notifications' %>
-              </div>
-              <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars fa-lg d-md-none"></i>
-              </button>
-            </nav>
-            <div class="collapse" id="navbarToggleExternalContent">
-              <div class="d-flex flex-column pt-1 pb-3 px-4">
-                <%= link_to new_user_session_path(), class: "my-2" do %>
-                  <i class="fas fa-sign-in-alt fa-lg"></i>
-                  ログイン
-                <% end %>
-                <%= link_to new_user_registration_path(), class: "my-2" do %>
-                  <i class="fas fa-user-plus fa-lg"></i>
-                  ユーザ登録
-                <% end %>
-              </div>
+              <ul class="list-unstyled mt-4">
+                <li class="mb-3"><%= link_to root_path(), class: "text-reset" do %>
+                  <i class="fas fa-home fa-2x"></i>
+                  ホーム
+                <% end %></li>
+                <li class="mb-3"><%= link_to my_page_path(current_user), class: "text-reset" do %>
+                  <i class="fas fa-chart-bar fa-2x"></i>
+                  レポート
+                <% end %></li>
+                <li class="mb-3"><%= link_to user_search_path(), class: "text-reset" do %>
+                  <i class="fas fa-search fa-2x"></i>
+                  ユーザ検索
+                <% end %></li>
+                <li class="mb-3"><%= link_to notifications_path(current_user), class: "text-reset" do %>
+                  <% if unchecked_notifications.any? %>
+                    <span class="fa-layers fa-fw ml-2">
+                      <i class="fas fa-bell fa-2x" data-fa-transform="left-5"></i>
+                      <span class="fa-layers-counter fa-2x fa-layers-bottom-right bg-tomato"></span>
+                    </span>
+                    <span class="ml-2">通知</span>
+                  <% else%>
+                    <i class="fas fa-bell fa-2x"></i>
+                    通知
+                  <% end %>
+                <% end %></li>
+                <li class="mb-3"><%= link_to user_books_path(current_user), class: "text-reset" do %>
+                  <i class="fas fa-book-open fa-2x"></i>
+                  教材全般
+                <% end %></li>
+                <li class="mb-3"><%= link_to user_path(current_user), class: "text-reset" do %>
+                  <i class="fas fa-user fa-2x"></i>
+                  プロフィール
+                <% end %></li>
+                <li><%= link_to destroy_user_session_path(), method: :delete, class: "text-reset" do %>
+                  <i class="fas fa-sign-out-alt fa-2x"></i>
+                  ログアウト
+                <% end %></li>
+              </ul>
             </div>
           </div>
 
-          <%= yield %>
-          
+          <div class="offset-sm-3 col-lg-8 pt-5 px-0 border-left">
+            <div class="fixed-top offset-sm-3 col-lg-8 pos-f-t border-bottom border-left bg-white">
+              <%= render 'layouts/nav' %>
+              <div class="collapse" id="navbarToggleExternalContent">
+                <ul class="d-flex list-unstyled mt-2 ml-4">
+                  <li class="flex-fill"><%= link_to user_books_path(current_user), class: "text-reset" do %>
+                    <i class="fas fa-book-open fa-lg"></i>
+                    教材全般
+                  <% end %></li>
+                  <li class="flex-fill"><%= link_to user_path(current_user), class: "text-reset" do %>
+                    <i class="fas fa-user fa-lg"></i>
+                    プロフィール
+                  <% end %></li>
+                  <li class="flex-fill"><%= link_to destroy_user_session_path(), method: :delete, class: "text-reset" do %>
+                    <i class="fas fa-sign-out-alt fa-lg"></i>
+                    ログアウト
+                  <% end %></li>
+                </ul>
+              </div>
+            </div>
+            <%= yield %>
+            <div class="fixed-bottom col d-sm-none border-top bg-white">
+              <div>
+                <ul class="d-flex list-unstyled text-center my-2">
+                  <li class="flex-fill"><%= link_to root_path(), class: "text-reset" do %>
+                    <i class="fas fa-home fa-2x"></i>
+                  <% end %></li>
+                  <li class="flex-fill"><%= link_to my_page_path(current_user), class: "text-reset" do %>
+                    <i class="fas fa-chart-bar fa-2x"></i>
+                  <% end %></li>
+                  <li class="flex-fill"><%= link_to user_search_path(), class: "text-reset" do %>
+                    <i class="fas fa-search fa-2x"></i>
+                  <% end %></li>
+                  <li class="flex-fill"><%= link_to notifications_path(current_user), class: "text-reset" do %>
+                    <% if unchecked_notifications.any? %>
+                      <span class="fa-layers fa-fw ml-2">
+                        <i class="fas fa-bell fa-2x" data-fa-transform="left-5"></i>
+                        <span class="fa-layers-counter fa-2x fa-layers-bottom-right bg-tomato"></span>
+                      </span>
+                    <% else%>
+                      <i class="fas fa-bell fa-2x"></i>
+                    <% end %>
+                  <% end %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+    <% else %>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="position-fixed offset-2 col-2 d-none d-md-block pl-xl-5">
+            <div class="mt-5 ml-xl-5">
+              <div class="m">
+                <%= image_tag 'logo.png', size: "100x100", class: "rounded" %>
+              </div>
+              <ul class="list-unstyled mt-4">
+                <li><%= link_to new_user_session_path(), class: "text-reset" do %>
+                  <i class="fas fa-sign-in-alt fa-lg"></i>
+                  ログイン
+                <% end %></li>
+                <li class="mt-3"><%= link_to new_user_registration_path(), class: "text-reset text-nowrap" do %>
+                  <i class="fas fa-user-plus fa-lg"></i>
+                  ユーザ登録
+                <% end %></li>
+              </ul>
+            </div>
+          </div>
+          <div class="offset-md-4 col-md-5 mt-2 pt-5 px-0 border-left">
+            <div class="fixed-top offset-md-4 col-md-5 bg-white pos-f-t border-bottom  border-left">
+              <%= render 'layouts/nav' %>
+              <div class="collapse" id="navbarToggleExternalContent">
+                <div class="d-flex flex-column pt-1 pb-3 px-4">
+                  <%= link_to new_user_session_path(), class: "my-2" do %>
+                    <i class="fas fa-sign-in-alt fa-lg"></i>
+                    ログイン
+                  <% end %>
+                  <%= link_to new_user_registration_path(), class: "my-2" do %>
+                    <i class="fas fa-user-plus fa-lg"></i>
+                    ユーザ登録
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% end %> 
   </body>
 </html>
