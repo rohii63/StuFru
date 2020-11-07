@@ -62,7 +62,7 @@
             </div>
           </div>
 
-          <div class="offset-sm-3 col-lg-8 pt-5 px-0 border-left">
+          <div class="offset-sm-3 col-lg-8 py-5 px-0 pb-sm-0 border-left">
             <div class="fixed-top offset-sm-3 col-lg-8 pos-f-t border-bottom border-left bg-white">
               <%= render 'layouts/nav' %>
               <div class="collapse" id="navbarToggleExternalContent">
@@ -82,10 +82,12 @@
                 </ul>
               </div>
             </div>
+
             <%= yield %>
+
             <div class="fixed-bottom col d-sm-none border-top bg-white">
               <div>
-                <ul class="d-flex list-unstyled text-center my-2">
+                <ul class="d-flex list-unstyled text-center my-2 py-1">
                   <li class="flex-fill"><%= link_to root_path(), class: "text-reset" do %>
                     <i class="fas fa-home fa-lg"></i>
                   <% end %></li>

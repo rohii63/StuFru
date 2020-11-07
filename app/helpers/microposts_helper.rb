@@ -12,7 +12,7 @@ module MicropostsHelper
     hours = tmp / 60
     minutes = tmp % 60
 
-    "前日比#{sign + hours.to_s}時間#{minutes}分"
+    "前日比 #{sign + hours.to_s}時間#{minutes}分"
   end
 
   def week_before_ratio_in_study_time
@@ -27,7 +27,7 @@ module MicropostsHelper
     hours = tmp / 60
     minutes = tmp % 60
 
-    "前週比#{sign + hours.to_s}時間#{minutes}分"
+    "前週比 #{sign + hours.to_s}時間#{minutes}分"
   end
 
   def month_before_ratio_in_study_time
@@ -42,7 +42,7 @@ module MicropostsHelper
     hours = tmp / 60
     minutes = tmp % 60
 
-    "前月比#{sign + hours.to_s}時間#{minutes}分"
+    "前月比 #{sign + hours.to_s}時間#{minutes}分"
   end
 
 end

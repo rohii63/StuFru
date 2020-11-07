@@ -1,78 +1,81 @@
-<p>
-  <div><strong>総勉強時間</strong></div>
+<div class="border-bottom py-2 text-center">
+  <span><strong>総勉強時間</strong></span>
   <%= @total_study_time[0] %>時間<%= @total_study_time[1] %>分
-</p>
+</div>
 
-<div class="row">
+<div class="row py-4">
   <div class="col-2">
-    <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="list-daily-list" data-toggle="list" href="#list-daily" role="tab" aria-controls="daily">日</a>
-      <a class="list-group-item list-group-item-action" id="list-weekly-list" data-toggle="list" href="#list-weekly" role="tab" aria-controls="weekly">週</a>
-      <a class="list-group-item list-group-item-action" id="list-monthly-list" data-toggle="list" href="#list-monthly" role="tab" aria-controls="monthly">月</a>
+    <div class="nav flex-column nav-pills text-center mt-5 ml-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active mt-5" id="v-pills-daily-tab" data-toggle="pill" href="#v-pills-daily" role="tab" aria-controls="v-pills-daily" aria-selected="true">日</a>
+      <a class="nav-link" id="v-pills-weekly-tab" data-toggle="pill" href="#v-pills-weekly" role="tab" aria-controls="v-pills-weekly" aria-selected="false">週</a>
+      <a class="nav-link" id="v-pills-monthly-tab" data-toggle="pill" href="#v-pills-monthly" role="tab" aria-controls="v-pills-monthly" aria-selected="false">月</a>
     </div>
   </div>
-  <div class="col-8">
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane  show active" id="list-daily" role="tabpanel" aria-labelledby="list-daily-list">
-        <p>
-          <div><strong>今日の勉強時間</strong></div>
+
+  <div class="col-10 pl-0 pr-5">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-daily" role="tabpanel" aria-labelledby="v-pills-daily-tab">
+        <div class="text-center mb-3">
+          <span><strong>今日の勉強時間</strong></span>
           <%= @today_study_time[0] %>時間<%= @today_study_time[1] %>分
-          <div><%= day_before_ratio_in_study_time %></div>
-        </p>
-        <strong id="aggregation_period_daily">
+          <div><small><%= day_before_ratio_in_study_time %></small></div>
+        </div>
+        <div id="aggregation_period_daily" class="d-flex justify-content-between">
           <%= render 'users/my_page/aggregation_period_daily' %>
-        </strong>
-        <canvas id="dailyGraph" width="900" height="400"></canvas>
+        </div>
+        <canvas id="dailyGraph" width="900" height="580"></canvas>
       </div>
-      <div class="tab-pane " id="list-weekly" role="tabpanel" aria-labelledby="list-weekly-list">
-        <p>
-          <div><strong>今週の勉強時間</strong></div>
+      <div class="tab-pane fade" id="v-pills-weekly" role="tabpanel" aria-labelledby="v-pills-weekly-tab">
+        <div class="text-center mb-3">
+          <span><strong>今週の勉強時間</strong></span>
           <%= @this_week_study_time[0] %>時間<%= @this_week_study_time[1] %>分
-          <div><%= week_before_ratio_in_study_time %></div>
-        </p>
-        <strong id="aggregation_period_weekly">
+          <div><small><%= week_before_ratio_in_study_time %></small></div>
+        </div>
+        <div id="aggregation_period_weekly" class="d-flex justify-content-between">
           <%= render 'users/my_page/aggregation_period_weekly' %>
-        </strong>
-        <canvas id="weeklyGraph" width="900" height="400"></canvas>
+        </div>
+        <canvas id="weeklyGraph" width="900" height="580"></canvas>
       </div>
-      <div class="tab-pane " id="list-monthly" role="tabpanel" aria-labelledby="list-monthly-list">
-        <p>
-          <div><strong>今月の勉強時間</strong></div>
+      <div class="tab-pane fade" id="v-pills-monthly" role="tabpanel" aria-labelledby="v-pills-monthly-tab">
+        <div class="text-center mb-3">
+          <span><strong>今月の勉強時間</strong></span>
           <%= @this_month_study_time[0] %>時間<%= @this_month_study_time[1] %>分
-          <div><%= month_before_ratio_in_study_time %></div>
-        </p>
-        <strong id="aggregation_period_monthly">
+          <div><small><%= month_before_ratio_in_study_time %></small></div>
+        </div>
+        <div id="aggregation_period_monthly" class="d-flex justify-content-between">
           <%= render 'users/my_page/aggregation_period_monthly' %>
-        </strong>
-        <canvas id="monthlyGraph" width="900" height="400"></canvas>
+        </div>
+        <canvas id="monthlyGraph" width="900" height="580"></canvas>
       </div>
     </div>
   </div>
 </div>
 
-<span id="weekTargetLabel"><strong>今週の目標</strong></span>
+<div class="border-top py-4">
+  <span id="weekTargetLabel" class="border"><strong>今週の目標</strong></span>
 
-<% if @user == current_user %>
-  <button id="weekTargetNewBtn" class="btn btn-primary">作成</button>
-<% end %>
+  <% if @user == current_user %>
+    <button id="weekTargetNewBtn" class="btn btn-primary">作成</button>
+  <% end %>
 
-<%= link_to "履歴", user_week_targets_path(@user) %>
+  <%= link_to "履歴", user_week_targets_path(@user) %>
 
-<% if @user == current_user %>
-  <div id="selectBook"></div>
-  <div id="book_select_modal">
-    <%= render 'users/my_page/book_select_modal' %>
+  <% if @user == current_user %>
+    <div id="selectBook"></div>
+    <div id="book_select_modal">
+      <%= render 'users/my_page/book_select_modal' %>
+    </div>
+    <div id="weekTargetForm"></div>
+  <% end %>
+
+  <div id="weekTargetArea">
+    <% if @week_targets.empty? %>
+      <div id="whenWeekTargetAreaBlank">今週の目標を設定しよう！</div>
+    <% end %>
+    <% @week_targets.each do |week_target| %>
+      <%= render 'users/my_page/week_target_card', week_target: week_target %>
+    <% end %>
   </div>
-  <div id="weekTargetForm"></div>
-<% end %>
-
-<div id="weekTargetArea">
-  <% if @week_targets.empty? %>
-    <div id="whenWeekTargetAreaBlank">今週の目標を設定しよう！</div>
-  <% end %>
-  <% @week_targets.each do |week_target| %>
-    <%= render 'users/my_page/week_target_card', week_target: week_target %>
-  <% end %>
 </div>
 
 
