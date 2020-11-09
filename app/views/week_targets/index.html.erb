@@ -26,7 +26,7 @@
             <%= sprintf("%04d", achievement) %> <%= week_target.study_unit %></div>
         <% end %>
 
-        <%= render 'users/my_page/canvas_tag', week_target: week_target %>
+        <canvas id='studyAmountGraph<%= week_target.id %>' width='250' height='200'></canvas>
       <% end %>
     <% end %>
   <% end %>

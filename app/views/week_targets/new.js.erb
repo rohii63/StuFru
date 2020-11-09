@@ -1,6 +1,14 @@
 $(function() {
+  if ($("#btnWrap")[0]) {
+    $("#btnWrap").remove();
+    $("#weekTargetHeader").append("<a id='bookSelectBtn' class='btn btn-primary' data-toggle='modal' data-target='#bookSelectModal'>教材選択</a>");
+  };
   $("#bookSelectModal").modal("hide");
-  $("#selectBook").html("");
+
+  if (!$("#weekTargetForm")[0]) {
+    $("#book_select_modal").after("<div id='weekTargetForm' class='border-top border-bottom mt-2 py-2 col-xl-8 col-10 mx-auto'></div>")
+  };
+
   $("#weekTargetForm").html("<%= escape_javascript(render 'users/my_page/week_target_form') %>");
 
   $("#weekTargetForm").on("change", "#totalBtn1", function() {

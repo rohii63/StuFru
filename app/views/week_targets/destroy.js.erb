@@ -1,10 +1,7 @@
 $(function(){
   $("#weekTargetCard<%= @week_target.id %>").remove();
 
-  <% if @week_targets.empty? %>
-    var elem = $("<div id='whenWeekTargetAreaBlank'>今週の目標を設定しよう！</div>");
-
-    $("#weekTargetArea").prepend(elem);
-    
-  <% end %>
+  if (!$("#weekTargetArea>div")[0]) {
+    $("#book_select_modal").after("<h5 id='whenWeekTargetAreaBlank' class='text-center mt-3 mb-5'>今週の目標を設定しよう！</h5>");
+  };
 })

@@ -11,14 +11,27 @@
           <% else %>
             <% @book_categories.each do |category| %>
               <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "in_progress") %>
-              <p><%= category.name unless tmp_status_with_books.empty? %></p>
-              <% tmp_status_with_books.each do |status_with_book| %>
-                <label>
-                  <%= f.radio_button :book_id, "#{status_with_book.book.id}" %>
-                  <%= image_tag url_for(status_with_book.book.icon.variant(resize: "75x75>")) %>
-                  <%= status_with_book.book.name %>  
-                </label>
+              <% unless tmp_status_with_books.empty? %>
+                <div class="py-2">
+                  <i class="fas fa-bookmark"></i>
+                  <%= category.name %>
+                </div>
               <% end %>
+              <div class="row">
+                <% tmp_status_with_books.each do |status_with_book| %>
+                  <label class="col-4 d-flex align-items-center">
+                    <%= f.radio_button :book_id, "#{status_with_book.book.id}", class: "mr-2" %>
+                    <div class="border rounded" style="width: 7rem; height: 10rem; overflow: auto;">
+                      <div class="position-relative" style="height: 7rem;">
+                        <%= image_tag url_for(status_with_book.book.icon.variant(resize: "80x100>")), class: "rounded position-absolute", style: "top: 50%; left: 50%; transform: translate(-50%, -50%);" %>
+                      </div>
+                      <div class="border-top">
+                        <%= status_with_book.book.name %>
+                      </div>
+                    </div>
+                  </label>
+                <% end %>
+              </div>
             <% end %>
           <% end %>
         </div>

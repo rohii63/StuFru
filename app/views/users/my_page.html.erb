@@ -1,29 +1,25 @@
 <%= content_for :title, "マイページ" %>
 <div id="error_messages"></div>
 
-<div class="row">
-  <div class="col-2">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">プロフィール</a>
-      <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-book" aria-selected="false">教材</a>
-      <a class="nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline" aria-selected="false">タイムライン</a>
-      <a class="nav-link active" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="true">レポート</a>
-    </div>
+
+
+<div class="nav nav-pills nav-fill border-bottom py-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-user"></i></a>
+  <a class="nav-item nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-book" aria-selected="false"><i class="fas fa-book"></i></a>
+  <a class="nav-item nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline" aria-selected="false"><i class="fas fa-home"></i></a>
+  <a class="nav-item nav-link active" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="true"><i class="far fa-chart-bar"></i></a>
+</div>
+<div class="tab-content" id="v-pills-tabContent">
+  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+    <%= render 'users/my_page/profile_tab' %>
   </div>
-  <div class="col-10">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <%= render 'users/my_page/profile_tab' %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
-        <%= render 'users/my_page/book_tab' %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-timeline" role="tabpanel" aria-labelledby="v-pills-timeline-tab">
-        <%= render 'shared/timeline' %>
-      </div>
-      <div class="tab-pane fade show active" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">
-        <%= render 'users/my_page/report' %>
-      </div>
-    </div>
+  <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
+    <%= render 'users/my_page/book_tab' %>
+  </div>
+  <div class="tab-pane fade" id="v-pills-timeline" role="tabpanel" aria-labelledby="v-pills-timeline-tab">
+    <%= render 'shared/timeline' %>
+  </div>
+  <div class="tab-pane fade show active" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">
+    <%= render 'users/my_page/report' %>
   </div>
 </div>
