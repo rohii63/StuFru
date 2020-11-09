@@ -4,7 +4,8 @@ function configureDoughnutGraph(displayGraph) {
 
   var options = {
     cutoutPercentage: 65,
-    responsive: false
+    responsive: false,
+    maintainAspectRatio: false
   };
 
   displayGraph(blue, gray, options);

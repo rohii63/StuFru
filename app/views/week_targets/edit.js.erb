@@ -1,6 +1,5 @@
 $(function() {
-  $("<%= escape_javascript(render 'users/my_page/week_target_edit_form') %>").replaceAll("#weekTarget<%= @week_target.id %>");
-  $("#weekTargetDeleteLink").remove();
+  $("#weekTarget<%= @week_target.id %>").html("<%= escape_javascript(render 'users/my_page/week_target_edit_form') %>");
 
   $("#weekTargetCard<%= @week_target.id %>").on("change", "#totalBtn2", function() {
     $("<%= escape_javascript(number_field :week_target, :content, in: 1...9999) %>").replaceAll("#studyAmountRangeInput");
@@ -10,5 +9,9 @@ $(function() {
   $('#weekTargetCard<%= @week_target.id %>').on("change", "#rangeBtn2", function() {
     $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#week_target_content");
     $("#studyUnit2").html("");
+  });
+
+  $("#weekTargetArea").on("click", "#weekTargetEditCloseBtn<%= @week_target.id %>", function() {
+    $("#weekTarget<%= @week_target.id %>").html("<%= escape_javascript(render 'users/my_page/week_target_content', week_target: @week_target) %>");
   });
 })

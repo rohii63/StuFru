@@ -1,0 +1,16 @@
+<% if week_target.study_unit == "時間" %>
+  <div id="weekTarget<%= week_target.id %>">
+    目標: 
+    <%= sprintf("%02d", week_target.content / 60) %> 時間 
+    <%= sprintf("%02d", week_target.content % 60) %> 分
+    <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
+    <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
+  </div>
+<% else %>
+  <div id="weekTarget<%= week_target.id %>">
+    目標: 
+    <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %>
+    <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
+    <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
+  </div>
+<% end %>

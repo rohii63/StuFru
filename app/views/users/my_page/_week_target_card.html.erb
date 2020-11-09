@@ -1,26 +1,39 @@
-<div id="weekTargetCard<%= week_target.id %>">
+<div id="weekTargetCard<%= week_target.id %>" class="col-lg-6 mt-2">
   <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
   
-  <div><strong><%= week_target.book.name %></strong></div>
-  <% if week_target.study_unit == "時間" %>
-    <span id="weekTarget<%= week_target.id %>">目標: 
-      <%= sprintf("%02d", week_target.content / 60) %> 時間 
-      <%= sprintf("%02d", week_target.content % 60) %> 分</span>
-    <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
-    <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true, id: "weekTargetDeleteLink" if @user == current_user %>
-    <div>現在: 
-      <%= sprintf("%02d", result / 60) %> 時間 
-      <%= sprintf("%02d", result % 60) %> 分</div>
+  <div class="w-50 mx-auto">
+    <div>
+      <i class="fas fa-book-open"></i> 
+      <%= week_target.book.name %>
+    </div>
+    <% if week_target.study_unit == "時間" %>
+      <div id="weekTarget<%= week_target.id %>">
+        目標: 
+        <%= sprintf("%02d", week_target.content / 60) %> 時間 
+        <%= sprintf("%02d", week_target.content % 60) %> 分
+        <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
+        <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
+      </div>
+      <div>
+        現在: 
+        <%= sprintf("%02d", result / 60) %> 時間 
+        <%= sprintf("%02d", result % 60) %> 分
+      </div>
+    <% else %>
+      <div id="weekTarget<%= week_target.id %>">
+        目標: 
+        <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %>
+        <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
+        <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
+      </div>
+      <div>
+        現在: 
+        <%= sprintf("%04d", result) %> <%= week_target.study_unit %>
+      </div>
+    <% end %>
+  </div>
 
-  <% else %>
-    <span id="weekTarget<%= week_target.id %>">目標: 
-      <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %></span>
-    <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
-    <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true, id: "weekTargetDeleteLink" if @user == current_user %>
-    <div>現在: 
-      <%= sprintf("%04d", result) %> <%= week_target.study_unit %></div>
-
-  <% end %>
-
-  <%= render 'users/my_page/canvas_tag', week_target: week_target %>
+  <div class="w-50 mt-2 mx-auto text-center">
+    <canvas id="studyAmountGraph<%= week_target.id %>" width='250' height='200'></canvas>
+  </div>
 </div>
