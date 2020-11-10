@@ -18,7 +18,7 @@
         <div class="text-center mb-3">
           <span><strong>今日の勉強時間</strong></span>
           <%= @today_study_time[0] %>時間<%= @today_study_time[1] %>分
-          <div><small><%= day_before_ratio_in_study_time %></small></div>
+          <div class="text-muted"><small><%= day_before_ratio_in_study_time %></small></div>
         </div>
         <div id="aggregation_period_daily" class="d-flex justify-content-around">
           <%= render 'users/my_page/aggregation_period_daily' %>
@@ -31,7 +31,7 @@
         <div class="text-center mb-3">
           <span><strong>今週の勉強時間</strong></span>
           <%= @this_week_study_time[0] %>時間<%= @this_week_study_time[1] %>分
-          <div><small><%= week_before_ratio_in_study_time %></small></div>
+          <div class="text-muted"><small><%= week_before_ratio_in_study_time %></small></div>
         </div>
         <div id="aggregation_period_weekly" class="d-flex justify-content-around">
           <%= render 'users/my_page/aggregation_period_weekly' %>
@@ -44,7 +44,7 @@
         <div class="text-center mb-3">
           <span><strong>今月の勉強時間</strong></span>
           <%= @this_month_study_time[0] %>時間<%= @this_month_study_time[1] %>分
-          <div><small><%= month_before_ratio_in_study_time %></small></div>
+          <div class="text-muted"><small><%= month_before_ratio_in_study_time %></small></div>
         </div>
         <div id="aggregation_period_monthly" class="d-flex justify-content-around">
           <%= render 'users/my_page/aggregation_period_monthly' %>
