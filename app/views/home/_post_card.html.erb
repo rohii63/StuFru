@@ -1,32 +1,56 @@
-<ul id="post_card_micropost<%= micropost.id %>">
-  <li><%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(micropost.user) %></li>
-  <%= link_to micropost_path(micropost) do %>
-    <li><%= micropost.user.name %></li>
-    <li><%= micropost.studied_at %></li>
-    <li><%= micropost.content %></li>
-    <li><%= image_tag url_for(micropost.picture.variant(resize: "100x100>")) if micropost.picture.attached? %></li>
-      <ul>
-        <li><%= image_tag url_for(micropost.book.icon.variant(resize: "100x100>")) if micropost.book %></li>
-        <li><%= micropost.book.name if micropost.book %></li>
-        <li>
-          <% if micropost.how_many_studied_hours != 0 %>
-            <%= micropost.how_many_studied_hours %>時間
-          <% end %>
-          <% if micropost.how_many_studied_minutes != 0 %>
-            <%= micropost.how_many_studied_minutes %>分
-          <% end %>
-        </li>
-        <li>
-          <% if micropost.study_amount  %>
-            <%= micropost.study_amount %><%= micropost.study_unit %>
-          <% end %>
-        </li>
-      </ul>
-</ul>
-<ul>
-  <li>コメントする</li>
-  <% end %>
-  <li id="like_button_<%= micropost.id %>">
-    <%= render 'likes/like_btn', micropost: micropost %>
-  </li>
-</ul>
+<div class="col-sm-6 py-3 pl-2 pr-3 border rounded-lg" id="post_card_micropost<%= micropost.id %>">
+  <div class="row">
+    <div class="col-2">
+      <%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "60x60>"))), my_page_path(micropost.user) %>
+    </div>
+    <div class="col-10">
+      <%= link_to micropost_path(micropost), class: "text-reset", style: "text-decoration: none;" do %>
+        <div>
+            <%= micropost.user.name %>
+          <div class="text-muted text-right mr-2">
+            <%= micropost.studied_at %>
+          </div>
+        </div>
+        <div class="mt-1">
+          <%= micropost.content %>
+        </div>
+        <div class="mt-1">
+          <%= image_tag url_for(micropost.picture.variant(resize: "350x180>")), class: "rounded" if micropost.picture.attached? %>
+        </div>
+        <div class="d-flex justify-content-center align-items-center border rounded shadow-sm mt-1 py-2">
+          <div class="col-3 px-2">
+            <%= image_tag url_for(micropost.book.icon.variant(resize: "85x70>")), class: "border rounded mr-2" if micropost.book %>
+          </div>
+          <div class="col-9 px-2" style="height: 72px;">
+            <div class="overflow-hidden m" style="text-overflow: ellipsis; white-space: nowrap;">
+              <%= micropost.book.name if micropost.book %>
+            </div>
+            <div>
+              <i class="far fa-clock"></i>
+              <% if micropost.how_many_studied_hours != 0 %>
+                <span class="text-primary"><%= micropost.how_many_studied_hours %></span>時間
+              <% end %>
+              <% if micropost.how_many_studied_minutes != 0 %>
+                <span class="text-primary"><%= micropost.how_many_studied_minutes %></span>分
+              <% end %>
+            </div>
+            <div>
+              <% if micropost.study_amount  %>
+                <i class="fas fa-pen"></i>
+                <%= micropost.study_amount %><%= micropost.study_unit %>
+              <% end %>
+            </div>        
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="offset-2 col-10 d-flex mt-3">
+    <div class="col-7 pl-0">
+      <i class="far fa-comment mr-2"></i>コメントする
+    </div>
+    <div class="col-5 pl-0" id="like_button_<%= micropost.id %>">
+      <%= render 'likes/like_btn', micropost: micropost %>
+    </div>
+  </div>
+</div>

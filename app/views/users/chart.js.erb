@@ -1,4 +1,6 @@
 $(function() {
+  $("<%= escape_javascript(render 'layouts/top_nav_link') %>").replaceAll("#navbarToggler");
+
   <% daily_data = [] %>
   <% weekly_data = [] %>
   <% monthly_data = [] %>

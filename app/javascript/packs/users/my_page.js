@@ -1,9 +1,15 @@
+import Tooltip from "bootstrap/js/src/tooltip";
+
 $(function() {
   $.ajax({
     url: location.href,
     type: "GET", 
     data: {chart: ""},
     dataType: "script"
+  });
+  
+  $("#fixedTop").on("mouseover", "#topNavLink", function(){
+    $('[data-toggle="tooltip"]').tooltip();
   });
 
   $("#weekTargetHeader").on("click", "#weekTargetNewBtn", function() {

@@ -1,15 +1,13 @@
 <%= content_for :title, "マイページ" %>
-<div id="error_messages"></div>
 
-
-
-<div class="nav nav-pills nav-fill border-bottom py-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+<div class="fixed-top offset-sm-3 col-lg-8 col-sm-9 nav nav-pills nav-fill border-bottom border-left bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-top: 44px;">
   <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-user"></i></a>
   <a class="nav-item nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab" aria-controls="v-pills-book" aria-selected="false"><i class="fas fa-book"></i></a>
   <a class="nav-item nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline" aria-selected="false"><i class="fas fa-home"></i></a>
   <a class="nav-item nav-link active" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="true"><i class="far fa-chart-bar"></i></a>
 </div>
-<div class="tab-content" id="v-pills-tabContent">
+
+<div class="tab-content mt-4 pt-3" id="v-pills-tabContent">
   <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
     <%= render 'users/my_page/profile_tab' %>
   </div>
@@ -23,3 +21,5 @@
     <%= render 'users/my_page/report' %>
   </div>
 </div>
+
+<%= javascript_pack_tag 'users/my_page' %>

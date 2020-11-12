@@ -63,22 +63,35 @@
           </div>
 
           <div class="offset-sm-3 col-lg-8 py-5 px-0 pb-sm-0 border-left">
-            <div class="fixed-top offset-sm-3 col-lg-8 pos-f-t border-bottom border-left bg-white">
-              <%= render 'layouts/nav' %>
+            <div id="fixedTop" class="fixed-top offset-sm-3 col-lg-8 pos-f-t border-bottom border-left bg-white">
+              <nav class="navbar d-flex align-items-center py-1 px-0">
+                <h6 class="font-weight-bold mb-0 py-2">
+                  <%= yield(:title) %>
+                </h6>
+                <button id="navbarToggler" class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="fas fa-bars fa-lg d-md-none"></i>
+                </button>
+              </nav>
               <div class="collapse" id="navbarToggleExternalContent">
                 <ul class="list-unstyled mt-2 ml-3">
-                  <li><%= link_to user_books_path(current_user), class: "text-reset" do %>
-                    <i class="fas fa-book-open"></i>
-                    教材全般
-                  <% end %></li>
-                  <li class="mt-1"><%= link_to user_path(current_user), class: "text-reset" do %>
-                    <i class="fas fa-user"></i>
-                    プロフィール
-                  <% end %></li>
-                  <li class="mt-1"><%= link_to destroy_user_session_path(), method: :delete, class: "text-reset" do %>
-                    <i class="fas fa-sign-out-alt"></i>
-                    ログアウト
-                  <% end %></li>
+                  <li>
+                    <%= link_to user_books_path(current_user), class: "text-reset" do %>
+                      <i class="fas fa-book-open"></i>
+                      教材全般
+                    <% end %>
+                  </li>
+                  <li class="mt-1">
+                    <%= link_to user_path(current_user), class: "text-reset" do %>
+                      <i class="fas fa-user"></i>
+                      プロフィール
+                    <% end %>
+                  </li>
+                  <li class="mt-1">
+                    <%= link_to destroy_user_session_path(), method: :delete, class: "text-reset" do %>
+                      <i class="fas fa-sign-out-alt"></i>
+                      ログアウト
+                    <% end %>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -137,7 +150,7 @@
           </div>
           <div class="offset-md-4 col-md-5 mt-2 pt-5 px-0 border-left">
             <div class="fixed-top offset-md-4 col-md-5 bg-white pos-f-t border-bottom  border-left">
-              <%= render 'layouts/nav' %>
+              <%= render 'layouts/page_title' %>
               <div class="collapse" id="navbarToggleExternalContent">
                 <div class="d-flex flex-column pt-1 pb-3 px-4">
                   <%= link_to new_user_session_path(), class: "my-2 text-reset" do %>

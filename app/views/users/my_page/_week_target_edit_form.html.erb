@@ -1,38 +1,41 @@
-<%= form_with model: @week_target, url: user_week_target_path(@user, @week_target) do |f| %>
+<%= form_with model: @week_target, url: user_week_target_path(@user, @week_target), class: "border-top border-bottom" do |f| %>
   <%= f.hidden_field :book_id %>
 
-  <% case @week_target.study_unit %>
-    <% when "時間" %>
-      <div>
-        目標:
-        <% hours = @week_target.content / 60 %>
-        <% minutes = @week_target.content % 60 %>
-        <%= number_field_tag 'time[hours]', hours, in: 0...168 %>
-        <%= label_tag 'time[hours]', "時間" %>
-        <%= number_field_tag 'time[minutes]', minutes, in: 0...60 %>
-        <%= label_tag 'time[minutes]', "分" %>
-      </div>
+  <div class="my-2">
+    <% case @week_target.study_unit %>
+      <% when "時間" %>
+        <div class="my-1">
+          <div>目標:</div>
+            <% hours = @week_target.content / 60 %>
+            <% minutes = @week_target.content % 60 %>
+            <%= number_field_tag 'time[hours]', hours, in: 0...168 %>
+            <%= label_tag 'time[hours]', "時間" %>
+            <%= number_field_tag 'time[minutes]', minutes, in: 0...60 %>
+            <%= label_tag 'time[minutes]', "分" %>
+        </div>
 
-    <% when "ページ" %>
-      <div>
-        <input id="totalBtn2" name="studyAmount" type="radio" checked="checked">合計</input>
-        <input id="rangeBtn2" name="studyAmount" type="radio">範囲</input>
-      </div>
-      <div>目標:</div>
-      <div>
-        <%= f.number_field :content, in: 1...9999 %> <span id="studyUnit2"><%= @week_target.study_unit %></span>
-      </div>
+      <% when "ページ" %>
+        <div class="m">
+          <input id="totalBtn2" name="studyAmount" type="radio" checked="checked">合計</input>
+          <input id="rangeBtn2" name="studyAmount" type="radio">範囲</input>
+        </div>
+        <div class="my-1">
+          <div>目標:</div>
+            <%= f.number_field :content, in: 1...9999 %> 
+            <span id="studyUnit2"><%= @week_target.study_unit %></span>
+        </div>
 
-    <% else %>
-      <div>
-        目標:
-        <%= f.number_field :content, in: 1...9999 %> <%= @week_target.study_unit %>
-      </div>
-      
-  <% end %>
-  
-  <div class="text-right">
-    <a id="weekTargetEditCloseBtn<%= @week_target.id %>" class="rounded-pill btn btn-secondary">閉じる</a>
-    <%= f.submit "保存", class: "rounded-pill btn btn-primary" %>
+      <% else %>
+        <div class="my-1">
+          <div>目標:</div>
+          <%= f.number_field :content, in: 1...9999 %> <%= @week_target.study_unit %>
+        </div>
+        
+    <% end %>
+    
+    <div class="text-right">
+      <a id="weekTargetEditCloseBtn<%= @week_target.id %>" class="rounded-pill btn btn-secondary">閉じる</a>
+      <%= f.submit "保存", class: "rounded-pill btn btn-primary" %>
+    </div>
   </div>
 <% end %>

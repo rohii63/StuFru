@@ -1,5 +1,5 @@
 Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
-  color: 'rgb(54, 162, 235)',
+  color: 'rgb(0, 72, 255)',
   font: { weight: 'bold' },
   anchor: 'end',
   align: 'end',

@@ -10,6 +10,9 @@ class HomeController < ApplicationController
         @selected_book = @user.status_with_books.find_by(book_id: book_id) if book_id.present?
         render 'modal'
       
+      elsif params[:navbar]
+        render 'navbar'
+
       else
         @user = current_user
         @micropost = @user.microposts.build()

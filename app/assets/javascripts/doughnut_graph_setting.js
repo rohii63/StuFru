@@ -1,5 +1,5 @@
 function configureDoughnutGraph(displayGraph) {
-  var blue = 'rgb(54, 162, 235)';
+  var blue = 'rgb(0, 72, 255)';
   var gray = 'rgb(99, 99, 99)';
 
   var options = {

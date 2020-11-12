@@ -8,7 +8,7 @@
 
   <% case @status_with_book.study_unit %>
     <% when "時間" %>
-      <div class="col-md-8">
+      <div class="col-md-8 my-1">
         <%= f.label :content, class: "mr-2" %>
         <%= number_field_tag 'time[hours]', nil, in: 0...168 %>
         <%= label_tag 'time[hours]', "時間" %>
@@ -16,17 +16,19 @@
         <%= label_tag 'time[minutes]', "分" %>
       </div>
     <% when "ページ" %>
-      <div class="col-12">
-        <%= f.label :content %>
-        <input id="totalBtn1" name="studyAmount" type="radio" checked="checked">合計</input>
-        <input id="rangeBtn1" name="studyAmount" type="radio">範囲</input>
-      </div>
-      <div class="col-md-8">
-        <%= f.number_field :content, in: 1...9999 %>
-        <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
+      <div class="my-1">
+        <div class="col-12">
+          <%= f.label :content %>
+          <input id="totalBtn1" name="studyAmount" type="radio" checked="checked">合計</input>
+          <input id="rangeBtn1" name="studyAmount" type="radio">範囲</input>
+        </div>
+        <div class="col-md-8">
+          <%= f.number_field :content, in: 1...9999 %>
+          <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
+        </div>
       </div>
     <% else %>
-      <div class="col-md-8">
+      <div class="col-md-8 my-1">
         <%= f.label :content, class: "mr-2" %>
         <%= f.number_field :content, in: 1...9999 %>
         <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
