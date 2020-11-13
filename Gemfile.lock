@@ -141,7 +141,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    listen (3.2.1)
+    listen (3.3.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.7.0)
@@ -312,7 +312,7 @@ DEPENDENCIES
   image_processing (~> 1.12)
   jbuilder (~> 2.10)
   kaminari (~> 1.2, >= 1.2.1)
-  listen (~> 3.2)
+  listen (~> 3.3)
   mysql2 (>= 0.4.4)
   nokogiri (~> 1.10, >= 1.10.10)
   omniauth-twitter
