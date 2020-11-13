@@ -8,7 +8,7 @@
         <div class="modal-body">
           <div class="form-group">
             <%= label_tag 'micropost[book_id]', "教材名" %>
-            <%= f.collection_select :book_id, @books_in_progress, :id, :name, class: "form-control", include_blank: true %>
+            <%= select_tag "micropost[book_id]", options_from_collection_for_select(@books_in_progress, "id", "name"), class: "form-control w-100", include_blank: true %>
           </div>
           <div class="form-group">
             <%= f.label :studied_at, "勉強日時" %>

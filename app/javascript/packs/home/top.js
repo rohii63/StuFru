@@ -8,14 +8,16 @@ $(function(){
     $.ajax({
       url: location.href,
       type: "GET", 
-      data: {navbar: ""},
+      data: {layout: ""},
       dataType: "script"
     });
   };
 
-  $("#fixedTop").on("mouseover", "#topNavLink", function(){
+  $("#topNavBar").on("mouseover", "#topNavLink", function(){
     $('[data-toggle="tooltip"]').tooltip();
   });
+
+  $("#postBtn")
 
   $('input:radio[name="user[target]"]').on('change', function(){
     $("#targetCreateBtn").prop("disabled", false);

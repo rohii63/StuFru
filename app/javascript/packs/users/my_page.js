@@ -8,7 +8,7 @@ $(function() {
     dataType: "script"
   });
   
-  $("#fixedTop").on("mouseover", "#topNavLink", function(){
+  $("#topNavBar").on("mouseover", "#topNavLink", function(){
     $('[data-toggle="tooltip"]').tooltip();
   });
 
