@@ -17,7 +17,7 @@ class HomeController < ApplicationController
         @user = current_user
         @micropost = @user.microposts.build()
         @books_in_progress = @user.books_in_progress
-        @follower_microposts = @user.feed.page(params[:page]).per(5)
+        @follower_microposts = @user.feed.page(params[:page]).per(10)
         @target_genre_microposts = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page])
 
         unless @user.target

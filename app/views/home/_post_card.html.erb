@@ -17,31 +17,43 @@
         <div class="mt-1">
           <%= image_tag url_for(micropost.picture.variant(resize: "350x180>")), class: "rounded" if micropost.picture.attached? %>
         </div>
-        <div class="d-flex justify-content-center align-items-center border rounded shadow-sm mt-1 py-2">
-          <div class="col-3 col-md-2 col-xl-3 px-2">
-            <%= image_tag url_for(micropost.book.icon.variant(resize: "85x70>")), class: "border rounded mr-2" if micropost.book %>
-          </div>
-          <div class="col-9 col-md-10 col-xl-9 px-2" style="height: 72px;">
-            <div class="overflow-hidden m" style="text-overflow: ellipsis; white-space: nowrap;">
-              <%= micropost.book.name if micropost.book %>
+        <% if micropost.book %>
+          <div class="d-flex justify-content-center align-items-center border rounded shadow-sm mt-1 py-2">
+            <div class="col-3 col-md-2 col-xl-3 px-2">
+              <%= image_tag url_for(micropost.book.icon.variant(resize: "85x70>")), class: "border rounded mr-2" if micropost.book %>
             </div>
-            <div>
-              <i class="far fa-clock"></i>
-              <% if micropost.how_many_studied_hours != 0 %>
-                <span class="text-primary"><%= micropost.how_many_studied_hours %></span>時間
-              <% end %>
-              <% if micropost.how_many_studied_minutes != 0 %>
-                <span class="text-primary"><%= micropost.how_many_studied_minutes %></span>分
-              <% end %>
+            <div class="col-9 col-md-10 col-xl-9 px-2">
+              <div class="overflow-hidden m" style="text-overflow: ellipsis; white-space: nowrap;">
+                <%= micropost.book.name if micropost.book %>
+              </div>
+              <div>
+                <i class="far fa-clock"></i>
+                <% if micropost.how_many_studied_hours != 0 %>
+                  <span class="text-primary"><%= micropost.how_many_studied_hours %></span>時間
+                <% end %>
+                <% if micropost.how_many_studied_minutes != 0 %>
+                  <span class="text-primary"><%= micropost.how_many_studied_minutes %></span>分
+                <% end %>
+              </div>
+              <div>
+                <% if micropost.study_amount  %>
+                  <i class="fas fa-pen"></i>
+                  <%= micropost.study_amount %><%= micropost.study_unit %>
+                <% end %>
+              </div>        
             </div>
-            <div>
-              <% if micropost.study_amount  %>
-                <i class="fas fa-pen"></i>
-                <%= micropost.study_amount %><%= micropost.study_unit %>
-              <% end %>
-            </div>        
           </div>
-        </div>
+        <% else %>
+          <div class="border rounded shadow-sm mt-1 p-2">
+            <i class="far fa-clock"></i>
+            <% if micropost.how_many_studied_hours != 0 %>
+              <span class="text-primary"><%= micropost.how_many_studied_hours %></span>時間
+            <% end %>
+            <% if micropost.how_many_studied_minutes != 0 %>
+              <span class="text-primary"><%= micropost.how_many_studied_minutes %></span>分
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
