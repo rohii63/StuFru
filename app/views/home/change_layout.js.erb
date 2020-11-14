@@ -1,5 +1,5 @@
 $(function(){
   $("<%= escape_javascript(render 'layouts/top_nav_link') %>").replaceAll("#navbarToggler");
   $("#sideNavList").after("<%= escape_javascript(render 'home/post_btn_in_side_bar') %>");
-  $("#bottomNavBar").prepend("<%= escape_javascript(render 'home/post_btn') %>");
-})  
+  $("#bottomNavBar").prepend("<%= escape_javascript(render 'home/post_btn_near_bottom') %>");
+})

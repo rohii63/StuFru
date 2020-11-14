@@ -5,7 +5,7 @@ $(function() {
     $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @micropost) %>");
 
     <% unless @micropost.errors.any? %>
-      $("<%= escape_javascript(render 'home/post_card', micropost: @micropost) %>").prependTo("#timeline");
+      $("#postBtn").after("<%= escape_javascript(render 'home/post_card', micropost: @micropost) %>");
       $("#micropostModal").html("<%= escape_javascript(render 'home/new_micropost_modal') %>");
     <% end %>
 
