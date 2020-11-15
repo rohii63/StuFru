@@ -28,8 +28,8 @@
                 <div>
                   実績:
                   <% if achievement >= week_target.content %>
-                    <h4 class="d-inline-block" style="color: rgb(54, 162, 235);"><%= sprintf("%02d", achievement / 60) %></h4> 時間 
-                    <h4 class="d-inline-block" style="color: rgb(54, 162, 235);"><%= sprintf("%02d", achievement % 60) %></h4> 分
+                    <h4 class="d-inline-block text-primary"><%= sprintf("%02d", achievement / 60) %></h4> 時間 
+                    <h4 class="d-inline-block text-primary"><%= sprintf("%02d", achievement % 60) %></h4> 分
                   <% else %>
                     <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%02d", achievement / 60) %></h4> 時間 
                     <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%02d", achievement % 60) %></h4> 分
@@ -43,7 +43,7 @@
                 <div>
                   実績: 
                   <% if achievement >= week_target.content %>
-                    <h4 class="d-inline-block" style="color: rgb(54, 162, 235)";><%= sprintf("%04d", achievement) %></h4> <%= week_target.study_unit %>
+                    <h4 class="d-inline-block text-primary"><%= sprintf("%04d", achievement) %></h4> <%= week_target.study_unit %>
                   <% else %>
                     <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%04d", achievement) %></h4> <%= week_target.study_unit %>
                   <% end %>

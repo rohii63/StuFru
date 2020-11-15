@@ -38,7 +38,7 @@
               <div>
                 <% if micropost.study_amount  %>
                   <i class="fas fa-pen"></i>
-                  <%= micropost.study_amount %><%= micropost.study_unit %>
+                  <span class="text-primary"><%= micropost.study_amount %></span><%= micropost.study_unit %>
                 <% end %>
               </div>        
             </div>
@@ -61,7 +61,7 @@
     <div class="col-7 pl-0">
       <i class="far fa-comment mr-2"></i>コメントする
     </div>
-    <div class="col-5 pl-0" id="like_button_<%= micropost.id %>">
+    <div class="col-5 pl-0" id="like_btn<%= micropost.id %>">
       <%= render 'likes/like_btn', micropost: micropost %>
     </div>
   </div>

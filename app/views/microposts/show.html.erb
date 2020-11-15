@@ -38,7 +38,7 @@
     <%= @micropost.content %>
   </div>
   <div class="mt-1">
-    <%= image_tag url_for(@micropost.picture.variant(resize: "350x180>")) if @micropost.picture.attached? %>
+    <%= image_tag url_for(@micropost.picture.variant(resize: "350x180>")), class: "rounded" if @micropost.picture.attached? %>
   </div>
   <% if @micropost.book %>
     <div class="d-flex align-items-center py-2 mt-2 border rounded shadow-sm">
@@ -50,34 +50,36 @@
           <%= @micropost.book.name %>
         </div>
         <div>
+          <i class="far fa-clock"></i>
           <% if @micropost.how_many_studied_hours != 0 %>
-            <%= @micropost.how_many_studied_hours %>時間
+            <span class="text-primary"><%= @micropost.how_many_studied_hours %></span>時間
           <% end %>
           <% if @micropost.how_many_studied_minutes != 0 %>
-            <%= @micropost.how_many_studied_minutes %>分
+            <span class="text-primary"><%= @micropost.how_many_studied_minutes %></span>分
           <% end %>
         </div>
         <div>
           <% if @micropost.study_amount  %>
-            <%= @micropost.study_amount %><%= @micropost.study_unit %>
+            <i class="fas fa-pen"></i>
+            <span class="text-primary"><%= @micropost.study_amount %></span><%= @micropost.study_unit %>
           <% end %>
         </div>
       </div>
     </div>
   <% else %>
-    <div>
+    <div class="mt-2 py-2 pl-2 border rounded shadow-sm">
+      <i class="far fa-clock"></i>
       <% if @micropost.how_many_studied_hours != 0 %>
-        <%= @micropost.how_many_studied_hours %>時間
+        <span class="text-primary"><%= @micropost.how_many_studied_hours %></span>時間
       <% end %>
       <% if @micropost.how_many_studied_minutes != 0 %>
-        <%= @micropost.how_many_studied_minutes %>分
+        <span class="text-primary"><%= @micropost.how_many_studied_minutes %></span>分
       <% end %>
     </div>
   <% end %>
 </div>
 
-
-<div id="like_form">
+<div id="like_form" class="mt-4 border-top">
   <%= render 'microposts/like_form' %>
 </div>
 
