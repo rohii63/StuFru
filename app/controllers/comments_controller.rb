@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     if @comment.save
       @micropost.create_notification_comment!(current_user, @comment.id)
     end
-      @comments = @micropost.comments.all
+    @comments = @micropost.comments.all
   end
 
   def destroy

@@ -1,8 +1,7 @@
-<div id="comment_error_messages"></div>
-<div id="micropost_error_messages"></div>
+<div id="error_messages"></div>
 <% content_for :title, "投稿内容" %>
 
-<div class="col-12 mt-3">
+<div class="p-3">
   <div class="d-flex">
     <div>
       <%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "60x60>"))), my_page_path(@micropost.user) %>
@@ -79,18 +78,20 @@
   <% end %>
 </div>
 
-<div id="like_form" class="mt-4 border-top">
+<div id="like_form" class="p-3 border-top">
   <%= render 'microposts/like_form' %>
 </div>
 
-<div id="comment_field">
+<div id="comment_field" class="p-3 border-top">
   <%= render 'microposts/comment_field' %>
 </div>
 
-<%= form_with model: @comment, url: micropost_comments_path(@micropost) do |comment| %>
-  <%= comment.text_field :content, class: "from-control" %>
-  <%= comment.hidden_field :micropost_id, class: "from-control" %>
-  <%= comment.submit "送信", class: "btn btn-primary" %>
-<% end %>
+<div class="p-3 border-top">
+  <%= form_with model: @comment, url: micropost_comments_path(@micropost), class: "d-flex" do |f| %>
+    <%= f.hidden_field :micropost_id %>
+    <%= f.text_field :content, placeholder: "コメント", class: "col-9 rounded" %>
+    <%= f.submit "送信", class: "col-2 ml-2 btn btn-primary" %>
+  <% end %>
+</div>
 
 <%= javascript_pack_tag 'microposts/show' %>

@@ -1,3 +1,9 @@
-$("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @comment) %>");
-$("#comment_field").html("<%= escape_javascript(render 'microposts/comment_field') %>");
-$("#comment_content").val("");
+$(function(){
+  <% if @comment.errors.any? %>
+    $('body, html').animate({ scrollTop: 0 }, 400);
+  <% end %>
+  
+  $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @comment) %>");
+  $("#comment_field").html("<%= escape_javascript(render 'microposts/comment_field') %>");
+  $("#comment_content").val("");
+})

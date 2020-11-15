@@ -2,7 +2,9 @@ $(function(){
   $("#bookEditModal").modal('hide');
   $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
   
-  <% unless @book.errors.any? %>
+  <% if @book.errors.any? %>
+    $('body, html').animate({ scrollTop: 0 }, 400);
+  <% else %>
     $("#book_info").html("<%= escape_javascript(render 'books/show/book_info') %>");
   <% end %>
 

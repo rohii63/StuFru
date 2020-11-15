@@ -2,14 +2,12 @@ $(function() {
   $("#<%= @modal_name %>").modal('hide');
   $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @user) %>");
 
-  <% unless @user.errors.any? %>
-    $('#<%= @modal_name %>').on(
-      'hidden.bs.modal', 
-      function () {
+  <% if @user.errors.any? %>
+    $('body, html').animate({ scrollTop: 0 }, 400);
+  <% else %>
+    $('#<%= @modal_name %>').on('hidden.bs.modal', function () {
         $("#<%= @area_name %>").html("<%= escape_javascript(render "users/show/#{@area_name}") %>");
         $("#userName").html("<%= @user.name %>");
-      }
-    );
-
+      });
   <% end %>
 })

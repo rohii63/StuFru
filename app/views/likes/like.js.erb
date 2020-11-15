@@ -1,3 +1,5 @@
-$("#like_btn<%= @micropost.id %>").html("<%= escape_javascript(render 'likes/like_btn', micropost: @micropost) %>");
-$("#like_btn_with_text<%= @micropost.id %>").html("<%= escape_javascript(render 'likes/like_btn_with_text', micropost: @micropost) %>");
-$("#like_form").html("<%= escape_javascript(render 'microposts/like_form', micropost: @micropost) %>");
+$(function(){
+  $("#like_btn<%= @micropost.id %>").html("<%= escape_javascript(render 'likes/like_btn', micropost: @micropost) %>");
+  $("#like_btn_with_text<%= @micropost.id %>").html("<%= escape_javascript(render 'likes/like_btn_with_text', micropost: @micropost) %>");
+  $("#like_form").html("<%= escape_javascript(render 'microposts/like_form', micropost: @micropost) %>");
+})

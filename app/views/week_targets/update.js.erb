@@ -1,7 +1,9 @@
 $(function() {
   $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>")
 
-  <% unless @week_target.errors.any? %>
+  <% if @week_target.errors.any? %>
+    $('body, html').animate({ scrollTop: 0 }, 400);
+  <% else %>
     $("<%= escape_javascript(render 'users/my_page/week_target_card', week_target: @week_target) %>").replaceAll("#weekTargetCard<%= @week_target.id %>")
     configureDoughnutGraph(updateStudyAmountGraph);
   <% end %>
