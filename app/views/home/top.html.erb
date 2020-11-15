@@ -1,46 +1,45 @@
 <% content_for :title, "ホーム" %>
-
 <div id="error_messages"></div>
-
-<div id="headWord">
-  <h1>ようこそ</h1>
-  <p>トップページです。</p>
-</div>
 
 <% unless @user.target %>
   <%= render 'home/target_register' %>
 
 <% else %>
-  <p><%= link_to "投稿する", root_path(modal: "new"), remote: true %></p>
   <div id="micropostModal">
     <%= render 'home/new_micropost_modal' %>
   </div>
 
-  <nav>
-    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-follow-tab" data-toggle="tab" href="#nav-follow" role="tab" aria-controls="nav-follow" aria-selected="true">フォロー</a>
-      <a class="nav-item nav-link" id="nav-target-genre-tab" data-toggle="tab" href="#nav-target-genre" role="tab" aria-controls="nav-target-genre" aria-selected="false">目標ジャンル</a>
-    </div>
-  </nav>
+  <div class="fixed-top offset-sm-3 col-lg-7 col-sm-9 nav nav-pills nav-fill border-bottom border-left bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="margin-top: 44px;">
+    <a class="nav-item nav-link active" id="v-pills-follow-tab" data-toggle="pill" href="#v-pills-follow" role="tab" aria-controls="v-pills-follow" aria-selected="false">フォロー</a>
+    <a class="nav-item nav-link" id="v-pills-target-genre-tab" data-toggle="pill" href="#v-pills-target-genre" role="tab" aria-controls="v-pills-target-genre" aria-selected="false">目標ジャンル</a>
+  </div>
 
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-follow" role="tabpanel" aria-labelledby="nav-follow-tab">
-      <div id="timeline">
+  <div class="tab-content mt-4 pt-3" id="v-pills-tabContent">
+    <div class="tab-pane fade active show" id="v-pills-follow" role="tabpanel" aria-labelledby="v-pills-follow-tab">
+      <div class="row px-3">
+        <%= link_to  root_path(modal: "new"), remote: true, id: "postBtn", class: "col-12 text-center" do %>
+          <button class="postBtn w-50 my-2 bg-primary text-white border rounded-pill">投稿する</button>
+        <% end %>
         <% @follower_microposts.each do |micropost| %>
           <%= render 'home/post_card', micropost: micropost %>
         <% end %>
       </div>
-      <%= paginate @follower_microposts %>
+      <div class="mt-2">
+        <%= paginate @follower_microposts %>
+      </div>
     </div>
-    <div class="tab-pane fade" id="nav-target-genre" role="tabpanel" aria-labelledby="nav-target-genre-tab">
-      <p><%= @user.target %></p>
-      <% @target_genre_microposts.each do |micropost| %>
-        <%= render 'home/post_card', micropost: micropost %>
-      <% end %>
-      <%= paginate @target_genre_microposts %>
+    <div class="tab-pane fade" id="v-pills-target-genre" role="tabpanel" aria-labelledby="v-pills-target-genre-tab">
+      <div class="row px-3">
+        <h5><div class="badge badge-pill badge-primary"><%= @user.target %></div></h5>
+        <% @target_genre_microposts.each do |micropost| %>
+          <%= render 'home/post_card', micropost: micropost %>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= paginate @target_genre_microposts %>
+      </div>
     </div>
   </div>
-
 <% end %>
 
 <%= javascript_pack_tag 'home/top' %>

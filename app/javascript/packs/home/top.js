@@ -1,14 +1,32 @@
-import {calculateStudyTime} from "../lib";
+import bootstrap from "bootstrap/dist/js/bootstrap";
+import 'moment/locale/ja';
+import '../bootstrap-datetimepicker.min';
+import {calculateStudyTime, dateTimePicker} from "../lib";
 
 $(function(){
   if ($("#targetCreateBtn")[0]) {
     $("header").html("");
-    $("<h4>目標ジャンルを設定しよう！</h4>").replaceAll("#headWord");
+  } else {
+    $.ajax({
+      url: location.href,
+      type: "GET", 
+      data: {layout: ""},
+      dataType: "script"
+    });
   };
+
+  $("#topNavBar").on("mouseover", "#topNavLink", function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  calculateStudyTime();
+
+  $("body").on("click", ".postBtn", function(){
+    dateTimePicker();
+  });
 
   $('input:radio[name="user[target]"]').on('change', function(){
     $("#targetCreateBtn").prop("disabled", false);
   });
 
-  calculateStudyTime();
 })

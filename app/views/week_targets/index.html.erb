@@ -1,3 +1,5 @@
+<% content_for :title, "今週の目標 -履歴-"  %>
+
 <% if @week_targets.present? %>
   <% 0.upto(@number_of_weeks_passed) do |n| %>
     <% past_week_targets = @week_targets.past_records(n) %>
@@ -6,28 +8,55 @@
       <% from = week_target_created_at.at_beginning_of_week %>
       <% to = week_target_created_at.at_end_of_week %>
 
-      <div><strong><%= "#{from.to_s(:month)} - #{to.to_s(:month)}" %></strong></div>
-      
-      <% past_week_targets.each do |week_target| %>
-        <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
+      <h4 class="my-3"><%= "#{from.to_s(:month)} - #{to.to_s(:month)}" %></h4>
+      <div class="row mt-2">
+        <% past_week_targets.each do |week_target| %>
+          <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
+          
+          <div class="col-lg-6">
+            <div class="col mt-2 mx-auto">
+              <div style="width: 350px;">
+                <i class="fas fa-book-open"></i>
+                <strong><%= week_target.book.name %></strong>
+              </div>
+              <% if week_target.study_unit == "時間" %>
+                <div class="mt-2">
+                  目標: 
+                  <h4 class="d-inline-block mb-0"><%= sprintf("%02d", week_target.content / 60) %></h4> 時間 
+                  <h4 class="d-inline-block mb-0"><%= sprintf("%02d", week_target.content % 60) %></h4> 分
+                </div>
+                <div>
+                  実績:
+                  <% if achievement >= week_target.content %>
+                    <h4 class="d-inline-block text-primary"><%= sprintf("%02d", achievement / 60) %></h4> 時間 
+                    <h4 class="d-inline-block text-primary"><%= sprintf("%02d", achievement % 60) %></h4> 分
+                  <% else %>
+                    <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%02d", achievement / 60) %></h4> 時間 
+                    <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%02d", achievement % 60) %></h4> 分
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="mt-2">
+                  目標: 
+                  <h4 class="d-inline-block mb-0"><%= sprintf("%04d", week_target.content) %></h4> <%= week_target.study_unit %>
+                </div>
+                <div>
+                  実績: 
+                  <% if achievement >= week_target.content %>
+                    <h4 class="d-inline-block text-primary"><%= sprintf("%04d", achievement) %></h4> <%= week_target.study_unit %>
+                  <% else %>
+                    <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%04d", achievement) %></h4> <%= week_target.study_unit %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
 
-        <div><strong><%= week_target.book.name %></div></strong>
-        <% if week_target.study_unit == "時間" %>
-          <span>目標: 
-            <%= sprintf("%02d", week_target.content / 60) %> 時間 
-            <%= sprintf("%02d", week_target.content % 60) %> 分</span>
-          <div>実績: 
-            <%= sprintf("%02d", achievement / 60) %> 時間 
-            <%= sprintf("%02d", achievement % 60) %> 分</div>
-        <% else %>
-          <span>目標: 
-            <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %></span>
-          <div>実績: 
-            <%= sprintf("%04d", achievement) %> <%= week_target.study_unit %></div>
+            <div class="col position-relative my-2 mx-auto" style="left: 50px;">
+              <canvas id='studyAmountGraph<%= week_target.id %>' width='250' height='200'></canvas>
+            </div>
+          </div>
         <% end %>
-
-        <canvas id='studyAmountGraph<%= week_target.id %>' width='250' height='200'></canvas>
-      <% end %>
+      </div>
     <% end %>
   <% end %>
 

@@ -1,17 +1,26 @@
-<p>コメント（<%= @comments.count %>件）</p>
+<p>
+  <i class="far fa-comment mr-2"></i>
+  コメント
+  <% unless @comments.count == 0 %>（<%= @comments.count %>件）<% end %>
+</p>
 
-<% @comments.each do |comment| %>
-  <ul id="comment_card_<%= comment.id %>">
-    <li><%= image_tag url_for(comment.user.avatar.variant(resize: "30x30>")) %></li>
-    <li><%= comment.user.name %></li>
-    <li><%= comment.created_at %></li>
-    <li><%= comment.content %></li>
-    <% if current_user == comment.user %>
-      <li>
-        <%= link_to "×", micropost_path(@micropost, comment_id: comment.id), remote: true %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="px-2">
+  <% @comments.each do |comment| %>
+    <div id="comment_card_<%= comment.id %>" class="row py-2">
+      <div class="col-2 col-sm-1 pl-0">
+        <%= link_to (image_tag url_for(comment.user.avatar.variant(resize: "60x60>"))) ,my_page_path(comment.user) %>
+      </div>
+      <div class="col-10 col-sm-11 pr-0">
+        <% if current_user == comment.user %>
+          <%= link_to micropost_path(@micropost, comment_id: comment.id), remote: true, class: "text-reset", style: "text-decoration: none;" do %>
+            <%= render 'microposts/comment_card_content', comment: comment %>
+          <% end %>
+        <% else %>
+          <%= render 'microposts/comment_card_content', comment: comment %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <%= render 'microposts/comment_delete_modal' %>

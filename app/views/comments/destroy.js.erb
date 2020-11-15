@@ -1,1 +1,4 @@
-$("#comment_field").html("<%= escape_javascript(render 'microposts/comment_field') %>");
+$(function(){
+  $('#commentDeleteModal').modal('hide');
+  $("#comment_field").html("<%= escape_javascript(render 'microposts/comment_field') %>");
+})

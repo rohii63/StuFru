@@ -1,56 +1,97 @@
-<div id="comment_error_messages"></div>
-<div id="micropost_error_messages"></div>
+<div id="error_messages"></div>
+<% content_for :title, "投稿内容" %>
 
-<h1>Microposts#show</h1>
-<p>Find me in app/views/microposts/show.html.erb</p>
-
-<% if @micropost.user == current_user %>
-  <p><%= link_to "編集", edit_micropost_path(@micropost, modal: ""), method: :get, remote: true %></p>
-  <div id="micropostModal">
-    <%= render 'microposts/edit_modal' %>
+<div class="p-3">
+  <div class="d-flex">
+    <div>
+      <%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "60x60>"))), my_page_path(@micropost.user) %>
+    </div>
+    <div class="ml-2">
+      <div>
+        <%= @micropost.user.name %>
+      </div>
+      <div class="text-muted">
+        <small><%= @micropost.studied_at.to_s(:datetime) %></small>
+      </div>
+    </div>
+    <div class="d-flex ml-auto mr-3">
+      <% if @micropost.user == current_user %>
+        <div class="mr-2">
+          <%= link_to edit_micropost_path(@micropost, modal: ""), method: :get, remote: true, id: "editLink", class: "text-reset" do %>
+            <i class="fas fa-pen"></i>
+          <% end %>
+          <div id="micropostModal">
+            <%= render 'microposts/edit_modal' %>
+          </div>
+        </div>
+        <div class="ml-3">
+          <%= link_to "#", data: {toggle: "modal", target: "#deleteConfirmModal"}, class: "text-reset" do %>
+            <i class="fas fa-times "></i>
+          <% end %>
+          <%= render 'microposts/delete_confirm_modal' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <p><%= link_to "削除", "#", data: {toggle: "modal", target: "#deleteConfirmModal"} %></p>
-  <%= render 'microposts/delete_confirm_modal' %>
-<% end %>
-
-<ul>
-  <li><%= link_to (image_tag url_for(@micropost.user.avatar.variant(resize: "100x100>"))), my_page_path(@micropost.user) %></li>
-  <li><%= @micropost.user.name %></li>
-  <li><%= @micropost.studied_at %></li>
-  <li><%= @micropost.content %></li>
-  <li><%= image_tag url_for(@micropost.picture.variant(resize: "100x100>")) if @micropost.picture.attached? %></li>
-  <ul>
-    <li><%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "100x100>"))), book_path(@micropost.book)  if @micropost.book %></li>
-    <li><%= @micropost.book.name if @micropost.book %></li>
-    <li>
+  <div class="mt-1">
+    <%= @micropost.content %>
+  </div>
+  <div class="mt-1">
+    <%= image_tag url_for(@micropost.picture.variant(resize: "350x180>")), class: "rounded" if @micropost.picture.attached? %>
+  </div>
+  <% if @micropost.book %>
+    <div class="d-flex align-items-center py-2 mt-2 border rounded shadow-sm">
+      <div class="col-3 col-sm-2 px-2 text-center">
+        <%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "85x70>")), class: "border rounded mr-2"), book_path(@micropost.book)%>
+      </div>
+      <div class="col-9 col-sm-10 px-2">
+        <div class="text-left">
+          <%= @micropost.book.name %>
+        </div>
+        <div>
+          <i class="far fa-clock"></i>
+          <% if @micropost.how_many_studied_hours != 0 %>
+            <span class="text-primary"><%= @micropost.how_many_studied_hours %></span>時間
+          <% end %>
+          <% if @micropost.how_many_studied_minutes != 0 %>
+            <span class="text-primary"><%= @micropost.how_many_studied_minutes %></span>分
+          <% end %>
+        </div>
+        <div>
+          <% if @micropost.study_amount  %>
+            <i class="fas fa-pen"></i>
+            <span class="text-primary"><%= @micropost.study_amount %></span><%= @micropost.study_unit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="mt-2 py-2 pl-2 border rounded shadow-sm">
+      <i class="far fa-clock"></i>
       <% if @micropost.how_many_studied_hours != 0 %>
-        <%= @micropost.how_many_studied_hours %>時間
+        <span class="text-primary"><%= @micropost.how_many_studied_hours %></span>時間
       <% end %>
       <% if @micropost.how_many_studied_minutes != 0 %>
-        <%= @micropost.how_many_studied_minutes %>分
+        <span class="text-primary"><%= @micropost.how_many_studied_minutes %></span>分
       <% end %>
-    </li>
-    <li>
-      <% if @micropost.study_amount  %>
-        <%= @micropost.study_amount %><%= @micropost.study_unit %>
-      <% end %>
-    </li>
-  </ul>
-</ul>
+    </div>
+  <% end %>
+</div>
 
-<div id="like_form">
+<div id="like_form" class="p-3 border-top">
   <%= render 'microposts/like_form' %>
 </div>
 
-<div id="comment_field">
+<div id="comment_field" class="p-3 border-top">
   <%= render 'microposts/comment_field' %>
 </div>
 
-<%= form_with model: @comment, url: micropost_comments_path(@micropost) do |comment| %>
-  <%= comment.text_field :content, class: "from-control" %>
-  <%= comment.hidden_field :micropost_id, class: "from-control" %>
-  <%= comment.submit "送信", class: "btn btn-primary" %>
-<% end %>
+<div class="p-3 border-top">
+  <%= form_with model: @comment, url: micropost_comments_path(@micropost), class: "d-flex" do |f| %>
+    <%= f.hidden_field :micropost_id %>
+    <%= f.text_field :content, placeholder: "コメント", class: "col-9 rounded" %>
+    <%= f.submit "送信", class: "col-2 ml-2 btn btn-primary" %>
+  <% end %>
+</div>
 
 <%= javascript_pack_tag 'microposts/show' %>

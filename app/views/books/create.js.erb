@@ -4,7 +4,10 @@ $(function(){
   $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
   $("#search").val("");
 
-  <% unless @book.errors.any? %>
+  <% if @book.errors.any? %>
+    $('body, html').animate({ scrollTop: 0 }, 400);
+
+  <% else %>
     $('#newBookModal').on('hidden.bs.modal', function () {
       <% case @status_with_book.status %>
         <% when "勉強中" %>
@@ -17,7 +20,7 @@ $(function(){
           $("#pills-finished-tab").tab('show');
           $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
       <% end %>
-
+      
       $("#new_book_modal").html("<%= escape_javascript(render 'books/index/new_book') %>");
     });
   <% end %>

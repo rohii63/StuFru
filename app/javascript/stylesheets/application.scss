@@ -1,5 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import 'search_users';
-@import 'top';
+@import 'search-users';
+@import 'home';
 @import 'users';
+@import 'bootstrap-custom';
+@import 'bootstrap-datetimepicker.min';
+
+
+.modal-content {
+  border-radius: 1rem !important;
+}

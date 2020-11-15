@@ -1,11 +1,11 @@
-<li id="like_button_<%= @micropost.id %>">
-  <%= render 'likes/like_btn', micropost: @micropost %>
-</li>
+<p id="like_btn_with_text<%= @micropost.id %>">
+  <%= render 'likes/like_btn_with_text', micropost: @micropost %>
+</p>
 
-<% @likes.each do |like| %>
-  <%= link_to my_page_path(like.user) do %>  
-    <ul>
-      <li><%= image_tag url_for(like.user.avatar.variant(resize: "30x30>")) %></li>
-    </ul>
+<div class="row px-2">
+  <% @likes.each do |like| %>
+      <%= link_to my_page_path(like.user), class: "mb-2" do %>  
+        <%= image_tag url_for(like.user.avatar.variant(resize: "60x60>")) %>
+      <% end %>
   <% end %>
-<% end %>
+</div>

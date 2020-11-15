@@ -5,8 +5,8 @@
         <h5 class="modal-title">コメントを削除しますか？</h5>
       </div>
       <div class="modal-footer">
+        <%= link_to "削除する", "#", id: "set_url", method: :delete, remote: true, class: "btn btn-primary" %>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-        <%= link_to "削除する", "#", id: "set_url", method: :delete, remote: true, class: "btn btn-primary", data: {dismiss: "modal"} %>
       </div>
     </div>
   </div>

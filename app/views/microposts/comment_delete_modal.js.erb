@@ -1,6 +1,6 @@
 $(function() {
-  $('#commentDeleteModal').modal('show')
+  $('#commentDeleteModal').modal('show');
   $("#set_url").click(function() {
     $(this).attr("href", "/microposts/<%= @micropost.id %>/comments/<%= @comment.id %>")
-  })
+  });
 })

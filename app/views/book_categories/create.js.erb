@@ -2,7 +2,6 @@ $(function() {
   <% if @book_category.errors.any? %>
     <% @book_category.errors.full_messages.each do |msg| %>
       alert("<%= msg %>");
-
     <% end %>
 
   <% else %>
@@ -18,9 +17,8 @@ $(function() {
 
       <% when "register" %>
         $("#bookRegisterModal").modal('show');
-
     <% end %>
-    
+
   <% end %>
 
 })

@@ -5,9 +5,7 @@ $(function() {
     <% when "ページ" %>
       viewStudyAmountTemplate();
 
-      var btnElems = $("<input id='totalBtn' name='studyAmount' type='radio' checked='checked'>合計</input><input id='rangeBtn' name='studyAmount' type='radio'>範囲</input>");
-
-      $("#studyAmount>label").after(btnElems);
+      $("#studyAmount>label").after("<div class='mb-1'><input id='totalBtn' name='studyAmount' type='radio' checked='checked'>合計</input><input id='rangeBtn' name='studyAmount' type='radio'>範囲</input></div>");
 
       $("#rangeBtn").on("change", function() {
         $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#micropost_study_amount");
@@ -27,7 +25,5 @@ $(function() {
 
 
 function viewStudyAmountTemplate() {
-  $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %><span></span>");
-  $("#studyAmount span").prop("id", "studyUnit");
-  $("#studyAmount span").html("<%= @micropost.study_unit %>");
+  $("#studyAmount").html("<%= escape_javascript(label :micropost, :study_amount, "学習量") %><%= escape_javascript(number_field :micropost, :study_amount, min: 1, max: 9999) %><span id='studyUnit'><%= @micropost.study_unit %></span>");
 }

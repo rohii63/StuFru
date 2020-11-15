@@ -1,39 +1,48 @@
-<div id="weekTargetCard<%= week_target.id %>" class="col-lg-6 mt-2">
+<div id="weekTargetCard<%= week_target.id %>" class="col-lg-6 mt-3">
   <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
   
-  <div class="w-50 mx-auto">
+  <div class="col-8 mx-auto">
     <div>
       <i class="fas fa-book-open"></i> 
-      <%= week_target.book.name %>
+      <strong><%= week_target.book.name %></strong>
     </div>
     <% if week_target.study_unit == "時間" %>
-      <div id="weekTarget<%= week_target.id %>">
+      <div id="weekTarget<%= week_target.id %>" class="mt-2">
         目標: 
-        <%= sprintf("%02d", week_target.content / 60) %> 時間 
-        <%= sprintf("%02d", week_target.content % 60) %> 分
+        <h4 class="d-inline-block mb-0"><%= sprintf("%02d", week_target.content / 60) %></h4> 時間 
+        <h4 class="d-inline-block mb-0"><%= sprintf("%02d", week_target.content % 60) %></h4> 分
         <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
         <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
       </div>
       <div>
-        現在: 
-        <%= sprintf("%02d", result / 60) %> 時間 
-        <%= sprintf("%02d", result % 60) %> 分
+        現在:
+        <% if result >= week_target.content %>
+          <h4 class="d-inline-block text-primary"><%= sprintf("%02d", result / 60) %></h4> 時間 
+          <h4 class="d-inline-block text-primary"><%= sprintf("%02d", result % 60) %></h4> 分
+        <% else %>
+          <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%02d", result / 60) %></h4> 時間 
+          <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%02d", result % 60) %></h4> 分
+        <% end %>
       </div>
     <% else %>
-      <div id="weekTarget<%= week_target.id %>">
+      <div id="weekTarget<%= week_target.id %>" class="mt-2">
         目標: 
-        <%= sprintf("%04d", week_target.content) %> <%= week_target.study_unit %>
+        <h4 class="d-inline-block mb-0"><%= sprintf("%04d", week_target.content) %></h4> <%= week_target.study_unit %>
         <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
         <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
       </div>
       <div>
         現在: 
-        <%= sprintf("%04d", result) %> <%= week_target.study_unit %>
+        <% if result >= week_target.content %>
+          <h4 class="d-inline-block text-primary"><%= sprintf("%04d", result) %></h4> <%= week_target.study_unit %>
+        <% else %>
+          <h4 class="d-inline-block" style="color: rgb(99, 99, 99);"><%= sprintf("%04d", result) %></h4> <%= week_target.study_unit %>
+        <% end %>
       </div>
     <% end %>
   </div>
 
-  <div class="w-50 mt-2 mx-auto text-center">
+  <div class="col-8 mt-2 mx-auto">
     <canvas id="studyAmountGraph<%= week_target.id %>" width='250' height='200'></canvas>
   </div>
 </div>

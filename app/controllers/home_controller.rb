@@ -10,11 +10,14 @@ class HomeController < ApplicationController
         @selected_book = @user.status_with_books.find_by(book_id: book_id) if book_id.present?
         render 'modal'
       
+      elsif params[:layout]
+        render 'change_layout'
+
       else
         @user = current_user
         @micropost = @user.microposts.build()
         @books_in_progress = @user.books_in_progress
-        @follower_microposts = @user.feed.page(params[:page]).per(5)
+        @follower_microposts = @user.feed.page(params[:page]).per(10)
         @target_genre_microposts = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page])
 
         unless @user.target

@@ -2,5 +2,9 @@ $(function() {
   $('#micropostEditModal').modal('hide');
   $('#micropostEditModal').on('hidden.bs.modal', function () {
     $("#micropost_error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @micropost) %>");
+
+    <% if @micropost.errors.any? %>
+      $('body, html').animate({ scrollTop: 0 }, 400);
+    <% end %>
   })
 })
