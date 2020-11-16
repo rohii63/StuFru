@@ -14,10 +14,6 @@ $(function(){
     });
   };
 
-  $("#topNavBar").on("mouseover", "#topNavLink", function(){
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-
   calculateStudyTime();
 
   $("body").on("click", ".postBtn", function(){
@@ -27,5 +23,4 @@ $(function(){
   $('input:radio[name="user[target]"]').on('change', function(){
     $("#targetCreateBtn").prop("disabled", false);
   });
-
 })

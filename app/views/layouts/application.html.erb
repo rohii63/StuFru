@@ -96,11 +96,11 @@
                 <h6 class="font-weight-bold mb-0 py-2">
                   <%= yield(:title) %>
                 </h6>
-                <button id="navbarToggler" class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="navbarToggler" class="navbar-toggler d-md-none" type="button">
                   <i class="fas fa-bars fa-lg d-md-none"></i>
                 </button>
               </nav>
-              <div class="collapse" id="navbarToggleExternalContent">
+              <div class="collapse" id="navbarCollapse">
                 <ul class="list-unstyled mt-2 ml-3">
                   <li>
                     <%= link_to user_books_path(current_user), class: "text-reset" do %>
