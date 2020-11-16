@@ -13,15 +13,11 @@ class BookRegistersController < ApplicationController
   def destroy
     @user = current_user
     @book = Book.find(params[:id])
-
     current_user.unregister(@book)
     @user.status_with_books.find_by(book_id: @book.id).destroy
-
     @study_book = @user.study_books.build(book_id: @book.id)
     @status_with_book = @user.status_with_books.build()
     @book_categories = @user.book_categories.all
-    
-    render 'book_registers/btn'
   end
 
   private

@@ -6,12 +6,12 @@
   <%= render 'books/index/search_field' %>
 </p>
 
-<p id="new_book_link">
-  <%= link_to "教材登録", "#", data: {toggle: "modal", target: "#newBookModal"} %>
-</p>
+<div id="newBtnWrapper">
+  <div id="newBtn" class="btn btn-primary">教材登録</div>
+</div>
 
-<div id="new_book_modal">
-  <%= render 'books/index/new_book' %>
+<div id="book_new_modal_modal">
+  <%= render 'books/index/book_new_modal' %>
 </div>
 
 <div id="book_category_modal">
@@ -25,3 +25,5 @@
 </div>
 
 <div id="book_status_edit_modal"></div>
+
+<%= javascript_pack_tag 'books/index' %>

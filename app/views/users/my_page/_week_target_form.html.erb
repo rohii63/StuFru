@@ -1,42 +1,61 @@
-<%= form_with model: @week_target, url: user_week_targets_path(@user), method: :post, class: "row" do |f| %>
+<%= form_with model: @week_target, url: user_week_targets_path(@user), method: :post do |f| %>
   <%= f.hidden_field :book_id %>
   <%= f.hidden_field :study_unit %>
-  <div class="col-12">
+  <div>
     <i class="fas fa-book-open"></i>
     <%= @selected_book.name %>
   </div>
 
   <% case @status_with_book.study_unit %>
     <% when "時間" %>
-      <div class="col-md-8 my-1">
-        <%= f.label :content, class: "mr-2" %>
-        <%= number_field_tag 'time[hours]', nil, in: 0...168 %>
-        <%= label_tag 'time[hours]', "時間" %>
-        <%= number_field_tag 'time[minutes]', nil, in: 0...60 %>
-        <%= label_tag 'time[minutes]', "分" %>
+      <div class="row my-2 px-2">
+        <div class="col-12">
+          <%= f.label :content, class: "mb-0" %>
+        </div>
+        <div class="col-sm-8 mt-1 ml-1 pr-0">
+          <%= number_field_tag 'time[hours]', nil, in: 0...168 %>
+          <%= label_tag 'time[hours]', "時間" %>
+          <%= number_field_tag 'time[minutes]', nil, in: 0...60 %>
+          <%= label_tag 'time[minutes]', "分" %>
+        </div>
+        <div class="col-sm-auto px-0 pr-md-2 text-right">
+          <%= f.submit "作成", class: "btn btn-primary" %>
+          <div id="weekTargetFormWrapperCloseBtn" class="btn btn-secondary">閉じる</div>
+        </div>
       </div>
     <% when "ページ" %>
-      <div class="my-1">
-        <div class="col-12">
-          <%= f.label :content %>
-          <input id="totalBtn1" name="studyAmount" type="radio" checked="checked">合計</input>
-          <input id="rangeBtn1" name="studyAmount" type="radio">範囲</input>
+      <div class="d-flex px-2">
+        <div class="my-2">
+          <div>
+            <%= f.label :content, class: "mb-0" %>
+          </div>
+          <div class="mt-1 ml-1">
+            <input id="totalBtn1" name="studyAmount" type="radio" checked="checked">合計</input>
+            <input id="rangeBtn1" name="studyAmount" type="radio">範囲</input>
+          </div>
+          <div class="mt-1 ml-2">
+            <%= f.number_field :content, in: 1...9999 %>
+            <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
+          </div>
         </div>
-        <div class="col-md-8">
-          <%= f.number_field :content, in: 1...9999 %>
-          <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
+        <div class="mt-auto ml-auto">
+          <%= f.submit "作成", class: "btn btn-primary" %>
+          <div id="weekTargetFormWrapperCloseBtn" class="btn btn-secondary">閉じる</div>
         </div>
       </div>
     <% else %>
-      <div class="col-md-8 my-1">
-        <%= f.label :content, class: "mr-2" %>
-        <%= f.number_field :content, in: 1...9999 %>
-        <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
+      <div class="row my-2 px-2">
+        <div class="col-12">
+          <%= f.label :content, class: "mb-0" %>
+        </div>
+        <div class="col-sm-8 mt-1 ml-1 pr-0">
+          <%= f.number_field :content, in: 1...9999 %>
+          <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
+        </div>
+        <div class="col-sm-auto px-0 pr-md-2 text-right">
+          <%= f.submit "作成", class: "btn btn-primary" %>
+          <div id="weekTargetFormWrapperCloseBtn" class="btn btn-secondary">閉じる</div>
+        </div>
       </div>
   <% end %>
-
-  <div class="col-md-4">
-    <a id="weekTargetNewCloseBtn" class="btn btn-secondary float-right ml-1">閉じる</a>
-    <%= f.submit "作成", class: "btn btn-primary float-right" %>
-  </div>
 <% end %>

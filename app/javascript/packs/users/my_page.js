@@ -1,4 +1,5 @@
 import Tooltip from "bootstrap/js/src/tooltip";
+import Modal from "bootstrap/js/src/modal";
 
 $(function() {
   $.ajax({
@@ -12,17 +13,21 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip();
   });
 
-  $("#weekTargetHeader").on("click", "#weekTargetNewBtn", function() {
+  $("#weekTargetHeader").on("click", "#createBtn", function() {
     if ($("#whenWeekTargetAreaBlank")[0]) {
-      $("<div id='btnWrap' class='col-4 mt-3 mb-5 mx-auto'><a id='bookSelectBtn' class='col btn btn-primary' data-toggle='modal' data-target='#bookSelectModal'>教材選択</a></div>").replaceAll("#whenWeekTargetAreaBlank");
+      $("<div id='bookSelectBtnWrapper' class='col-4 mt-3 mb-5 mx-auto'><div id='bookSelectBtn' class='col btn btn-primary'>教材選択</div></div>").replaceAll("#whenWeekTargetAreaBlank");
       $(this).remove();
       
     } else {
-      $("<a id='bookSelectBtn' class='btn btn-primary' data-toggle='modal' data-target='#bookSelectModal'>教材選択</a>").replaceAll(this);
+      $("<div id='bookSelectBtn' class='btn btn-primary'>教材選択</div>").replaceAll(this);
     }
   });
 
-  $("#v-pills-report").on("click", "#weekTargetNewCloseBtn", function() {
-    $("#weekTargetForm").remove();
+  $("#v-pills-report").on("click", "#bookSelectBtn", function(){
+    $("#bookSelectModal").modal("show");
+
+    $("#book_select_modal").on("click", "#weekTargetNewBtn", function(){
+      $("#bookSelectModal").modal("hide");
+    });
   });
 });

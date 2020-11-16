@@ -11,8 +11,8 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 global.$ = require('jquery')
-require("bootstrap")
 require("chart.js")
+require("bootstrap")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

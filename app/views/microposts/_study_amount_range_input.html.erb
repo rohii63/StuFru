@@ -1,10 +1,10 @@
 <span id="studyAmountRangeInput">
   <div>
-    <%= label_tag "page[start]", "開始ページ" %>
+    <%= label_tag "page[start]", "開始ページ", class: "mb-0" %>
     <%= number_field_tag "page[start]", nil, in: 1...9999 %>
   </div>
   <div>
-    <%= label_tag "page[end]", "終了ページ" %>
+    <%= label_tag "page[end]", "終了ページ", class: "mb-0" %>
     <%= number_field_tag "page[end]", nil, in: 1...9999 %>
   </div>
 </span>

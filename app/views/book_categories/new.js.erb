@@ -1,5 +1,5 @@
 $(function() {
-  $("#newBookModal").modal('hide');
+  $("#bookNewModal").modal('hide');
   $("#bookStatusEditModal").modal('hide');
   $("#bookRegisterModal").modal('hide');
 
@@ -9,7 +9,7 @@ $(function() {
   $('#bookCategoryModal').on('hidden.bs.modal', function () {
     <% case @modal %>
       <% when "new" %>
-        $("#newBookModal").modal('show');
+        $("#bookNewModal").modal('show');
       <% when "edit" %>
         $("#bookStatusEditModal").modal('show');
       <% when "register" %>

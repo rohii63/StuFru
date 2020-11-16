@@ -24,9 +24,7 @@
           </div>
         </div>
         <div class="ml-3">
-          <%= link_to "#", data: {toggle: "modal", target: "#deleteConfirmModal"}, class: "text-reset" do %>
-            <i class="fas fa-times "></i>
-          <% end %>
+          <button id="deleteBtn" class="border-0 bg-white"><i class="fas fa-trash-alt"></i></button>
           <%= render 'microposts/delete_confirm_modal' %>
         </div>
       <% end %>

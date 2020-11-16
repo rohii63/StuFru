@@ -1,5 +1,5 @@
 $(function(){
-  $('#newBookModal').modal('hide');
+  $('#bookNewModal').modal('hide');
   $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
   $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
   $("#search").val("");
@@ -8,7 +8,7 @@ $(function(){
     $('body, html').animate({ scrollTop: 0 }, 400);
 
   <% else %>
-    $('#newBookModal').on('hidden.bs.modal', function () {
+    $('#bookNewModal').on('hidden.bs.modal', function () {
       <% case @status_with_book.status %>
         <% when "勉強中" %>
           $("#pills-in-progress-tab").tab('show');
@@ -21,7 +21,7 @@ $(function(){
           $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
       <% end %>
       
-      $("#new_book_modal").html("<%= escape_javascript(render 'books/index/new_book') %>");
+      $("#book_new_modal_modal").html("<%= escape_javascript(render 'books/index/book_new_modal') %>");
     });
   <% end %>
 })
