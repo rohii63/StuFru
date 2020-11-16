@@ -1,7 +1,7 @@
 <% content_for :title, "ユーザ検索" %>
+
 <h1>Search#users</h1>
 <p>Find me in app/views/search/users.html.erb</p>
-
 <%= render 'search/search_field' %>
 
 <p><%= link_to "おすすめユーザー", user_search_path, remote: true, method: :get %></p>

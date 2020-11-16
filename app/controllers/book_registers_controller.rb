@@ -2,14 +2,11 @@ class BookRegistersController < ApplicationController
   def create
     @user = current_user
     @book = Book.find(params[:book_register][:book_id])
-
     @status_with_book = @user.status_with_books.build(status_with_book_params)
     @status_with_book.book_id = @book.id
-
     current_user.register(@book)
     @status_with_book.save
-
-    flash[:success] = "登録完了"
+    flash[:notice] = "登録完了"
     redirect_to user_books_path(@user)
   end
 

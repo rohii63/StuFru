@@ -1,7 +1,6 @@
 <% content_for :title, "ログイン" %>
 
 <div class="row justify-content-center pt-3 my-4 my-xl-5">
-
   <div class="mx-3">
     <h5 class="text-nowrap text-center font-weight-bold">
       <p class="mb-2">繋がった仲間に勉強の成果を</p>
@@ -19,14 +18,14 @@
   <div class="col-lg-auto text-center mx-3 mt-2 mt-xl-0">
     <%= image_tag 'logo.png', size: "150x150", class: "mx-auto" %>
   </div>
-
 </div>
 
 
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="border-top py-4">
+  <%= render 'devise/shared/error_messages', resource: resource %>
 
+  <div class="border-top py-4">
     <div class="form-group">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Eメール", class: "form-control w-50 mx-auto" %>
     </div>
@@ -45,7 +44,6 @@
         <%= f.submit "ログイン", class: "btn btn-secondary w-50" %>
       </div>
     </div>
-
   </div>
 <% end %>
 

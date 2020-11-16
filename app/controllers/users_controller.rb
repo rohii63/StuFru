@@ -35,10 +35,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
-  end
-
   def show
     if params[:modal_name]
       @modal_name = params[:modal_name]

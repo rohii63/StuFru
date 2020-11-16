@@ -71,4 +71,4 @@ ja:
             content:
               format: '%{message}'
               blank: '%{attribute}を入力してください'
-              greater_than_or_equal_to: '%{attribute}は１以上の値にして下さい'
+              greater_than_or_equal_to: '%{attribute}の値が０です。'
