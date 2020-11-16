@@ -5,11 +5,9 @@ $(function(){
   <% if @keyword %>
     $("#book_field").html("<%= escape_javascript(render 'books/index/search_result_field') %>");
     $("#search").val("");
-    $("#new_book_link").html("");
-
+    $("#newBtnWrapper").html("");
   <% else %>
     $("#book_field").html("<%= escape_javascript(render 'books/index/book_field') %>");
-    $("#new_book_link").html("<%= escape_javascript(link_to "教材登録", "#", data: {toggle: "modal", target: "#newBookModal"}) %>");
+    $("#newBtnWrapper").html("<div id='newBtn' class='btn btn-primary'>教材登録</div>");
   <% end %>
-  
 })

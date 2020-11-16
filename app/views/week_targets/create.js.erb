@@ -1,5 +1,5 @@
 $(function() {
-  $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>");
+  $("#error_messages_in_report").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>");
   
   <% if @week_target.errors.any? %>
     $('body, html').animate({ scrollTop: 0 }, 400);
@@ -8,8 +8,8 @@ $(function() {
     configureDoughnutGraph(createStudyAmountGraph);
     $("#book_select_modal").html("<%= escape_javascript(render 'users/my_page/book_select_modal') %>");
     $("#bookSelectBtn").remove();
-    $("#weekTargetForm").remove();
-    $("#weekTargetHeader").append("<button id='weekTargetNewBtn' class='btn btn-primary ml-2'>作成</button>");  
+    $("#weekTargetFormWrapper").remove();
+    $("#weekTargetHeader").append("<button id='createBtn' class='btn btn-primary ml-2'>作成</button>");  
   <% end %>
 })
 

@@ -1,4 +1,9 @@
+import Collapse from 'bootstrap/js/src/collapse';
+import {navbarCollapse} from "../lib";
+
 $(function() {
+  navbarCollapse();
+  
   var elem =  $("#my_choice_university_create_confirm_modal");
 
   if (elem[0]) {

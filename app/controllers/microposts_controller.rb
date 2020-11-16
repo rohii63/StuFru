@@ -37,14 +37,14 @@ class MicropostsController < ApplicationController
     culculate_study_amount_of_page
     @micropost = Micropost.find(params[:id])
     if @micropost.update(micropost_params)
-      flash[:success] = "編集完了"
+      flash[:notice] = "編集完了"
       redirect_to root_path
     end
   end
 
   def destroy
     Micropost.find(params[:id]).destroy
-    flash[:success] = "削除完了"
+    flash[:notice] = "削除完了"
     redirect_to root_path
   end
 

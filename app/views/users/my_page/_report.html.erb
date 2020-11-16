@@ -1,5 +1,4 @@
-<div id="error_messages"></div>
-
+<div id="error_messages_in_report"></div>
 <div class="border-bottom py-2 text-center">
   <span><strong>総勉強時間</strong></span>
   <%= @total_study_time[0] %>時間<%= @total_study_time[1] %>分
@@ -64,7 +63,7 @@
     <strong>今週の目標</strong>
     <%= link_to "履歴", user_week_targets_path(@user) %>
     <% if @user == current_user %>
-      <button id="weekTargetNewBtn" class="btn btn-primary ml-2">作成</button>
+      <button id="createBtn" class="btn btn-primary ml-2">作成</button>
     <% end %>
   </div>
 
@@ -77,7 +76,7 @@
     <% if @week_targets.empty? %>
       <h5 id="whenWeekTargetAreaBlank" class="text-center mt-3 mb-5">今週の目標を設定しよう！</h5>
     <% end %>
-  <div id="weekTargetArea" class="row mt-3">
+  <div id="weekTargetArea" class="row">
     <% @week_targets.each do |week_target| %>
       <%= render 'users/my_page/week_target_card', week_target: week_target %>
     <% end %>

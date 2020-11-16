@@ -1,5 +1,5 @@
 $(function() {
-  $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>")
+  $("#error_messages_in_report").html("<%= escape_javascript(render 'shared/error_messages', object: @week_target) %>")
 
   <% if @week_target.errors.any? %>
     $('body, html').animate({ scrollTop: 0 }, 400);

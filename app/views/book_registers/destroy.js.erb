@@ -1,0 +1,5 @@
+$(function(){
+  $("#registered_user_count").html("勉強中：<%= @book.users.count %>");
+  $("#editBtnWrapper").html("");
+  $("#registerBtnWrapper").html("<%= escape_javascript(render 'books/show/register_btn') %>");
+})

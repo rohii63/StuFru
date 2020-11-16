@@ -1,23 +1,25 @@
 $(function() {
-  if ($("#btnWrap")[0]) {
-    $("#btnWrap").remove();
-    $("#weekTargetHeader").append("<a id='bookSelectBtn' class='btn btn-primary' data-toggle='modal' data-target='#bookSelectModal'>教材選択</a>");
-  };
-  $("#bookSelectModal").modal("hide");
-
-  if (!$("#weekTargetForm")[0]) {
-    $("#book_select_modal").after("<div id='weekTargetForm' class='border-top border-bottom mt-2 py-2 col-xl-8 col-10 mx-auto'></div>")
+  if ($("#bookSelectBtnWrapper")[0]) {
+    $("#bookSelectBtnWrapper").remove();
+    $("#weekTargetHeader").append("<div id='bookSelectBtn' class='btn btn-primary'>教材選択</div>");
   };
 
-  $("#weekTargetForm").html("<%= escape_javascript(render 'users/my_page/week_target_form') %>");
+  if (!$("#weekTargetFormWrapper")[0]) {
+    $("#book_select_modal").after("<div id='weekTargetFormWrapper' class='border-top border-bottom mt-2 py-2 col-xl-8 col-10 mx-auto'></div>")
+  };
+  
+  $("#weekTargetFormWrapper").html("<%= escape_javascript(render 'users/my_page/week_target_form') %>");
 
-  $("#weekTargetForm").on("change", "#totalBtn1", function() {
+  $("#weekTargetFormWrapper").on("change", "#totalBtn1", function() {
     $("<%= escape_javascript(number_field :week_target, :content, in: 1...9999) %>").replaceAll("#studyAmountRangeInput");
     $("#studyUnit1").html("<%= @week_target.study_unit %>");
   })
-  $('#weekTargetForm').on("change", "#rangeBtn1", function() {
+  $('#weekTargetFormWrapper').on("change", "#rangeBtn1", function() {
     $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#week_target_content");
     $("#studyUnit1").html("");
   })
-  
+
+  $("#weekTargetFormWrapper").on("click", "#weekTargetFormWrapperCloseBtn", function() {
+    $("#weekTargetFormWrapper").remove();
+  });
 });

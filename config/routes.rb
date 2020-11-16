@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :users, only: [:index, :show] do
+  resources :users, only: :show do
     member do 
       get :follow end
     resources :books, only: :index

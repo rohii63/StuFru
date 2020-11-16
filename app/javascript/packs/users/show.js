@@ -1,24 +1,16 @@
+import Collapse from 'bootstrap/js/src/collapse';
+import {navbarCollapse} from "../lib";
+
 $(function () {
-  btnProp = new Object();
-  btnProp.type = "submit";
-  btnProp.name = "commit";
-  btnProp.value = "保存";
-  btnProp.class = "btn btn-primary";
+  navbarCollapse();
 
-  $("#avatarEditModal").on(
-    "change", 
-    "#user_avatar", 
-    function() {
-      var val = $('#user_avatar').val();
+  $("#avatarEditModal").on("change", "#user_avatar", function() {
+    var val = $('#user_avatar').val();
 
-      if (val == "") {
-        $("#avatarUpdateBtn").html("");
-
-      } else {
-        $("#avatarUpdateBtn").html("<input></input>");
-        $("#avatarUpdateBtn>input").prop(btnProp);
-        
-      };
-    }
-  );
+    if (val == "") {
+      $("#avatarUpdateBtn").html("");
+    } else {
+      $("#avatarUpdateBtn").html("<input type='submit' name='commit' class='btn btn-primary' value='保存'></input>");
+    };
+  });
 });

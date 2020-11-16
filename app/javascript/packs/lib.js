@@ -52,3 +52,12 @@ export function dateTimePicker() {
     showClose: true
   });
 }
+
+export function navbarCollapse(){
+  $('#navbarCollapse').collapse({
+    toggle: false
+  });
+  $("#topNavBar").on("click", "#navbarToggler", function(){
+    $("#navbarCollapse").collapse("toggle");
+  });
+}

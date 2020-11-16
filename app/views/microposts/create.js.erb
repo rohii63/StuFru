@@ -2,7 +2,7 @@ $(function() {
   $('#newMicropostModal').modal('hide');
 
   $('#newMicropostModal').on('hidden.bs.modal', function () {
-    $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @micropost) %>");
+    $("#error_messages_in_top_page").html("<%= escape_javascript(render 'shared/error_messages', object: @micropost) %>");
 
     <% if @micropost.errors.any? %>
       $('body, html').animate({ scrollTop: 0 }, 400);

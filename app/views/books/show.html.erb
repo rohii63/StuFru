@@ -1,5 +1,3 @@
-<div id="error_messages"></div>
-
 <h1>Books#show</h1>
 <p>Find me in app/views/books/show.html.erb</p>
 
@@ -9,17 +7,22 @@
   <%= render 'books/show/book_info' %>
 </div>
 
-<%= link_to "編集", "#", data: { toggle: "modal", target: "#bookEditModal" } if @user.register?(@book) %>
+<div id="editBtnWrapper">
+  <% if @user.register?(@book) %>
+    <div id="editBtn" class="btn btn-primary">編集</div>
+  <% end %>
+</div>
 <%= render 'books/show/book_edit_modal' %>
 
 <div id="book_category_modal">
   <%= render 'books/book_category_modal' %>
 </div>
 
-<span id="register_btn">
+<span id="registerBtnWrapper">
   <%= render 'books/show/register_btn' %>
 </span>
 
 <strong><p>タイムライン</p></strong>
 <p><%= render 'shared/timeline' %></p>
 
+<%= javascript_pack_tag 'books/show' %>

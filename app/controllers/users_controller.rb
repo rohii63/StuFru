@@ -35,10 +35,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
-  end
-
   def show
     if params[:modal_name]
       @modal_name = params[:modal_name]
@@ -82,7 +78,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @followers = @user.followers.all
     @following = @user.following.all
-    render 'show_follow'
   end
 
   private

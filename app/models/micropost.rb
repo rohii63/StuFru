@@ -15,11 +15,11 @@ class Micropost < ApplicationRecord
   validate  :item_of_page_blank
 
   def datetime_not_future_time
-    errors.add(:studied_at, "は現在までの日時を選択してください。") if studied_at > Time.now
+    errors.add(:studied_at, "が未来の日時です。") if studied_at > Time.now
   end
 
   def studied_time_non_zero
-    errors.add(:studied_time_in_minutes, "は1分以上で入力してください。") if studied_time_in_minutes == 0
+    errors.add(:studied_time_in_minutes, "が０分です。") if studied_time_in_minutes == 0
   end
 
   def study_time_limit_per_day

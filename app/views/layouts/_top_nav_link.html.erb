@@ -1,17 +1,17 @@
-  <ul id="topNavLink" class="d-sm-none col-4 d-flex list-unstyled mb-0 pr-0">
-    <li class="col-4">
+  <ul id="topNavLink" class="d-sm-none d-flex justify-content-between w-25 list-unstyled mb-0 pr-0">
+    <li>
       <%= link_to user_books_path(current_user) do %>
-        <i class="fas fa-book-open text-primary" data-toggle="tooltip" data-placement="bottom" title="教材"></i>
+        <i class="fas fa-book-open text-primary"></i>
       <% end %>
     </li>
-    <li class="col-4">
+    <li>
       <%= link_to user_path(current_user) do %>
-        <i class="fas fa-user text-primary" data-toggle="tooltip" data-placement="bottom" title="プロフィール"></i>
+        <i class="fas fa-user text-primary"></i>
       <% end %>
     </li>
-    <li class="col-4">
+    <li>
       <%= link_to destroy_user_session_path(), method: :delete do %>
-        <i class="fas fa-sign-out-alt text-primary" data-toggle="tooltip" data-placement="bottom" title="ログアウト"></i>
+        <i class="fas fa-sign-out-alt text-primary"></i>
       <% end %>
     </li>
   </ul>
