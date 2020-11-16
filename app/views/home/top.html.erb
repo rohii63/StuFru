@@ -1,8 +1,7 @@
-<% content_for :title, "ホーム" %>
+<% content_for :title, "ホーム" %>  
 
 <% unless @user.target %>
   <%= render 'home/target_register' %>
-
 <% else %>
   <div id="micropostModal">
     <%= render 'home/new_micropost_modal' %>
