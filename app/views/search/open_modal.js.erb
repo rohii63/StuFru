@@ -1,16 +1,11 @@
 $(function() {
-  var elem =  $("#my_choice_university_create_confirm_modal");
+  var elem =  $("#my_choice_university_create_modal");
 
   if (elem[0]) { 
-    elem.html("<%= escape_javascript(render "search/my_choice_university_create_confirm_modal") %>");
-
-    var hiddenObj = $("<input type='hidden' name='from_top' id='from_top'>");
-
-    $("#user_my_choice_university").before(hiddenObj);
-
+    elem.html("<%= escape_javascript(render "search/my_choice_university_create_modal") %>");
+    $("#user_my_choice_university").before("<input type='hidden' name='from_top' id='from_top'>");
   } else { 
-    $("#my_choice_university_update_confirm_modal").html("<%= escape_javascript(render "search/my_choice_university_update_confirm_modal") %>");
-
+    $("#my_choice_university_update_modal").html("<%= escape_javascript(render "search/my_choice_university_update_modal") %>");
   };
   
   $("#confirmModal").modal("show");

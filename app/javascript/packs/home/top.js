@@ -9,9 +9,9 @@ $(function(){
     $("#bottomNavBar").html("");
     $("#pageTitle").html("<i class='fab fa-font-awesome-flag text-primary'></i> 目標設定をしよう！");
     $("#topNavBar").removeClass("col-lg-7");
-    $("#main").removeClass("col-lg-7");
+    $("#mainContainer").removeClass("col-lg-7");
     $("#topNavBar").addClass("col-lg-6 border-right");
-    $("#main").addClass("col-lg-6 border-right border-bottom");
+    $("#mainContainer").addClass("col-lg-6 border-right border-bottom");
   } else {
     $.ajax({
       url: location.href,
