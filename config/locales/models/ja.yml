@@ -22,7 +22,7 @@ ja:
       micropost:
         content: コメント
         studied_at: 勉強日時
-        studied_time_in_minutes: 勉強時間
+        study_time: 勉強時間
         study_amount: 学習量
       comment:
         content: コメント

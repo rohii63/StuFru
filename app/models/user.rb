@@ -73,7 +73,7 @@ class User < ApplicationRecord
       from = Time.current.at_beginning_of_day - 6.day
       to = Time.current
 
-      total_times = microposts.all.where(studied_at: from...to).sum(:studied_time_in_minutes)
+      total_times = microposts.all.where(studied_at: from...to).sum(:study_time)
       hours = total_times / 60
       minutes = total_times % 60
       "#{hours}時間#{minutes}分"

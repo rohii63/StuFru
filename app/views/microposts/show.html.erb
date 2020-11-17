@@ -47,11 +47,11 @@
         </div>
         <div>
           <i class="far fa-clock"></i>
-          <% if @micropost.how_many_studied_hours != 0 %>
-            <span class="text-primary"><%= @micropost.how_many_studied_hours %></span>時間
+          <% if @micropost.study_hours != 0 %>
+            <span class="text-primary"><%= @micropost.study_hours %></span>時間
           <% end %>
-          <% if @micropost.how_many_studied_minutes != 0 %>
-            <span class="text-primary"><%= @micropost.how_many_studied_minutes %></span>分
+          <% if @micropost.study_minutes != 0 %>
+            <span class="text-primary"><%= @micropost.study_minutes %></span>分
           <% end %>
         </div>
         <div>
@@ -65,11 +65,11 @@
   <% else %>
     <div class="mt-2 py-2 pl-2 border rounded shadow-sm">
       <i class="far fa-clock"></i>
-      <% if @micropost.how_many_studied_hours != 0 %>
-        <span class="text-primary"><%= @micropost.how_many_studied_hours %></span>時間
+      <% if @micropost.study_hours != 0 %>
+        <span class="text-primary"><%= @micropost.study_hours %></span>時間
       <% end %>
-      <% if @micropost.how_many_studied_minutes != 0 %>
-        <span class="text-primary"><%= @micropost.how_many_studied_minutes %></span>分
+      <% if @micropost.study_minutes != 0 %>
+        <span class="text-primary"><%= @micropost.study_minutes %></span>分
       <% end %>
     </div>
   <% end %>

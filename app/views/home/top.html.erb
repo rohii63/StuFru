@@ -17,7 +17,7 @@
       <div id="error_messages_in_top_page"></div>
       <%= render "shared/notifications" %>
       <div class="row px-3">
-        <%= link_to  root_path(modal: "new"), remote: true, id: "postBtn", class: "col-12 text-center" do %>
+        <%= link_to  root_path(modal: "new"), remote: true, id: "postBtnWrapper", class: "postBtnWrapper col-12 text-center" do %>
           <button class="postBtn w-50 my-2 bg-primary text-white border rounded-pill">投稿する</button>
         <% end %>
         <% @follower_microposts.each do |micropost| %>

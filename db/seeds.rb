@@ -168,18 +168,24 @@ require 'faker'
 end
 
 fakers = User.where(target: "yeild")
-targets2 = Target.where(target_category_id: 2)
-targets = []
+target = Target.find_by(target_category_id: 8)
+university = University.first
 
-targets2.each do |t2|
-  10.times do |n|
-    targets.push(t2.content)
-  end
+fakers.each do |f|
+  f.update(target: target, my_choice_university: university)
 end
 
-fakers.zip(targets) do |f, t|
-  f.update(target: t)
-end
+# targets = []
+
+# targets?.each do |t?|
+#   10.times do |n|
+#     targets.push(t?.content)
+#   end
+# end
+
+# fakers.zip(targets) do |f, t|
+#   f.update(target: t)
+# end
 
 
 universities = File.open("app/javascript/csv/university_list.csv", mode = "r").readlines

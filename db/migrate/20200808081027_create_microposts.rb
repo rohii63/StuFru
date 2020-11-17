@@ -2,9 +2,9 @@ class CreateMicroposts < ActiveRecord::Migration[6.0]
   def change
     create_table :microposts do |t|
       t.datetime :studied_at, null: false
-      t.integer :how_many_studied_hours
-      t.integer :how_many_studied_minutes
-      t.integer :studied_time_in_minutes, null: false
+      t.integer :study_hours
+      t.integer :study_minutes
+      t.integer :study_time, null: false
       t.integer :study_amount
       t.string :study_unit
       t.text :content

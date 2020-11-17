@@ -12,9 +12,9 @@ ja:
     attributes:
       micropost:
         studied_at: 勉強日時
-        how_many_studied_hours: 何時間勉強したか
-        how_many_studied_minutes: 何分勉強したか
-        studied_time_in_minutes: 勉強時間
+        study_hours: 何時間勉強したか
+        study_minutes: 何分勉強したか
+        study_time: 勉強時間
   date:
     abbr_day_names:
     - 日
