@@ -1,5 +1,5 @@
 <%= form_with model: @book = @user.books.build do |book| %>
-  <div class="modal fade" id="bookNewModal" tabindex="-1" role="dialog" aria-labelledby="bookNewModalLabel" aria-hidden="true">
+  <div class="modal fade" id="bookCreateModal" tabindex="-1" role="dialog" aria-labelledby="bookCreateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -25,14 +25,14 @@
             </div>
             <div class="form-group">
               <%= label_tag "book[book_category_id]" ,"カテゴリー" %>
-              <%= link_to "新規作成", new_user_book_category_path(@user, modal: "new"), remote: true %>
+              <%= link_to "新規作成", new_user_book_category_path(@user, modal: "new"), remote: true, id: "bookCategoryNewLink" %>
               <%= status.collection_select :book_category_id, @book_categories, :id, :name, selected: 1 %>
             </div>
           <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= book.submit :登録, class: "btn btn-primary", id: "book_register_btn" %>
+          <%= book.submit :登録, class: "btn btn-primary", id: "bookCreateBtn" %>
         </div>
       </div>
     </div>
