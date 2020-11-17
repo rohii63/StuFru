@@ -3,12 +3,16 @@ import {navbarCollapse} from "../lib";
 
 $(function() {
   navbarCollapse();
-  
-  var elem =  $("#my_choice_university_create_confirm_modal");
 
-  if (elem[0]) {
-    $("header").html("");
-    $("#university_search").before("<p><h4>志望校を選択しよう！</h4></p>");
+  if ($("#my_choice_university_create_modal")[0]) {
+    $("#sidebar").html("");
+    $("#navbarToggler").html("");
+    $("#bottomNavBar").html("");
+    $("#pageTitle").html("<i class='fas fa-university text-primary'></i></i> 志望校を選択しよう！");
+    $("#topNavBar").removeClass("col-lg-7");
+    $("#mainContainer").removeClass("col-lg-7");
+    $("#topNavBar").addClass("col-lg-6 border-right");
+    $("#mainContainer").addClass("col-lg-6 border-right border-bottom");
   };
 
   $("#university_search").on("keyup", function() {
