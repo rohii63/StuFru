@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :books, only: [:create, :show, :update, :destroy]
+  resources :books, except: [:index, :edit]
   resources :book_registers, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index

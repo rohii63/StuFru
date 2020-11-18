@@ -12,6 +12,9 @@ class BooksController < ApplicationController
     end
   end
 
+  def new
+  end
+
   def create
     @user = current_user
     @book = @user.books.build(book_params)

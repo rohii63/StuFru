@@ -7,12 +7,12 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <%= f.text_field :name, placeholder: "カテゴリー名を入力" %>
+            <%= f.text_field :name, placeholder: "カテゴリー名を入力", class: "form-control mb-0" %>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit :登録, class: "btn btn-primary" %>
+          <%= f.submit :登録, id: "bookCategoryCreateBtn",class: "btn btn-primary" %>
         </div>
       </div>
     </div>
