@@ -5,7 +5,7 @@ class Micropost < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  default_scope -> { order(updated_at: :desc) }
+  default_scope -> { order(studied_at: :desc) }
   validates :content, length: {maximum: 280}
   validates :study_amount, numericality: { greater_than_or_equal_to: 1, allow_nil: true }
   validate  :datetime_not_future_time

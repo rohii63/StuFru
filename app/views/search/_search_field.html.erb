@@ -1,8 +1,8 @@
-<p id="searched_word"><%= "〜#{@keyword}〜で検索" if @keyword %></p>
-
-<p>
-<%= form_tag user_search_path, method: 'get', remote: true do %>
-  <%= text_field_tag :search, nil, placeholder: "キーワードで検索" %>
-  <%= submit_tag "検索" %>
+<%= form_tag user_search_path, method: 'get', remote: true, class: "row justify-content-center px-2", id: "search_form" do %>
+  <div class="form-group col-10 px-0">
+    <%= text_field_tag :search, nil, placeholder: "キーワードで検索", class: "form-control rounded" %>
+  </div>
+  <div class="col-auto px-0 ml-1">
+    <%= submit_tag "検索", class: "btn btn-primary" %>
+  </div>
 <% end %>
-</p>

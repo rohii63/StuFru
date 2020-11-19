@@ -53,8 +53,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
-    t.string "status"
-    t.string "study_unit"
     t.string "icon"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
