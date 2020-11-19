@@ -1,4 +1,4 @@
-<div class="col-xl-6 py-3 pl-2 pr-3 border rounded-lg" id="post_card_micropost<%= micropost.id %>">
+<div class="col-xl-6 mb-2 py-3 pl-2 pr-3 border rounded-lg" id="post_card_micropost<%= micropost.id %>">
   <div class="row">
     <div class="col-2">
       <%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "60x60>"))), my_page_path(micropost.user) %>
@@ -22,17 +22,17 @@
             <div class="col-3 col-md-2 col-xl-3 px-2">
               <%= image_tag url_for(micropost.book.icon.variant(resize: "85x70>")), class: "border rounded mr-2" if micropost.book %>
             </div>
-            <div class="col-9 col-md-10 col-xl-9 px-2">
-              <div class="overflow-hidden m" style="text-overflow: ellipsis; white-space: nowrap;">
+            <div class="col-9 col-md-10 col-xl-9 px-2 ml-2">
+              <div class="overflow-hidden" style="text-overflow: ellipsis; white-space: nowrap;">
                 <%= micropost.book.name if micropost.book %>
               </div>
               <div>
                 <i class="far fa-clock"></i>
-                <% if micropost.how_many_studied_hours != 0 %>
-                  <span class="text-primary"><%= micropost.how_many_studied_hours %></span>時間
+                <% if micropost.study_hours != 0 %>
+                  <span class="text-primary"><%= micropost.study_hours %></span>時間
                 <% end %>
-                <% if micropost.how_many_studied_minutes != 0 %>
-                  <span class="text-primary"><%= micropost.how_many_studied_minutes %></span>分
+                <% if micropost.study_minutes != 0 %>
+                  <span class="text-primary"><%= micropost.study_minutes %></span>分
                 <% end %>
               </div>
               <div>
@@ -46,11 +46,11 @@
         <% else %>
           <div class="border rounded shadow-sm mt-1 p-2">
             <i class="far fa-clock"></i>
-            <% if micropost.how_many_studied_hours != 0 %>
-              <span class="text-primary"><%= micropost.how_many_studied_hours %></span>時間
+            <% if micropost.study_hours != 0 %>
+              <span class="text-primary"><%= micropost.study_hours %></span>時間
             <% end %>
-            <% if micropost.how_many_studied_minutes != 0 %>
-              <span class="text-primary"><%= micropost.how_many_studied_minutes %></span>分
+            <% if micropost.study_minutes != 0 %>
+              <span class="text-primary"><%= micropost.study_minutes %></span>分
             <% end %>
           </div>
         <% end %>

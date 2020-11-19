@@ -54,9 +54,9 @@ class MicropostsController < ApplicationController
       params.require(:micropost).permit(
         :book_id,
         :studied_at,
-        :how_many_studied_hours,
-        :how_many_studied_minutes,
-        :studied_time_in_minutes,
+        :study_hours,
+        :study_minutes,
+        :study_time,
         :studied_page,
         :content,
         :picture,

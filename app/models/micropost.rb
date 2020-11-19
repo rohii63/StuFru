@@ -5,7 +5,7 @@ class Micropost < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  default_scope -> { order(updated_at: :desc) }
+  default_scope -> { order(studied_at: :desc) }
   validates :content, length: {maximum: 280}
   validates :study_amount, numericality: { greater_than_or_equal_to: 1, allow_nil: true }
   validate  :datetime_not_future_time
@@ -19,13 +19,13 @@ class Micropost < ApplicationRecord
   end
 
   def studied_time_non_zero
-    errors.add(:studied_time_in_minutes, "が０分です。") if studied_time_in_minutes == 0
+    errors.add(:study_time, "が０分です。") if study_time == 0
   end
 
   def study_time_limit_per_day
     from = studied_at.at_beginning_of_day
     to = studied_at.at_end_of_day
-    errors.add(:studied_time_in_minutes, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:studied_time_in_minutes) + studied_time_in_minutes >= 1440
+    errors.add(:study_time, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:study_time) + study_time >= 1440
   end
 
   def item_of_page_blank
@@ -80,7 +80,7 @@ class Micropost < ApplicationRecord
   end
 
   def self.total_study_time
-    total = self.sum(:studied_time_in_minutes)
+    total = self.sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes
@@ -92,8 +92,8 @@ class Micropost < ApplicationRecord
     from_in_yesterday = Time.current.at_beginning_of_day - 1.day
     to_in_yesterday = Time.current.at_end_of_day - 1.day
 
-    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
-    total_in_yesterday = self.where(studied_at: from_in_yesterday...to_in_yesterday).sum(:studied_time_in_minutes)
+    total = self.where(studied_at: from...to).sum(:study_time)
+    total_in_yesterday = self.where(studied_at: from_in_yesterday...to_in_yesterday).sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total, total_in_yesterday
@@ -105,8 +105,8 @@ class Micropost < ApplicationRecord
     from_in_last_week = Time.current.at_beginning_of_week - 1.week
     to_in_last_week = Time.current.at_end_of_week - 1.week
 
-    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
-    total_in_last_week = self.where(studied_at: from_in_last_week...to_in_last_week).sum(:studied_time_in_minutes)
+    total = self.where(studied_at: from...to).sum(:study_time)
+    total_in_last_week = self.where(studied_at: from_in_last_week...to_in_last_week).sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total, total_in_last_week
@@ -118,8 +118,8 @@ class Micropost < ApplicationRecord
     from_in_last_month = Time.current.at_beginning_of_month - 1.month
     to_in_last_month = Time.current.at_end_of_month - 1.month
 
-    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
-    total_in_last_month = self.where(studied_at: from_in_last_month...to_in_last_month).sum(:studied_time_in_minutes)
+    total = self.where(studied_at: from...to).sum(:study_time)
+    total_in_last_month = self.where(studied_at: from_in_last_month...to_in_last_month).sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total, total_in_last_month
@@ -129,7 +129,7 @@ class Micropost < ApplicationRecord
     from = Time.current.at_beginning_of_day - n.day
     to = Time.current.at_end_of_day - n.day
 
-    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    total = self.where(studied_at: from...to).sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total
@@ -139,7 +139,7 @@ class Micropost < ApplicationRecord
     from = Time.current.at_beginning_of_week - n.week
     to = Time.current.at_end_of_week - n.week
 
-    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    total = self.where(studied_at: from...to).sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total
@@ -149,7 +149,7 @@ class Micropost < ApplicationRecord
     from = Time.current.at_beginning_of_month - n.month
     to = Time.current.at_end_of_month - n.month
 
-    total = self.where(studied_at: from...to).sum(:studied_time_in_minutes)
+    total = self.where(studied_at: from...to).sum(:study_time)
     hours = total / 60
     minutes = total % 60
     return hours, minutes, total
@@ -160,7 +160,7 @@ class Micropost < ApplicationRecord
     to = week_target_created_at.at_end_of_week
     post = self.where(studied_at: from...to).where(book_id: book_id).where(study_unit: study_unit)
     
-    study_unit == "時間" ? post.sum(:studied_time_in_minutes) : post.sum(:study_amount)
+    study_unit == "時間" ? post.sum(:study_time) : post.sum(:study_amount)
   end
 
 end

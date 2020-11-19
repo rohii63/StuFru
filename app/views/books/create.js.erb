@@ -21,7 +21,7 @@ $(function(){
           $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
       <% end %>
       
-      $("#book_new_modal_modal").html("<%= escape_javascript(render 'books/index/book_new_modal') %>");
+      $("#bookModalWrapper").html("<%= escape_javascript(render 'books/index/book_new_modal') %>");
     });
   <% end %>
 })

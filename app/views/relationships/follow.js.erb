@@ -1,4 +1,5 @@
 $(function(){
-  $("#follow_btn").html("<%= escape_javascript(render 'relationships/follow_btn') %>");
+  $("#followBtnWrapper").html("<%= escape_javascript(render 'relationships/follow_btn', user: @user) %>");
+  $("#followBtnWrapper<%= @user.id %>").html("<%= escape_javascript(render 'relationships/follow_btn', user: @user) %>");
   $("#followInformation").html("<%= escape_javascript(render 'users/my_page/follow_information') %>");
 })

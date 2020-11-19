@@ -3,7 +3,11 @@
 </p>
 <p>
   <%= @user.name %>
-  <div id="follow_btn"><%= render 'relationships/follow_btn' %></div>
+  <% unless current_user == @user %>
+    <div id="followBtnWrapper">
+      <%= render 'relationships/follow_btn', user: @user %>
+    </div>
+  <% end %>
 </p>
 
 

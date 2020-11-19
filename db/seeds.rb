@@ -167,23 +167,32 @@ require 'faker'
   user.active_relationships.create(followed_id: 1)
 end
 
-fakers = User.where(target: "yeild")
-targets2 = Target.where(target_category_id: 2)
-targets = []
-
-targets2.each do |t2|
-  10.times do |n|
-    targets.push(t2.content)
-  end
-end
-
-fakers.zip(targets) do |f, t|
-  f.update(target: t)
-end
-
-
 universities = File.open("app/javascript/csv/university_list.csv", mode = "r").readlines
 
 for university in universities do
   University.create(name: university)
 end
+
+fakers = User.where(target: "yeild")
+target = Target.find_by(target_category_id: 8).content
+university = University.first.name
+
+fakers.each do |f|
+  f.update(target: target, my_choice_university: university)
+end
+
+User.take(2).each do |u|
+  u.update(target: target, my_choice_university: university)
+end
+
+# targets = []
+
+# targets?.each do |t?|
+#   10.times do |n|
+#     targets.push(t?.content)
+#   end
+# end
+
+# fakers.zip(targets) do |f, t|
+#   f.update(target: t)
+# end

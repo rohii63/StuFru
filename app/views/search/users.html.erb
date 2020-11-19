@@ -1,13 +1,21 @@
 <% content_for :title, "ユーザ検索" %>
 
-<h1>Search#users</h1>
-<p>Find me in app/views/search/users.html.erb</p>
-<%= render 'search/search_field' %>
+<div class="mt-2 p-3">
+  <%= render 'search/search_field' %>
+</div>
 
-<p><%= link_to "おすすめユーザー", user_search_path, remote: true, method: :get %></p>
+<hr class="my-0">
 
-<ol id="searched_user">
-  <%= render 'search/searched_user' %>
-</ol>
+<div class="px-2 mt-2 mb-5">
+  <div class="d-flex">
+    <%= link_to user_search_path(), remote: true, method: :get, id: "recommendUserLink" do %>
+      <h5><div class="badge badge-pill badge-primary">おすすめユーザー</div></h5>
+    <% end %>
+    <h5><div id="search_word" class='badge badge-pill badge-primary ml-1'></div></h5>
+  </div>
+  <div id="userList" class="row mt-2 px-4">
+    <%= render 'search/user_list' %>
+  </div>
+</div>
 
 <%= javascript_pack_tag 'search/users' %>

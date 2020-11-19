@@ -1,20 +1,18 @@
 <%= render "shared/notifications" %>
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
 
 <p id="search_field">
   <%= render 'books/index/search_field' %>
 </p>
 
-<div id="newBtnWrapper">
-  <div id="newBtn" class="btn btn-primary">教材登録</div>
+<div id="bookModalBtnWrapper">
+  <%= link_to "教材登録", new_book_path(), remote: true %>
 </div>
 
-<div id="book_new_modal_modal">
+<div id="bookModalWrapper">
   <%= render 'books/index/book_new_modal' %>
 </div>
 
-<div id="book_category_modal">
+<div id="bookCategoryModalWrapper">
   <%= render 'books/book_category_modal' %>
 </div>
 

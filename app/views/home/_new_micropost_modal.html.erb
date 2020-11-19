@@ -23,13 +23,13 @@
             </div>
           </div>
           <div class="mt-3">
-            <%= f.label :how_many_studied_hours, "勉強時間", class: "mb-1" %>
+            <%= f.label :study_hours, "勉強時間", class: "mb-1" %>
             <div>
-              <%= f.select :how_many_studied_hours, (0..23).to_a, class: "" %>
-              <%= f.label :how_many_studied_hours, "時間" %>
-              <%= f.select :how_many_studied_minutes, (0..59).to_a, class: "" %>
-              <%= f.label :how_many_studied_minutes, "分" %>
-              <%= f.hidden_field :studied_time_in_minutes, class: "" %>
+              <%= f.select :study_hours, (0..23).to_a, class: "" %>
+              <%= f.label :study_hours, "時間" %>
+              <%= f.select :study_minutes, (0..59).to_a, class: "" %>
+              <%= f.label :study_minutes, "分" %>
+              <%= f.hidden_field :study_time, class: "" %>
             </div>
           </div>
           <div id="studyAmount" class="mt-3"></div>

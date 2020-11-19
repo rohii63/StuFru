@@ -3,7 +3,7 @@ import '../bootstrap-datetimepicker.min';
 import {calculateStudyTime, dateTimePicker} from "../lib";
 
 $(function(){
-  if ($("#targetCreateBtn")[0]) {
+  if ($("#userTargetSaveBtnWrapper")[0]) {
     $("#sidebar").html("");
     $("#navbarToggler").html("");
     $("#bottomNavBar").html("");
@@ -12,7 +12,12 @@ $(function(){
     $("#mainContainer").removeClass("col-lg-7");
     $("#topNavBar").addClass("col-lg-6 border-right");
     $("#mainContainer").addClass("col-lg-6 border-right border-bottom");
-  } else {
+
+    $('input:radio[name="user[target]"]').on('change', function(){
+      $("body, html").animate({ scrollTop: $("body").get(0).scrollHeight }, 400);
+      $("#userTargetSaveBtnWrapper").html("<input type='submit' name='commit' value='登録' class='btn btn-primary w-25' data-disable-with='登録'>");
+    });
+    } else {
     $.ajax({
       url: location.href,
       type: "GET", 
@@ -23,11 +28,7 @@ $(function(){
 
   calculateStudyTime();
 
-  $("body").on("click", ".postBtn", function(){
+  $(".postBtnWrapper").on("click", ".postBtn", function(){
     dateTimePicker();
-  });
-
-  $('input:radio[name="user[target]"]').on('change', function(){
-    $("#targetCreateBtn").prop("disabled", false);
   });
 })

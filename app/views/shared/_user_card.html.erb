@@ -1,12 +1,42 @@
-<li id="profile-card-<%= user.id %>">
-  <%= link_to my_page_path(user) do %>
-    <%= image_tag url_for(user.avatar.variant(resize: "50x50>")) %>
-    <%= user.name %>
-    <%= user.job %>
-    <%= user.live %>
-    <%= user.target_comment %>
-    <%= user.target %>
-    <%= user.my_choice_university %>
-    <%= user.a_week_study_time %>
+<div id="profile-card-<%= user.id %>" class="col-lg-6 border rounded-lg mb-1 p-2">
+  <%= link_to my_page_path(user), class: "text-reset", style: "text-decoration: none;" do %>
+    <div class="row">
+      <div class="col-2">
+        <%= image_tag url_for(user.avatar.variant(resize: "60x60>")) %>
+      </div>
+      <div class="col-10">
+        <div style="height: 45px">
+          <div>
+            <%= user.name %>
+          </div>
+          <div class="text-muted">
+            <small>
+              <%= user.job %>
+              <%= user.live %>
+            </small>
+          </div>
+        </div>
+        <div class="overflow-hidden mt-1" style="text-overflow: ellipsis; white-space: nowrap;">
+          <%= user.target_comment %>
+        </div>
+        <div class="text-muted">
+          <i class='fab fa-font-awesome-flag text-primary'></i>
+          <small>
+            <%= user.target %>
+            <%= user.my_choice_university %>
+          </small>
+        </div>
+        <div class="text-muted">
+          <i class="far fa-clock text-primary"></i>
+          <small>
+            最近１週間
+            <%= user.a_week_study_time %>
+          </small>
+        </div>
+      </div>
+    </div>
   <% end %>
-</li>
+  <div id="followBtnWrapper<%= user.id %>" class="offset-2 col-10 mt-3 text-right">
+    <%= render 'relationships/follow_btn', user: user %>
+  </div>
+</div>

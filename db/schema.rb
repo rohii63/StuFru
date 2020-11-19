@@ -53,8 +53,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
-    t.string "status"
-    t.string "study_unit"
     t.string "icon"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -83,9 +81,9 @@ ActiveRecord::Schema.define(version: 2020_10_16_064608) do
 
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "studied_at", null: false
-    t.integer "how_many_studied_hours"
-    t.integer "how_many_studied_minutes"
-    t.integer "studied_time_in_minutes", null: false
+    t.integer "study_hours"
+    t.integer "study_minutes"
+    t.integer "study_time", null: false
     t.integer "study_amount"
     t.string "study_unit"
     t.text "content"

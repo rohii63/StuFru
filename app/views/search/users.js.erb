@@ -1,6 +1,10 @@
 $(function(){
+  <% if @keyword %>
+    $("#search_word").html(" <%= @keyword %> で検索");
+  <% else %>
+    $("#search_word").html("");
+  <% end %>
   $("#notifications").html("<%= escape_javascript(render 'shared/notifications') %>");
-  $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
   $("#search").val("");
-  $("#searched_user").html("<%= escape_javascript(render 'search/searched_user') %>");
+  $("#userList").html("<%= escape_javascript(render 'search/user_list') %>");
 })
