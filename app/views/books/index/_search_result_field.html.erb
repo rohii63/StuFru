@@ -1,8 +1,22 @@
-<% @books.each do |book| %>
-  <div class="book_card_<%= book.id %>">
-    <%= link_to book_path(book) do %>
-      <%= image_tag url_for(book.icon.variant(resize: "100x100>")) %>
-      <%= book.name %>
-    <% end %>
-  </div>
-<% end %>
+<div class="mt-2">
+  <% @books.each do |book| %>
+    <div class="mt-1">
+      <%= link_to book_path(book), class: "text-primary" do %>
+        <div class="d-flex px-2 align-items-center">
+          <div>
+            <%= image_tag url_for(book.icon.variant(resize: "90x100>")) %>
+          </div>
+          <div class="ml-1">
+            <div>
+              <%= book.name %>
+            </div>
+            <div>
+              <i class="fas fa-user"></i>
+              <%= book.users.count %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

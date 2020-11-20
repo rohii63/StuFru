@@ -13,7 +13,7 @@ ja:
         target_comment: 目標コメント
         introduction: 自己紹介
       book:
-        icon: イメージ
+        icon: 教材イメージ
         name: 教材名
         status: ステータス
         study_unit: 勉強単位

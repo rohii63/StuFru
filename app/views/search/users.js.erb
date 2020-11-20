@@ -1,9 +1,5 @@
 $(function(){
-  <% if @keyword %>
-    $("#search_word").html(" <%= @keyword %> で検索");
-  <% else %>
-    $("#search_word").html("");
-  <% end %>
+  $("#search_word").html("<%= " #{@keyword} で検索" if @keyword %>");
   $("#notifications").html("<%= escape_javascript(render 'shared/notifications') %>");
   $("#search").val("");
   $("#userList").html("<%= escape_javascript(render 'search/user_list') %>");

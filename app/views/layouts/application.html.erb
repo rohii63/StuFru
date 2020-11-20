@@ -25,20 +25,20 @@
         <div class="collapse" id="navbarCollapse">
           <ul class="list-unstyled mt-2 ml-3">
             <li>
-              <%= link_to user_books_path(current_user), class: "text-reset" do %>
-                <i class="fas fa-book-open"></i>
+              <%= link_to user_books_path(current_user), class: "text-reset", style: "text-decoration: none;" do %>
+                <i class="fas fa-book-open text-primary"></i>
                 教材全般
               <% end %>
             </li>
             <li class="mt-1">
-              <%= link_to user_path(current_user), class: "text-reset" do %>
-                <i class="fas fa-user"></i>
+              <%= link_to user_path(current_user), class: "text-reset", style: "text-decoration: none;" do %>
+                <i class="fas fa-user text-primary"></i>
                 プロフィール
               <% end %>
             </li>
             <li class="mt-1">
-              <%= link_to destroy_user_session_path(), method: :delete, class: "text-reset" do %>
-                <i class="fas fa-sign-out-alt"></i>
+              <%= link_to destroy_user_session_path(), method: :delete, class: "text-reset", style: "text-decoration: none;" do %>
+                <i class="fas fa-sign-out-alt text-primary"></i>
                 ログアウト
               <% end %>
             </li>

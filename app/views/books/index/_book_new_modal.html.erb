@@ -7,26 +7,46 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <%= book.label :icon %>
-            <%= book.file_field :icon, class: "form-control-file" %>
+            <div>
+              <%= book.label :icon, class: "mb-1" %>
+            </div>
+            <div>
+              <%= book.file_field :icon, class: "form-control-file" %>
+            </div>
           </div>
           <div class="form-group">
-            <%= book.label :name %>
-            <%= book.text_field :name, placeholder: "教材名を入力" %>
+            <div >
+              <%= book.label :name, class: "mb-1" %>
+            </div>
+            <div>
+              <%= book.text_field :name %>
+            </div>
           </div>
           <%= fields_for @status_with_book = @user.status_with_books.build() do |status| %>
             <div class="form-group">
-              <%= status.label :status, "ステータス" %>
-              <%= status.select :status, StatusWithBook.statuses, include_blank: false %>
+              <div>
+                <%= status.label :status, "ステータス", class: "mb-1" %>
+              </div>
+              <div>
+                <%= status.select  :status, StatusWithBook.statuses, include_blank: false %>
+              </div>
             </div>
             <div class="form-group">
-              <%= status.label :study_unit, "学習単位" %>
-              <%= status.select :study_unit, StatusWithBook.study_units, include_blank: false %>
+              <div>
+                <%= status.label :study_unit, "学習単位", class: "mb-1" %>
+              </div>
+              <div>
+                <%= status.select :study_unit, StatusWithBook.study_units, include_blank: false %>
+              </div>
             </div>
             <div class="form-group">
-              <%= label_tag "book[book_category_id]" ,"カテゴリー" %>
-              <%= link_to "新規作成", new_user_book_category_path(@user, modal: "new"), remote: true %>
-              <%= status.collection_select :book_category_id, @book_categories, :id, :name, selected: 1 %>
+              <div>
+                <%= label_tag "book[book_category_id]" ,"カテゴリー", class: "mb-1" %>
+                <%= link_to "新規作成", new_user_book_category_path(@user, modal: "new"), remote: true, class: "text-primary" %>
+              </div>
+              <div>
+                <%= status.collection_select :book_category_id, @book_categories, :id, :name, selected: 1 %>
+              </div>
             </div>
           <% end %>
         </div>
