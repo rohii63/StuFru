@@ -13,10 +13,10 @@
       <div class="col-10 col-sm-11 pr-0">
         <% if current_user == comment.user %>
           <%= link_to micropost_path(@micropost, comment_id: comment.id), remote: true, class: "text-reset", style: "text-decoration: none;" do %>
-            <%= render 'microposts/comment_card_content', comment: comment %>
+            <%= render 'microposts/comment_card', comment: comment %>
           <% end %>
         <% else %>
-          <%= render 'microposts/comment_card_content', comment: comment %>
+          <%= render 'microposts/comment_card', comment: comment %>
         <% end %>
       </div>
     </div>

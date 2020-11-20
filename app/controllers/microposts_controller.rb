@@ -13,11 +13,10 @@ class MicropostsController < ApplicationController
 
     if @micropost.user == current_user
       @books_in_progress = current_user.books_in_progress
-      if params[:comment_id]
-        @comments = @micropost.comments.all
-        @comment = Comment.find(params[:comment_id])
-        render 'comment_delete_modal'
-      end
+    elsif params[:comment_id]
+      @comments = @micropost.comments.all
+      @comment = Comment.find(params[:comment_id])
+      render 'comment_delete_modal'
     end
 
     @comment = @micropost.comments.build()
