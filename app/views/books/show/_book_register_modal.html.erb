@@ -1,0 +1,45 @@
+<%= form_with model: @study_book, url: book_registers_path() do |study_book| %>
+  <div class="modal fade" id="bookRegisterModal" tabindex="-1" role="dialog" aria-labelledby="bookRegisterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">教材登録</h5>
+        </div>
+        <div class="modal-body">
+          <%= fields_for @status_with_book do |status| %>
+            <div class="form-group">
+              <div>
+                <%= status.label :status, "ステータス", class: "mb-1" %>
+              </div>
+              <div>
+                <%= status.select :status, StatusWithBook.statuses %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <%= status.label :study_unit, "学習単位", class: "mb-1" %>
+              </div>
+              <div>
+                <%= status.select :study_unit, StatusWithBook.study_units %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <%= label_tag "book[book_category_id]" ,"カテゴリー", class: "mb-1" %>
+                <%= link_to "新規作成", new_user_book_category_path(@user, modal: "register"), remote: true %>
+              </div>
+              <div>
+                <%= status.collection_select :book_category_id, @book_categories, :id, :name, selected: 1 %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= study_book.hidden_field :book_id %>
+          <%= study_book.submit "登録", id: "bookRegisterCreateBtn" ,class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

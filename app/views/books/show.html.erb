@@ -1,28 +1,37 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<% content_for :title, @book.name %>
 
-<p id="registered_user_count">勉強中：<%= @book.users.count %></p>
+<div class="p-2 mb-2">
+  <div id="book_info">
+    <%= render 'books/show/book_info' %>
+  </div>
 
-<div id="book_info">
-  <%= render 'books/show/book_info' %>
+  <div class="row px-4 align-items-center">
+    <div id="bookEditBtnWrapper" class="col-6 px-1">
+      <% if @user.register?(@book) %>
+        <%= link_to  "編集", edit_book_path(@book), id: "bookEditBtn", class: "col-12 btn btn-primary", remote: true %>
+      <% end %>
+    </div>
+    <div id="bookRegisterBtnWrapper" class="col-6 px-1">
+      <%= render 'books/show/book_register_btn' %>
+    </div>
+  </div>
 </div>
 
-<div id="editBtnWrapper">
-  <% if @user.register?(@book) %>
-    <div id="editBtn" class="btn btn-primary">編集</div>
-  <% end %>
+<div>
+  <%= render 'books/show/book_register_modal' %>
+  <%= render 'books/show/book_edit_modal' %>
 </div>
-<%= render 'books/show/book_edit_modal' %>
 
 <div id="bookCategoryModalWrapper">
   <%= render 'books/book_category_modal' %>
 </div>
 
-<span id="registerBtnWrapper">
-  <%= render 'books/show/register_btn' %>
-</span>
+<hr class="mb-2">
 
-<strong><p>タイムライン</p></strong>
-<p><%= render 'shared/timeline' %></p>
+<div class="ml-2 mb-2"><strong>タイムライン</strong></div>
+
+<div class="row px-4">
+  <%= render 'shared/timeline' %>
+</div>
 
 <%= javascript_pack_tag 'books/show' %>

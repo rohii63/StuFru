@@ -15,11 +15,11 @@
     <% if user_signed_in? %>
       <div id="topNavBar" class="fixed-top offset-sm-3 col-sm-9 col-lg-7 pos-f-t border-bottom border-left bg-white">
         <nav class="navbar d-flex align-items-center py-1 px-0">
-          <h6 id="pageTitle" class="font-weight-bold mb-0 py-2">
+          <h6 id="pageTitle" class="col-9 font-weight-bold mb-0 py-2 px-0 overflow-hidden" style="text-overflow: ellipsis; white-space: nowrap;">
             <%= yield(:title) %>
           </h6>
-          <button id="navbarToggler" class="navbar-toggler d-md-none" type="button">
-            <i class="fas fa-bars fa-lg d-md-none"></i>
+          <button id="navbarToggler" class="navbar-toggler px-0 d-sm-none" type="button" style="width: 50px;">
+            <i class="fas fa-bars fa-lg"></i>
           </button>
         </nav>
         <div class="collapse" id="navbarCollapse">
