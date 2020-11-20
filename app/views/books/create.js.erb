@@ -9,6 +9,8 @@ $(function(){
 
   <% else %>
     $('#bookNewModal').on('hidden.bs.modal', function () {
+      $("#bookField").html("<%= escape_javascript(render 'books/index/book_shelf') %>");
+      
       <% case @status_with_book.status %>
         <% when "勉強中" %>
           $("#pills-in-progress-tab").tab('show');
@@ -20,7 +22,7 @@ $(function(){
           $("#pills-finished-tab").tab('show');
           $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
       <% end %>
-      
+
       $("#bookModalWrapper").html("<%= escape_javascript(render 'books/index/book_new_modal') %>");
     });
   <% end %>

@@ -7,17 +7,29 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <%= f.label :status, "ステータス" %>
-            <%= f.select :status, options_for_select(StatusWithBook.statuses, selected: @status) %>
+            <div>
+              <%= f.label :status, "ステータス", class: "mb-1" %>
+            </div>
+            <div>
+              <%= f.select :status, options_for_select(StatusWithBook.statuses, selected: @status) %>
+            </div>
           </div>
           <div class="form-group">
-            <%= f.label :study_unit, "学習単位" %>
-            <%= f.select :study_unit, options_for_select(StatusWithBook.study_units, selected: @study_unit) %>
+            <div>
+              <%= f.label :study_unit, "学習単位", class: "mb-1" %>
+            </div>
+            <div>
+              <%= f.select :study_unit, options_for_select(StatusWithBook.study_units, selected: @study_unit) %>
+            </div>
           </div>
           <div class="form-group">
-            <%= label_tag "book[book_category_id]" ,"カテゴリー" %>
-            <%= link_to "新規作成", new_user_book_category_path(@user, modal: "edit"), remote: true %>
-            <%= f.collection_select :book_category_id, @book_categories, :id, :name %>
+            <div>
+              <%= label_tag "book[book_category_id]" ,"カテゴリー", class: "mb-1" %>
+              <%= link_to "新規作成", new_user_book_category_path(@user, modal: "edit"), remote: true, class: "text-primary" %>
+            </div>
+            <div>
+              <%= f.collection_select :book_category_id, @book_categories, :id, :name %>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

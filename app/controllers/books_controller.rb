@@ -38,12 +38,9 @@ class BooksController < ApplicationController
     @study_book = @user.study_books.build(book_id: @book.id)
     @status_with_book = @user.status_with_books.build()
     @book_categories = @user.book_categories.all
+  end
 
-    respond_to do |format|
-      format.html
-      format.js { render 'edit' }
-    end
-
+  def edit
   end
 
   def update

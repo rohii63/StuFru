@@ -1,13 +1,11 @@
 $(function(){
   $("#error_messages").html("<%= escape_javascript(render 'shared/error_messages', object: @book) %>");
-  $("#searched_word").html("<%= "〜#{@keyword}〜で検索" if @keyword %>");
+  $("#search_word").html("<%= " #{@keyword} で検索" if @keyword %>");
 
   <% if @keyword %>
-    $("#book_field").html("<%= escape_javascript(render 'books/index/search_result_field') %>");
+    $("#bookField").html("<%= escape_javascript(render 'books/index/search_result_field') %>");
     $("#search").val("");
-    $("#bookModalBtnWrapper").html("");
   <% else %>
-    $("#book_field").html("<%= escape_javascript(render 'books/index/book_field') %>");
-    $("#bookModalBtnWrapper").html("<%= escape_javascript(link_to "教材登録", new_book_path(), remote: true ) %>");
+    $("#bookField").html("<%= escape_javascript(render 'books/index/book_shelf') %>");
   <% end %>
 })

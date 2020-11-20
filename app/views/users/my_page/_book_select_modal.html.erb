@@ -13,20 +13,24 @@
               <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "in_progress") %>
               <% unless tmp_status_with_books.empty? %>
                 <div class="py-2">
-                  <i class="fas fa-bookmark"></i>
+                  <i class="fas fa-bookmark text-primary"></i>
                   <%= category.name %>
                 </div>
               <% end %>
-              <div class="row">
+              <div class="row mt-2">
                 <% tmp_status_with_books.each do |status_with_book| %>
-                  <label class="col-4 d-flex align-items-center">
-                    <%= f.radio_button :book_id, "#{status_with_book.book.id}", class: "mr-2" %>
-                    <div class="border rounded" style="width: 7rem; height: 10rem; overflow: auto;">
-                      <div class="position-relative" style="height: 7rem;">
-                        <%= image_tag url_for(status_with_book.book.icon.variant(resize: "80x100>")), class: "rounded position-absolute", style: "top: 50%; left: 50%; transform: translate(-50%, -50%);" %>
-                      </div>
-                      <div class="border-top">
-                        <%= status_with_book.book.name %>
+                  <label>
+                    <div class="col-auto">
+                      <div class="p-2 border rounded-lg shadow-sm">
+                        <div class="text-center">
+                          <%= image_tag url_for(status_with_book.book.icon.variant(resize: "90x100>")), class: "border rounded" %>
+                        </div>
+                        <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
+                          <small><%= status_with_book.book.name %></small>
+                        </div>
+                        <div class="text-center">
+                          <%= f.radio_button :book_id, "#{status_with_book.book.id}" %>
+                        </div>
                       </div>
                     </div>
                   </label>

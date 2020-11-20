@@ -1,8 +1,0 @@
-<% if @user.register?(@book) %>
-  <%= form_with url: book_register_path(@book), method: :delete do |f| %>
-    <%= f.submit "登録解除", class: "btn btn-primary" %>
-  <% end %>
-<% else %>
-  <div id="registerBtn" class="btn btn-primary">登録</div>
-  <%= render 'books/show/register_modal' %>
-<% end %>

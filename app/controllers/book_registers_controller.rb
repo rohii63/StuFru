@@ -1,4 +1,7 @@
 class BookRegistersController < ApplicationController
+  def new
+  end
+  
   def create
     @user = current_user
     @book = Book.find(params[:book_register][:book_id])
