@@ -1,8 +1,10 @@
-<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-<% if notifications.exists? %>
-  <%= render notifications %>
-<% else %>
-  <p>｜通知はありません</p>
-<% end %>
+<%= content_for :title, "通知" %>
 
+<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+
+<div class="mt-1 px-2">
+  <% if notifications.exists? %>
+    <%= render notifications %>
+  <% end %>
+</div>
 <%= javascript_pack_tag 'notifications/index' %>

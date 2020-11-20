@@ -1,7 +1,14 @@
   <ul id="topNavLink" class="d-sm-none d-flex justify-content-between w-25 list-unstyled mb-0 pr-0">
     <li>
-      <%= link_to user_books_path(current_user) do %>
-        <i class="fas fa-book-open text-primary"></i>
+      <%= link_to notifications_path(current_user) do %>
+        <% if unchecked_notifications.any? %>
+          <span class="fa-layers fa-fw">
+            <i class="fas fa-bell text-primary"></i>
+            <span class="fa-layers-counter fa-lg fa-layers-bottom-right bg-tomato"></span>
+          </span>
+        <% else%>
+          <i class="fas fa-bell text-primary"></i>
+        <% end %>
       <% end %>
     </li>
     <li>

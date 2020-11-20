@@ -1,4 +1,4 @@
-<div class="col-xl-6 mb-2 py-3 pl-2 pr-3 border rounded-lg" id="post_card_micropost<%= micropost.id %>">
+<div class="col-xl-6 py-3 pl-2 pr-3 border rounded-lg" id="post_card_micropost<%= micropost.id %>">
   <div class="row">
     <div class="col-2">
       <%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "60x60>"))), my_page_path(micropost.user) %>
@@ -59,7 +59,9 @@
   </div>
   <div class="offset-2 col-10 d-flex mt-3">
     <div class="col-7 pl-0">
-      <i class="far fa-comment mr-2"></i>コメントする
+      <%= link_to micropost_path(micropost), class: "text-reset", style: "text-decoration: none;" do %>
+        <i class="far fa-comment mr-2"></i>コメントする
+      <% end %>
     </div>
     <div class="col-5 pl-0" id="like_btn<%= micropost.id %>">
       <%= render 'likes/like_btn', micropost: micropost %>

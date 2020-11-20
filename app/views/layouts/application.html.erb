@@ -25,20 +25,28 @@
         <div class="collapse" id="navbarCollapse">
           <ul class="list-unstyled mt-2 ml-3">
             <li>
-              <%= link_to user_books_path(current_user), class: "text-reset", style: "text-decoration: none;" do %>
-                <i class="fas fa-book-open text-primary"></i>
-                教材全般
+              <%= link_to notifications_path(current_user), class: "text-reset", style: "text-decoration: none;" do %>
+                <% if unchecked_notifications.any? %>
+                  <span class="fa-layers fa-fw">
+                    <i class="fas fa-bell text-primary"></i>
+                    <span class="fa-layers-counter fa-lg fa-layers-bottom-right bg-tomato"></span>
+                  </span>
+                  通知
+                <% else%>
+                  <i class="fas fa-bell text-primary mr-1"></i>
+                  通知
+                <% end %>
               <% end %>
             </li>
             <li class="mt-1">
               <%= link_to user_path(current_user), class: "text-reset", style: "text-decoration: none;" do %>
-                <i class="fas fa-user text-primary"></i>
+                <i class="fas fa-user text-primary mr-1"></i>
                 プロフィール
               <% end %>
             </li>
             <li class="mt-1">
               <%= link_to destroy_user_session_path(), method: :delete, class: "text-reset", style: "text-decoration: none;" do %>
-                <i class="fas fa-sign-out-alt text-primary"></i>
+                <i class="fas fa-sign-out-alt text-primary mr-1"></i>
                 ログアウト
               <% end %>
             </li>
@@ -77,6 +85,14 @@
               <% end %>
             </li>
             <li class="mb-3">
+              <%= link_to user_books_path(current_user), class: "d-flex text-reset", style: "text-decoration: none;" do %>
+                <div class="col-3 px-0">
+                  <i class="fas fa-book-open fa-2x text-primary"></i>
+                </div>
+                <h5 class="ml-2 pt-1 font-weight-bold">教材全般</h5>
+              <% end %>
+            </li>
+            <li class="mb-3">
               <%= link_to notifications_path(current_user), class: "d-flex text-reset", style: "text-decoration: none;" do %>
                 <% if unchecked_notifications.any? %>
                   <div class="fa-layers fa-fw col-3 mt-1 px-0">
@@ -90,14 +106,6 @@
                   </div>
                   <h5 class="ml-2 pt-1 font-weight-bold">通知</h5>
                 <% end %>
-              <% end %>
-            </li>
-            <li class="mb-3">
-              <%= link_to user_books_path(current_user), class: "d-flex text-reset", style: "text-decoration: none;" do %>
-                <div class="col-3 px-0">
-                  <i class="fas fa-book-open fa-2x text-primary"></i>
-                </div>
-                <h5 class="ml-2 pt-1 font-weight-bold">教材全般</h5>
               <% end %>
             </li>
             <li class="mb-3">
@@ -147,15 +155,8 @@
               <% end %>
             </li>
             <li class="flex-fill">
-              <%= link_to notifications_path(current_user), class: "text-primary" do %>
-                <% if unchecked_notifications.any? %>
-                  <span class="fa-layers fa-fw ml-2">
-                    <i class="fas fa-bell fa-lg" data-fa-transform="left-8"></i>
-                    <span class="fa-layers-counter fa-lg fa-layers-bottom-left bg-tomato"></span>
-                  </span>
-                <% else%>
-                  <i class="fas fa-bell fa-lg"></i>
-                <% end %>
+              <%= link_to user_books_path(current_user), class: "text-primary" do %>
+                <i class="fas fa-book-open fa-lg text-primary"></i>
               <% end %>
             </li>
           </ul>

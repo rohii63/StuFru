@@ -41,7 +41,7 @@
       <div class="col-auto ml-1 px-0">
         <%= link_to (image_tag url_for(@micropost.book.icon.variant(resize: "85x70>")), class: "border rounded mr-2"), book_path(@micropost.book)%>
       </div>
-      <div class="col-9 ml-2 px-0">
+      <div class="col-8 ml-2 px-0">
         <div class="overflow-hidden" style="text-overflow: ellipsis; white-space: nowrap;">
           <%= @micropost.book.name %>
         </div>
@@ -86,7 +86,7 @@
 <div class="p-3 border-top">
   <%= form_with model: @comment, url: micropost_comments_path(@micropost), class: "d-flex" do |f| %>
     <%= f.hidden_field :micropost_id %>
-    <%= f.text_field :content, placeholder: "コメント", class: "col-9 rounded" %>
+    <%= f.text_field :content, placeholder: "コメント", class: "col-9 rounded", autocomplete: "off" %>
     <%= f.submit "送信", class: "col-2 ml-2 btn btn-primary" %>
   <% end %>
 </div>
