@@ -1,42 +1,47 @@
-<p>達成目標 
-  <%= link_to "編集", user_path(@user, modal_name: "targetEditModal"), remote: true %></p>
-    
-<p><%= @user.target %></p>
-<p><% if @user.target == "大学受験合格" %>
-  <strong>志望校：<%= @user.my_choice_university %></strong><%= link_to "編集", university_search_path() %>
-<% end %></p>
+<div class="d-flex justify-content-between">
+  <div><strong>目標ジャンル</strong></div>
+  <%= link_to "編集", user_path(@user, modal_name: "targetEditModal"), remote: true, class: "mr-2 text-primary" %>
+</div>
+
+<div class="mt-3 ml-2">
+  <i class='fab fa-font-awesome-flag text-primary'></i>
+  <%= @user.target %>
+  <% if @user.target == "大学受験合格" %>
+    <%= link_to university_search_path(), class: "ml-1 text-primary" do %>
+      <strong><%= @user.my_choice_university %></strong>
+    <% end %>
+  <% end %>
+</div>    
 
 <%= form_with model: @user, url: user_update_path(
                                   @user, 
                                   modal_name: "targetEditModal",
                                   area_name: "target_area") do |f| %>
   <div class="modal fade" id="targetEditModal" tabindex="-1" role="dialog" aria-labelledby="targetEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-dialog-centered-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">目標ジャンル設定</h5>
+          <h5 class="modal-title">目標ジャンル</h5>
         </div>
         <div class="modal-body">
-
           <% for pointer,nav_name in @navbars do %>
-          <nav class="navbar navbar-light">
-            <a class="navbar-brand"><%= nav_name %></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent<%= pointer %>" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent<%= pointer %>">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+            <div class="pos-f-t">
+              <nav class="navbar navbar-white bg-white px-0">
+                <button id="targetNavbarToggler<%= pointer %>" class="navbar-toggler" type="button">
+                  <span><i class="fas fa-bars mr-2"></i><%= nav_name %></span>
+                </button>
+              </nav>
+              <div class="collapse" id="targetNavbar<%= pointer %>">
+                <div class="bg-white mx-2 py-1 px-2">
                   <% Target.where(target_category_id: pointer).each do |target| %>
                     <div class="form-check">
                       <%= f.radio_button :target, :"#{target.content}", class: "form-check-input" %>
                       <%= f.label :target, "#{target.content}", class: "form-check-label" %>
                     </div>
                   <% end %>
-                </li>                
-              </ul>
+                </div>
+              </div>
             </div>
-          </nav>
           <% end %>          
         </div>
         <div class="modal-footer">

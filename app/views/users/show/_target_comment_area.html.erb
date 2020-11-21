@@ -1,19 +1,24 @@
-<p><%= link_to (text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！"), 
-              user_path(@user, modal_name: "targetCommentEditModal"), remote: true %></p>
+<div class="input-group mt-1 w-100">
+  <%= link_to user_path(@user, modal_name: "targetCommentEditModal"), remote: true, style: "text-decoration: none;" do %>
+    <%= text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！", size: "40x3", class: "form-control rounded", style: "cursor: pointer;" %>
+  <% end %>
+</div>
 
 <%= form_with model: @user, url: user_update_path(
                                   @user, 
                                   modal_name: "targetCommentEditModal",
                                   area_name: "target_comment_area") do |f| %>
   <div class="modal fade" id="targetCommentEditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="targetCommentEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-dialog-centered-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">編集</h5>
         </div>
         <div class="modal-body">
-          <%= f.label :目標コメント, class: "col-form-label" %>
-          <%= f.text_area :target_comment, rows: "3", class: "form-control" %>
+          <%= f.label :target_comment %>
+          <div class="input-group">
+            <%= f.text_area :target_comment, rows: "4", class: "form-control rounded" %>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

@@ -1,38 +1,70 @@
-<p>
-<%= image_tag url_for(@user.avatar.variant(resize: "100x100>")) %>
-</p>
-<p>
-  <%= @user.name %>
-  <% unless current_user == @user %>
-    <div id="followBtnWrapper">
-      <%= render 'relationships/follow_btn', user: @user %>
+<div class="m-2">
+  <div><strong>プロフィール</strong></div>
+  <div class="d-flex mt-3">
+    <%= image_tag url_for(@user.avatar.variant(resize: "80x100>")) %>
+    <div class="align-top"><%= @user.name %></div>
+    <% unless current_user == @user %>
+      <div id="followBtnWrapper" class="ml-auto">
+        <%= render 'relationships/follow_btn', user: @user %>
+      </div>
+    <% end %>
+  </div>
+  <div class="input-group mt-2">
+    <%= text_area_tag '', @user.target_comment, readonly: true, placeholder: "具体的な目標を記入しよう！", size: "40x3", class: "form-control rounded" %>
+  </div>
+  <div id="followInformation" class="d-flex mt-1">
+    <%= render 'users/my_page/follow_information' %>
+  </div>
+</div>
+
+<hr class="mb-1">
+
+<div class="m-2">
+  <div><strong>自己紹介</strong></div>
+  <% if @user.introduction %>
+    <p class="text-justify mt-3 ml-2 mr-3">
+      <%= @user.introduction %>
+    </p>
+  <% else %>
+    <div class="py-3">
     </div>
   <% end %>
-</p>
+</div>
 
+<hr class="mb-1">
 
-<p>
-<%= text_area_tag '', @user.target_comment, disabled: true, placeholder: "具体的な目標を記入しよう！" %>
-</p>
+<div class="m-2">
+  <div><strong>目標ジャンル</strong></div>
+  <div class="mt-3 ml-2">
+    <i class='fab fa-font-awesome-flag text-primary'></i>
+    <%= @user.target %>
+    <% if @user.target == "大学受験合格" %>
+      <strong class="ml-2"><%= @user.my_choice_university %></strong>
+    <% end %>
+  </div>    
+</div>
 
-<p id="followInformation">
-  <%= render 'users/my_page/follow_information' %>
-</p>
+<hr class="mb-1">
 
-<p>自己紹介</p>
-<p><%= @user.introduction %></p>
-
-<p>達成目標</p>
-<p><%= @user.target %></p>
-
-<p>
-<%= @user.my_choice_university %>
-</p>
-
-
-<p>基本情報</p>
-<p>ユーザ名 <%= @user.name %></p>
-<p>性別 <%= @user.sex %></p>
-<p>年齢 <%= @user.age %></p>
-<p>住まい <%= @user.live %></p>
-<p>職業 <%= @user.job %></p>
+<div class="m-2 mb-4">
+  <div><strong>基本情報</strong></div>
+  <div class="mt-3 ml-2">
+    <div class="d-flex mb-1">
+      <div class="mr-3" style="width: 64px;">ユーザ名</div>
+      <%= @user.name %>
+    </div>
+    <div class="d-flex mb-1">
+      <div class="mr-3" style="width: 64px;">性別</div> 
+      <%= @user.sex %>
+    </div>
+    <div class="d-flex mb-1">
+      <div class="mr-3" style="width: 64px;">年齢</div> <%= @user.age %>
+    </div>
+    <div class="d-flex mb-1">
+      <div class="mr-3" style="width: 64px;">住まい</div> <%= @user.live %>
+    </div>
+    <div class="d-flex mb-1">
+      <div class="mr-3" style="width: 64px;">職業</div> <%= @user.job %>
+    </div>
+  </div>
+</div>
