@@ -1,19 +1,33 @@
-<p><%= link_to (text_area_tag '', @user.introduction, readonly: true, placeholder: "自己紹介をしよう！"), 
-              user_path(@user, modal_name: "introductionEditModal"), remote: true %></p>
+<div class="d-flex justify-content-between">
+  <div><strong>自己紹介</strong></div>
+  <%= link_to "編集", user_path(@user, modal_name: "introductionEditModal"), remote: true, class: "mr-2 text-primary" %>
+</div>
+
+<% if @user.introduction %>
+  <p class="text-justify mt-3 ml-2 mr-3">
+    <%= @user.introduction %>
+  </p>
+<% else %>
+  <p class="text-justify mt-3 text-muted">
+    自己紹介をしよう！
+  </p>
+<% end %>
 
 <%= form_with model: @user, url: user_update_path(
                                   @user,
                                   modal_name: "introductionEditModal", 
                                   area_name: "introduction_area") do |f| %>
   <div class="modal fade" id="introductionEditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="introductionEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-dialog-centered-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">編集</h5>
         </div>
         <div class="modal-body">
           <%= f.label :自己紹介, class: "col-form-label" %>
-          <%= f.text_area :introduction, rows: "7", class: "form-control" %>
+          <div class="input-group">
+            <%= f.text_area :introduction, rows: "7", class: "form-control rounded" %>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

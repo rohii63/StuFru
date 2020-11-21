@@ -1,5 +1,8 @@
-<p><%= link_to (image_tag url_for(@user.avatar.variant(resize: "100x100>"))), 
-              user_path(@user, modal_name: "avatarEditModal"), remote: true %></p>
+<div class="mt-1">
+  <%= link_to (image_tag url_for(@user.avatar.variant(resize: "80x100>"))), 
+                user_path(@user, modal_name: "avatarEditModal"), remote: true %>
+  <span id="userName" class="align-top"><%= @user.name %></span>
+</div>
 
 <%= form_with model: @user, url: user_update_path(
                                   @user, 
@@ -9,7 +12,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">プロフィール画像設定</h5>
+          <h5 class="modal-title">編集</h5>
         </div>
         <div class="modal-body">
           <%= f.file_field :avatar, class: "form-control-file" %>

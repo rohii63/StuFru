@@ -12,6 +12,12 @@ ja:
         avatar: プロフィール画像
         target_comment: 目標コメント
         introduction: 自己紹介
+        target: 目標
+        sex: 性別
+        age: 年齢
+        live: 住まい
+        job: 職業
+        my_choice_university: 志望校
       book:
         icon: 教材イメージ
         name: 教材名

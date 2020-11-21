@@ -2,11 +2,11 @@
   <% for pointer, nav_name in @navbars do %>
     <div class="pos-f-t">
       <nav class="navbar navbar-white bg-white">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar<%= pointer %>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button id="targetNavbarToggler<%= pointer %>" class="navbar-toggler" type="button">
           <span><i class="fas fa-bars mr-2"></i><%= nav_name %></span>
         </button>
       </nav>
-      <div class="collapse" id="navbar<%= pointer %>">
+      <div class="collapse" id="targetNavbar<%= pointer %>">
         <div class="bg-white mx-2 py-1 px-4">
           <% Target.where(target_category_id: pointer).each do |target| %>
             <div class="form-check">

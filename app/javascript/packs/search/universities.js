@@ -9,10 +9,10 @@ $(function() {
     $("#navbarToggler").html("");
     $("#bottomNavBar").html("");
     $("#pageTitle").html("<i class='fas fa-university text-primary'></i></i> 志望校を選択しよう！");
-    $("#topNavBar").removeClass("col-lg-7");
-    $("#mainContainer").removeClass("col-lg-7");
-    $("#topNavBar").addClass("col-lg-6 border-right");
-    $("#mainContainer").addClass("col-lg-6 border-right border-bottom");
+    $("#topNavBar").removeClass("offset-sm-4");
+    $("#mainContainer").removeClass("offset-sm-4");
+    $("#topNavBar").addClass("offset-sm-3 col-sm-6 border-right");
+    $("#mainContainer").addClass("offset-sm-3 col-sm-6 border-right border-bottom");
   };
 
   $("#university_search").on("keyup", function() {

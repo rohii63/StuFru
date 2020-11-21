@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @user = current_user
+    @user = User.find(params[:user_id])
     @book = @user.books.build()
     @status_with_books = @user.status_with_books.all
     @status_with_book = @user.status_with_books.build()

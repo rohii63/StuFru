@@ -1,31 +1,36 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% content_for :title, @user.name %>
 
-<p>プロフィール</p>
-
-<div id="avatar_area">
-  <%= render 'users/show/avatar_area' %>
+<div class="m-2">
+  <div><strong>プロフィール</strong></div>
+  <div id="avatar_area" class="mt-3">
+    <%= render 'users/show/avatar_area' %>
+  </div>
+  <div id="target_comment_area">
+    <%= render "users/show/target_comment_area" %>
+  </div>
+  <div class="d-flex mt-1">
+    <%= render 'users/my_page/follow_information' %>
+    <%= link_to user_books_path(@user) do %>
+      <h5><div class="badge badge-pill badge-primary ml-1">本棚（<%= @user.books.count %>）</div></h5>
+    <% end %>
+  </div>
 </div>
 
-<p id="userName"><%= @user.name %></p>
+<hr class="mb-1">
 
-<div id="target_comment_area">
-  <%= render "users/show/target_comment_area" %>
-</div>
-
-<p><%= link_to "フォロワー（#{@user.followers.count}）フォロー（#{@user.following.count}）", follow_user_path(@user) %></p>
-
-<p><%= link_to "本棚（#{@user.books.count}）", user_books_path(@user) %></p>
-
-<div id="introduction_area">
+<div id="introduction_area" class="m-2">
   <%= render 'users/show/introduction_area' %>
 </div>
 
-<div id="target_area">
+<hr class="mb-1">
+
+<div id="target_area" class="m-2">
   <%= render 'users/show/target_area' %>
 </div>
 
-<div id="basic_information_area">
+<hr class="mb-1">
+
+<div id="basic_information_area" class="m-2 mb-4">
   <%= render 'users/show/basic_information_area' %>
 </div>
 

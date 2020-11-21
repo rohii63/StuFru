@@ -1,8 +1,19 @@
 import Collapse from 'bootstrap/js/src/collapse';
-import {navbarCollapse} from "../lib";
 
 $(function () {
-  navbarCollapse();
+  $('.collapse').collapse({
+    toggle: false
+  });
+
+  $("#topNavBar").on("click", "#navbarToggler", function(){
+    $("#navbarCollapse").collapse("toggle");
+  });
+
+  for (let i = 1; i < 9; i++) {
+    $("#target_area").on("click", "#targetNavbarToggler" + i, function(){
+      $("#targetNavbar" + i).collapse("toggle");
+    });
+  };
 
   $("#avatarEditModal").on("change", "#user_avatar", function() {
     var val = $('#user_avatar').val();
