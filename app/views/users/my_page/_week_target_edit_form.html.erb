@@ -5,13 +5,15 @@
     <% case @week_target.study_unit %>
       <% when "時間" %>
         <div class="my-1">
-          <div>目標:</div>
+          目標:
+          <span class="ml-1">
             <% hours = @week_target.content / 60 %>
             <% minutes = @week_target.content % 60 %>
             <%= number_field_tag 'time[hours]', hours, in: 0...168 %>
             <%= label_tag 'time[hours]', "時間" %>
             <%= number_field_tag 'time[minutes]', minutes, in: 0...60 %>
             <%= label_tag 'time[minutes]', "分" %>
+          </span>
         </div>
 
       <% when "ページ" %>
@@ -20,15 +22,19 @@
           <input id="rangeBtn2" name="studyAmount" type="radio">範囲</input>
         </div>
         <div class="my-1">
-          <div>目標:</div>
+          目標:
+          <span class="ml-1">
             <%= f.number_field :content, in: 1...9999 %> 
             <span id="studyUnit2"><%= @week_target.study_unit %></span>
+          </span>
         </div>
 
       <% else %>
         <div class="my-1">
-          <div>目標:</div>
-          <%= f.number_field :content, in: 1...9999 %> <%= @week_target.study_unit %>
+          目標:
+          <span class="ml-1">
+            <%= f.number_field :content, in: 1...9999 %> <%= @week_target.study_unit %>
+          </span>
         </div>
         
     <% end %>

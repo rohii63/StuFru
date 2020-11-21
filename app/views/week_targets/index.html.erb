@@ -9,13 +9,13 @@
       <% to = week_target_created_at.at_end_of_week %>
 
       <h4 class="my-3"><%= "#{from.to_s(:month)} - #{to.to_s(:month)}" %></h4>
-      <div class="row mt-2">
+      <div class="row mt-2 ml-1">
         <% past_week_targets.each do |week_target| %>
           <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
           
-          <div class="col-lg-6">
-            <div class="col mt-2 mx-auto">
-              <div style="width: 350px;">
+          <div class="col-sm-6 col-md-12 col-xl-6">
+            <div class="mt-2 mx-auto">
+              <div style="">
                 <i class="fas fa-book-open"></i>
                 <strong><%= week_target.book.name %></strong>
               </div>
@@ -51,7 +51,7 @@
               <% end %>
             </div>
 
-            <div class="col position-relative my-2 mx-auto" style="left: 50px;">
+            <div class="my-2 mx-auto" style="width: 250px;">
               <canvas id='studyAmountGraph<%= week_target.id %>' width='250' height='200'></canvas>
             </div>
           </div>
