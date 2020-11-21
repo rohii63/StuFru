@@ -1,8 +1,8 @@
-<div id="weekTargetCard<%= week_target.id %>" class="col-12 mt-3">
+<div id="weekTargetCard<%= week_target.id %>" class="col-xl-6 mt-3">
   <% result = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
   
-  <div class="col-8 mx-auto">
-    <div>
+  <div class="mx-auto" style="width: 250px;">
+    <div class="overflow-hidden" style="text-overflow: ellipsis; white-space: nowrap;">
       <i class="fas fa-book-open"></i> 
       <strong><%= week_target.book.name %></strong>
     </div>
@@ -42,7 +42,7 @@
     <% end %>
   </div>
 
-  <div class="col-8 mt-2 mx-auto">
+  <div class="mx-auto" style="width: 250px;">
     <canvas id="studyAmountGraph<%= week_target.id %>" width='250' height='200'></canvas>
   </div>
 </div>

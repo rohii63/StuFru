@@ -7,7 +7,7 @@ $(function() {
   });
 
   $('#weekTargetCard<%= @week_target.id %>').on("change", "#rangeBtn2", function() {
-    $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#week_target_content");
+    $("<%= escape_javascript(render 'microposts/study_amount_range_input') %>").replaceAll("#weekTargetCard<%= @week_target.id %> #week_target_content");
     $("#studyUnit2").html("");
   });
 
