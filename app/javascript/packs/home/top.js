@@ -9,9 +9,9 @@ $(function(){
     $("#navbarToggler").html("");
     $("#bottomNavBar").html("");
     $("#pageTitle").html("<i class='fab fa-font-awesome-flag text-primary'></i> 目標設定をしよう！");
-    $("#topNavBar").removeClass("offset-sm-4 col-sm-5");
+    $("#topNavBar").removeClass("offset-lg-4 offset-md-3 col-lg-5 col-md-7");
     $("#topNavBar").addClass("offset-lg-3 col-lg-6 border-right");
-    $("#mainContainer").removeClass("offset-sm-4 col-sm-5");
+    $("#mainContainer").removeClass("offset-lg-4 offset-md-3 col-lg-5 col-md-7");
     $("#mainContainer").addClass("offset-lg-3 col-lg-6 border-right border-bottom");
 
     $('input:radio[name="user[target]"]').on('change', function(){
