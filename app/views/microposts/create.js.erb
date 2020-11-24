@@ -7,7 +7,7 @@ $(function() {
     <% if @micropost.errors.any? %>
       $('body, html').animate({ scrollTop: 0 }, 400);
     <% else %>
-      $("#postBtnWrapper").after("<%= escape_javascript(render 'home/post_card', micropost: @micropost) %>");
+      $("#followersPosts").prepend("<%= escape_javascript(render 'home/post_card', micropost: @micropost) %>");
       $("#micropostModal").html("<%= escape_javascript(render 'home/new_micropost_modal') %>");
     <% end %>
   })

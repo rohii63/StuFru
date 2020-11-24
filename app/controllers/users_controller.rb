@@ -21,7 +21,11 @@ class UsersController < ApplicationController
       @from = 6
       @to = 0
       render 'chart'
+    elsif params[:paginate]
+      @timeline = @microposts.all.page(params[:page]).per(5)
+      render 'shared/paginate_timeline'
     else
+      @timeline = @microposts.all.page(params[:page]).per(5)
       @week_targets = @user.week_targets.all.at_this_week()
       @status_with_books = @user.status_with_books.all
       @book_categories = @user.book_categories.all

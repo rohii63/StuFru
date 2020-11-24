@@ -34,10 +34,15 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @microposts = @book.microposts.all
-    @user = current_user
-    @study_book = @user.study_books.build(book_id: @book.id)
-    @status_with_book = @user.status_with_books.build()
-    @book_categories = @user.book_categories.all
+    @timeline = @microposts.all.page(params[:page]).per(25)
+    if params[:paginate]
+      render 'shared/paginate_timeline'
+    else
+      @user = current_user
+      @study_book = @user.study_books.build(book_id: @book.id)
+      @status_with_book = @user.status_with_books.build()
+      @book_categories = @user.book_categories.all
+    end
   end
 
   def edit
