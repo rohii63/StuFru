@@ -1,6 +1,6 @@
-  <ul id="topNavLink" class="d-md-none d-flex justify-content-between w-25 list-unstyled mb-0 pr-0">
-    <li>
-      <%= link_to notifications_path(current_user) do %>
+  <div id="topNavLink" class="d-md-none col-4 d-flex text-center px-0" style="height: 42px;">
+    <div class="flex-fill">
+      <%= link_to notifications_path(current_user), class: "d-inline-block my-2" do %>
         <% if unchecked_notifications.any? %>
           <span class="fa-layers fa-fw">
             <i class="fas fa-bell text-primary"></i>
@@ -10,15 +10,15 @@
           <i class="fas fa-bell text-primary"></i>
         <% end %>
       <% end %>
-    </li>
-    <li>
-      <%= link_to user_path(current_user) do %>
+    </div>
+    <div class="flex-fill">
+      <%= link_to user_path(current_user), class: "d-inline-block my-2" do %>
         <i class="fas fa-user text-primary"></i>
       <% end %>
-    </li>
-    <li>
-      <%= link_to destroy_user_session_path(), method: :delete do %>
+    </div>
+    <div class="flex-fill">
+      <%= link_to destroy_user_session_path(), method: :delete, class: "d-inline-block my-2" do %>
         <i class="fas fa-sign-out-alt text-primary"></i>
       <% end %>
-    </li>
-  </ul>
+    </div>
+  </div>

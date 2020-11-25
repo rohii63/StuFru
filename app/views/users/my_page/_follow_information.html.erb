@@ -1,6 +1,6 @@
 <%= link_to follow_user_path(@user, key: "following"), class: "d-flex" do %>
-  <h5><div class="badge badge-pill badge-primary">フォロー（<%= @user.following.count %>）</div></h5>
+  <h5><div class="badge-costom badge badge-pill badge-primary">フォロー（<%= @user.following.count %>）</div></h5>
 <% end %>
 <%= link_to follow_user_path(@user, key: "followers"), class: "d-flex" do %>
-  <h5><div class="badge badge-pill badge-primary ml-1">フォロワー（<%= @user.followers.count %>）</div></h5>
+  <h5><div class="badge-costom badge badge-pill badge-primary ml-1">フォロワー（<%= @user.followers.count %>）</div></h5>
 <% end %>

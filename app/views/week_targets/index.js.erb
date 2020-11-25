@@ -3,27 +3,29 @@ $(function() {
 });
 
 var displayStudyAmountGraph = function(blue, gray, options) {
-  <% 0.upto(@number_of_weeks_passed) do |n| %>
+  <% 1.upto(@number_of_weeks_passed) do |n| %>
     <% past_week_targets = @week_targets.past_records(n) %>
-    <% past_week_targets.each do |week_target| %>
-      $("<canvas id='studyAmountGraph<%= week_target.id %>' width='250' height='200'></canvas>").replaceAll("#studyAmountGraph<%= week_target.id %>");
-      
-      <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
-      <% progress_rate = achievement * 100 / week_target.content %>
+    <% if past_week_targets.present? %>
+      <% past_week_targets.each do |week_target| %>
+        $("<canvas id='studyAmountGraph<%= week_target.id %>' width='250' height='200'></canvas>").replaceAll("#studyAmountGraph<%= week_target.id %>");
+        
+        <% achievement = @microposts.weekly_study_amount(week_target.book.id, week_target.study_unit, week_target.created_at) %>
+        <% progress_rate = achievement * 100 / week_target.content %>
 
-      var ctx = $('#studyAmountGraph<%= week_target.id %>');
-      var chart = new Chart(ctx, {
-        type: 'doughnut',
-        data: { 
-          datasets: [{
-            data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
-            backgroundColor: [blue, gray],
-            datalabels: { display: false }
-          }]
-        },
-        options: options,
-        plugins: [chartJsPluginCenterLabel]
-      });
+        var ctx = $('#studyAmountGraph<%= week_target.id %>');
+        var chart = new Chart(ctx, {
+          type: 'doughnut',
+          data: { 
+            datasets: [{
+              data: [<%= progress_rate %>, <%= 100 - progress_rate if progress_rate <= 100 %>],
+              backgroundColor: [blue, gray],
+              datalabels: { display: false }
+            }]
+          },
+          options: options,
+          plugins: [chartJsPluginCenterLabel]
+        });
+      <% end %>
     <% end %>
   <% end %>
 };

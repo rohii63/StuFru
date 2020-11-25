@@ -10,7 +10,7 @@
     <% end %>
   </div>
   <div class="input-group mt-2">
-    <%= text_area_tag '', @user.target_comment, readonly: true, size: "40x3", class: "form-control rounded" %>
+    <%= text_area_tag '', @user.target_comment, disabled: true, size: "40x3", class: "form-control rounded" %>
   </div>
   <div id="followInformation" class="d-flex mt-1">
     <%= render 'users/my_page/follow_information' %>

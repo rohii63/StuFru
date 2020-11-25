@@ -28,7 +28,7 @@
         <% else %>
           <span>
             <%= link_to micropost_path(notification.micropost) do %>
-              <%= image_tag url_for(notification.micropost.user.avatar.variant(resize: "20x20>")), class: "icon_mini" %>
+              <%= image_tag url_for(notification.micropost.user.avatar.variant(resize: "20x20>")), class: "avatar icon_mini" %>
               <strong><%= notification.micropost.user.name %></strong>さんの投稿
             <% end %>
           </span>

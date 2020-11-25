@@ -10,18 +10,14 @@ class MicropostsController < ApplicationController
 
   def show
     @micropost = Micropost.find(params[:id])
-
-    if @micropost.user == current_user
-      @books_in_progress = current_user.books_in_progress
-    elsif params[:comment_id]
-      @comments = @micropost.comments.all
-      @comment = Comment.find(params[:comment_id])
-      render 'comment_delete_modal'
-    end
-
+    @books_in_progress = current_user.books_in_progress if @micropost.user == current_user
     @comment = @micropost.comments.build()
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
+    if params[:comment_id]
+      @comment = Comment.find(params[:comment_id])
+      render 'comment_delete_modal'
+    end
   end
 
   def edit

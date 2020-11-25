@@ -9,8 +9,8 @@ $(function() {
   });
   
   $("#weekTargetHeader").on("click", "#createBtn", function() {
-    if ($("#whenWeekTargetAreaBlank")[0]) {
-      $("<div id='bookSelectBtnWrapper' class='col-4 mt-3 mb-5 mx-auto'><div id='bookSelectBtn' class='col btn btn-primary'>教材選択</div></div>").replaceAll("#whenWeekTargetAreaBlank");
+    if ($("#descriptionOfWeekTarget")[0]) {
+      $("<div id='bookSelectBtnWrapper' class='col-4 mt-3 mb-5 mx-auto'><div id='bookSelectBtn' class='col btn btn-primary'>教材選択</div></div>").replaceAll("#descriptionOfWeekTarget");
       $(this).remove();
       
     } else {

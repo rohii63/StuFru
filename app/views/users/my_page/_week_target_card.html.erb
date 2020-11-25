@@ -11,8 +11,8 @@
         目標: 
         <h4 class="d-inline-block mb-0"><%= sprintf("%02d", week_target.content / 60) %></h4> 時間 
         <h4 class="d-inline-block mb-0"><%= sprintf("%02d", week_target.content % 60) %></h4> 分
-        <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
-        <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
+        <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true, class: "text-primary mx-1" if @user == current_user %>
+        <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true, class: "text-primary" if @user == current_user %>
       </div>
       <div>
         現在:
@@ -28,8 +28,8 @@
       <div id="weekTarget<%= week_target.id %>" class="mt-2">
         目標: 
         <h4 class="d-inline-block mb-0"><%= sprintf("%04d", week_target.content) %></h4> <%= week_target.study_unit %>
-        <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true if @user == current_user %>
-        <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true if @user == current_user %>
+        <%= link_to "編集", edit_user_week_target_path(@user, week_target), remote: true, class: "text-primary mx-1" if @user == current_user %>
+        <%= link_to "×", user_week_target_path(@user, week_target), method: :delete, remote: true, class: "text-primary" if @user == current_user %>
       </div>
       <div>
         現在: 
