@@ -1,6 +1,6 @@
 <div id="profile-card-<%= user.id %>" class="col-12 border rounded-lg p-2">
   <%= link_to my_page_path(user), class: "text-reset", style: "text-decoration: none;" do %>
-    <div class="row">
+    <div class="row user-card-body">
       <div class="col-2">
         <%= image_tag url_for(user.avatar.variant(resize: "60x60>")) %>
       </div>

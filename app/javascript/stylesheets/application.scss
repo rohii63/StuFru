@@ -3,6 +3,8 @@
 @import 'search-users';
 @import 'home';
 @import 'users';
+@import 'microposts';
+@import 'books';
 @import 'bootstrap-custom';
 @import 'bootstrap-datetimepicker.min';
 
@@ -10,3 +12,44 @@
 .modal-content {
   border-radius: 1rem !important;
 }
+
+//nav
+#topNavLink {
+  div:active {
+    background-color: gainsboro;
+  }
+}
+
+#sideNavList {
+  div:active {
+    background-color: gainsboro;
+  }
+}
+
+#bottomNavBar {
+  a {
+    color: #0048ff;
+  }
+  div:active {
+    background-color: gainsboro;
+  }
+  button:active {
+    background-color: gainsboro;
+  }
+}
+
+// badge
+.badge-costom:active {
+  background-color: gainsboro;
+}
+
+// user avatar
+.avatar:active {
+  background-color: gainsboro;
+}
+
+// user card
+.user-card-body:active {
+  background-color: gainsboro;
+}
+

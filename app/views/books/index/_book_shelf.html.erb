@@ -1,4 +1,4 @@
-<ul class="nav nav-pills nav-fill mb-3 px-2" id="pills-tab" role="tablist">
+<ul class="nav nav-pills justify-content-center mt-2 px-2" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-in-progress-tab" data-toggle="pill" href="#pills-in-progress" role="tab" aria-controls="pills-in-progress" aria-selected="true">勉強中</a>
   </li>
@@ -13,13 +13,16 @@
 <div class="px-3">
   <div class="tab-content border-left border-right" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-in-progress" role="tabpanel" aria-labelledby="pills-in-progress-tab">
-      <%= render 'books/index/book_in_progress' %>
+      <% status = "in_progress" %>
+      <%= render 'books/index/books_with_status', status: status %>
     </div>
     <div class="tab-pane fade" id="pills-standby" role="tabpanel" aria-labelledby="pills-standby-tab">
-      <%= render 'books/index/book_standby' %>
+      <% status = "standby" %>
+      <%= render 'books/index/books_with_status', status: status %>
     </div>
     <div class="tab-pane fade" id="pills-finished" role="tabpanel" aria-labelledby="pills-finished-tab">
-      <%= render 'books/index/book_finished' %>
+      <% status = "finished" %>
+      <%= render 'books/index/books_with_status', status: status %>
     </div>
   </div>
 </div>

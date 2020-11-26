@@ -7,7 +7,7 @@ $(function() {
   if ($("#my_choice_university_create_modal")[0]) {
     $("#sidebar").html("");
     $("#navbarToggler").html("");
-    $("#bottomNavBar").html("");
+    $("#bottomNavBar").remove();
     $("#pageTitle").html("<i class='fas fa-university text-primary'></i></i> 志望校を選択しよう！");
     $("#topNavBar").removeClass("offset-lg-4 offset-md-3 col-lg-5 col-md-7");
     $("#mainContainer").removeClass("offset-lg-4 offset-md-3 col-lg-5 col-md-7");

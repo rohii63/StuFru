@@ -11,7 +11,7 @@
   <div class="d-flex mt-1">
     <%= render 'users/my_page/follow_information' %>
     <%= link_to user_books_path(@user) do %>
-      <h5><div class="badge badge-pill badge-primary ml-1">本棚（<%= @user.books.count %>）</div></h5>
+      <h5><div class="badge-costom badge badge-pill badge-primary ml-1">本棚（<%= @user.books.count %>）</div></h5>
     <% end %>
   </div>
 </div>

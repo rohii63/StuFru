@@ -1,0 +1,4 @@
+$(function(){
+  $('body, html').scrollTop(0);
+  $("#v-pills-follow").html("<%= escape_javascript(render 'home/follow_tab_content') %>");
+})

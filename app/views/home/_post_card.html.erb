@@ -1,9 +1,9 @@
 <div class="col-12 py-3 pl-2 pr-3 border rounded-lg" id="post_card_micropost<%= micropost.id %>">
   <div class="row">
     <div class="col-2">
-      <%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "60x60>"))), my_page_path(micropost.user) %>
+      <%= link_to (image_tag url_for(micropost.user.avatar.variant(resize: "60x60>")), class: "avatar"), my_page_path(micropost.user) %>
     </div>
-    <div class="col-10">
+    <div class="col-10  post-card-body">
       <%= link_to micropost_path(micropost), class: "text-reset", style: "text-decoration: none;" do %>
         <div>
             <%= micropost.user.name %>
@@ -58,7 +58,7 @@
     </div>
   </div>
   <div class="offset-2 col-10 d-flex mt-3">
-    <div class="col-7 pl-0">
+    <div class="post-card-comment col-7 pl-0">
       <%= link_to micropost_path(micropost), class: "text-reset", style: "text-decoration: none;" do %>
         <i class="far fa-comment mr-2"></i>コメントする
       <% end %>

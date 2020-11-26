@@ -61,7 +61,7 @@
 <div class="border-top pt-3 pb-5 mb-5">
   <div id="weekTargetHeader" class="text-center">
     <strong>今週の目標</strong>
-    <%= link_to "履歴", user_week_targets_path(@user) %>
+    <%= link_to "履歴", user_week_targets_path(@user), class: "text-primary" %>
     <% if @user == current_user %>
       <button id="createBtn" class="btn btn-primary ml-2">作成</button>
     <% end %>
@@ -73,10 +73,13 @@
     </div>
   <% end %>
 
-    <% if @week_targets.empty? %>
-      <h5 id="whenWeekTargetAreaBlank" class="text-center mt-3 mb-5">今週の目標を設定しよう！</h5>
+    <% if @week_targets.empty? && @user == current_user %>
+      <div id="descriptionOfWeekTarget" class="text-center mt-3 mb-5">
+        <h5>今週の目標を設定しよう！</h5>
+        <div class="text-muted">毎週月曜0時更新。</div>
+      </div>
     <% end %>
-  <div id="weekTargetArea" class="row">
+  <div id="weekTargetArea" class="row mt-3 mx-3">
     <% @week_targets.each do |week_target| %>
       <%= render 'users/my_page/week_target_card', week_target: week_target %>
     <% end %>

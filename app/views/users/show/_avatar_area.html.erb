@@ -1,5 +1,5 @@
 <div class="mt-1">
-  <%= link_to (image_tag url_for(@user.avatar.variant(resize: "80x100>"))), 
+  <%= link_to (image_tag url_for(@user.avatar.variant(resize: "80x100>")), class: "avatar"), 
                 user_path(@user, modal_name: "avatarEditModal"), remote: true %>
   <span id="userName" class="align-top"><%= @user.name %></span>
 </div>

@@ -2,6 +2,6 @@ $(function(){
   $("#weekTargetCard<%= @week_target.id %>").remove();
 
   if (!$("#weekTargetArea>div")[0]) {
-    $("#book_select_modal").after("<h5 id='whenWeekTargetAreaBlank' class='text-center mt-3 mb-5'>今週の目標を設定しよう！</h5>");
+    $("#book_select_modal").after("<div id='descriptionOfWeekTarget' class='text-center mt-3 mb-5'><h5>今週の目標を設定しよう！</h5><div class='text-muted'>毎週月曜0時更新。</div></div>");
   };
 })

@@ -14,13 +14,13 @@ $(function(){
       <% case @status_with_book.status %>
         <% when "勉強中" %>
           $("#pills-in-progress-tab").tab('show');
-          $("#pills-in-progress").html("<%= escape_javascript(render 'books/index/book_in_progress') %>");
+          $("#pills-in-progress").html("<%= status = @status_with_book.status %><%= escape_javascript(render 'books/index/books_with_status', status: status) %>");
         <% when "勉強予定" %>
           $("#pills-standby-tab").tab('show');
-          $("#pills-standby").html("<%= escape_javascript(render 'books/index/book_standby') %>");
+          $("#pills-standby").html("<%= status = @status_with_book.status %><%= escape_javascript(render 'books/index/books_with_status', status: status) %>");
         <% when "勉強済み" %>
           $("#pills-finished-tab").tab('show');
-          $("#pills-finished").html("<%= escape_javascript(render 'books/index/book_finished') %>");
+          $("#pills-finished").html("<%= status = @status_with_book.status %><%= escape_javascript(render 'books/index/books_with_status', status: status) %>");
       <% end %>
 
       $("#bookModalWrapper").html("<%= escape_javascript(render 'books/index/book_new_modal') %>");

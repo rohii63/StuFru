@@ -1,13 +1,13 @@
 <% content_for :title, "今週の目標 -履歴-"  %>
 
 <% if @week_targets.present? %>
-  <% 0.upto(@number_of_weeks_passed) do |n| %>
+  <% 1.upto(@number_of_weeks_passed) do |n| %>
     <% past_week_targets = @week_targets.past_records(n) %>
     <% if past_week_targets.present? %>
       <% week_target_created_at = past_week_targets.take.created_at %>
       <% from = week_target_created_at.at_beginning_of_week %>
       <% to = week_target_created_at.at_end_of_week %>
-
+      
       <h4 class="my-3"><%= "#{from.to_s(:month)} - #{to.to_s(:month)}" %></h4>
       <div class="row mt-2 ml-1">
         <% past_week_targets.each do |week_target| %>

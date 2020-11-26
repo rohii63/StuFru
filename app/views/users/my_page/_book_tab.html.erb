@@ -1,1 +1,100 @@
-<%= render 'books/index/book_shelf' %>
+<ul class="nav nav-pills justify-content-center mt-2 px-2" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-in-progress-tab" data-toggle="pill" href="#pills-in-progress" role="tab" aria-controls="pills-in-progress" aria-selected="true">勉強中</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-standby-tab" data-toggle="pill" href="#pills-standby" role="tab" aria-controls="pills-standby" aria-selected="false">勉強予定</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-finished-tab" data-toggle="pill" href="#pills-finished" role="tab" aria-controls="pills-finished" aria-selected="false">勉強済み</a>
+  </li>
+</ul>
+
+<div class="px-3">
+  <div class="tab-content border-left border-right" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-in-progress" role="tabpanel" aria-labelledby="pills-in-progress-tab">
+      <% status = "in_progress" %>
+      <div class="py-1">
+        <% @book_categories.each do |category| %>
+          <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: status) %>
+          <div class="mt-2 px-2">
+            <% unless tmp_status_with_books.empty? %>
+              <i class="fas fa-bookmark text-primary"></i>
+              <%= category.name  %>
+            <% end %>
+            <div class="row mt-2 px-3">
+              <% tmp_status_with_books.each do |status_with_book| %>
+                  <div class="col-auto p-2 border rounded-lg shadow-sm">
+                    <%= link_to book_path(status_with_book.book), class: "text-reset", style: "text-decoration: none;" do %>
+                      <div class="text-center">
+                        <%= image_tag url_for(status_with_book.book.icon.variant(resize: "90x100>")), class: "border rounded" %>
+                      </div>
+                      <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
+                        <small><%= status_with_book.book.name %></small>
+                      </div>
+                    <% end %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-standby" role="tabpanel" aria-labelledby="pills-standby-tab">
+      <% status = "standby" %>
+      <div class="py-1">
+        <% @book_categories.each do |category| %>
+          <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: status) %>
+          <div class="mt-2 px-2">
+            <% unless tmp_status_with_books.empty? %>
+              <i class="fas fa-bookmark text-primary"></i>
+              <%= category.name  %>
+            <% end %>
+            <div class="row mt-2 px-3">
+              <% tmp_status_with_books.each do |status_with_book| %>
+                  <div class="col-auto p-2 border rounded-lg shadow-sm">
+                    <%= link_to book_path(status_with_book.book), class: "text-reset", style: "text-decoration: none;" do %>
+                      <div class="text-center">
+                        <%= image_tag url_for(status_with_book.book.icon.variant(resize: "90x100>")), class: "border rounded" %>
+                      </div>
+                      <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
+                        <small><%= status_with_book.book.name %></small>
+                      </div>
+                    <% end %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-finished" role="tabpanel" aria-labelledby="pills-finished-tab">
+      <% status = "finished" %>
+      <div class="py-1">
+        <% @book_categories.each do |category| %>
+          <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: status) %>
+          <div class="mt-2 px-2">
+            <% unless tmp_status_with_books.empty? %>
+              <i class="fas fa-bookmark text-primary"></i>
+              <%= category.name  %>
+            <% end %>
+            <div class="row mt-2 px-3">
+              <% tmp_status_with_books.each do |status_with_book| %>
+                  <div class="col-auto p-2 border rounded-lg shadow-sm">
+                    <%= link_to book_path(status_with_book.book), class: "text-reset", style: "text-decoration: none;" do %>
+                      <div class="text-center">
+                        <%= image_tag url_for(status_with_book.book.icon.variant(resize: "90x100>")), class: "border rounded" %>
+                      </div>
+                      <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
+                        <small><%= status_with_book.book.name %></small>
+                      </div>
+                    <% end %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

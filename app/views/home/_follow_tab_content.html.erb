@@ -1,0 +1,17 @@
+<div id="error_messages_in_top_page"></div>
+
+<div><%= render 'shared/notifications' %></div>
+
+<%= link_to  root_path(modal: "new"), remote: true, class: "postBtnWrapper d-inline-block w-100 text-center" do %>
+  <button class="postBtn my-2 w-50 bg-primary text-white border rounded-pill">投稿する</button>
+<% end %>
+
+<div id="followersPosts" class="row px-4">
+  <% @follower_microposts.each do |micropost| %>
+    <%= render 'home/post_card', micropost: micropost %>
+  <% end %>
+</div>
+
+<div class="mt-2 mb-5">
+  <%= paginate @follower_microposts, params: { paginate: "follow" }, remote: true %>
+</div>
