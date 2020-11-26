@@ -15,7 +15,7 @@ $(function () {
     });
   };
 
-  $("#avatarEditModal").on("change", "#user_avatar", function() {
+  $("#avatar_area").on("change", "#user_avatar", function() {
     var val = $('#user_avatar').val();
 
     if (val == "") {

@@ -8,7 +8,7 @@
   <% @comments.each do |comment| %>
     <div id="comment_card_<%= comment.id %>" class="row py-2">
       <div class="col-2 col-sm-1 pl-0">
-        <%= link_to (image_tag url_for(comment.user.avatar.variant(resize: "60x60>")), class: "avatar") ,my_page_path(comment.user) %>
+        <%= link_to (image_tag url_for(comment.user.avatar.variant(gravity: :center, resize:"50x50^", crop:"50x50+0+0")), class: "avatar rounded-circle") ,my_page_path(comment.user) %>
       </div>
       <div class="comment-card-body col-10 col-sm-11 pr-0">
         <% if current_user == comment.user %>

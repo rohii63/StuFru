@@ -1,19 +1,21 @@
 <div class="m-2">
   <div><strong>プロフィール</strong></div>
-  <div class="d-flex mt-3">
-    <%= image_tag url_for(@user.avatar.variant(resize: "80x100>")) %>
-    <div class="align-top"><%= @user.name %></div>
-    <% unless current_user == @user %>
-      <div id="followBtnWrapper" class="ml-auto">
-        <%= render 'relationships/follow_btn', user: @user %>
-      </div>
-    <% end %>
-  </div>
-  <div class="input-group mt-2">
-    <%= text_area_tag '', @user.target_comment, disabled: true, size: "40x3", class: "form-control rounded" %>
-  </div>
-  <div id="followInformation" class="d-flex mt-1">
-    <%= render 'users/my_page/follow_information' %>
+  <div class="mx-1">
+    <div class="d-flex mt-3">
+      <%= image_tag url_for(@user.avatar.variant(gravity: :center, resize:"60x60^", crop:"60x60+0+0")), class: "avatar rounded-circle" %>
+      <div class="align-top ml-2"><%= @user.name %></div>
+      <% unless current_user == @user %>
+        <div id="followBtnWrapper" class="ml-auto">
+          <%= render 'relationships/follow_btn', user: @user %>
+        </div>
+      <% end %>
+    </div>
+    <div class="input-group mt-3">
+      <%= text_area_tag '', @user.target_comment, disabled: true, size: "40x3", class: "form-control rounded" %>
+    </div>
+    <div id="followInformation" class="d-flex mt-1">
+      <%= render 'users/my_page/follow_information' %>
+    </div>
   </div>
 </div>
 

@@ -23,7 +23,7 @@
                     <div class="col-auto">
                       <div class="p-2 border rounded-lg shadow-sm">
                         <div class="text-center">
-                          <%= image_tag url_for(status_with_book.book.icon.variant(resize: "90x100>")), class: "border rounded" %>
+                          <%= image_tag url_for(status_with_book.book.icon.variant(resize_and_pad: [92, 92, background: :transparent])), class: "border rounded" %>
                         </div>
                         <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
                           <small><%= status_with_book.book.name %></small>

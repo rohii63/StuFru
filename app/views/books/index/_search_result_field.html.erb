@@ -2,11 +2,11 @@
   <% @books.each do |book| %>
     <div class="mt-1">
       <%= link_to book_path(book), class: "text-primary" do %>
-        <div class="d-flex px-2 align-items-center">
+        <div class="d-flex mx-3 align-items-center">
           <div>
-            <%= image_tag url_for(book.icon.variant(resize: "90x100>")) %>
+            <%= image_tag url_for(book.icon.variant(resize_and_pad: [90, 90, background: :transparent])) %>
           </div>
-          <div class="ml-1">
+          <div class="ml-2">
             <div>
               <%= book.name %>
             </div>

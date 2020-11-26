@@ -1,11 +1,11 @@
 <% content_for :title, @book.name %>
 
 <div class="p-2 mb-2">
-  <div id="book_info">
+  <div id="book_info" class="mb-2">
     <%= render 'books/show/book_info' %>
   </div>
 
-  <div class="row px-4 align-items-center">
+  <div class="row mx-2 align-items-center">
     <div id="bookEditBtnWrapper" class="col-6 px-1">
       <% if @user.register?(@book) %>
         <%= link_to  "編集", edit_book_path(@book), id: "bookEditBtn", class: "col-12 btn btn-primary", remote: true %>

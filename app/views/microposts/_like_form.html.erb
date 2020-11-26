@@ -5,7 +5,7 @@
 <div class="row px-2">
   <% @likes.each do |like| %>
       <%= link_to my_page_path(like.user), class: "mb-2" do %>  
-        <%= image_tag url_for(like.user.avatar.variant(resize: "60x60>")), class: "avatar" %>
+        <%= image_tag url_for(like.user.avatar.variant(gravity: :center, resize:"50x50^", crop:"50x50+0+0")), class: "avatar rounded-circle" %>
       <% end %>
   <% end %>
 </div>
