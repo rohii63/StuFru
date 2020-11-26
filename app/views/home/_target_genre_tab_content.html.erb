@@ -1,4 +1,9 @@
-<h5><div class="badge badge-pill badge-secondary mt-1"><%= @user.target %></div></h5>
+<div class="d-flex">
+  <h5><div class="badge badge-pill badge-secondary mt-1"><%= @user.target %></div></h5>
+  <% if @user.target == "大学受験合格" && @user.my_choice_university %>
+    <h5><div class="badge badge-pill badge-secondary mt-1 ml-1"><%= @user.my_choice_university %></div></h5>
+  <% end %>
+</div>
 
 <div class="row px-4">
   <% @target_genre_microposts.each do |micropost| %>

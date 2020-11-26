@@ -79,7 +79,7 @@
         <div class="text-muted">毎週月曜0時更新。</div>
       </div>
     <% end %>
-  <div id="weekTargetArea" class="row">
+  <div id="weekTargetArea" class="row mt-3 mx-3">
     <% @week_targets.each do |week_target| %>
       <%= render 'users/my_page/week_target_card', week_target: week_target %>
     <% end %>

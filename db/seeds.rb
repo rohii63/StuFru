@@ -1,26 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-User.create!(
-  email: 'trial@mail',
-  name: 'trial',
-  password: 'password',
-  confirmed_at: DateTime.now,
-  confirmation_sent_at: DateTime.now - 1
-)
-User.create!(
-  email: 'test@mail',
-  name: 'test',
-  password: 'password',
-  confirmed_at: DateTime.now,
-  confirmation_sent_at: DateTime.now - 1
-)
-
-
 target_category1_contents = [
   "公務員試験",
   "教員採用試験",
@@ -151,21 +128,35 @@ for content in target_category8_contents do
 end
 
 
-require 'faker'
+User.create(
+  email: 'trial@mail',
+  name: 'お試しユーザー',
+  password: 'password',
+  confirmed_at: DateTime.now,
+  confirmation_sent_at: DateTime.now - 1
+)
+User.create(
+  email: 'test@mail',
+  name: 'テストユーザー',
+  password: 'password',
+  confirmed_at: DateTime.now,
+  confirmation_sent_at: DateTime.now - 1
+)
 
-50.times do |n|
-  name = Faker::Name.name
-  email = Faker::Internet.unique.email
-  user = User.create!(
-    name: name,
-    email: email,
+user1 = User.first
+
+23.times do |n|
+  faker = User.create(
+    name: Faker::Name.name,
+    email: Faker::Internet.unique.email,
     password: "password",
-    target: "yeild",
     confirmed_at: DateTime.now,
     confirmation_sent_at: DateTime.now - 1
   )
-  user.active_relationships.create(followed_id: 1)
+  faker.active_relationships.create(followed_id: 1)
+  user1.active_relationships.create(followed_id: faker.id)
 end
+
 
 universities = File.open("app/javascript/csv/university_list.csv", mode = "r").readlines
 
@@ -173,9 +164,9 @@ for university in universities do
   University.create(name: university)
 end
 
-fakers = User.where(target: "yeild")
+fakers = User.where(target: nil)
 target = Target.find_by(target_category_id: 8).content
-university = University.first.name
+university = University.find(41).name
 
 fakers.each do |f|
   f.update(target: target, my_choice_university: university)
@@ -184,15 +175,3 @@ end
 User.take(2).each do |u|
   u.update(target: target, my_choice_university: university)
 end
-
-# targets = []
-
-# targets?.each do |t?|
-#   10.times do |n|
-#     targets.push(t?.content)
-#   end
-# end
-
-# fakers.zip(targets) do |f, t|
-#   f.update(target: t)
-# end
