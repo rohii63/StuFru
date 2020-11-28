@@ -24,10 +24,10 @@
 </div>    
 
 
-<%= form_with model: @user, url: user_update_path(
+<%= form_with model: @user, url: user_path(
                                   @user, 
                                   modal_name: "basicInformationEditModal", 
-                                  area_name: "basic_information_area") do |f| %>
+                                  area_name: "basic_information_area"), method: :patch do |f| %>
   <div class="modal fade" id="basicInformationEditModal" tabindex="-1" role="dialog" aria-labelledby="basicInformationEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">

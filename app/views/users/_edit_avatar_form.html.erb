@@ -1,0 +1,17 @@
+<%= form_with model: user, url: user_path(user, from_index: ""), method: :patch, class: "border-bottom" do |f| %>
+  <div>
+    <%= user.name %>
+  </div>
+  <div class="mt-1 ml-2 mb-2">
+    <%= image_tag url_for(user.avatar.variant(gravity: :center, resize:"60x60^", crop:"60x60+0+0")), class: "avatar rounded-circle" %>
+  </div>
+  <div>
+    <%= f.file_field :avatar %>
+  </div>
+  <div>
+    <%= f.select :sex, ['男', '女'] %>
+  </div>
+  <div class="text-right">
+    <%= f.submit "保存" %>
+  </div>
+<% end %>

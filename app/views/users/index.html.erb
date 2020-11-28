@@ -1,0 +1,7 @@
+<div class="mb-5">
+  <% @users.each do |user| %>
+    <div id="editAvatarForm<%= user.id %>">
+      <%= render 'users/edit_avatar_form', user: user %>
+    </div>
+  <% end%>
+</div>

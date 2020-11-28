@@ -5,37 +5,39 @@
         <div class="modal-header">
           <h5 class="modal-title">教材選択</h5>
         </div>
-        <div class="modal-body">
+        <div class="modal-body py-1">
           <% if @user.books.all.empty? %>
             勉強中の教材がありません。
           <% else %>
             <% @book_categories.each do |category| %>
               <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "in_progress") %>
               <% unless tmp_status_with_books.empty? %>
-                <div class="py-2">
-                  <i class="fas fa-bookmark text-primary"></i>
-                  <%= category.name %>
+                <div class="mt-1 mb-3 mx-1">
+                  <div class="py-2">
+                    <i class="fas fa-bookmark text-primary"></i>
+                    <%= category.name %>
+                  </div>
+                  <div class="row mt-2 mx-1">
+                    <% tmp_status_with_books.each do |status_with_book| %>
+                      <label class="mb-0">
+                        <div class="col-auto px-0">
+                          <div class="p-2 border rounded-lg shadow-sm">
+                            <div class="text-center">
+                              <%= image_tag url_for(status_with_book.book.icon.variant(resize_and_pad: [92, 92, background: :transparent])), class: "border rounded" %>
+                            </div>
+                            <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
+                              <small><%= status_with_book.book.name %></small>
+                            </div>
+                            <div class="text-center">
+                              <%= f.radio_button :book_id, "#{status_with_book.book.id}" %>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                    <% end %>
+                  </div>
                 </div>
               <% end %>
-              <div class="row mt-2">
-                <% tmp_status_with_books.each do |status_with_book| %>
-                  <label>
-                    <div class="col-auto">
-                      <div class="p-2 border rounded-lg shadow-sm">
-                        <div class="text-center">
-                          <%= image_tag url_for(status_with_book.book.icon.variant(resize_and_pad: [92, 92, background: :transparent])), class: "border rounded" %>
-                        </div>
-                        <div class="mt-1 mx-auto border rounded" style="width: 92px; white-space: nowrap; overflow: auto;">
-                          <small><%= status_with_book.book.name %></small>
-                        </div>
-                        <div class="text-center">
-                          <%= f.radio_button :book_id, "#{status_with_book.book.id}" %>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                <% end %>
-              </div>
             <% end %>
           <% end %>
         </div>

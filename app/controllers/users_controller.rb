@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def my_page
     @user = User.find(params[:id])
     @microposts = @user.microposts.all
@@ -22,10 +21,10 @@ class UsersController < ApplicationController
       @to = 0
       render 'chart'
     elsif params[:paginate]
-      @timeline = @microposts.all.page(params[:page]).per(5)
+      @timeline = @microposts.all.page(params[:page]).per(10)
       render 'shared/paginate_timeline'
     else
-      @timeline = @microposts.all.page(params[:page]).per(5)
+      @timeline = @microposts.all.page(params[:page]).per(10)
       @week_targets = @user.week_targets.all.at_this_week()
       @status_with_books = @user.status_with_books.all
       @book_categories = @user.book_categories.all
@@ -37,6 +36,10 @@ class UsersController < ApplicationController
       @from = 6
       @to = 0
     end
+  end
+
+  def index
+    @users = User.take(25)
   end
 
   def show
@@ -51,30 +54,38 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    @user.update(user_params)
-    if params[:top_page]
-      if @user.target == "大学受験合格"
-        redirect_to university_search_path(from_top: "")
-      else
-        redirect_to root_path()
-      end
-    elsif params[:target] && @user.my_choice_university.nil?
-      redirect_to university_search_path()
-    else
-      @modal_name = params[:modal_name]
-      @area_name = params[:area_name]
-      create_target_list
+    if params[:from_index]
+      @user = User.find(params[:id])
+      @user.update(user_params)
+      render 'update_avatar'
 
-      respond_to do |format|
-        if params[:from_top]
-          format.html { redirect_to root_path() }
+    else
+      @user = current_user
+      @user.update(user_params)
+
+      if params[:top_page]
+        if @user.target == "大学受験合格"
+          redirect_to university_search_path(from_top: "")
         else
-          format.html { redirect_to user_path(@user) }
-          format.js
+          redirect_to root_path()
         end
-      end
+  
+      elsif params[:target] && @user.my_choice_university.nil?
+        redirect_to university_search_path()
       
+      else
+        @modal_name = params[:modal_name]
+        @area_name = params[:area_name]
+        create_target_list
+        respond_to do |format|
+          if params[:from_top]
+            format.html { redirect_to root_path() }
+          else
+            format.html { redirect_to user_path(@user) }
+            format.js
+          end
+        end
+      end  
     end
   end
 

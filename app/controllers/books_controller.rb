@@ -34,7 +34,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @microposts = @book.microposts.all
-    @timeline = @microposts.all.page(params[:page]).per(25)
+    @timeline = @microposts.all.page(params[:page]).per(10)
     if params[:paginate]
       render 'shared/paginate_timeline'
     else

@@ -9,16 +9,16 @@
   <% case @status_with_book.study_unit %>
     <% when "時間" %>
       <div class="row my-2 px-2">
-        <div class="col-12">
+        <div class="col-12 mb-2">
           <%= f.label :content, class: "mb-0" %>
         </div>
-        <div class="col-sm-8 mt-1 ml-1 pr-0">
+        <div class="col-sm-7 pl-4">
           <%= number_field_tag 'time[hours]', nil, in: 0...168 %>
           <%= label_tag 'time[hours]', "時間" %>
           <%= number_field_tag 'time[minutes]', nil, in: 0...60 %>
           <%= label_tag 'time[minutes]', "分" %>
         </div>
-        <div class="col-sm-auto px-0 pr-md-2 text-right">
+        <div class="col-sm-5 text-right pl-0 pr-2">
           <%= f.submit "作成", class: "btn btn-primary" %>
           <div id="weekTargetFormWrapperCloseBtn" class="btn btn-secondary">閉じる</div>
         </div>
@@ -33,7 +33,7 @@
             <input id="totalBtn1" name="studyAmount" type="radio" checked="checked">合計</input>
             <input id="rangeBtn1" name="studyAmount" type="radio">範囲</input>
           </div>
-          <div class="mt-1 ml-2">
+          <div class="mt-2 ml-2">
             <%= f.number_field :content, in: 1...9999 %>
             <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
           </div>
@@ -45,14 +45,14 @@
       </div>
     <% else %>
       <div class="row my-2 px-2">
-        <div class="col-12">
+        <div class="col-12 mb-2">
           <%= f.label :content, class: "mb-0" %>
         </div>
-        <div class="col-sm-8 mt-1 ml-1 pr-0">
+        <div class="ml-4">
           <%= f.number_field :content, in: 1...9999 %>
           <span id="studyUnit1"><%= @status_with_book.study_unit %></span>
         </div>
-        <div class="col-sm-auto px-0 pr-md-2 text-right">
+        <div class="ml-auto mr-2">
           <%= f.submit "作成", class: "btn btn-primary" %>
           <div id="weekTargetFormWrapperCloseBtn" class="btn btn-secondary">閉じる</div>
         </div>

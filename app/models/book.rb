@@ -1,6 +1,5 @@
 class Book < ApplicationRecord
   has_one_attached :icon
-  default_scope -> { order(created_at: :desc) }
   has_many :owners, class_name: "BookRegister",
                               foreign_key: "book_id",
                               dependent:  :destroy

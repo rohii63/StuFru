@@ -1,4 +1,4 @@
-<%= form_with model: @user, url: user_update_path(@user, top_page: ""), local: true, class: "mt-2" do |f| %>
+<%= form_with model: @user, url: user_path(@user, top_page: ""), method: :patch, local: true, class: "mt-2" do |f| %>
   <% for pointer, nav_name in @navbars do %>
     <div class="pos-f-t">
       <nav class="navbar navbar-white bg-white">

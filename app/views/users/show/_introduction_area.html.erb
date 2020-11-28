@@ -8,15 +8,15 @@
     <%= @user.introduction %>
   </p>
 <% else %>
-  <p class="text-justify mt-3 text-muted">
+  <p class="text-justify mt-3 ml-2 text-muted">
     自己紹介をしよう！
   </p>
 <% end %>
 
-<%= form_with model: @user, url: user_update_path(
+<%= form_with model: @user, url: user_path(
                                   @user,
                                   modal_name: "introductionEditModal", 
-                                  area_name: "introduction_area") do |f| %>
+                                  area_name: "introduction_area"), method: :patch do |f| %>
   <div class="modal fade" id="introductionEditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="introductionEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog modal-dialog-centered-scrollable" role="document">
       <div class="modal-content">

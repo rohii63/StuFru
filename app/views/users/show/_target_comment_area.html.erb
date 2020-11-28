@@ -4,10 +4,10 @@
   <% end %>
 </div>
 
-<%= form_with model: @user, url: user_update_path(
+<%= form_with model: @user, url: user_path(
                                   @user, 
                                   modal_name: "targetCommentEditModal",
-                                  area_name: "target_comment_area") do |f| %>
+                                  area_name: "target_comment_area"), method: :patch do |f| %>
   <div class="modal fade" id="targetCommentEditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="targetCommentEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog modal-dialog-centered-scrollable" role="document">
       <div class="modal-content">

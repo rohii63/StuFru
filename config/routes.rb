@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :users, only: :show do
+  resources :users, only: [:index, :show, :update] do
     member do 
       get :follow end
     resources :books, only: :index
@@ -16,8 +16,6 @@ Rails.application.routes.draw do
     resources :book_categories, only: [:new, :create, :destroy]
     resources :week_targets, except: :show
   end
-
-  patch '/users/:id', to: 'users#update', as: 'user_update'
 
   resources :microposts, except: [:index, :new] do
     resources :likes, only: [:create, :destroy]

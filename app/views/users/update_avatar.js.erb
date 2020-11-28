@@ -1,0 +1,3 @@
+$(function() {
+  $("#editAvatarForm<%= @user.id %>").html("<%= escape_javascript(render 'users/edit_avatar_form', user: @user) %>");
+})

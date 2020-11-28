@@ -24,7 +24,7 @@
             <div class="col-auto ml-1 px-0">
               <%= image_tag url_for(micropost.book.icon.variant(resize_and_pad: [72, 72, background: :transparent])), class: "border rounded" if micropost.book %>
             </div>
-            <div class="col-9 ml-2 px-0">
+            <div class="col-9 ml-2 pl-0" style="height: 74px;">
               <div class="overflow-hidden" style="text-overflow: ellipsis; white-space: nowrap;">
                 <%= micropost.book.name if micropost.book %>
               </div>
