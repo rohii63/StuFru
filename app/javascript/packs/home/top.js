@@ -28,6 +28,7 @@ $(function(){
         $("#targetNavbar" + i).collapse("toggle");
       });
     };
+    
     } else {
     $.ajax({
       url: location.href,
@@ -39,7 +40,7 @@ $(function(){
 
   calculateStudyTime();
 
-  $(".postBtnWrapper").on("click", ".postBtn", function(){
+  $("#bottomNavBar, #sideNavList, #postBtnWrapper").on("click", ".postBtn", function(){
     dateTimePicker();
   });
 })

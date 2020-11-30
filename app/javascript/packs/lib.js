@@ -9,7 +9,7 @@ export function calculateStudyTime() {
 }
 
 export function dateTimePicker() {
-  $('#datetimepicker1').datetimepicker({
+  $('#datetimepicker').datetimepicker({
     dayViewHeaderFormat: 'YYYY年 MMMM',
     tooltips: {
         close: '閉じる',
@@ -28,26 +28,6 @@ export function dateTimePicker() {
         nextCentury: '次世紀'
     },
     format: 'YYYY/MM/DD',
-    locale: 'ja',
-    showClose: true
-  });
-
-  $('#datetimepicker2').datetimepicker({
-    tooltips: {
-        close: '閉じる',
-        pickHour: '時間を取得',
-        incrementHour: '時間を増加',
-        decrementHour: '時間を減少',
-        pickMinute: '分を取得',
-        incrementMinute: '分を増加',
-        decrementMinute: '分を減少',
-        pickSecond: '秒を取得',
-        incrementSecond: '秒を増加',
-        decrementSecond: '秒を減少',
-        togglePeriod: '午前/午後切替',
-        selectTime: '時間を選択'
-    },
-    format: 'HH:mm',
     locale: 'ja',
     showClose: true
   });

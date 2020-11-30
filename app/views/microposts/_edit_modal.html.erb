@@ -18,7 +18,7 @@
             <div>
               <%= f.label :studied_at, "勉強日時", class: "mb-1" %>
             </div>
-            <div class="input-group date" id="datetimepicker1">
+            <div class="input-group date" id="datetimepicker">
               <%= f.text_field :studied_at, type: "text", value: @micropost.studied_at.to_s(:year) %>
               <span class="input-group-append">
                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
