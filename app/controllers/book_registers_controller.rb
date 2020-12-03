@@ -1,7 +1,7 @@
 class BookRegistersController < ApplicationController
   def new
   end
-  
+
   def create
     @user = current_user
     @book = Book.find(params[:book_register][:book_id])
@@ -25,8 +25,7 @@ class BookRegistersController < ApplicationController
 
   private
 
-    def status_with_book_params
-      params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
-    end
-
+  def status_with_book_params
+    params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
+  end
 end

@@ -29,9 +29,9 @@ gem 'image_processing', '~> 1.12'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  gem 'pry-rails'           # rails console(もしくは、rails c)でirbの代わりにpryを使われる
-  gem 'pry-doc'             # methodを表示
   gem 'pry-byebug'          # デバッグを実施(Ruby 2.0以降で動作する)
+  gem 'pry-doc'             # methodを表示
+  gem 'pry-rails'           # rails console(もしくは、rails c)でirbの代わりにpryを使われる
   gem 'pry-stack_explorer'  # スタックをたどれる
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -39,13 +39,13 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.3'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', '~> 1.5', require: false
   gem 'rubocop-rails', '~> 2.8', '>= 2.8.1', require: false
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
@@ -67,14 +67,14 @@ gem 'omniauth-twitter'
 gem "aws-sdk-s3", require: false
 
 gem 'nokogiri', '~> 1.10', '>= 1.10.10'
-#Create fake user
+# Create fake user
 gem 'faker', '~> 2.15'
-#Create hash widh association function of activeRecord
+# Create hash widh association function of activeRecord
 gem 'active_hash'
-#Change error messages to japanese
+# Change error messages to japanese
 gem 'rails-i18n', '~> 6.0'
-#Create graph
-gem "chartkick"
+# Create graph
 gem 'chart-js-rails', '~> 0.1.7'
-#Paginate
+gem "chartkick"
+# Paginate
 gem 'kaminari', '~> 1.2', '>= 1.2.1'

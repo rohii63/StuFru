@@ -25,5 +25,4 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     get microposts_destroy_url
     assert_response :success
   end
-
 end

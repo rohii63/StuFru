@@ -58,15 +58,15 @@ class BooksController < ApplicationController
 
   private
 
-    def book_params
-      params.require(:book).permit(:name, :icon, :status, :study_unit)
-    end
+  def book_params
+    params.require(:book).permit(:name, :icon, :status, :study_unit)
+  end
 
-    def status_with_book_params
-      params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
-    end
+  def status_with_book_params
+    params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
+  end
 
-    def attach_default_image
-      @book.icon.attach(io: File.open(Rails.root.join('app/assets/images/book-default-image.png')), filename: 'book-default-image.png', content_type: 'image/png')
-    end
+  def attach_default_image
+    @book.icon.attach(io: File.open(Rails.root.join('app/assets/images/book-default-image.png')), filename: 'book-default-image.png', content_type: 'image/png')
+  end
 end

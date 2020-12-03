@@ -37,5 +37,4 @@ class WeekTarget < ApplicationRecord
 
     self.where(created_at: from...to) if self.where(created_at: from...to).any?
   end
-
 end

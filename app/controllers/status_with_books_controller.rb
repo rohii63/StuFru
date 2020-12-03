@@ -1,5 +1,4 @@
 class StatusWithBooksController < ApplicationController
-
   def edit
     @user = current_user
     @status_with_book = StatusWithBook.find(params[:id])
@@ -15,7 +14,6 @@ class StatusWithBooksController < ApplicationController
     StatusWithBook.study_units.each do |study_unit|
       @study_unit = study_unit[1] if @status_with_book.study_unit == study_unit[0]
     end
-
   end
 
   def update
@@ -28,8 +26,7 @@ class StatusWithBooksController < ApplicationController
 
   private
 
-    def status_with_book_params
-      params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
-    end
-
+  def status_with_book_params
+    params.require(:status_with_book).permit(:status, :study_unit, :book_category_id)
+  end
 end

@@ -45,35 +45,34 @@ class MicropostsController < ApplicationController
 
   private
 
-    def micropost_params
-      params.require(:micropost).permit(
-        :book_id,
-        :studied_at,
-        :study_hours,
-        :study_minutes,
-        :study_time,
-        :studied_page,
-        :content,
-        :picture,
-        :user_id,
-        :study_amount,
-        :study_unit
-      )
-    end
+  def micropost_params
+    params.require(:micropost).permit(
+      :book_id,
+      :studied_at,
+      :study_hours,
+      :study_minutes,
+      :study_time,
+      :studied_page,
+      :content,
+      :picture,
+      :user_id,
+      :study_amount,
+      :study_unit
+    )
+  end
 
-    def culculate_study_amount_of_page
-      if params[:page]
-        start_page = params[:page][:start].to_i
-        end_page = params[:page][:end].to_i
-        if start_page == 0 || end_page == 0
-          tmp = 10000
-        elsif start_page >= end_page
-          tmp = 10001
-        else
-          tmp = end_page - start_page
-        end
-        params[:micropost][:study_amount] = tmp
+  def culculate_study_amount_of_page
+    if params[:page]
+      start_page = params[:page][:start].to_i
+      end_page = params[:page][:end].to_i
+      if start_page == 0 || end_page == 0
+        tmp = 10000
+      elsif start_page >= end_page
+        tmp = 10001
+      else
+        tmp = end_page - start_page
       end
+      params[:micropost][:study_amount] = tmp
     end
-
+  end
 end
