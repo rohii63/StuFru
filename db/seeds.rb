@@ -240,7 +240,7 @@ User.create(
   faker.active_relationships.create(followed_id: 1)
   user1.active_relationships.create(followed_id: faker.id)
   book = Book.create(name: book_names[n])
-  book.icon.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'book_image', "image(#{n}).jpg")), filename: "image(#{n}).jpg", content_type: 'image/jpg')
+  book.icon.attach(io: File.open(Rails.root.join("app/assets/images/book_image/image(#{n}).jpg")), filename: "image(#{n}).jpg", content_type: 'image/jpg')
 end
 
 # book_category_ids = [26,27,26,27,28,29,29,30,31,26,27,27,27,28,28,31,26,27,29,27,27,28,29]

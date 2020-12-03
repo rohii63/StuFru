@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
 
     def default_image
-      self.avatar.attach(io: File.open(Rails.root.join('app', 'javascript', 'images', 'avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
+      self.avatar.attach(io: File.open(Rails.root.join('app/javascript/images/avatar-default.png')), filename: 'avatar-dafault.png', content_type: 'image/png')
     end
 
     def default_book_category
@@ -44,31 +44,32 @@ class User < ApplicationRecord
     end
 
     def avatar_presence
-      if avatar.attached?
-        if !avatar.content_type.in?(%('image/jpeg image/png'))
-          errors.add(:avatar, 'にはjpegまたはpngファイルを添付してください')
-        end
+      if avatar.attached? && !avatar.content_type.in?(%('image/jpeg image/png'))
+        errors.add(:avatar, 'にはjpegまたはpngファイルを添付してください')
       end
     end
 
     def self.keyword_search(id, search)
-      searched_users_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(['name LIKE ? OR target_comment LIKE ? OR introduction LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]).group("microposts.user_id").maximum("microposts.studied_at")
-      ordered_users = searched_users_in_hash.sort_by{ |k, v| v }.reverse.to_h
+      users_except_yourself = self.joins(:microposts).select("users.id").where.not(id: id)
+      like_searched_users = users_except_yourself.where(['name LIKE ? OR target_comment LIKE ? OR introduction LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
+      grouped_users = like_searched_users.group("microposts.user_id").maximum("microposts.studied_at")
+      ordered_users = grouped_users.sort_by{ |k, v| v }.reverse.to_h
       self.find(ordered_users.keys)
     end
 
     def self.recommended_user(id, target, my_choice_university)
-      if my_choice_university
-        recommended_user_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(my_choice_university: my_choice_university).group("microposts.user_id").maximum("microposts.studied_at")
+      users_except_yourself = self.joins(:microposts).select("users.id").where.not(id: id)
+      if target == "大学受験合格" && my_choice_university
+        recommended_user_in_hash = users_except_yourself.where(my_choice_university: my_choice_university).group("microposts.user_id").maximum("microposts.studied_at")
       else
-        recommended_user_in_hash = self.joins(:microposts).select("users.*, microposts.*").where.not(id: id).where(target: target).group("microposts.user_id").maximum("microposts.studied_at")
+        recommended_user_in_hash = users_except_yourself.where(target: target).group("microposts.user_id").maximum("microposts.studied_at")
       end
       ordered_users = recommended_user_in_hash.sort_by{ |k, v| v }.reverse.to_h
       self.find(ordered_users.keys)
     end
 
     def a_week_study_time
-      from = Time.current.at_beginning_of_day - 6.day
+      from = Time.current.at_beginning_of_day - 6.days
       to = Time.current
 
       total_times = microposts.all.where(studied_at: from...to).sum(:study_time)
@@ -109,10 +110,11 @@ class User < ApplicationRecord
     end
 
     def self.feeds_of_users_with_same_target(id, target, my_choice_university)
+      mircroposts_except_yourself = self.joins(:microposts).select("microposts.id").where.not(id: id)
       if target == "大学受験合格" && my_choice_university.present?
-        microposts = self.joins(:microposts).select("microposts.id").where.not(id: id).where(my_choice_university: my_choice_university)
+        microposts = mircroposts_except_yourself.where(my_choice_university: my_choice_university)
       else
-        microposts = self.joins(:microposts).select("microposts.id").where.not(id: id).where(target: target)
+        microposts = mircroposts_except_yourself.where(target: target)
       end
 
       micropost_ids = []
@@ -143,5 +145,4 @@ class User < ApplicationRecord
       book_ids = status_with_books.where(status: "in_progress").pluck(:book_id)
       books.where(id: book_ids)
     end
-    
 end
