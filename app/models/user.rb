@@ -3,7 +3,6 @@ class User < ApplicationRecord
   after_create :default_image
   after_create :default_book_category
   has_many :study_books, class_name: "BookRegister",
-                              foreign_key: "user_id",
                               dependent:  :destroy
   has_many :books,  through: :study_books
   has_many :book_categories, dependent: :destroy
@@ -30,9 +29,9 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable,
           :confirmable
   validate :avatar_presence
-  validates :name, presence: true, length: {maximum: 32}
-  validates :target_comment, length: {maximum: 400}
-  validates :introduction, length: {maximum: 1000}
+  validates :name, presence: true, length: { maximum: 32 }
+  validates :target_comment, length: { maximum: 400 }
+  validates :introduction, length: { maximum: 1000 }
 
 
     def default_image
@@ -53,7 +52,7 @@ class User < ApplicationRecord
       users_except_yourself = self.joins(:microposts).select("users.id").where.not(id: id)
       searched_users = users_except_yourself.where(['name LIKE ? OR target_comment LIKE ? OR introduction LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
       grouped_users = searched_users.group("microposts.user_id").maximum("microposts.studied_at")
-      ordered_users = grouped_users.sort_by{ |k, v| v }.reverse.to_h
+      ordered_users = grouped_users.sort_by { |k, v| v }.reverse.to_h
       self.find(ordered_users.keys)
     end
 
@@ -64,7 +63,7 @@ class User < ApplicationRecord
       else
         recommended_user = users_except_yourself.where(target: target).group("microposts.user_id").maximum("microposts.studied_at")
       end
-      ordered_users = recommended_user.sort_by{ |k, v| v }.reverse.to_h
+      ordered_users = recommended_user.sort_by { |k, v| v }.reverse.to_h
       self.find(ordered_users.keys)
     end
 
@@ -132,7 +131,7 @@ class User < ApplicationRecord
 
     def create_notification_follow!(current_user)
       temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
-      if temp.present?
+      if temp.blank?
         notification = current_user.active_notifications.new(
           visited_id: id,
           action: 'follow'

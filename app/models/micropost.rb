@@ -6,7 +6,7 @@ class Micropost < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
   default_scope -> { order(studied_at: :desc) }
-  validates :content, length: {maximum: 280}
+  validates :content, length: { maximum: 280 }
   validates :study_amount, numericality: { greater_than_or_equal_to: 1, allow_nil: true }
   validate  :datetime_not_future_time
   validate  :studied_time_non_zero
@@ -42,7 +42,7 @@ class Micropost < ApplicationRecord
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and micropost_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
     # いいねされていない場合のみ、通知レコードを作成
-    if temp.present?
+    if temp.blank?
       notification = current_user.active_notifications.new(
         micropost_id: id,
         visited_id: user_id,
@@ -63,7 +63,7 @@ class Micropost < ApplicationRecord
       save_notification_comment!(current_user, comment_id, temp_id['user_id'])
     end
     # まだ誰もコメントしていない場合は、投稿者に通知を送る
-    save_notification_comment!(current_user, comment_id, user_id) if temp_ids.present?
+    save_notification_comment!(current_user, comment_id, user_id) if temp_ids.blank?
   end
 
   def save_notification_comment!(current_user, comment_id, visited_id)
