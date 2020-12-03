@@ -3,7 +3,7 @@ $(function() {
 });
 
 var displayStudyAmountGraph = function(blue, gray, options) {
-  <% 1.upto(@number_of_weeks_passed) do |n| %>
+  <% 1.upto(@number_of_weeks_elapsed) do |n| %>
     <% past_week_targets = @week_targets.past_records(n) %>
     <% if past_week_targets.present? %>
       <% past_week_targets.each do |week_target| %>

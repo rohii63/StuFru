@@ -67,6 +67,6 @@ class BooksController < ApplicationController
     end
 
     def attach_default_image
-      @book.icon.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'book-default-image.png')), filename: 'book-default-image.png', content_type: 'image/png')
+      @book.icon.attach(io: File.open(Rails.root.join('app/assets/images/book-default-image.png')), filename: 'book-default-image.png', content_type: 'image/png')
     end
 end

@@ -7,11 +7,11 @@
 <% end %>
 
 <div id="followersPosts" class="row px-4">
-  <% @follower_microposts.each do |micropost| %>
+  <% @microposts_follower.each do |micropost| %>
     <%= render 'home/post_card', micropost: micropost %>
   <% end %>
 </div>
 
 <div class="mt-3">
-  <%= paginate @follower_microposts, params: { paginate: "follow" }, remote: true %>
+  <%= paginate @microposts_follower, params: { paginate: "follow" }, remote: true %>
 </div>

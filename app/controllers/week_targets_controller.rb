@@ -4,7 +4,10 @@ class WeekTargetsController < ApplicationController
     @user = User.find(params[:user_id])
     @week_targets = @user.week_targets.all
     @microposts = @user.microposts.all
-    @number_of_weeks_passed = (Time.current.at_beginning_of_week - @week_targets.last.created_at.at_beginning_of_week).to_i / 604800 if @week_targets.present?
+    if @week_targets.present?
+      number_of_days_elapsed = (Time.current.at_beginning_of_week - @week_targets.last.created_at.at_beginning_of_week).to_i
+      @number_of_weeks_elapsed = number_of_days_elapsed / 604800
+    end
 
     respond_to do |format|
       format.html
@@ -68,7 +71,7 @@ class WeekTargetsController < ApplicationController
       if params[:time]
         hours = params[:time][:hours]
         minutes = params[:time][:minutes]
-        if !hours.present? && !minutes.present?
+        if hours.blank? && minutes.blank?
           tmp = ""
         else
           hours_to_minute = hours.to_i * 60

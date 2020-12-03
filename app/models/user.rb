@@ -51,8 +51,8 @@ class User < ApplicationRecord
 
     def self.keyword_search(id, search)
       users_except_yourself = self.joins(:microposts).select("users.id").where.not(id: id)
-      like_searched_users = users_except_yourself.where(['name LIKE ? OR target_comment LIKE ? OR introduction LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
-      grouped_users = like_searched_users.group("microposts.user_id").maximum("microposts.studied_at")
+      searched_users = users_except_yourself.where(['name LIKE ? OR target_comment LIKE ? OR introduction LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
+      grouped_users = searched_users.group("microposts.user_id").maximum("microposts.studied_at")
       ordered_users = grouped_users.sort_by{ |k, v| v }.reverse.to_h
       self.find(ordered_users.keys)
     end
@@ -60,11 +60,11 @@ class User < ApplicationRecord
     def self.recommended_user(id, target, my_choice_university)
       users_except_yourself = self.joins(:microposts).select("users.id").where.not(id: id)
       if target == "大学受験合格" && my_choice_university
-        recommended_user_in_hash = users_except_yourself.where(my_choice_university: my_choice_university).group("microposts.user_id").maximum("microposts.studied_at")
+        recommended_user = users_except_yourself.where(my_choice_university: my_choice_university).group("microposts.user_id").maximum("microposts.studied_at")
       else
-        recommended_user_in_hash = users_except_yourself.where(target: target).group("microposts.user_id").maximum("microposts.studied_at")
+        recommended_user = users_except_yourself.where(target: target).group("microposts.user_id").maximum("microposts.studied_at")
       end
-      ordered_users = recommended_user_in_hash.sort_by{ |k, v| v }.reverse.to_h
+      ordered_users = recommended_user.sort_by{ |k, v| v }.reverse.to_h
       self.find(ordered_users.keys)
     end
 
@@ -132,7 +132,7 @@ class User < ApplicationRecord
 
     def create_notification_follow!(current_user)
       temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
-      if temp.blank?
+      if temp.present?
         notification = current_user.active_notifications.new(
           visited_id: id,
           action: 'follow'
