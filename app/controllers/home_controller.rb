@@ -17,10 +17,10 @@ class HomeController < ApplicationController
         @user = current_user
         case params[:paginate]
           when "follow"
-            @follower_microposts = @user.feed.page(params[:page]).per(10)
+            @microposts_follower = @user.feed.page(params[:page]).per(10)
             render 'paginate_follow'
           when "target_genre"
-            @target_genre_microposts = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page]).per(10)
+            @microposts_target_genre = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page]).per(10)
             render 'paginate_target_genre'
         end
 
@@ -28,8 +28,8 @@ class HomeController < ApplicationController
         @user = current_user
         @micropost = @user.microposts.build()
         @books_in_progress = @user.books_in_progress
-        @follower_microposts = @user.feed.page(params[:page]).per(10)
-        @target_genre_microposts = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page]).per(10)
+        @microposts_follower = @user.feed.page(params[:page]).per(10)
+        @microposts_target_genre = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page]).per(10)
         unless @user.target
           tmpTargets = []
           

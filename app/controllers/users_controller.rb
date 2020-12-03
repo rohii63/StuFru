@@ -30,9 +30,9 @@ class UsersController < ApplicationController
       @book_categories = @user.book_categories.all
       @week_target = @user.week_targets.build()
       @total_study_time = @microposts.total_study_time
-      @today_study_time = @microposts.today_study_time
-      @this_week_study_time = @microposts.this_week_study_time
-      @this_month_study_time = @microposts.this_month_study_time
+      @study_time_today = @microposts.study_time_today
+      @study_time_this_week = @microposts.study_time_this_week
+      @study_time_this_month = @microposts.study_time_this_month
       @from = 6
       @to = 0
     end

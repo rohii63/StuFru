@@ -15,7 +15,7 @@ class Micropost < ApplicationRecord
   validate  :item_of_page_blank
 
   def datetime_not_future_time
-    errors.add(:studied_at, "が未来の日時です。") if studied_at > Time.now
+    errors.add(:studied_at, "が未来の日時です。") if studied_at > Time.current
   end
 
   def studied_time_non_zero
@@ -25,7 +25,9 @@ class Micropost < ApplicationRecord
   def study_time_limit_per_day
     from = studied_at.at_beginning_of_day
     to = studied_at.at_end_of_day
-    errors.add(:study_time, "は1日24時間以内にして下さい。") if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:study_time) + study_time >= 1440
+    if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:study_time) + study_time >= 1440
+      errors.add(:study_time, "は1日24時間以内にして下さい。") 
+    end
   end
 
   def item_of_page_blank
@@ -40,7 +42,7 @@ class Micropost < ApplicationRecord
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and micropost_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
     # いいねされていない場合のみ、通知レコードを作成
-    if temp.blank?
+    if temp.present?
       notification = current_user.active_notifications.new(
         micropost_id: id,
         visited_id: user_id,
@@ -61,7 +63,7 @@ class Micropost < ApplicationRecord
       save_notification_comment!(current_user, comment_id, temp_id['user_id'])
     end
     # まだ誰もコメントしていない場合は、投稿者に通知を送る
-    save_notification_comment!(current_user, comment_id, user_id) if temp_ids.blank?
+    save_notification_comment!(current_user, comment_id, user_id) if temp_ids.present?
   end
 
   def save_notification_comment!(current_user, comment_id, visited_id)
@@ -86,7 +88,7 @@ class Micropost < ApplicationRecord
     return hours, minutes
   end
 
-  def self.today_study_time
+  def self.study_time_today
     from = Time.current.at_beginning_of_day
     to = Time.current.at_end_of_day
     from_in_yesterday = Time.current.at_beginning_of_day - 1.day
@@ -99,7 +101,7 @@ class Micropost < ApplicationRecord
     return hours, minutes, total, total_in_yesterday
   end
 
-  def self.this_week_study_time
+  def self.study_time_this_week
     from = Time.current.at_beginning_of_week
     to = Time.current.at_end_of_week
     from_in_last_week = Time.current.at_beginning_of_week - 1.week
@@ -112,7 +114,7 @@ class Micropost < ApplicationRecord
     return hours, minutes, total, total_in_last_week
   end
 
-  def self.this_month_study_time
+  def self.study_time_this_month
     from = Time.current.at_beginning_of_month
     to = Time.current.at_end_of_month
     from_in_last_month = Time.current.at_beginning_of_month - 1.month

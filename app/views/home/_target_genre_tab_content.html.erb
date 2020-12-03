@@ -6,11 +6,11 @@
 </div>
 
 <div class="row px-4">
-  <% @target_genre_microposts.each do |micropost| %>
+  <% @microposts_target_genre.each do |micropost| %>
     <%= render 'home/post_card', micropost: micropost %>
   <% end %>
 </div>
 
 <div class="mt-3">
-  <%= paginate @target_genre_microposts, params: { paginate: "target_genre" }, remote: true %>
+  <%= paginate @microposts_target_genre, params: { paginate: "target_genre" }, remote: true %>
 </div>

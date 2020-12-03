@@ -1,7 +1,7 @@
 <% content_for :title, "今週の目標 -履歴-"  %>
 
 <% if @week_targets.present? %>
-  <% 1.upto(@number_of_weeks_passed) do |n| %>
+  <% 1.upto(@number_of_weeks_elapsed) do |n| %>
     <% past_week_targets = @week_targets.past_records(n) %>
     <% if past_week_targets.present? %>
       <% week_target_created_at = past_week_targets.take.created_at %>
