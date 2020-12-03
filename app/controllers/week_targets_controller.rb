@@ -1,5 +1,4 @@
 class WeekTargetsController < ApplicationController
-
   def index
     @user = User.find(params[:user_id])
     @week_targets = @user.week_targets.all
@@ -13,7 +12,6 @@ class WeekTargetsController < ApplicationController
       format.html
       format.js
     end
-
   end
 
   def new
@@ -58,42 +56,42 @@ class WeekTargetsController < ApplicationController
 
   private
 
-    def week_target_params
-      params.require(:week_target).permit(
-        :content,
-        :user_id,
-        :book_id,
-        :study_unit
-      )
-    end
+  def week_target_params
+    params.require(:week_target).permit(
+      :content,
+      :user_id,
+      :book_id,
+      :study_unit
+    )
+  end
 
-    def caliculate_week_target_content
-      if params[:time]
-        hours = params[:time][:hours]
-        minutes = params[:time][:minutes]
-        if hours.blank? && minutes.blank?
-          tmp = ""
-        else
-          hours_to_minute = hours.to_i * 60
-          minutes = minutes.to_i
-          tmp = hours_to_minute + minutes
-        end
-        params[:week_target][:content] = tmp
-      elsif params[:page]
-        start_page = params[:page][:start].to_i   
-        end_page = params[:page][:end].to_i      
-        if start_page == 0 && end_page == 0
-          tmp = 10000
-        elsif start_page == 0
-          tmp = 10001
-        elsif end_page == 0
-          tmp = 10002
-        elsif !(start_page == 0 && end_page == 0) && start_page >= end_page
-          tmp = 10003
-        else
-          tmp = end_page - start_page
-        end
-        params[:week_target][:content] = tmp
+  def caliculate_week_target_content
+    if params[:time]
+      hours = params[:time][:hours]
+      minutes = params[:time][:minutes]
+      if hours.blank? && minutes.blank?
+        tmp = ""
+      else
+        hours_to_minute = hours.to_i * 60
+        minutes = minutes.to_i
+        tmp = hours_to_minute + minutes
       end
+      params[:week_target][:content] = tmp
+    elsif params[:page]
+      start_page = params[:page][:start].to_i
+      end_page = params[:page][:end].to_i
+      if start_page == 0 && end_page == 0
+        tmp = 10000
+      elsif start_page == 0
+        tmp = 10001
+      elsif end_page == 0
+        tmp = 10002
+      elsif !(start_page == 0 && end_page == 0) && start_page >= end_page
+        tmp = 10003
+      else
+        tmp = end_page - start_page
+      end
+      params[:week_target][:content] = tmp
     end
+  end
 end

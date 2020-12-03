@@ -7,12 +7,12 @@ class UsersController < ApplicationController
       @from = params[:from].to_i
       @to = params[:to].to_i
       case params[:button]
-        when "before"
-          @from += 1
-          @to += 1
-        when "after"
-          @from -= 1
-          @to -= 1
+      when "before"
+        @from += 1
+        @to += 1
+      when "after"
+        @from -= 1
+        @to -= 1
       end
       render 'switch_graph'
     elsif params[:chart]
@@ -69,10 +69,10 @@ class UsersController < ApplicationController
         else
           redirect_to root_path()
         end
-  
+
       elsif params[:target] && @user.my_choice_university.nil?
         redirect_to university_search_path()
-      
+
       else
         @modal_name = params[:modal_name]
         @area_name = params[:area_name]
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
             format.js
           end
         end
-      end  
+      end
     end
   end
 
@@ -97,34 +97,33 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(
-        :name,
-        :avatar,
-        :target_comment,
-        :introduction,
-        :target,
-        :sex,
-        :age,
-        :live,
-        :job,
-        :my_choice_university
-        )
+  def user_params
+    params.require(:user).permit(
+      :name,
+      :avatar,
+      :target_comment,
+      :introduction,
+      :target,
+      :sex,
+      :age,
+      :live,
+      :job,
+      :my_choice_university
+    )
+  end
+
+  def create_target_list
+    tmpTargets = []
+
+    8.times do |n|
+      n += 1
+      tmpTargets.push(Target.new(target_category_id: "#{n}"))
     end
 
-    def create_target_list
-      tmpTargets = []
+    @navbars = {}
 
-      8.times do |n|
-        n += 1
-        tmpTargets.push(Target.new(target_category_id: "#{n}"))
-      end
-
-      @navbars = {}
-
-      tmpTargets.each do |t| 
-        @navbars.store(t.target_category_id, t.targetCategory.name) 
-      end 
-
+    tmpTargets.each do |t|
+      @navbars.store(t.target_category_id, t.targetCategory.name)
     end
   end
+end

@@ -26,7 +26,7 @@ class Micropost < ApplicationRecord
     from = studied_at.at_beginning_of_day
     to = studied_at.at_end_of_day
     if Micropost.where(user_id: user_id).where(studied_at: from...to).sum(:study_time) + study_time >= 1440
-      errors.add(:study_time, "は1日24時間以内にして下さい。") 
+      errors.add(:study_time, "は1日24時間以内にして下さい。")
     end
   end
 
@@ -161,8 +161,7 @@ class Micropost < ApplicationRecord
     from = week_target_created_at.at_beginning_of_week
     to = week_target_created_at.at_end_of_week
     post = self.where(studied_at: from...to).where(book_id: book_id).where(study_unit: study_unit)
-    
+
     study_unit == "時間" ? post.sum(:study_time) : post.sum(:study_amount)
   end
-
 end
