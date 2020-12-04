@@ -19,19 +19,19 @@ class WeekTargetsController < ApplicationController
     @selected_book = Book.find(params[:week_target][:book_id])
     @status_with_book = @user.status_with_books.find_by(book_id: @selected_book.id)
     @week_target = @user.week_targets.build(book_id: @selected_book.id, study_unit: @status_with_book.study_unit)
-    @week_targets = @user.week_targets.all.at_this_week()
+    @week_targets = @user.week_targets.all.at_this_week
   end
 
   def create
     caliculate_week_target_content
     @user = User.find(params[:user_id])
     @week_target = @user.week_targets.build(week_target_params)
-    if @week_target.save
-      @week_targets = @user.week_targets.all.at_this_week()
-      @microposts = @user.microposts.all
-      @book_categories = @user.book_categories.all
-      @status_with_books = @user.status_with_books.all
-    end
+    return unless @week_target.save
+
+    @week_targets = @user.week_targets.all.at_this_week
+    @microposts = @user.microposts.all
+    @book_categories = @user.book_categories.all
+    @status_with_books = @user.status_with_books.all
   end
 
   def edit
@@ -70,7 +70,7 @@ class WeekTargetsController < ApplicationController
       hours = params[:time][:hours]
       minutes = params[:time][:minutes]
       if hours.blank? && minutes.blank?
-        tmp = ""
+        tmp = ''
       else
         hours_to_minute = hours.to_i * 60
         minutes = minutes.to_i
@@ -80,17 +80,17 @@ class WeekTargetsController < ApplicationController
     elsif params[:page]
       start_page = params[:page][:start].to_i
       end_page = params[:page][:end].to_i
-      if start_page == 0 && end_page == 0
-        tmp = 10000
-      elsif start_page == 0
-        tmp = 10001
-      elsif end_page == 0
-        tmp = 10002
-      elsif !(start_page == 0 && end_page == 0) && start_page >= end_page
-        tmp = 10003
-      else
-        tmp = end_page - start_page
-      end
+      tmp = if start_page.zero? && end_page.zero?
+              10000
+            elsif start_page.zero?
+              10001
+            elsif end_page.zero?
+              10002
+            elsif !(start_page.zero? && end_page.zero?) && start_page >= end_page
+              10003
+            else
+              end_page - start_page
+            end
       params[:week_target][:content] = tmp
     end
   end

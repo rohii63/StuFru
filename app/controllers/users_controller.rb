@@ -7,16 +7,16 @@ class UsersController < ApplicationController
       @from = params[:from].to_i
       @to = params[:to].to_i
       case params[:button]
-      when "before"
+      when 'before'
         @from += 1
         @to += 1
-      when "after"
+      when 'after'
         @from -= 1
         @to -= 1
       end
       render 'switch_graph'
     elsif params[:chart]
-      @week_targets = @user.week_targets.all.at_this_week()
+      @week_targets = @user.week_targets.all.at_this_week
       @from = 6
       @to = 0
       render 'chart'
@@ -25,10 +25,10 @@ class UsersController < ApplicationController
       render 'shared/paginate_timeline'
     else
       @timeline = @microposts.all.page(params[:page]).per(10)
-      @week_targets = @user.week_targets.all.at_this_week()
+      @week_targets = @user.week_targets.all.at_this_week
       @status_with_books = @user.status_with_books.all
       @book_categories = @user.book_categories.all
-      @week_target = @user.week_targets.build()
+      @week_target = @user.week_targets.build
       @total_study_time = @microposts.total_study_time
       @study_time_today = @microposts.study_time_today
       @study_time_this_week = @microposts.study_time_this_week
@@ -64,14 +64,14 @@ class UsersController < ApplicationController
       @user.update(user_params)
 
       if params[:top_page]
-        if @user.target == "大学受験合格"
-          redirect_to university_search_path(from_top: "")
+        if @user.target == '大学受験合格'
+          redirect_to university_search_path(from_top: '')
         else
-          redirect_to root_path()
+          redirect_to root_path
         end
 
       elsif params[:target] && @user.my_choice_university.nil?
-        redirect_to university_search_path()
+        redirect_to university_search_path
 
       else
         @modal_name = params[:modal_name]
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
         create_target_list
         respond_to do |format|
           if params[:from_top]
-            format.html { redirect_to root_path() }
+            format.html { redirect_to root_path }
           else
             format.html { redirect_to user_path(@user) }
             format.js
@@ -113,16 +113,16 @@ class UsersController < ApplicationController
   end
 
   def create_target_list
-    tmpTargets = []
+    targets = []
 
     8.times do |n|
       n += 1
-      tmpTargets.push(Target.new(target_category_id: "#{n}"))
+      targets.push(Target.new(target_category_id: n.to_s))
     end
 
     @navbars = {}
 
-    tmpTargets.each do |t|
+    targets.each do |t|
       @navbars.store(t.target_category_id, t.targetCategory.name)
     end
   end

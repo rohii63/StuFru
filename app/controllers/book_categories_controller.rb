@@ -1,7 +1,7 @@
 class BookCategoriesController < ApplicationController
   def new
     @user = current_user
-    @book_category = @user.book_categories.build()
+    @book_category = @user.book_categories.build
     @modal = params[:modal]
   end
 
@@ -13,8 +13,7 @@ class BookCategoriesController < ApplicationController
     @modal = params[:modal]
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 

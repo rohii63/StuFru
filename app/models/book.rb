@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
   has_one_attached :icon
-  has_many :owners, class_name: "BookRegister",
+  has_many :owners, class_name: 'BookRegister',
                     dependent: :destroy
   has_many :users, through: :owners
   has_many :microposts
