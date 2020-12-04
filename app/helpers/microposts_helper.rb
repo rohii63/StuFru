@@ -1,10 +1,10 @@
 module MicropostsHelper
   def day_before_ratio_in_study_time(study_time_today, study_time_yesterday)
     tmp = study_time_today - study_time_yesterday
-    sign = "+"
+    sign = '+'
 
-    if tmp < 0
-      sign = "-"
+    if tmp.negative?
+      sign = '-'
       tmp = -tmp
     end
 
@@ -16,10 +16,10 @@ module MicropostsHelper
 
   def week_before_ratio_in_study_time(study_time_this_week, study_time_last_week)
     tmp = study_time_this_week - study_time_last_week
-    sign = "+"
+    sign = '+'
 
-    if tmp < 0
-      sign = "-"
+    if tmp.negative?
+      sign = '-'
       tmp = -tmp
     end
 
@@ -31,10 +31,10 @@ module MicropostsHelper
 
   def month_before_ratio_in_study_time(study_time_this_month, study_time_last_month)
     tmp = study_time_this_month - study_time_last_month
-    sign = "+"
+    sign = '+'
 
-    if tmp < 0
-      sign = "-"
+    if tmp.negative?
+      sign = '-'
       tmp = -tmp
     end
 

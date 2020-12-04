@@ -64,7 +64,7 @@ gem 'dotenv-rails'
 gem 'devise'
 gem 'omniauth-twitter'
 # To create a save destination for active storage
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', require: false
 
 gem 'nokogiri', '~> 1.10', '>= 1.10.10'
 # Create fake user
@@ -75,6 +75,6 @@ gem 'active_hash'
 gem 'rails-i18n', '~> 6.0'
 # Create graph
 gem 'chart-js-rails', '~> 0.1.7'
-gem "chartkick"
+gem 'chartkick'
 # Paginate
 gem 'kaminari', '~> 1.2', '>= 1.2.1'

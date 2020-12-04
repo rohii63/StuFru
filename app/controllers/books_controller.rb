@@ -1,34 +1,32 @@
 class BooksController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @book = @user.books.build()
+    @book = @user.books.build
     @status_with_books = @user.status_with_books.all
-    @status_with_book = @user.status_with_books.build()
+    @status_with_book = @user.status_with_books.build
     @book_categories = @user.book_categories.all
-    @book_category = @user.book_categories.build()
-    if params[:search] || params[:search] == ""
-      @books = Book.name_search(params[:search])
-      @keyword = params[:search]
-    end
+    @book_category = @user.book_categories.build
+    return unless params[:search] || params[:search] == ''
+
+    @books = Book.name_search(params[:search])
+    @keyword = params[:search]
   end
 
-  def new
-  end
+  def new; end
 
   def create
     @user = current_user
     @book = @user.books.build(book_params)
     @status_with_book = @user.status_with_books.build(status_with_book_params)
     attach_default_image unless params[:book][:icon]
-    if @book.save
-      @status_with_book.book_id = @book.id
-      if @status_with_book.save
-        @user.study_books.create(book_id: @book.id)
-        @books = @user.books.all
-        @book_categories = @user.book_categories.all
-        @status_with_books = @user.status_with_books.all
-      end
-    end
+    return unless @book.save
+
+    @status_with_book.book_id = @book.id if
+    @status_with_book.save
+    @user.study_books.create(book_id: @book.id)
+    @books = @user.books.all
+    @book_categories = @user.book_categories.all
+    @status_with_books = @user.status_with_books.all
   end
 
   def show
@@ -40,21 +38,19 @@ class BooksController < ApplicationController
     else
       @user = current_user
       @study_book = @user.study_books.build(book_id: @book.id)
-      @status_with_book = @user.status_with_books.build()
+      @status_with_book = @user.status_with_books.build
       @book_categories = @user.book_categories.all
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @book = Book.find(params[:id])
     @book.update(book_params)
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 

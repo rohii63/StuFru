@@ -4,8 +4,8 @@ class StatusWithBooksController < ApplicationController
     @status_with_book = StatusWithBook.find(params[:id])
     @book_categories = @user.book_categories.all
 
-    @status = ""
-    @study_unit = ""
+    @status = ''
+    @study_unit = ''
 
     StatusWithBook.statuses.each do |status|
       @status = status[1] if @status_with_book.status == status[0]
@@ -20,7 +20,7 @@ class StatusWithBooksController < ApplicationController
     @user = current_user
     @status_with_book = StatusWithBook.find(params[:id])
     @status_with_book.update(status_with_book_params)
-    flash[:notice] = "ステータス編集完了"
+    flash[:notice] = 'ステータス編集完了'
     redirect_to user_books_path(@user)
   end
 

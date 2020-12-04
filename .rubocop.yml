@@ -1,6 +1,3 @@
-# 将来的には対応する規約の読込
-inherit_from: .rubocop_todo.yml
-
 # 追加した規約ファイル読込
 require:
   - rubocop-rails
@@ -33,14 +30,14 @@ ClassAndModuleChildren:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# 引数の最小文字数3文字以下を2文字以下に変更。加えて以下の配列の文字列を許可。
+# 引数の最小文字数3文字(デフォルト)を2文字以下に変更。以下の配列の文字列を例外的に許可。
 Naming/MethodParameterName:
   MinNameLength: 2
   AllowedNames: ["n"]
 
-# 数字の桁数区切りを６桁まで許可
+# 数字の桁数区切りのチェックを無効
 NumericLiterals:
-  MinDigits: 6
+  Enabled: false
 
 # 1行の長さ最大120文字を最大160文字までに変更
 Layout/LineLength:
@@ -50,14 +47,34 @@ Layout/LineLength:
 Metrics/ClassLength:
   Max: 150
 
-# inverse_ofオプションを利用しなくてもよい
+# inverse_ofオプションの利用を強制しない。
 Rails/InverseOf:
   Enabled: false
 
-# dependentオプションを利用しなくてもよい
+# dependentオプションの利用を強制しない。
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
 # ハッシュにシンボルがあるときはRuby1.9構文の使用を強制
 Style/HashSyntax:
   EnforcedStyle: 'ruby19'
+
+# メソッドの行数を最大10行から50行に変更
+Metrics/MethodLength:
+  Max: 50
+
+# メソッドの循環的複雑度を最大7から15に変更
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+# メソッドの知覚的複雑度を最大7から15に変更
+Metrics/PerceivedComplexity: 
+  Max: 15
+
+# %i構文を使用した配列をチェックする
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# メソッドの複雑さの基準値15を70に変更
+Metrics/AbcSize:
+  Max: 70

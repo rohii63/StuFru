@@ -2,9 +2,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     @micropost = @comment.micropost
-    if @comment.save
-      @micropost.create_notification_comment!(current_user, @comment.id)
-    end
+    @micropost.create_notification_comment!(current_user, @comment.id) if @comment.save
     @comments = @micropost.comments.all
   end
 

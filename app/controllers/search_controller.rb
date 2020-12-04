@@ -4,7 +4,7 @@ class SearchController < ApplicationController
     @users = params[:search].present? ? User.keyword_search(@user, params[:search]) : User.recommended_user(@user, @user.target, @user.my_choice_university)
     @keyword = params[:search] if params[:search].present?
     flash[:alert] = nil
-    flash[:alert] = "キーワードを入力して下さい。" if params[:search] == ""
+    flash[:alert] = 'キーワードを入力して下さい。' if params[:search] == ''
   end
 
   def universities
@@ -16,7 +16,7 @@ class SearchController < ApplicationController
       @universities = University.name_search(params[:keyword])
       render 'university_search'
     elsif params[:from_top]
-      @from_top = ""
+      @from_top = ''
       @universities = University.all
     else
       @universities = University.all

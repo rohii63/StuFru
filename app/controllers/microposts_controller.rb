@@ -11,35 +11,32 @@ class MicropostsController < ApplicationController
   def show
     @micropost = Micropost.find(params[:id])
     @books_in_progress = current_user.books_in_progress if @micropost.user == current_user
-    @comment = @micropost.comments.build()
+    @comment = @micropost.comments.build
     @comments = @micropost.comments.all
     @likes = @micropost.likes.all
-    if params[:comment_id]
-      @comment = Comment.find(params[:comment_id])
-      render 'comment_delete_modal'
-    end
+    return unless params[:comment_id]
+
+    @comment = Comment.find(params[:comment_id])
+    render 'comment_delete_modal'
   end
 
   def edit
     @micropost = Micropost.find(params[:id])
-
-    if params[:modal]
-      render 'modal'
-    end
+    render 'modal' if params[:modal]
   end
 
   def update
     culculate_study_amount_of_page
     @micropost = Micropost.find(params[:id])
-    if @micropost.update(micropost_params)
-      flash[:notice] = "編集完了"
-      redirect_to root_path
-    end
+    return unless @micropost.update(micropost_params)
+
+    flash[:notice] = '編集完了'
+    redirect_to root_path
   end
 
   def destroy
     Micropost.find(params[:id]).destroy
-    flash[:notice] = "削除完了"
+    flash[:notice] = '削除完了'
     redirect_to root_path
   end
 
@@ -62,17 +59,18 @@ class MicropostsController < ApplicationController
   end
 
   def culculate_study_amount_of_page
-    if params[:page]
-      start_page = params[:page][:start].to_i
-      end_page = params[:page][:end].to_i
-      if start_page == 0 || end_page == 0
-        tmp = 10000
-      elsif start_page >= end_page
-        tmp = 10001
-      else
-        tmp = end_page - start_page
-      end
-      params[:micropost][:study_amount] = tmp
-    end
+    return unless params[:page]
+
+    start_page = params[:page][:start].to_i
+    end_page = params[:page][:end].to_i
+
+    tmp = if start_page.zero? || end_page.zero?
+            10000
+          elsif start_page >= end_page
+            10001
+          else
+            end_page - start_page
+          end
+    params[:micropost][:study_amount] = tmp
   end
 end

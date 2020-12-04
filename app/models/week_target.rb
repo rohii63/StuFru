@@ -12,29 +12,29 @@ class WeekTarget < ApplicationRecord
   @to = Time.current.at_end_of_week
 
   def start_page_and_end_page_not_blank
-    errors.add(:範囲, "を入力してください。") if content == 10000
+    errors.add(:範囲, 'を入力してください。') if content == 10000
   end
 
   def start_page_not_blank
-    errors.add(:開始ページ, "を入力してください。") if content == 10001
+    errors.add(:開始ページ, 'を入力してください。') if content == 10001
   end
 
   def end_page_not_blank
-    errors.add(:終了ページ, "を入力してください。") if content == 10002
+    errors.add(:終了ページ, 'を入力してください。') if content == 10002
   end
 
   def end_page_greater_than_start_page
-    errors.add(:終了ページ, "は開始ページよりも大きい必要があります。") if content == 10003
+    errors.add(:終了ページ, 'は開始ページよりも大きい必要があります。') if content == 10003
   end
 
-  def self.at_this_week()
-    self.where(created_at: @from...@to)
+  def self.at_this_week
+    where(created_at: @from...@to)
   end
 
   def self.past_records(n)
     from = @from - n.week
     to = @to - n.week
 
-    self.where(created_at: from...to) if self.where(created_at: from...to).any?
+    where(created_at: from...to) if where(created_at: from...to).any?
   end
 end

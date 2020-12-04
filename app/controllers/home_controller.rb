@@ -16,36 +16,36 @@ class HomeController < ApplicationController
       elsif params[:paginate]
         @user = current_user
         case params[:paginate]
-        when "follow"
+        when 'follow'
           @microposts_follower = @user.feed.page(params[:page]).per(10)
           render 'paginate_follow'
-        when "target_genre"
+        when 'target_genre'
           @microposts_target_genre = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page]).per(10)
           render 'paginate_target_genre'
         end
 
       else
         @user = current_user
-        @micropost = @user.microposts.build()
+        @micropost = @user.microposts.build
         @books_in_progress = @user.books_in_progress
         @microposts_follower = @user.feed.page(params[:page]).per(10)
         @microposts_target_genre = User.feeds_of_users_with_same_target(@user.id, @user.target, @user.my_choice_university).page(params[:page]).per(10)
         unless @user.target
-          tmpTargets = []
+          targets = []
 
           8.times do |n|
             n += 1
-            tmpTargets.push(Target.new(target_category_id: "#{n}"))
+            targets.push(Target.new(target_category_id: n.to_s))
           end
 
           @navbars = {}
-          tmpTargets.each do |t|
+          targets.each do |t|
             @navbars.store(t.target_category_id, t.targetCategory.name)
           end
         end
       end
     else
-      redirect_to new_user_session_path()
+      redirect_to new_user_session_path
     end
   end
 end
