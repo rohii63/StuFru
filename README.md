@@ -1,24 +1,51 @@
-# README
+# StuFru
+繋がった仲間と勉強時間や投稿を共有できる学習管理アプリです。  
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+15秒でアピールポイントをまとめましたので、ご覧いただければと思います。  
 
-Things you may want to cover:
+![demo](https://raw.github.com/wiki/HirotoYasuda/StuFru/images/application_summary.gif)  
 
-* Ruby version
+URL: https://stufru.herokuapp.com/
 
-* System dependencies
+# 使用技術
+### フロントエンド
+* jQuery
+* Bootstrap4
+### バックエンド
+* Ruby 2.7.2
+* Ruby on Rails 6.0.3
+### インフラ
+* Heroku
+* MySQL2
+* Puma
+* Rubocop
+### その他
+* グラフ（chart.js）
+* モーダル、タブ（bootstrap4）
+* 日付選択のカレンダー表示（dateTimePicker）
+* ログイン機構（devise）  
 
-* Configuration
+# 今後の予定
+- [ ] テストを書く  
+- [ ] インフラ周りの勉強をする
+- [ ] フロントでモダンなフレームワークを使う
 
-* Database creation
+# 制作背景
+私は、社会人になってから資格の勉強に多くの時間を費やしてきました。  
+資格に合格するためには、何よりも勉強を継続させることが大事です。  
+しかし、これが何よりも難しく、私の中で長い間課題でした。  
+そして、ポートフォリオのテーマを「勉強の継続のサポート」とするに至ります。  
+<br>  
 
-* Database initialization
+このポートフォリオは、基本的には『Studyplus』というアプリを参考に作成しています。  
+テーマに関連するアプリを調べたときに、見つけたアプリで、実際に利用してみて、  
+勉強の継続のサポートという観点で、とても素晴らしいアプリだと感じたからです。  
+<br>  
 
-* How to run the test suite
+勿論、オリジナルの機能もあります。  
+私は、勉強を継続させる上で、「目標から逆算して今やるべきことを明確にすること」が大事だと考えています。  
+これを機能として実現させたものが、「今週の目標」です。  
+この機能は、レポートページの今週の目標を作成することで利用できます。  
+<br>  
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+このポートフォリオが、勉強の継続のサポートになるようなものとなっていれば嬉しく思います。  
