@@ -194,7 +194,7 @@ user1 = User.create(
   name: 'お試しユーザー',
   password: 'password',
   confirmed_at: DateTime.now,
-  confirmation_sent_at: DateTime.now - 1,
+  confirmation_sent_at: DateTime.now,
   target: target,
   my_choice_university: university
 )
@@ -204,7 +204,7 @@ User.create(
   name: 'テストユーザー',
   password: 'password',
   confirmed_at: DateTime.now,
-  confirmation_sent_at: DateTime.now - 1,
+  confirmation_sent_at: DateTime.now,
   target_comment: "インディゴインディゴインディゴインディゴ",
   target: target,
   my_choice_university: university,
@@ -220,7 +220,7 @@ User.create(
     email: Faker::Internet.unique.email,
     password: "password",
     confirmed_at: DateTime.now,
-    confirmation_sent_at: DateTime.now - 1,
+    confirmation_sent_at: DateTime.now,
     target_comment: target_comments[n],
     target: target,
     my_choice_university: university,
