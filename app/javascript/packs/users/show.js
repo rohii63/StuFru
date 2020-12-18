@@ -1,4 +1,4 @@
-import Collapse from 'bootstrap/js/src/collapse';
+import 'bootstrap/js/src/collapse';
 
 $(function () {
   $('.collapse').collapse({

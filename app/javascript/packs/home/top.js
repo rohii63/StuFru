@@ -1,7 +1,7 @@
 import 'moment/locale/ja';
-import '../bootstrap-datetimepicker.min';
-import {calculateStudyTime, dateTimePicker} from "../lib";
-import Collapse from 'bootstrap/js/src/collapse';
+import '../../src/bootstrap-datetimepicker.min';
+import {calculateStudyTime, dateTimePicker} from "../../src/lib";
+import 'bootstrap/js/src/collapse';
 
 $(function(){
   if ($("#userTargetSaveBtnWrapper")[0]) {

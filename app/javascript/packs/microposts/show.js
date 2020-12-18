@@ -1,8 +1,8 @@
-import Modal from 'bootstrap/js/src/modal';
-import Collapse from 'bootstrap/js/src/collapse';
+import 'bootstrap/js/src/modal';
+import 'bootstrap/js/src/collapse';
 import 'moment/locale/ja';
-import '../bootstrap-datetimepicker.min';
-import * as lib from "../lib";
+import '../../src/bootstrap-datetimepicker.min';
+import * as lib from "../../src/lib";
 
 $(function() {
   lib.calculateStudyTime();
