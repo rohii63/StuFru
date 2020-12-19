@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  protect_from_forgery except: :my_page
+  
   def my_page
     @user = User.find(params[:id])
     @microposts = @user.microposts.all

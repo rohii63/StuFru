@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_one_attached :avatar
-  # comment out this when test execute to avoid bug
+  # comment out this when test of user models execute to avoid bug
   after_create :default_image
   after_create :default_book_category
   has_many :study_books, class_name: 'BookRegister',
