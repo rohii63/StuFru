@@ -1,4 +1,4 @@
-import Modal from "bootstrap/js/src/modal";
+import "bootstrap/js/src/modal";
 
 $(function() {
   $.ajax({

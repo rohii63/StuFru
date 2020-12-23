@@ -1,6 +1,6 @@
-import Collapse from 'bootstrap/js/src/collapse';
+import 'bootstrap/js/src/collapse';
 import Tab from 'bootstrap/js/src/tab';
-import {navbarCollapse} from "../lib";
+import {navbarCollapse} from "../../src/lib";
 
 $(function(){
   navbarCollapse();

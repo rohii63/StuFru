@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module StuFru
   class Application < Rails::Application
     #fix rails server error
-    unless Rails.env.production?
+    if Rails.env.development?
       config.web_console.whitelisted_ips = '10.0.2.2'
     end
     # Initialize configuration defaults for originally generated Rails version.

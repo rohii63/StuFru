@@ -7,11 +7,10 @@ const webpack = require('webpack')
 environment.plugins.prepend(
     'Provide',
     new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        Popper: 'popper.js'
+        $: 'jquery'
     })
 )
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
+environment.splitChunks()
 module.exports = environment
