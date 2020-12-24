@@ -8,8 +8,8 @@ RSpec.describe "Users", type: :system do
     visit user_path(user)
     click_link 'test_id'
     fill_in '自己紹介', with: '自己紹介を更新'
+    expect(page).to have_button '保存'
     click_button '保存'
-    expect(page).not_to have_button '保存'
     expect(page).to have_selector 'p', text: '自己紹介を更新'
   end
 end

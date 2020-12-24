@@ -6,27 +6,27 @@ ruby '2.7.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4'
+gem 'mysql2'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+gem 'sass-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.2'
+gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.10'
+gem 'jbuilder'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.12'
+gem 'image_processing'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'pry-byebug'          # デバッグを実施(Ruby 2.0以降で動作する)
@@ -39,24 +39,24 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen', '~> 3.3'
-  gem 'web-console', '>= 3.3.0'
+  gem 'listen'
+  gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rubocop', '~> 1.5', require: false
-  gem 'rubocop-rails', '~> 2.8', '>= 2.8.1', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
-  gem 'factory_bot_rails', '~> 6.1'
-  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
@@ -72,15 +72,15 @@ gem 'omniauth-twitter'
 # To create a save destination for active storage
 gem 'aws-sdk-s3', require: false
 
-gem 'nokogiri', '~> 1.10', '>= 1.10.10'
+gem 'nokogiri'
 # Create fake user
-gem 'faker', '~> 2.15'
+gem 'faker'
 # Create hash widh association function of activeRecord
 gem 'active_hash'
 # Change error messages to japanese
-gem 'rails-i18n', '~> 6.0'
+gem 'rails-i18n'
 # Create graph
-gem 'chart-js-rails', '~> 0.1.7'
+gem 'chart-js-rails'
 gem 'chartkick'
 # Paginate
-gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'kaminari'

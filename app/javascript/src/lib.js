@@ -1,5 +1,11 @@
 export function calculateStudyTime() {
   $("#micropostModal").on("click", "#btnPrimary",function() {
+    var studiedAt = $("#micropost_studied_at").val().split("/");
+
+    $("#micropost_studied_at_1i").val(studiedAt[0]);
+    $("#micropost_studied_at_2i").val(studiedAt[1]);
+    $("#micropost_studied_at_3i").val(studiedAt[2]);
+
     var hours = $('#micropost_study_hours').val() * 60;
     var minutes = $('#micropost_study_minutes').val();
     var total = parseInt(hours) + parseInt(minutes);

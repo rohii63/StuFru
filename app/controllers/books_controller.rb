@@ -21,7 +21,7 @@ class BooksController < ApplicationController
     attach_default_image unless params[:book][:icon]
     return unless @book.save
 
-    @status_with_book.book_id = @book.id if
+    @status_with_book.book_id = @book.id
     @status_with_book.save
     @user.study_books.create(book_id: @book.id)
     @books = @user.books.all
