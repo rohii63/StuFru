@@ -13,12 +13,13 @@ URL: https://stufru.herokuapp.com/
 * Bootstrap4
 ### バックエンド
 * Ruby 2.7.2
-* Ruby on Rails 6.0.3
+* Ruby on Rails 6.1.0
 ### インフラ
 * Heroku
 * MySQL2
 * Puma
 * Rubocop
+* Rspec
 ### その他
 * グラフ（chart.js）
 * モーダル、タブ（bootstrap4）
@@ -26,9 +27,9 @@ URL: https://stufru.herokuapp.com/
 * ログイン機構（devise）  
 
 # 今後の予定
-- [ ] テストを書く  
-- [ ] インフラ周りの勉強をする
+- [ ] テストを書く
 - [ ] フロントでモダンなフレームワークを使う
+- [ ] インフラ周りの勉強をする
 
 # 制作背景
 このポートフォリオのテーマは「勉強の継続のサポート」です。  
