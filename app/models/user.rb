@@ -139,7 +139,7 @@ class User < ApplicationRecord
   end
 
   def books_in_progress
-    book_ids = status_with_books.where(status: 'in_progress').pluck(:book_id)
+    book_ids = status_with_books.where(status: '勉強中').pluck(:book_id)
     books.where(id: book_ids)
   end
 end

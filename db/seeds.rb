@@ -243,9 +243,7 @@ User.create(
   book.icon.attach(io: File.open(Rails.root.join("app/assets/images/book_image/image(#{n}).jpg")), filename: "image(#{n}).jpg", content_type: 'image/jpg')
 end
 
-# book_category_ids = [26,27,26,27,28,29,29,30,31,26,27,27,27,28,28,31,26,27,29,27,27,28,29]
-study_unit = StatusWithBook.study_units.keys
-study_unit.delete_at(2)
+study_unit = ["時間", "ページ", "問"]
 book_ids = Book.pluck(:id).sort
 offset_nums = [1,1,1,1,2,2,3,4,4,4,4,5,5,5,5,6,6,6,6,6,6,6,6]
 

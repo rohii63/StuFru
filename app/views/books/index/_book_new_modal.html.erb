@@ -28,7 +28,7 @@
                 <%= status.label :status, "ステータス", class: "mb-1" %>
               </div>
               <div>
-                <%= status.select  :status, StatusWithBook.statuses, include_blank: false %>
+                <%= status.select  :status, ["勉強中", "勉強予定", "勉強済み"] %>
               </div>
             </div>
             <div class="form-group">
@@ -36,7 +36,7 @@
                 <%= status.label :study_unit, "学習単位", class: "mb-1" %>
               </div>
               <div>
-                <%= status.select :study_unit, StatusWithBook.study_units, include_blank: false %>
+                <%= status.select :study_unit, ["時間", "ページ", "単語", "問"] %>
               </div>
             </div>
             <div class="form-group">
