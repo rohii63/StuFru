@@ -10,7 +10,7 @@
             勉強中の教材がありません。
           <% else %>
             <% @book_categories.each do |category| %>
-              <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "in_progress") %>
+              <% tmp_status_with_books = @status_with_books.where(book_category_id: category.id).where(status: "勉強中") %>
               <% unless tmp_status_with_books.empty? %>
                 <div class="mt-1 mb-3 mx-1">
                   <div class="py-2">

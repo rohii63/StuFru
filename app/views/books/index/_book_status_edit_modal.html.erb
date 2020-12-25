@@ -11,7 +11,7 @@
               <%= f.label :status, "ステータス", class: "mb-1" %>
             </div>
             <div>
-              <%= f.select :status, options_for_select(StatusWithBook.statuses, selected: @status) %>
+              <%= f.select :status, ["勉強中", "勉強予定", "勉強済み"] %>
             </div>
           </div>
           <div class="form-group">
@@ -19,7 +19,7 @@
               <%= f.label :study_unit, "学習単位", class: "mb-1" %>
             </div>
             <div>
-              <%= f.select :study_unit, options_for_select(StatusWithBook.study_units, selected: @study_unit) %>
+              <%= f.select :study_unit, ["時間", "ページ", "単語", "問"]  %>
             </div>
           </div>
           <div class="form-group">
