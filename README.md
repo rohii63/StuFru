@@ -1,7 +1,7 @@
 # StuFru
 繋がった仲間と勉強時間や投稿を共有できる学習管理アプリです。  
 
-15秒でアピールポイントをまとめましたので、ご覧いただければと思います。  
+６秒でアピールポイントをまとめました。   
 
 ![demo](https://raw.github.com/wiki/HirotoYasuda/StuFru/images/application_summary.gif)  
 
