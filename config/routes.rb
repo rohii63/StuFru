@@ -26,4 +26,12 @@ Rails.application.routes.draw do
   resources :book_registers, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index
+
+  namespace :api, {format: 'json'} do
+    resources :users, only: [:index, :show]
+  end
+
+  namespace :with_vue do
+    resources :users, only: :show
+  end
 end

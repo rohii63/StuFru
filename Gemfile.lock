@@ -311,9 +311,6 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.0.1)
     tilt (2.0.10)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
@@ -378,7 +375,6 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen
-  turbolinks
   web-console
   webdrivers
   webpacker
