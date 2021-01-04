@@ -1,5 +1,15 @@
 <template>
 <div>
+  <div class="alert alert-success" role="alert" v-if="show">編集完了</div>
+  <div v-if="errors.length != 0" id="error_explanation" class="border-bottom">
+    <div class="alert alert-danger">
+      エラーが{{ errors.length }}つ発生しました。
+    </div>
+    <ul v-for="e in errors" :key="e">
+      <li>{{ e }}</li>
+    </ul>
+  </div>
+
   <div class="m-2">
     <div><strong>プロフィール</strong></div>
     <div class="mx-1">
@@ -46,7 +56,10 @@
   <hr class="mb-1">
 
   <div class="m-2 mb-4">
-    <div><strong>基本情報</strong></div>
+    <div class="d-flex justify-content-between">
+      <div><strong>基本情報</strong></div>
+      <a class="mr-2 text-primary" style="cursor: pointer;" @click="showModal('basicInformationEditModal')">編集</a>
+    </div>
     <div class="mt-3 ml-2">
       <div class="d-flex mb-1">
         <div class="mr-3" style="width: 64px;">ユーザ名</div>
@@ -70,23 +83,34 @@
       </div>
     </div>
   </div>
+
+  <BasicInformationEditModal :user="user"></BasicInformationEditModal>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import UsersIndexPage from 'UsersIndexPage.vue'
+import 'bootstrap/js/src/modal';
+import BasicInformationEditModal from 'BasicInformationEditModal.vue';
 
 export default {
+  components: { BasicInformationEditModal },
   data: function () {
     return {
-      user: {}
+      user: {},
+      show: false,
+      errors: ''
     }
   },
   mounted () {
     axios
       .get(`/api/users/${this.$route.params.id}.json`)
       .then(response => (this.user = response.data))
+  },
+  methods: {
+    showModal: function(modalName) {
+      $(`#${modalName}`).modal("show");
+    }
   }
 }
 </script>

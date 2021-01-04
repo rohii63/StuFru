@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :notifications, only: :index
 
   namespace :api, {format: 'json'} do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:show, :update]
   end
 
   namespace :with_vue do

@@ -7,8 +7,6 @@
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-import UsersIndexPage from 'UsersIndexPage.vue'
 import UsersShowPage from 'UsersShowPage.vue'
 
 const router = new VueRouter({
@@ -17,7 +15,7 @@ const router = new VueRouter({
   routes: [
     { path: '/users/:id',
       name: 'UsersShowPage',
-      component: UsersShowPage, UsersIndexPage  }
+      component: UsersShowPage  }
   ]
 })
 
