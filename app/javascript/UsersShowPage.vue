@@ -18,7 +18,9 @@
         <div class="align-top ml-2">{{ user.name }}</div>
       </div>
       <div class="input-group mt-3">
-        <textarea readonly="readonly" placeholder="具体的な目標を記入しよう！" class="form-control rounded" style="cursor: pointer;" cols="40" rows="3" v-model="user.target_comment"></textarea>
+        <a style="cursor: pointer;" @click="showModal('targetCommentEditModal')">
+          <textarea readonly="readonly" placeholder="具体的な目標を記入しよう！" class="form-control rounded" style="cursor: pointer;" cols="40" rows="3" v-model="user.target_comment"></textarea>
+        </a>
       </div>
       <div id="followInformation" class="d-flex mt-1">
         <a :href="followingPath"><h5><div class="badge-costom badge badge-pill badge-primary">フォロー（{{ user.following_count }}）</div></h5></a>
@@ -90,6 +92,7 @@
     </div>
   </div>
 
+  <TargetCommentEditModal :user="user"></TargetCommentEditModal>
   <IntroductionEditModal :user="user"></IntroductionEditModal>
   <TargetEditModal :user="user" :navbars="navbars" :targets="targets"></TargetEditModal>
   <BasicInformationEditModal :user="user"></BasicInformationEditModal>
@@ -99,12 +102,13 @@
 <script>
 import axios from 'axios';
 import 'bootstrap/js/src/modal';
+import TargetCommentEditModal from 'TargetCommentEditModal.vue';
 import IntroductionEditModal from 'IntroductionEditModal.vue';
 import TargetEditModal from 'TargetEditModal.vue';
 import BasicInformationEditModal from 'BasicInformationEditModal.vue';
 
 export default {
-  components: { IntroductionEditModal, TargetEditModal, BasicInformationEditModal },
+  components: { TargetCommentEditModal, IntroductionEditModal, TargetEditModal, BasicInformationEditModal },
   data: function() {
     return {
       user: {},
