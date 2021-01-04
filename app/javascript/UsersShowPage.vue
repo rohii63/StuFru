@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="alert alert-success" role="alert" v-if="show">編集完了</div>
+  <div class="alert alert-success" role="alert" v-if="flashMessage">編集完了</div>
   <div v-if="errors.length != 0" id="error_explanation" class="border-bottom">
     <div class="alert alert-danger">
       エラーが{{ errors.length }}つ発生しました。
@@ -21,9 +21,9 @@
         <textarea readonly="readonly" placeholder="具体的な目標を記入しよう！" class="form-control rounded" style="cursor: pointer;" cols="40" rows="3" v-model="user.target_comment"></textarea>
       </div>
       <div id="followInformation" class="d-flex mt-1">
-        <h5><div class="badge-costom badge badge-pill badge-primary">フォロー（{{ user.following_count }}）</div></h5>
-        <h5><div class="badge-costom badge badge-pill badge-primary ml-1">フォロワー（{{ user.followers_count }}）</div></h5>
-        <h5><div class="badge-costom badge badge-pill badge-primary ml-1">本棚（{{ user.books_count }}）</div></h5>
+        <a :href="followingPath"><h5><div class="badge-costom badge badge-pill badge-primary">フォロー（{{ user.following_count }}）</div></h5></a>
+        <a :href="followersPath"><h5><div class="badge-costom badge badge-pill badge-primary ml-1">フォロワー（{{ user.followers_count }}）</div></h5></a>
+        <a :href="shelfPath"><h5><div class="badge-costom badge badge-pill badge-primary ml-1">本棚（{{ user.books_count }}）</div></h5></a>
       </div>
     </div>
   </div>
@@ -31,21 +31,27 @@
   <hr class="mb-1">
 
   <div class="m-2">
-    <div><strong>自己紹介</strong></div>
-    <p v-if="user.introduction !== null" class="text-justify mt-3 ml-2 mr-3">
-      {{ user.introduction }}
-    </p>
-    <p v-else class="text-justify mt-3 ml-2 text-muted">
+    <div class="d-flex justify-content-between">
+      <div><strong>自己紹介</strong></div>
+      <a class="mr-2 text-primary" style="cursor: pointer;" @click="showModal('introductionEditModal')">編集</a>
+    </div>
+    <p v-if="user.introduction == ''" class="text-justify mt-3 ml-2 text-muted">
       自己紹介をしよう！
+    </p>
+    <p v-else class="text-justify mt-3 ml-2 mr-3">
+      {{ user.introduction }}
     </p>
   </div>
 
   <hr class="mb-1">
 
   <div class="m-2">
-    <div><strong>目標ジャンル</strong></div>
+    <div class="d-flex justify-content-between">
+      <div><strong>目標ジャンル</strong></div>
+      <a class="mr-2 text-primary" style="cursor: pointer;" @click="showModal('targetEditModal')">編集</a>
+    </div>
     <div class="mt-3 ml-2">
-      <i class='fab fa-font-awesome-flag text-primary'></i>
+      <i class="fab fa-font-awesome-flag text-primary"></i>
       {{ user.target }}
       <strong v-if="user.target == '大学受験合格'" class="ml-2">
         {{ user.my_choice_university }}
@@ -84,6 +90,8 @@
     </div>
   </div>
 
+  <IntroductionEditModal :user="user"></IntroductionEditModal>
+  <TargetEditModal :user="user" :navbars="navbars" :targets="targets"></TargetEditModal>
   <BasicInformationEditModal :user="user"></BasicInformationEditModal>
 </div>
 </template>
@@ -91,33 +99,40 @@
 <script>
 import axios from 'axios';
 import 'bootstrap/js/src/modal';
+import IntroductionEditModal from 'IntroductionEditModal.vue';
+import TargetEditModal from 'TargetEditModal.vue';
 import BasicInformationEditModal from 'BasicInformationEditModal.vue';
 
 export default {
-  components: { BasicInformationEditModal },
-  data: function () {
+  components: { IntroductionEditModal, TargetEditModal, BasicInformationEditModal },
+  data: function() {
     return {
       user: {},
-      show: false,
-      errors: ''
+      flashMessage: false,
+      errors: '',
+      followingPath: `/users/${this.$route.params.id}/follow?key=following`,
+      followersPath: `/users/${this.$route.params.id}/follow?key=followers`,
+      shelfPath: `/users/${this.$route.params.id}/books`,
+      navbars: {},
+      targets: []
     }
   },
-  mounted () {
+  mounted: function() {
     axios
-      .get(`/api/users/${this.$route.params.id}.json`)
-      .then(response => (this.user = response.data))
+      .get(`/api/users/${this.$route.params.id}`)
+      .then(response => {
+        this.user = response.data.user
+        this.navbars = response.data.navbars
+        this.targets = response.data.targets
+        })
   },
   methods: {
     showModal: function(modalName) {
-      $(`#${modalName}`).modal("show");
+      $(`#${modalName}`).modal('show');
     }
   }
 }
 </script>
 
 <style scoped>
-/* p {
-  font-size: 2em;
-  text-align: center;
-} */
 </style>

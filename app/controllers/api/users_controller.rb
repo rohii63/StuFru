@@ -11,7 +11,20 @@ class Api::UsersController < ApiController
     user.store("following_count", @user.following.count)
     user.store("books_count", @user.books.count)
     user.store("avatar", url_for(@user.avatar.variant(gravity: :center, resize:"60x60^", crop:"60x60+0+0")))
-    render json: user
+    targets = Target.select(:id, :target_category_id, :content)
+
+    tmp_targets = []
+    navbars = {}
+
+    8.times do |n|
+      n += 1
+      tmp_targets.push(Target.new(target_category_id: n.to_s))
+    end
+    tmp_targets.each do |t|
+      navbars.store(t.target_category_id, t.targetCategory.name)
+    end
+
+    render json: { user: user, navbars: navbars, targets: targets }
   end
 
   def update
