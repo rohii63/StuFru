@@ -40,7 +40,7 @@
               <% end %>
             </li>
             <li class="mt-1">
-              <%= link_to user_path(current_user), class: "text-reset" do %>
+              <%= link_to with_vue_user_path(current_user), class: "text-reset" do %>
                 <i class="fas fa-user text-primary mr-1"></i>
                 プロフィール
               <% end %>
@@ -60,7 +60,6 @@
           <div>
             <%= image_tag 'logo.png', size: "70x70", class: "rounded" %>
           </div>
-          <%= link_to 'プロフィール with vue', with_vue_user_path(current_user) %>
           <div id="sideNavList" class="mt-4">
             <div class="mb-3">
               <%= link_to root_path(), class: "d-flex text-reset streched-link", style: "text-decoration: none;" do %>
@@ -111,7 +110,7 @@
               <% end %>
             </div>
             <div class="mb-3">
-              <%= link_to user_path(current_user), class: "d-flex text-reset streched-link", style: "text-decoration: none;" do %>
+              <%= link_to with_vue_user_path(current_user), class: "d-flex text-reset streched-link", style: "text-decoration: none;" do %>
                 <div class="col-3 px-0">
                   <i class="fas fa-user fa-2x text-primary"></i>
                 </div>

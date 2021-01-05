@@ -14,7 +14,7 @@ RSpec.describe 'Users', type: :request do
     it 'response has correct content type' do
       headers = { 'ACCEPT': 'text/javascript' }
       get my_page_path(user), params: { term: 'day' }, headers: headers
-      expect(response.content_type).to eq("text/javascript; charset=utf-8")
+      expect(response.content_type).to eq('text/javascript; charset=utf-8')
     end
     it '@from be 7' do
       get my_page_path(user)

@@ -10,19 +10,19 @@ RSpec.describe User, type: :model do
     context 'name is blank' do
       it {
         user.name = ''
-        is_expected.not_to be_valid 
+        is_expected.not_to be_valid
       }
     end
     context 'email is blank' do
       it {
         user.email = ''
-        is_expected.not_to be_valid 
+        is_expected.not_to be_valid
       }
     end
     context 'password is blank' do
       it {
         user.password = ''
-        is_expected.not_to be_valid 
+        is_expected.not_to be_valid
       }
     end
   end
