@@ -12,7 +12,7 @@
       <% end %>
     </div>
     <div class="flex-fill">
-      <%= link_to user_path(current_user), class: "d-inline-block my-2" do %>
+      <%= link_to with_vue_user_path(current_user), class: "d-inline-block my-2" do %>
         <i class="fas fa-user text-primary"></i>
       <% end %>
     </div>
