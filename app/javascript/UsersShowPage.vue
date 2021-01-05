@@ -14,7 +14,9 @@
     <div><strong>プロフィール</strong></div>
     <div class="mx-1">
       <div class="d-flex mt-3">
-        <img :src="user.avatar" class="avatar rounded-circle" />
+        <a style="cursor: pointer;" @click="showModal('avatarEditModal')">
+          <img :src="user.avatar" class="avatar rounded-circle" />
+        </a>
         <div class="align-top ml-2">{{ user.name }}</div>
       </div>
       <div class="input-group mt-3">
@@ -57,6 +59,7 @@
       {{ user.target }}
       <strong v-if="user.target == '大学受験合格'" class="ml-2">
         {{ user.my_choice_university }}
+        <a v-if="user.my_choice_university == ''" class="text-primary" href="/search/universities">大学一覧</a>
       </strong>
     </div>
   </div>
@@ -92,6 +95,7 @@
     </div>
   </div>
 
+  <AvatarEditModal :user="user"></AvatarEditModal>
   <TargetCommentEditModal :user="user"></TargetCommentEditModal>
   <IntroductionEditModal :user="user"></IntroductionEditModal>
   <TargetEditModal :user="user" :navbars="navbars" :targets="targets"></TargetEditModal>
@@ -102,13 +106,14 @@
 <script>
 import axios from 'axios';
 import 'bootstrap/js/src/modal';
+import AvatarEditModal from 'AvatarEditModal.vue';
 import TargetCommentEditModal from 'TargetCommentEditModal.vue';
 import IntroductionEditModal from 'IntroductionEditModal.vue';
 import TargetEditModal from 'TargetEditModal.vue';
 import BasicInformationEditModal from 'BasicInformationEditModal.vue';
 
 export default {
-  components: { TargetCommentEditModal, IntroductionEditModal, TargetEditModal, BasicInformationEditModal },
+  components: { AvatarEditModal ,TargetCommentEditModal, IntroductionEditModal, TargetEditModal, BasicInformationEditModal },
   data: function() {
     return {
       user: {},

@@ -30,7 +30,8 @@ class Api::UsersController < ApiController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      head :no_content
+      avatar_url = url_for(@user.avatar.variant(gravity: :center, resize:"60x60^", crop:"60x60+0+0"))
+      render json: { user: { avatar: avatar_url } }
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -39,6 +40,6 @@ class Api::UsersController < ApiController
   private
 
   def user_params
-    params.fetch(:user, {}).permit(:name, :target_comment, :introduction, :target, :sex, :age, :live, :job, :my_choice_university)
+    params.fetch(:user, {}).permit(:name, :avatar, :target_comment, :introduction, :target, :sex, :age, :live, :job, :my_choice_university)
   end
 end
