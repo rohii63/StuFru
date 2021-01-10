@@ -58,7 +58,7 @@
       <i class="fab fa-font-awesome-flag text-primary"></i>
       {{ user.target }}
       <strong v-if="user.target == '大学受験合格'" class="ml-2">
-        {{ user.my_choice_university }}
+        <a class="text-primary" href="/search/universities">{{ user.my_choice_university }}</a>
         <a v-if="user.my_choice_university == ''" class="text-primary" href="/search/universities">大学一覧</a>
       </strong>
     </div>
