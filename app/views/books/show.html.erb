@@ -11,8 +11,14 @@
         <%= link_to  "編集", edit_book_path(@book), id: "bookEditBtn", class: "col-12 btn btn-primary", remote: true %>
       <% end %>
     </div>
-    <div id="bookRegisterBtnWrapper" class="col-6 px-1">
-      <%= render 'books/show/book_register_btn' %>
+    <div class="col-6 px-1">
+      <% if @user.register?(@book) %>
+        <%= form_with url: book_register_path(@book), method: :delete, local: true do |f| %>
+          <%= f.submit "本棚から削除", class: "col-12 btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <%= link_to "本棚に追加", new_book_register_path(), id: "registerBtn", class: "col-12 btn btn-primary" ,remote: true %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<%= form_with model: @status_with_book, url: user_status_with_book_path(@user, @status_with_book) do |f| %>
+<%= form_with model: @status_with_book, url: user_status_with_book_path(@user, @status_with_book), local: true do |f| %>
   <div class="modal fade" id="bookStatusEditModal" tabindex="-1" role="dialog" aria-labelledby="bookStatusEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">

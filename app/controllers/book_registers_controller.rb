@@ -8,7 +8,7 @@ class BookRegistersController < ApplicationController
     @status_with_book.book_id = @book.id
     current_user.register(@book)
     @status_with_book.save
-    flash[:notice] = '登録完了'
+    flash[:notice] = '追加完了'
     redirect_to user_books_path(@user)
   end
 
@@ -17,9 +17,8 @@ class BookRegistersController < ApplicationController
     @book = Book.find(params[:id])
     current_user.unregister(@book)
     @user.status_with_books.find_by(book_id: @book.id).destroy
-    @study_book = @user.study_books.build(book_id: @book.id)
-    @status_with_book = @user.status_with_books.build
-    @book_categories = @user.book_categories.all
+    flash[:alert] = '削除完了'
+    redirect_to user_books_path(@user)
   end
 
   private

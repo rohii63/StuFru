@@ -1,4 +1,4 @@
-<%= form_with model: @study_book, url: book_registers_path() do |study_book| %>
+<%= form_with model: @study_book, url: book_registers_path(), local: true do |study_book| %>
   <div class="modal fade" id="bookRegisterModal" tabindex="-1" role="dialog" aria-labelledby="bookRegisterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
