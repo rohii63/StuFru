@@ -157,8 +157,12 @@ class Micropost < ApplicationRecord
   def self.weekly_study_amount(book_id, study_unit, week_target_created_at)
     from = week_target_created_at.at_beginning_of_week
     to = week_target_created_at.at_end_of_week
-    post = where(studied_at: from...to).where(book_id: book_id).where(study_unit: study_unit)
+    posts = where(studied_at: from...to).where(book_id: book_id)
 
-    study_unit == '時間' ? post.sum(:study_time) : post.sum(:study_amount)
+    if study_unit == '時間'
+      posts.sum(:study_time)
+    else
+      posts.where(study_unit: study_unit).sum(:study_amount)
+    end
   end
 end
