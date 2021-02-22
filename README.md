@@ -5,7 +5,7 @@
 
 ![demo](https://raw.github.com/wiki/HirotoYasuda/StuFru/images/application_summary.gif)  
 
-URL: https://stufru.herokuapp.com/
+URL: https://www.stufru.com/
 
 # 使用技術
 ### フロントエンド
