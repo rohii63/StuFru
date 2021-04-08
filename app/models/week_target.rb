@@ -8,9 +8,6 @@ class WeekTarget < ApplicationRecord
   validate :end_page_not_blank
   validate :end_page_greater_than_start_page
 
-  @from = Time.current.at_beginning_of_week
-  @to = Time.current.at_end_of_week
-
   def start_page_and_end_page_not_blank
     errors.add(:範囲, 'を入力してください。') if content == 10000
   end
@@ -28,12 +25,14 @@ class WeekTarget < ApplicationRecord
   end
 
   def self.at_this_week
-    where(created_at: @from...@to)
+    from = Time.current.at_beginning_of_week
+    to = Time.current.at_end_of_week
+    where(created_at: from...to)
   end
 
   def self.past_records(n)
-    from = @from - n.week
-    to = @to - n.week
+    from = Time.current.at_beginning_of_week - n.week
+    to = Time.current.at_end_of_week - n.week
 
     where(created_at: from...to) if where(created_at: from...to).any?
   end
